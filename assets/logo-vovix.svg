@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 110" fill="none" aria-hidden="true">
+  <!-- PRD: Interlocking V – Path A (Emerald) + Path B (Silver). SVG only, scalable. -->
+  <path d="M40 40 L60 80 L90 20" stroke="#00C853" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M70 40 L90 80 L120 20" stroke="#C0C0C0" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="100" y="95" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="bold" font-size="24" fill="#102A43" letter-spacing="0.08em">VOVIX</text>
+  <text x="100" y="108" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#102A43" letter-spacing="0.2em">AUTOMATE YOUR ALPHA.</text>
+</svg>
