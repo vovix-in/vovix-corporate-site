@@ -30,6 +30,37 @@
     }
   }
 
+  const mailForms = document.querySelectorAll("[data-mailto-form]");
+  mailForms.forEach((form) => {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const name = form.querySelector("[name='name']")?.value?.trim() || "";
+      const email = form.querySelector("[name='email']")?.value?.trim() || "";
+      const company = form.querySelector("[name='company']")?.value?.trim() || "";
+      const scope = form.querySelector("[name='scope']")?.value?.trim() || "";
+      const timeline = form.querySelector("[name='timeline']")?.value?.trim() || "";
+      const notes = form.querySelector("[name='notes']")?.value?.trim() || "";
+
+      const subject = encodeURIComponent("Discovery call request - vovix.in");
+      const body = encodeURIComponent(
+        [
+          "New discovery call request",
+          "",
+          `Name: ${name}`,
+          `Email: ${email}`,
+          `Company: ${company}`,
+          `Scope: ${scope}`,
+          `Timeline: ${timeline}`,
+          "",
+          "Project notes:",
+          notes || "N/A"
+        ].join("\n")
+      );
+
+      window.location.href = `mailto:admin@vovix.in?subject=${subject}&body=${body}`;
+    });
+  });
+
   const counterNodes = document.querySelectorAll("[data-count]");
   if (counterNodes.length === 0) return;
 
@@ -73,35 +104,4 @@
   );
 
   counterNodes.forEach((node) => counterObserver.observe(node));
-
-  const mailForms = document.querySelectorAll("[data-mailto-form]");
-  mailForms.forEach((form) => {
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const name = form.querySelector("[name='name']")?.value?.trim() || "";
-      const email = form.querySelector("[name='email']")?.value?.trim() || "";
-      const company = form.querySelector("[name='company']")?.value?.trim() || "";
-      const scope = form.querySelector("[name='scope']")?.value?.trim() || "";
-      const timeline = form.querySelector("[name='timeline']")?.value?.trim() || "";
-      const notes = form.querySelector("[name='notes']")?.value?.trim() || "";
-
-      const subject = encodeURIComponent("Discovery call request - vovix.in");
-      const body = encodeURIComponent(
-        [
-          "New discovery call request",
-          "",
-          `Name: ${name}`,
-          `Email: ${email}`,
-          `Company: ${company}`,
-          `Scope: ${scope}`,
-          `Timeline: ${timeline}`,
-          "",
-          "Project notes:",
-          notes || "N/A"
-        ].join("\n")
-      );
-
-      window.location.href = `mailto:admin@vovix.in?subject=${subject}&body=${body}`;
-    });
-  });
 })();
