@@ -60,11 +60,11 @@ h4,
 .hero-dark {
   background: linear-gradient(
     140deg,
-    var(--vovix-hero-bg) 0%,
-    var(--vovix-hero-accent) 52%,
-    #0d253c 100%
+    #ffffff 0%,
+    var(--vovix-secondary) 58%,
+    #eaf2f9 100%
   );
-  color: #e8eef4;
+  color: var(--text-main);
   position: relative;
   overflow: hidden;
 }
@@ -75,8 +75,8 @@ h4,
   inset: 0;
   background: radial-gradient(
     ellipse 78% 52% at 72% 18%,
-    rgba(0, 229, 255, 0.12) 0%,
-    rgba(0, 200, 83, 0.08) 32%,
+    rgba(0, 229, 255, 0.1) 0%,
+    rgba(0, 200, 83, 0.06) 34%,
     transparent 62%
   );
   pointer-events: none;
@@ -95,6 +95,14 @@ h4,
   color: rgba(0, 200, 83, 0.95);
 }
 
+.hero-dark .text-white {
+  color: var(--text-main) !important;
+}
+
+.hero-dark .text-white-50 {
+  color: var(--text-muted) !important;
+}
+
 /* Hero brand wordmark (large); do not reuse hero-kicker sizing */
 .hero-brand-name {
   font-family: "Montserrat", "Plus Jakarta Sans", sans-serif;
@@ -102,7 +110,7 @@ h4,
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1.05;
-  color: #fff;
+  color: var(--vovix-navy);
   margin-bottom: 0.35rem !important;
 }
 
@@ -131,20 +139,29 @@ h4,
 
 .navbar {
   backdrop-filter: blur(8px);
+  background: var(--vovix-secondary) !important;
 }
 
+.navbar-light .navbar-nav .nav-link,
 .navbar-dark .navbar-nav .nav-link {
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--vovix-navy);
+  font-weight: 500;
 }
 
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link:focus,
 .navbar-dark .navbar-nav .nav-link:hover,
 .navbar-dark .navbar-nav .nav-link:focus {
-  color: #fff;
+  color: var(--vovix-emerald);
 }
 
 .navbar-light .navbar-nav .nav-link.active {
   color: var(--vovix-emerald);
   font-weight: 600;
+}
+
+.navbar .text-white {
+  color: var(--vovix-navy) !important;
 }
 
 footer {
@@ -192,8 +209,8 @@ a:hover {
 
 /* Homepage refinements */
 .hero-mini-card {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #ffffff;
+  border: 1px solid var(--border-color);
   border-radius: 0.75rem;
   padding: 1rem 1rem 1.1rem;
   height: 100%;
@@ -205,14 +222,14 @@ a:hover {
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--vovix-navy);
   margin-bottom: 0.35rem;
 }
 
 .hero-mini-card p {
   font-size: 0.8rem;
   line-height: 1.45;
-  color: rgba(232, 238, 244, 0.72);
+  color: var(--text-muted);
   margin: 0;
 }
 
