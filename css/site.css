@@ -1,8 +1,8 @@
 :root {
   --vovix-emerald: #00c853;
   --vovix-emerald-hover: #00e676;
-  --vovix-hero-bg: #0a0f14;
-  --vovix-hero-accent: #0d2818;
+  --vovix-hero-bg: #0b1220;
+  --vovix-hero-accent: #16283b;
   --text-muted-custom: #5c6b7a;
 }
 
@@ -45,10 +45,10 @@ h4,
 
 .hero-dark {
   background: linear-gradient(
-    145deg,
+    140deg,
     var(--vovix-hero-bg) 0%,
-    var(--vovix-hero-accent) 45%,
-    #0a1620 100%
+    var(--vovix-hero-accent) 52%,
+    #121f30 100%
   );
   color: #e8eef4;
   position: relative;
@@ -60,9 +60,10 @@ h4,
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    ellipse 80% 50% at 70% 20%,
-    rgba(0, 200, 83, 0.12) 0%,
-    transparent 55%
+    ellipse 78% 52% at 72% 18%,
+    rgba(74, 144, 226, 0.14) 0%,
+    rgba(0, 200, 83, 0.06) 34%,
+    transparent 62%
   );
   pointer-events: none;
 }
