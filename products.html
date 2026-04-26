@@ -25,6 +25,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link href="/css/site.css" rel="stylesheet" />
+    <script src="/js/site.js" defer></script>
   </head>
   <body class="bg-white">
     <nav
@@ -70,7 +71,7 @@
 
     <main class="py-5 bg-light">
       <div class="container">
-        <section class="mb-5">
+        <section class="mb-5 reveal-up">
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h2 class="section-heading h4 mb-0">Live now</h2>
             <span class="badge bg-success text-white">1 product</span>
@@ -106,7 +107,7 @@
           </div>
         </section>
 
-        <section class="rounded-4 border bg-white p-4 p-lg-5">
+        <section class="rounded-4 border bg-white p-4 p-lg-5 mb-4 reveal-up cta-premium">
           <div class="row align-items-center g-3">
             <div class="col-lg-8">
               <h2 class="section-heading h4 mb-2">Need automation beyond listed products?</h2>
@@ -117,6 +118,49 @@
             </div>
             <div class="col-lg-4 text-lg-end">
               <a class="btn btn-primary px-4" href="/contact.html">Talk to us</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="rounded-4 border bg-white p-4 p-lg-5 reveal-up">
+          <div class="row align-items-center g-4">
+            <div class="col-lg-5">
+              <h2 class="section-heading h4 mb-2">Delivery Quality Signals</h2>
+              <p class="text-secondary small mb-3">
+                We keep product and custom delivery measurable with execution checkpoints, adoption tracking, and production hardening.
+              </p>
+              <div class="row row-cols-3 g-2 text-center">
+                <div class="col">
+                  <div class="impact-pill">
+                    <p class="impact-number mb-1"><span data-count="3">0</span></p>
+                    <p class="impact-label mb-0">Delivery tracks</p>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="impact-pill">
+                    <p class="impact-number mb-1"><span data-count="12">0</span>+</p>
+                    <p class="impact-label mb-0">Workflow modules</p>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="impact-pill">
+                    <p class="impact-number mb-1"><span data-count="24">0</span>/7</p>
+                    <p class="impact-label mb-0">Monitoring-ready</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-7">
+              <figure class="visual-card mb-0">
+                <img
+                  src="/assets/workflow-architecture-visual.svg"
+                  alt="Workflow architecture style visual for product and custom delivery"
+                  class="img-fluid rounded-4"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption class="small text-secondary mt-2 mb-0">Product + custom automation built on connected execution layers.</figcaption>
+              </figure>
             </div>
           </div>
         </section>
@@ -152,6 +196,14 @@
             </p>
           </div>
         </div>
+        <div class="trust-strip-advanced mt-4 reveal-up">
+          <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-lg-start">
+            <span class="trust-chip"><i class="bx bx-rocket"></i> Production-ready rollout</span>
+            <span class="trust-chip"><i class="bx bx-network-chart"></i> Scalable architecture</span>
+            <span class="trust-chip"><i class="bx bx-analyse"></i> Measurable adoption focus</span>
+            <span class="trust-chip"><i class="bx bx-timer"></i> Fast implementation cycles</span>
+          </div>
+        </div>
         <hr class="my-4 opacity-25" />
         <p class="disclaimer-box mb-3">
           Vovix builds software for operational automation; site content is general and not bespoke professional or legal advice
@@ -165,9 +217,11 @@
       </div>
     </footer>
 
-    <script>
-      document.getElementById("y").textContent = new Date().getFullYear();
-    </script>
+    <div class="mobile-sticky-cta" aria-label="Quick contact actions">
+      <a class="btn btn-primary" href="/contact.html">Book discovery call</a>
+      <a class="btn btn-outline-secondary" href="mailto:admin@vovix.in">Email now</a>
+    </div>
+
     <script src="/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

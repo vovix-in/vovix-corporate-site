@@ -25,6 +25,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link href="/css/site.css" rel="stylesheet" />
+    <script src="/js/site.js" defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -191,7 +192,7 @@
         </div>
       </article>
 
-      <section class="py-5 bg-dark text-white">
+      <section class="py-5 bg-dark text-white cta-premium reveal-up">
         <div class="container text-center">
           <p class="hero-kicker mb-2 opacity-75">Tagline</p>
           <p class="display-6 fw-bold text-vovix mb-4">Automate Your Alpha</p>
@@ -232,6 +233,14 @@
             </p>
           </div>
         </div>
+        <div class="trust-strip-advanced mt-4 reveal-up">
+          <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-lg-start">
+            <span class="trust-chip"><i class="bx bx-briefcase-alt-2"></i> Product + services model</span>
+            <span class="trust-chip"><i class="bx bx-cog"></i> Automation-first approach</span>
+            <span class="trust-chip"><i class="bx bx-line-chart"></i> Operations performance focus</span>
+            <span class="trust-chip"><i class="bx bx-check-shield"></i> Reliable long-term delivery</span>
+          </div>
+        </div>
         <hr class="my-4 opacity-25" />
         <p class="disclaimer-box mb-3">
           Vovix builds software for operational automation; site content is general and not bespoke professional, legal, or tax
@@ -240,10 +249,10 @@
         <p class="small text-secondary mb-0">&copy; <span id="y"></span> Vovix Private Limited.</p>
       </div>
     </footer>
-
-    <script>
-      document.getElementById("y").textContent = new Date().getFullYear();
-    </script>
+    <div class="mobile-sticky-cta" aria-label="Quick contact actions">
+      <a class="btn btn-primary" href="/contact.html">Book discovery call</a>
+      <a class="btn btn-outline-secondary" href="mailto:admin@vovix.in">Email now</a>
+    </div>
     <script src="/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

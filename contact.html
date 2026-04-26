@@ -25,6 +25,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link href="/css/site.css" rel="stylesheet" />
+    <script src="/js/site.js" defer></script>
   </head>
   <body class="bg-white">
     <nav
@@ -69,7 +70,7 @@
 
     <main class="py-5 bg-light">
       <div class="container">
-        <div class="row g-4 mb-5">
+        <div class="row g-4 mb-5 reveal-up">
           <div class="col-12">
             <p class="small text-secondary mb-0">Corporate contact details.</p>
           </div>
@@ -107,7 +108,7 @@
           </div>
         </div>
 
-        <section class="rounded-4 border bg-white p-4 p-lg-5 mb-5 shadow-sm">
+        <section class="rounded-4 border bg-white p-4 p-lg-5 mb-5 shadow-sm reveal-up">
           <h2 class="h5 fw-bold mb-4">Choose your reason for contacting us</h2>
           <div class="row g-4">
             <div class="col-md-4">
@@ -137,7 +138,125 @@
           </div>
         </section>
 
-        <section class="rounded-4 bg-dark text-white p-4 p-lg-5 text-center">
+        <section class="rounded-4 border bg-white p-4 p-lg-5 mb-5 reveal-up">
+          <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+              <figure class="visual-card mb-0">
+                <img
+                  src="/assets/automation-dashboard-hero.svg"
+                  alt="Operations dashboard style visual representing client onboarding and delivery tracking"
+                  class="img-fluid rounded-4"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption class="small text-secondary mt-2 mb-0">Structured intake, scoped execution, and delivery tracking.</figcaption>
+              </figure>
+            </div>
+            <div class="col-lg-5">
+              <h2 class="section-heading h4 mb-2">What happens after you contact us</h2>
+              <p class="text-secondary small mb-3">
+                We keep pre-sales and scoping clear so your team gets a practical proposal instead of a vague pitch deck.
+              </p>
+              <div class="d-grid gap-2">
+                <div class="impact-pill d-flex justify-content-between align-items-center px-3">
+                  <p class="impact-label mb-0 text-start">Initial response window</p>
+                  <p class="impact-number mb-0"><span data-count="1">0</span>d</p>
+                </div>
+                <div class="impact-pill d-flex justify-content-between align-items-center px-3">
+                  <p class="impact-label mb-0 text-start">Scoped recommendations</p>
+                  <p class="impact-number mb-0"><span data-count="3">0</span></p>
+                </div>
+                <div class="impact-pill d-flex justify-content-between align-items-center px-3">
+                  <p class="impact-label mb-0 text-start">Execution modes</p>
+                  <p class="impact-number mb-0"><span data-count="2">0</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="discovery-form-wrap p-4 p-lg-5 mb-5 reveal-up">
+          <div class="row g-4">
+            <div class="col-lg-5">
+              <h2 class="section-heading h4 mb-2">Book a discovery call</h2>
+              <p class="text-secondary small mb-3">
+                Share basic details and we will route your request with a practical response path.
+              </p>
+              <div class="row g-3">
+                <div class="col-12">
+                  <div class="discovery-step-card">
+                    <span class="discovery-step-number">1</span>
+                    <h3 class="h6 fw-bold mb-1">Tell us your workflow</h3>
+                    <p class="small text-secondary mb-0">What process you want to improve and where it currently slows down.</p>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="discovery-step-card">
+                    <span class="discovery-step-number">2</span>
+                    <h3 class="h6 fw-bold mb-1">Share constraints</h3>
+                    <p class="small text-secondary mb-0">Current systems, expected volumes, and timeline expectations.</p>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="discovery-step-card">
+                    <span class="discovery-step-number">3</span>
+                    <h3 class="h6 fw-bold mb-1">Get scoped options</h3>
+                    <p class="small text-secondary mb-0">We suggest product-fit, custom scope, or a hybrid delivery approach.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-7">
+              <form class="row g-3" data-mailto-form>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold mb-1" for="name">Name</label>
+                  <input class="form-control" id="name" name="name" type="text" required />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold mb-1" for="email">Work email</label>
+                  <input class="form-control" id="email" name="email" type="email" required />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold mb-1" for="company">Company</label>
+                  <input class="form-control" id="company" name="company" type="text" />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold mb-1" for="timeline">Timeline</label>
+                  <select class="form-select" id="timeline" name="timeline">
+                    <option value="">Select timeline</option>
+                    <option>Immediate (0-2 weeks)</option>
+                    <option>Near term (2-6 weeks)</option>
+                    <option>Planned (6+ weeks)</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label class="form-label small fw-semibold mb-1" for="scope">Primary requirement</label>
+                  <input
+                    class="form-control"
+                    id="scope"
+                    name="scope"
+                    type="text"
+                    placeholder="Example: automate order reconciliation workflow"
+                    required
+                  />
+                </div>
+                <div class="col-12">
+                  <label class="form-label small fw-semibold mb-1" for="notes">Project notes</label>
+                  <textarea class="form-control" id="notes" name="notes" rows="4" placeholder="Current stack, team size, integration constraints..."></textarea>
+                </div>
+                <div class="col-12 d-flex flex-wrap gap-2 align-items-center">
+                  <button class="btn btn-primary px-4" type="submit">Send discovery request</button>
+                  <a class="btn btn-outline-secondary" href="mailto:admin@vovix.in">Email directly</a>
+                </div>
+                <div class="col-12">
+                  <p class="small text-secondary mb-0">Submitting opens your default email client prefilled to `admin@vovix.in`.</p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <section class="rounded-4 bg-dark text-white p-4 p-lg-5 text-center reveal-up cta-premium">
           <h2 class="h4 section-heading mb-3 text-white">Tell us what you want to automate.</h2>
           <p class="text-white-50 mb-4">
             Share your workflow, constraints, and timeline, and we will help you find the right product or scope a custom solution.
@@ -179,6 +298,14 @@
             </p>
           </div>
         </div>
+        <div class="trust-strip-advanced mt-4 reveal-up">
+          <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-lg-start">
+            <span class="trust-chip"><i class="bx bx-mail-send"></i> Structured intake process</span>
+            <span class="trust-chip"><i class="bx bx-git-branch"></i> Clear scoping path</span>
+            <span class="trust-chip"><i class="bx bx-lock-alt"></i> Confidential discovery calls</span>
+            <span class="trust-chip"><i class="bx bx-user-check"></i> Dedicated team response</span>
+          </div>
+        </div>
         <hr class="my-4 opacity-25" />
         <p class="disclaimer-box mb-3">
           Vovix builds software for operational automation; site content is general and not bespoke professional, legal, or tax
@@ -188,9 +315,11 @@
       </div>
     </footer>
 
-    <script>
-      document.getElementById("y").textContent = new Date().getFullYear();
-    </script>
+    <div class="mobile-sticky-cta" aria-label="Quick contact actions">
+      <a class="btn btn-primary" href="/contact.html">Book discovery call</a>
+      <a class="btn btn-outline-secondary" href="mailto:admin@vovix.in">Email now</a>
+    </div>
+
     <script src="/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
