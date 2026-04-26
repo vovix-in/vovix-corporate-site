@@ -25,7 +25,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link href="/css/site.css" rel="stylesheet" />
-    <script src="/js/site.js" defer></script>
+    <script src="/js/site.js?v=20260426b" defer></script>
   </head>
   <body class="bg-white">
     <nav
@@ -226,7 +226,7 @@
               </div>
             </div>
             <div class="col-lg-7">
-              <form class="row g-3" data-mailto-form>
+              <form class="row g-3" data-mailto-form novalidate>
                 <div class="col-md-6">
                   <label class="form-label small fw-semibold mb-1" for="name">Name</label>
                   <input class="form-control" id="name" name="name" type="text" required />
@@ -264,11 +264,11 @@
                   <textarea class="form-control" id="notes" name="notes" rows="4" placeholder="Current stack, team size, integration constraints..."></textarea>
                 </div>
                 <div class="col-12 d-flex flex-wrap gap-2 align-items-center">
-                  <button class="btn btn-primary px-4" type="submit">Send discovery request</button>
-                  <a class="btn btn-outline-secondary" href="mailto:admin@vovix.in">Email directly</a>
+                  <button class="btn btn-primary px-4" type="submit" data-discovery-submit>Send discovery request</button>
+                  <a class="btn btn-outline-secondary" href="https://mail.google.com/mail/?view=cm&fs=1&to=admin@vovix.in" target="_blank" rel="noopener noreferrer">Email directly</a>
                 </div>
                 <div class="col-12">
-                  <p class="small text-secondary mb-0">Submitting opens your default email client prefilled to `admin@vovix.in`.</p>
+                  <p class="small text-secondary mb-0">Submitting opens your email composer; direct webmail option is also available.</p>
                 </div>
               </form>
             </div>

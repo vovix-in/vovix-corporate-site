@@ -31,34 +31,60 @@
   }
 
   const mailForms = document.querySelectorAll("[data-mailto-form]");
+  const openDiscoveryComposer = (form) => {
+    if (typeof form.reportValidity === "function" && !form.reportValidity()) {
+      return;
+    }
+
+    const name = form.querySelector("[name='name']")?.value?.trim() || "";
+    const email = form.querySelector("[name='email']")?.value?.trim() || "";
+    const company = form.querySelector("[name='company']")?.value?.trim() || "";
+    const scope = form.querySelector("[name='scope']")?.value?.trim() || "";
+    const timeline = form.querySelector("[name='timeline']")?.value?.trim() || "";
+    const notes = form.querySelector("[name='notes']")?.value?.trim() || "";
+
+    const plainBody = [
+      "New discovery call request",
+      "",
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Company: ${company}`,
+      `Scope: ${scope}`,
+      `Timeline: ${timeline}`,
+      "",
+      "Project notes:",
+      notes || "N/A"
+    ].join("\n");
+
+    const subject = encodeURIComponent("Discovery call request - vovix.in");
+    const body = encodeURIComponent(plainBody);
+    const gmailBody = encodeURIComponent(plainBody);
+
+    window.location.href = `mailto:admin@vovix.in?subject=${subject}&body=${body}`;
+
+    // If a local mail client is unavailable, open webmail compose as fallback.
+    setTimeout(() => {
+      window.open(
+        `https://mail.google.com/mail/?view=cm&fs=1&to=admin@vovix.in&su=${subject}&body=${gmailBody}`,
+        "_blank",
+        "noopener,noreferrer"
+      );
+    }, 450);
+  };
+
   mailForms.forEach((form) => {
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-      const name = form.querySelector("[name='name']")?.value?.trim() || "";
-      const email = form.querySelector("[name='email']")?.value?.trim() || "";
-      const company = form.querySelector("[name='company']")?.value?.trim() || "";
-      const scope = form.querySelector("[name='scope']")?.value?.trim() || "";
-      const timeline = form.querySelector("[name='timeline']")?.value?.trim() || "";
-      const notes = form.querySelector("[name='notes']")?.value?.trim() || "";
-
-      const subject = encodeURIComponent("Discovery call request - vovix.in");
-      const body = encodeURIComponent(
-        [
-          "New discovery call request",
-          "",
-          `Name: ${name}`,
-          `Email: ${email}`,
-          `Company: ${company}`,
-          `Scope: ${scope}`,
-          `Timeline: ${timeline}`,
-          "",
-          "Project notes:",
-          notes || "N/A"
-        ].join("\n")
-      );
-
-      window.location.href = `mailto:admin@vovix.in?subject=${subject}&body=${body}`;
+      openDiscoveryComposer(form);
     });
+
+    const submitButton = form.querySelector("[data-discovery-submit]");
+    if (submitButton) {
+      submitButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        openDiscoveryComposer(form);
+      });
+    }
   });
 
   const counterNodes = document.querySelectorAll("[data-count]");
