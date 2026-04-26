@@ -59,14 +59,15 @@ h4,
 
 .hero-dark {
   background: linear-gradient(
-    140deg,
+    135deg,
     #ffffff 0%,
-    var(--vovix-secondary) 58%,
-    #eaf2f9 100%
+    #f7f9fc 48%,
+    #eef4fa 100%
   );
   color: var(--text-main);
   position: relative;
   overflow: hidden;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .hero-dark::before {
@@ -74,10 +75,10 @@ h4,
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    ellipse 78% 52% at 72% 18%,
+    ellipse 85% 58% at 74% 16%,
     rgba(0, 229, 255, 0.1) 0%,
-    rgba(0, 200, 83, 0.06) 34%,
-    transparent 62%
+    rgba(16, 42, 67, 0.05) 34%,
+    transparent 65%
   );
   pointer-events: none;
 }
@@ -118,6 +119,7 @@ h4,
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.1;
+  color: var(--vovix-navy) !important;
 }
 
 .section-heading {
@@ -139,13 +141,17 @@ h4,
 
 .navbar {
   backdrop-filter: blur(8px);
-  background: var(--vovix-secondary) !important;
+  background: #ffffff !important;
+  box-shadow: 0 2px 12px rgba(16, 42, 67, 0.06);
 }
 
 .navbar-light .navbar-nav .nav-link,
 .navbar-dark .navbar-nav .nav-link {
   color: var(--vovix-navy);
   font-weight: 500;
+  border-radius: 999px;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .navbar-light .navbar-nav .nav-link:hover,
@@ -158,6 +164,7 @@ h4,
 .navbar-light .navbar-nav .nav-link.active {
   color: var(--vovix-emerald);
   font-weight: 600;
+  background: rgba(0, 200, 83, 0.1);
 }
 
 .navbar .text-white {
@@ -209,11 +216,12 @@ a:hover {
 
 /* Homepage refinements */
 .hero-mini-card {
-  background: #ffffff;
+  background: var(--vovix-secondary);
   border: 1px solid var(--border-color);
   border-radius: 0.75rem;
   padding: 1rem 1rem 1.1rem;
   height: 100%;
+  box-shadow: 0 0.3rem 1rem rgba(16, 42, 67, 0.05);
 }
 
 .hero-mini-card h4 {
