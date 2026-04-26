@@ -1,9 +1,22 @@
 :root {
-  --vovix-emerald: #00c853;
-  --vovix-emerald-hover: #00e676;
-  --vovix-hero-bg: #0b1220;
-  --vovix-hero-accent: #16283b;
-  --text-muted-custom: #5c6b7a;
+  --vovix-primary: #00c853;
+  --vovix-secondary: #f5f7fa;
+  --vovix-navy: #102a43;
+  --vovix-cyan: #00e5ff;
+  --vovix-loss: #ef5350;
+  --vovix-bg: #f5f7fa;
+
+  --white: #ffffff;
+  --text-main: #102a43;
+  --text-muted: #486581;
+  --border-color: #d9e2ec;
+
+  /* Backward-compatible aliases used across existing components */
+  --vovix-emerald: var(--vovix-primary);
+  --vovix-emerald-hover: #00a844;
+  --vovix-hero-bg: #102a43;
+  --vovix-hero-accent: #163a5c;
+  --text-muted-custom: var(--text-muted);
 }
 
 html {
@@ -12,7 +25,8 @@ html {
 
 body {
   font-family: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
-  color: #1a2332;
+  color: var(--text-main);
+  background: var(--vovix-bg);
 }
 
 h1,
@@ -48,7 +62,7 @@ h4,
     140deg,
     var(--vovix-hero-bg) 0%,
     var(--vovix-hero-accent) 52%,
-    #121f30 100%
+    #0d253c 100%
   );
   color: #e8eef4;
   position: relative;
@@ -61,8 +75,8 @@ h4,
   inset: 0;
   background: radial-gradient(
     ellipse 78% 52% at 72% 18%,
-    rgba(74, 144, 226, 0.14) 0%,
-    rgba(0, 200, 83, 0.06) 34%,
+    rgba(0, 229, 255, 0.12) 0%,
+    rgba(0, 200, 83, 0.08) 32%,
     transparent 62%
   );
   pointer-events: none;
@@ -163,7 +177,7 @@ footer {
 }
 
 a {
-  color: #0d6e3a;
+  color: var(--vovix-navy);
 }
 
 a:hover {
@@ -213,9 +227,9 @@ a:hover {
 }
 
 .impact-pill {
-  border: 1px solid rgba(13, 110, 58, 0.12);
+  border: 1px solid rgba(16, 42, 67, 0.12);
   border-radius: 0.75rem;
-  background: #f6faf7;
+  background: var(--vovix-secondary);
   padding: 0.85rem 0.5rem;
   height: 100%;
 }
@@ -225,13 +239,13 @@ a:hover {
   font-size: 1.3rem;
   font-weight: 700;
   line-height: 1;
-  color: #0f2d1c;
+  color: var(--vovix-navy);
 }
 
 .impact-label {
   font-size: 0.73rem;
   line-height: 1.25;
-  color: #4f6358;
+  color: var(--text-muted);
 }
 
 .visual-card {
@@ -291,7 +305,7 @@ a:hover {
 .trust-strip-advanced {
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 1rem;
-  background: #f8fbf9;
+  background: var(--vovix-secondary);
   padding: 0.9rem;
 }
 
@@ -299,17 +313,17 @@ a:hover {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  border: 1px solid rgba(13, 110, 58, 0.14);
+  border: 1px solid rgba(16, 42, 67, 0.16);
   background: #fff;
   border-radius: 999px;
   padding: 0.38rem 0.68rem;
   font-size: 0.74rem;
-  color: #284336;
+  color: var(--vovix-navy);
   font-weight: 500;
 }
 
 .trust-chip i {
-  color: #0f9548;
+  color: var(--vovix-emerald);
   font-size: 0.88rem;
 }
 
@@ -329,7 +343,7 @@ a:hover {
 }
 
 .discovery-step-card {
-  border: 1px solid rgba(13, 110, 58, 0.12);
+  border: 1px solid rgba(16, 42, 67, 0.12);
   border-radius: 0.9rem;
   background: #fff;
   padding: 1rem;
@@ -344,7 +358,7 @@ a:hover {
   height: 1.9rem;
   border-radius: 999px;
   background: rgba(0, 200, 83, 0.14);
-  color: #0f9548;
+  color: var(--vovix-emerald);
   font-weight: 700;
   font-size: 0.85rem;
   margin-bottom: 0.55rem;
@@ -359,7 +373,13 @@ a:hover {
 
 .discovery-form-wrap .form-control,
 .discovery-form-wrap .form-select {
-  border-color: rgba(33, 52, 45, 0.2);
+  border-color: var(--border-color);
+}
+
+.discovery-form-wrap .form-control:focus,
+.discovery-form-wrap .form-select:focus {
+  border-color: var(--vovix-cyan);
+  box-shadow: 0 0 0 0.2rem rgba(0, 229, 255, 0.2);
 }
 
 .mobile-sticky-cta {
