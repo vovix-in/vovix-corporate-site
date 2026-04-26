@@ -65,7 +65,7 @@ npx vercel@latest --prod
 
 ## Before production
 
-- Set real domains in canonical tags, `sitemap.xml`, `robots.txt`, and `og:image` (use `assets/og-image.svg`).
+- Set real domains in canonical tags, `sitemap.xml`, `robots.txt`, and `og:image` (use `assets/og-image.png` at 1200x630).
 - Copy official logos from the product app (`logo-vovix-navbar.svg`, favicons) into `assets/` and update `<img>` / favicon links if you replace the text navbar mark.
 - Replace contact placeholders (registered office, email) and finalize legal pages with counsel.
 - Positioning: **business automation** across everyday operations, not solely investment products. **Vovix OneView** is scoped as a **market-intelligence** product (Indian equities); duplicate product cards on `products.html` as other automation tools launch. Keep securities/SEBI-style compliance notes only on market-related product context (have counsel review).
