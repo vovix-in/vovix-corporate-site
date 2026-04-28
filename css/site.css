@@ -462,6 +462,29 @@ a:hover {
   font-size: 0.83rem;
 }
 
+/* Cross-page visual consistency utilities */
+.section-frame {
+  border: 1px solid rgba(16, 42, 67, 0.1);
+  border-radius: 1rem;
+  background: #ffffff;
+  box-shadow: 0 0.5rem 1.5rem rgba(16, 42, 67, 0.06);
+}
+
+.showcase-image {
+  border-radius: 1rem;
+  box-shadow: 0 0.9rem 2.1rem rgba(16, 42, 67, 0.15);
+  border: 1px solid rgba(16, 42, 67, 0.12);
+}
+
+.headline-tight {
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+.surface-muted {
+  background: linear-gradient(180deg, #f7f9fc 0%, #f2f6fb 100%);
+}
+
 body.has-mobile-sticky-cta {
   padding-bottom: 5rem;
 }
