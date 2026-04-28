@@ -481,6 +481,11 @@ a:hover {
   line-height: 1.08;
 }
 
+/* Ensure white headings on navy hero banners */
+.hero-navy .display-hero {
+  color: #ffffff !important;
+}
+
 .surface-muted {
   background: linear-gradient(180deg, #f7f9fc 0%, #f2f6fb 100%);
 }
