@@ -58,231 +58,108 @@
       </div>
     </nav>
 
-    <header class="hero-dark hero-home py-5 py-lg-6 border-bottom border-secondary border-opacity-25">
-      <div class="container py-lg-4">
-        <p class="hero-kicker mb-2">Connect</p>
-        <h1 class="display-hero display-5 mb-3 text-white">Contact Vovix</h1>
-        <p class="lead text-white-50 col-lg-9 mb-0">
-          Reach us for partnerships, product questions, and custom automation discussions.
+    <header class="py-5 py-lg-6 border-bottom border-secondary border-opacity-25" style="background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 55%, #f5f7fa 100%)">
+      <div class="container py-lg-4 text-center">
+        <h1 class="display-hero display-5 mb-3">Let's Start Your Automation Journey</h1>
+        <p class="lead text-secondary col-lg-8 mx-auto mb-0">
+          Whether you have questions or are ready to transform operations, the Vovix team is ready to help.
         </p>
       </div>
     </header>
 
-    <main class="py-5 bg-light">
+    <main class="py-5 py-lg-6 bg-white">
       <div class="container">
-        <div class="row g-4 mb-5 reveal-up">
-          <div class="col-12">
-            <p class="small text-secondary mb-0">Corporate contact details.</p>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <div class="card border-0 shadow-sm h-100">
-              <div class="card-body p-4">
-                <p class="small text-uppercase text-secondary fw-semibold mb-2">Email</p>
-                <h2 class="h6 fw-bold mb-2">General enquiries</h2>
-                <p class="small text-secondary mb-3">Best for partnerships, product queries, and project discussions.</p>
-                <a class="fw-semibold" href="mailto:admin@vovix.in">admin@vovix.in</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <div class="card border-0 shadow-sm h-100">
-              <div class="card-body p-4">
-                <p class="small text-uppercase text-secondary fw-semibold mb-2">Phone</p>
-                <h2 class="h6 fw-bold mb-2">Speak to our team</h2>
-                <p class="small text-secondary mb-3">For quick routing of product and custom automation requests.</p>
-                <a class="fw-semibold" href="tel:+919080640562">+91 9080640562</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="card border-0 shadow-sm h-100">
-              <div class="card-body p-4">
-                <p class="small text-uppercase text-secondary fw-semibold mb-2">Registered office</p>
-                <h2 class="h6 fw-bold mb-2">Vovix Private Limited</h2>
-                <p class="small text-secondary mb-0">
-                  S. No 61/8a, Door No: S8, 'B' Block, 2nd Floor, Thanigaivel Flats,<br />
-                  Sirpi Nagar, Guduvancheri, Chennai - 603202
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <section class="row g-5 align-items-start reveal-up">
+          <div class="col-lg-7">
+            <h2 class="section-heading h3 mb-3">Get in Touch</h2>
+            <p class="text-secondary mb-4">Share your requirements and we will respond with a practical next step within 24 hours.</p>
 
-        <section class="rounded-4 border bg-white p-4 p-lg-5 mb-5 shadow-sm reveal-up">
-          <h2 class="h5 fw-bold mb-4">Choose your reason for contacting us</h2>
-          <div class="row g-4">
-            <div class="col-md-4">
-              <div class="h-100">
-                <h3 class="h6 fw-bold mb-2">Partnerships and press</h3>
-                <p class="small text-secondary mb-0">Company, media, and collaboration conversations.</p>
+            <form class="row g-3" data-mailto-form novalidate>
+              <div class="col-md-6">
+                <label class="form-label small fw-semibold mb-1" for="name">Full name *</label>
+                <input class="form-control" id="name" name="name" type="text" required />
               </div>
-            </div>
-            <div class="col-md-4">
-              <div class="h-100">
-                <h3 class="h6 fw-bold mb-2">Product questions</h3>
-                <p class="small text-secondary mb-0">Questions after reviewing our product listings and fit.</p>
+              <div class="col-md-6">
+                <label class="form-label small fw-semibold mb-1" for="email">Email *</label>
+                <input class="form-control" id="email" name="email" type="email" required />
               </div>
-            </div>
-            <div class="col-md-4">
-              <div class="h-100">
-                <h3 class="h6 fw-bold mb-2">Custom automation projects</h3>
-                <p class="small text-secondary mb-0">Workflow scoping, integrations, timelines, and delivery discussions.</p>
+              <div class="col-md-6">
+                <label class="form-label small fw-semibold mb-1" for="company">Company</label>
+                <input class="form-control" id="company" name="company" type="text" />
               </div>
-            </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-semibold mb-1" for="phone">Phone</label>
+                <input class="form-control" id="phone" name="phone" type="tel" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-semibold mb-1" for="scope">I am interested in *</label>
+                <select class="form-select" id="scope" name="scope" required>
+                  <option value="">Select one</option>
+                  <option>Vovix OneView</option>
+                  <option>Workflow Automation Suite</option>
+                  <option>Data Integration Hub</option>
+                  <option>Custom Solution</option>
+                  <option>Product Demo</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-semibold mb-1" for="timeline">Timeline</label>
+                <select class="form-select" id="timeline" name="timeline">
+                  <option value="">Select timeline</option>
+                  <option>Immediate (0-2 weeks)</option>
+                  <option>Near term (2-6 weeks)</option>
+                  <option>Planned (6+ weeks)</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label small fw-semibold mb-1" for="notes">Message *</label>
+                <textarea class="form-control" id="notes" name="notes" rows="5" required placeholder="Tell us about your automation goals, workflow pain points, and expected outcomes."></textarea>
+              </div>
+              <div class="col-12 d-flex flex-wrap gap-2 align-items-center">
+                <button class="btn btn-primary px-4" type="submit" data-discovery-submit>Send message</button>
+                <a class="btn btn-outline-secondary" href="mailto:admin@vovix.in">Email directly</a>
+              </div>
+            </form>
           </div>
-          <div class="rounded-4 border bg-light p-3 p-lg-4 mt-4">
-            <p class="small fw-semibold text-dark mb-2">For custom automation enquiries, include:</p>
-            <p class="small text-secondary mb-0">
-              The process you want to automate, current tools, expected volumes, timeline, and any delivery constraints.
-            </p>
-          </div>
-        </section>
 
-        <section class="rounded-4 border bg-white p-4 p-lg-5 mb-5 reveal-up">
-          <div class="row align-items-center g-4">
-            <div class="col-lg-7">
-              <div class="visual-card h-100">
-                <h3 class="h6 fw-bold mb-3">Discovery call agenda (30 minutes)</h3>
-                <div class="row g-3">
-                  <div class="col-md-6">
-                    <div class="rounded-3 border p-3 h-100">
-                      <p class="small fw-semibold text-dark mb-1">Current process review</p>
-                      <p class="small text-secondary mb-0">Understand workflow steps, systems, and pain points in the current state.</p>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="rounded-3 border p-3 h-100">
-                      <p class="small fw-semibold text-dark mb-1">Target outcome definition</p>
-                      <p class="small text-secondary mb-0">Align on what success looks like for speed, quality, and team usage.</p>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="rounded-3 border p-3 h-100">
-                      <p class="small fw-semibold text-dark mb-1">Delivery path options</p>
-                      <p class="small text-secondary mb-0">Recommend product fit, custom scope, or a hybrid approach.</p>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="rounded-3 border p-3 h-100">
-                      <p class="small fw-semibold text-dark mb-1">Timeline and next steps</p>
-                      <p class="small text-secondary mb-0">Share milestone plan, dependencies, and execution responsibilities.</p>
-                    </div>
-                  </div>
-                </div>
+          <div class="col-lg-5 reveal-up">
+            <img
+              class="img-fluid rounded-4 shadow-lg mb-4"
+              src="https://images.unsplash.com/photo-1630958234938-4f6a4a9dbf3a?auto=format&fit=crop&w=1000&q=80"
+              alt="Automation support desk"
+              loading="lazy"
+              decoding="async"
+            />
+
+            <div class="rounded-4 border bg-light p-4 mb-4">
+              <h3 class="h6 fw-bold mb-3">Contact Information</h3>
+              <div class="d-grid gap-3 small">
+                <p class="mb-0"><i class="bx bx-envelope text-vovix me-2"></i><a href="mailto:admin@vovix.in">admin@vovix.in</a></p>
+                <p class="mb-0"><i class="bx bx-phone text-vovix me-2"></i><a href="tel:+919080640562">+91 9080640562</a></p>
+                <p class="mb-0"><i class="bx bx-map text-vovix me-2"></i>Guduvancheri, Tamil Nadu, India</p>
+                <p class="mb-0"><i class="bx bx-time text-vovix me-2"></i>Mon-Fri: 9AM - 6PM IST</p>
               </div>
             </div>
-            <div class="col-lg-5">
-              <h2 class="section-heading h4 mb-2">What happens after you contact us</h2>
-              <p class="text-secondary small mb-3">
-                We keep pre-sales and scoping clear so your team gets a practical proposal instead of a vague pitch deck.
+
+            <div class="rounded-4 p-4 text-white" style="background: linear-gradient(135deg, #102a43 0%, #0d1f31 100%)">
+              <h3 class="h5 mb-2">Prefer a Live Demo?</h3>
+              <p class="text-white-50 small mb-3">
+                Book a 30-minute walkthrough with our team and see the right Vovix automation fit for your workflow.
               </p>
-              <div class="d-grid gap-2">
-                <div class="impact-pill d-flex justify-content-between align-items-center px-3">
-                  <p class="impact-label mb-0 text-start">Initial response window</p>
-                  <p class="impact-number mb-0"><span data-count="1">0</span>d</p>
-                </div>
-                <div class="impact-pill d-flex justify-content-between align-items-center px-3">
-                  <p class="impact-label mb-0 text-start">Scoped recommendations</p>
-                  <p class="impact-number mb-0"><span data-count="3">0</span></p>
-                </div>
-                <div class="impact-pill d-flex justify-content-between align-items-center px-3">
-                  <p class="impact-label mb-0 text-start">Execution modes</p>
-                  <p class="impact-number mb-0"><span data-count="2">0</span></p>
-                </div>
-              </div>
+              <a class="btn btn-primary btn-sm" href="mailto:admin@vovix.in?subject=Demo Request">Schedule demo</a>
             </div>
           </div>
         </section>
 
-        <section class="discovery-form-wrap p-4 p-lg-5 mb-5 reveal-up">
-          <div class="row g-4">
-            <div class="col-lg-5">
-              <h2 class="section-heading h4 mb-2">Book a discovery call</h2>
-              <p class="text-secondary small mb-3">
-                Share basic details and we will route your request with a practical response path.
-              </p>
-              <div class="row g-3">
-                <div class="col-12">
-                  <div class="discovery-step-card">
-                    <span class="discovery-step-number">1</span>
-                    <h3 class="h6 fw-bold mb-1">Tell us your workflow</h3>
-                    <p class="small text-secondary mb-0">What process you want to improve and where it currently slows down.</p>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="discovery-step-card">
-                    <span class="discovery-step-number">2</span>
-                    <h3 class="h6 fw-bold mb-1">Share constraints</h3>
-                    <p class="small text-secondary mb-0">Current systems, expected volumes, and timeline expectations.</p>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="discovery-step-card">
-                    <span class="discovery-step-number">3</span>
-                    <h3 class="h6 fw-bold mb-1">Get scoped options</h3>
-                    <p class="small text-secondary mb-0">We suggest product-fit, custom scope, or a hybrid delivery approach.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-7">
-              <form class="row g-3" data-mailto-form novalidate>
-                <div class="col-md-6">
-                  <label class="form-label small fw-semibold mb-1" for="name">Name</label>
-                  <input class="form-control" id="name" name="name" type="text" required />
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label small fw-semibold mb-1" for="email">Work email</label>
-                  <input class="form-control" id="email" name="email" type="email" required />
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label small fw-semibold mb-1" for="company">Company</label>
-                  <input class="form-control" id="company" name="company" type="text" />
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label small fw-semibold mb-1" for="timeline">Timeline</label>
-                  <select class="form-select" id="timeline" name="timeline">
-                    <option value="">Select timeline</option>
-                    <option>Immediate (0-2 weeks)</option>
-                    <option>Near term (2-6 weeks)</option>
-                    <option>Planned (6+ weeks)</option>
-                  </select>
-                </div>
-                <div class="col-12">
-                  <label class="form-label small fw-semibold mb-1" for="scope">Primary requirement</label>
-                  <input
-                    class="form-control"
-                    id="scope"
-                    name="scope"
-                    type="text"
-                    placeholder="Example: automate order reconciliation workflow"
-                    required
-                  />
-                </div>
-                <div class="col-12">
-                  <label class="form-label small fw-semibold mb-1" for="notes">Project notes</label>
-                  <textarea class="form-control" id="notes" name="notes" rows="4" placeholder="Current stack, team size, integration constraints..."></textarea>
-                </div>
-                <div class="col-12 d-flex flex-wrap gap-2 align-items-center">
-                  <button class="btn btn-primary px-4" type="submit" data-discovery-submit>Send discovery request</button>
-                  <a class="btn btn-outline-secondary" href="https://mail.google.com/mail/?view=cm&fs=1&to=admin@vovix.in" target="_blank" rel="noopener noreferrer">Email directly</a>
-                </div>
-                <div class="col-12">
-                  <p class="small text-secondary mb-0">Submitting opens your email composer; direct webmail option is also available.</p>
-                </div>
-              </form>
-            </div>
+        <section class="py-5 reveal-up">
+          <div class="text-center mb-4">
+            <h2 class="section-heading h3 mb-2">Ready to Automate Your Alpha?</h2>
+            <p class="text-secondary mb-0">Trusted by teams improving daily operational speed and quality.</p>
           </div>
-        </section>
-
-        <section class="rounded-4 bg-dark text-white p-4 p-lg-5 text-center reveal-up cta-premium">
-          <h2 class="h4 section-heading mb-3 text-white">Tell us what you want to automate.</h2>
-          <p class="text-white-50 mb-4">
-            Share your workflow, constraints, and timeline, and we will help you find the right product or scope a custom solution.
-          </p>
-          <div class="d-flex justify-content-center flex-wrap gap-2">
-            <a class="btn btn-primary px-4" href="mailto:admin@vovix.in">Email Vovix</a>
-            <a class="btn btn-outline-light px-4" href="tel:+919080640562">Call us</a>
+          <div class="row row-cols-1 row-cols-md-3 g-3 text-center">
+            <div class="col"><div class="rounded-4 border bg-light p-4 h-100"><p class="display-6 text-vovix fw-bold mb-1"><span data-count="24">0</span>hrs</p><p class="small text-secondary mb-0">Response time</p></div></div>
+            <div class="col"><div class="rounded-4 border bg-light p-4 h-100"><p class="display-6 text-vovix fw-bold mb-1"><span data-count="100">0</span>%</p><p class="small text-secondary mb-0">Satisfaction focus</p></div></div>
+            <div class="col"><div class="rounded-4 border bg-light p-4 h-100"><p class="display-6 text-vovix fw-bold mb-1"><span data-count="24">0</span>/7</p><p class="small text-secondary mb-0">Support readiness</p></div></div>
           </div>
         </section>
       </div>
