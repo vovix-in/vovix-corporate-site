@@ -45,7 +45,7 @@
     const notes = form.querySelector("[name='notes']")?.value?.trim() || "";
 
     const plainBody = [
-      "Contact Vovix — vovix.in",
+      "Contact Vovix (vovix.in)",
       "",
       `Name: ${name}`,
       `Work email: ${email}`,
