@@ -1,0 +1,3 @@
+vovix-corporate-site static deploy marker
+Expected HTML asset query: /css/site.css?v=20260513a (or newer)
+If this file or newer CSS query is missing on www.vovix.in, production is not building from the latest GitHub main branch—open the Vovix project in Vercel and redeploy, or reconnect the Git integration.
