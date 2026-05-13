@@ -53,7 +53,7 @@
       `Interest: ${scope}`,
       `Timeline: ${timeline}`,
       "",
-      "What do you want to automate?",
+      "What is one manual task each week that should not be manual?",
       automation || "N/A",
       "",
       "Additional context:",
