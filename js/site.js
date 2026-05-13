@@ -45,7 +45,7 @@
     const notes = form.querySelector("[name='notes']")?.value?.trim() || "";
 
     const plainBody = [
-      "Talk to us — vovix.in",
+      "Contact Vovix — vovix.in",
       "",
       `Name: ${name}`,
       `Work email: ${email}`,
@@ -60,7 +60,7 @@
       notes || "N/A"
     ].join("\n");
 
-    const subject = encodeURIComponent("Talk to us - vovix.in");
+    const subject = encodeURIComponent("Contact Vovix - vovix.in");
     const body = encodeURIComponent(plainBody);
     const gmailBody = encodeURIComponent(plainBody);
 

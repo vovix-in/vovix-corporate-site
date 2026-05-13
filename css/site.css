@@ -500,3 +500,111 @@ body.has-mobile-sticky-cta {
   }
 }
 
+/* —— Formal corporate layout (shared across pages) —— */
+.hero-navy .hero-navy-link {
+  color: rgba(255, 255, 255, 0.95);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-color: rgba(0, 200, 83, 0.65);
+  font-weight: 600;
+}
+
+.hero-navy .hero-navy-link:hover {
+  color: #ffffff;
+  text-decoration-color: var(--vovix-emerald);
+}
+
+.formal-intro-band {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.14);
+}
+
+.at-a-glance-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 0.85rem;
+  padding: 1rem 1.1rem;
+  height: 100%;
+  text-align: left;
+}
+
+.at-a-glance-card .aag-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--vovix-emerald);
+  margin-bottom: 0.35rem;
+}
+
+.at-a-glance-card .aag-text {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: rgba(226, 237, 247, 0.9);
+  margin: 0;
+}
+
+.product-showcase-card {
+  border: 1px solid rgba(16, 42, 67, 0.1);
+  border-radius: 1rem;
+  background: #ffffff;
+  box-shadow: 0 0.4rem 1.35rem rgba(16, 42, 67, 0.07);
+  padding: 1.75rem 1.85rem;
+  height: 100%;
+  border-left: 4px solid var(--vovix-emerald);
+}
+
+.product-showcase-card .psc-kicker {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--vovix-emerald);
+  margin-bottom: 0.35rem;
+}
+
+.statement-panel {
+  border: 1px solid rgba(16, 42, 67, 0.1);
+  border-radius: 1rem;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: 0 0.45rem 1.4rem rgba(16, 42, 67, 0.06);
+  padding: 1.75rem 2rem;
+}
+
+.statement-panel .sp-rule {
+  width: 3rem;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--vovix-emerald);
+  margin-bottom: 1rem;
+}
+
+.services-pillar-card {
+  border: 1px solid rgba(16, 42, 67, 0.1);
+  border-radius: 1rem;
+  background: #ffffff;
+  height: 100%;
+  padding: 1.75rem 1.85rem;
+  border-top: 3px solid var(--vovix-emerald);
+  box-shadow: 0 0.35rem 1.2rem rgba(16, 42, 67, 0.05);
+}
+
+.page-lead {
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+@media (min-width: 992px) {
+  .page-lead-wide {
+    max-width: 40rem;
+  }
+}
+
+.section-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--vovix-emerald);
+}
+
