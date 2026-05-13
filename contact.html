@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Contact Vovix Private Limited (vovix.in), Guduvancheri, Tamil Nadu, India. Email admin@vovix.in, phone, registered office. Partnerships, products, and custom automation."
+      content="Contact Vovix Private Limited (vovix.in) for B2B automation, data pipelines, and internal tools. Guduvancheri, Tamil Nadu. admin@vovix.in, phone, registered office."
     />
     <meta name="theme-color" content="#00C853" />
     <meta property="og:title" content="Contact | Vovix" />
@@ -24,7 +24,7 @@
     />
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link href="/css/site.css?v=20260511b" rel="stylesheet" />
+    <link href="/css/site.css?v=20260511c" rel="stylesheet" />
     <script src="/js/site.js?v=20260426b" defer></script>
   </head>
   <body class="bg-white">
@@ -50,9 +50,13 @@
         <div class="collapse navbar-collapse" id="navMain">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-lg-1">
             <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/services.html">Services</a></li>
             <li class="nav-item"><a class="nav-link" href="/products.html">Products</a></li>
             <li class="nav-item"><a class="nav-link" href="/about.html">About</a></li>
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="/contact.html">Contact</a></li>
+            <li class="nav-item ms-lg-2 d-lg-flex align-items-lg-center mt-2 mt-lg-0">
+              <a class="btn btn-primary btn-sm px-3 w-100 w-lg-auto" href="/contact.html">Talk to us</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -60,9 +64,9 @@
 
     <header class="hero-navy py-5 py-lg-6 border-bottom border-secondary border-opacity-25 text-white" style="background: linear-gradient(135deg, #102a43 0%, #0d1f31 100%)">
       <div class="container py-lg-4 text-center">
-        <h1 class="display-hero display-5 headline-tight text-white mb-3">Let's Start Your Automation Journey</h1>
+        <h1 class="display-hero display-5 headline-tight text-white mb-3">Talk to us about your automation or data project</h1>
         <p class="lead text-white-50 col-lg-8 mx-auto mb-0">
-          Whether you have questions or are ready to transform operations, the Vovix team is ready to help.
+          Share your company context and what you want to offload—we reply with a practical next step, usually within one business day.
         </p>
       </div>
     </header>
@@ -71,8 +75,10 @@
       <div class="container">
         <section class="row g-5 align-items-start reveal-up">
           <div class="col-lg-7">
-            <h2 class="section-heading h3 mb-3">Get in Touch</h2>
-            <p class="text-secondary mb-4">Share your requirements and we will respond with a practical next step within 24 hours.</p>
+            <h2 class="section-heading h3 mb-3">Get in touch</h2>
+            <p class="text-secondary mb-4">
+              Use this form for B2B inquiries (preferred). We also read <a href="mailto:admin@vovix.in">admin@vovix.in</a> if you already have a thread there.
+            </p>
 
             <form class="row g-3" data-mailto-form novalidate>
               <div class="col-md-6">
@@ -80,8 +86,8 @@
                 <input class="form-control" id="name" name="name" type="text" required />
               </div>
               <div class="col-md-6">
-                <label class="form-label small fw-semibold mb-1" for="email">Email *</label>
-                <input class="form-control" id="email" name="email" type="email" required />
+                <label class="form-label small fw-semibold mb-1" for="email">Work email *</label>
+                <input class="form-control" id="email" name="email" type="email" required autocomplete="email" />
               </div>
               <div class="col-md-6">
                 <label class="form-label small fw-semibold mb-1" for="company">Company</label>
@@ -95,6 +101,7 @@
                 <label class="form-label small fw-semibold mb-1" for="scope">I am interested in *</label>
                 <select class="form-select" id="scope" name="scope" required>
                   <option value="">Select one</option>
+                  <option>B2B services (custom build)</option>
                   <option>Vovix OneView</option>
                   <option>Vovix OneCrawl</option>
                   <option>Custom Solution</option>
@@ -111,8 +118,25 @@
                 </select>
               </div>
               <div class="col-12">
-                <label class="form-label small fw-semibold mb-1" for="notes">Message *</label>
-                <textarea class="form-control" id="notes" name="notes" rows="5" required placeholder="Tell us about your automation goals, workflow pain points, and expected outcomes."></textarea>
+                <label class="form-label small fw-semibold mb-1" for="automation">What do you want to automate? *</label>
+                <textarea
+                  class="form-control"
+                  id="automation"
+                  name="automation"
+                  rows="3"
+                  required
+                  placeholder="Short summary: e.g. daily broker statements, CRM–billing sync, internal admin for refunds…"
+                ></textarea>
+              </div>
+              <div class="col-12">
+                <label class="form-label small fw-semibold mb-1" for="notes">Additional context (optional)</label>
+                <textarea
+                  class="form-control"
+                  id="notes"
+                  name="notes"
+                  rows="4"
+                  placeholder="Stack, volumes, deadlines, security constraints, or links we should know about."
+                ></textarea>
               </div>
               <div class="col-12 d-flex flex-wrap gap-2 align-items-center">
                 <button class="btn btn-primary px-4" type="submit" data-discovery-submit>Send message</button>
@@ -141,19 +165,19 @@
             </div>
 
             <div class="rounded-4 p-4 text-white" style="background: linear-gradient(135deg, #102a43 0%, #0d1f31 100%)">
-              <h3 class="h5 mb-2">Prefer a Live Demo?</h3>
+              <h3 class="h5 mb-2">Prefer a live walkthrough?</h3>
               <p class="text-white-50 small mb-3">
-                Book a 30-minute walkthrough with our team and see the right Vovix automation fit for your workflow.
+                After we understand your scope, we can show how we deliver B2B builds—or walk through our products if that is the better fit.
               </p>
-              <a class="btn btn-primary btn-sm" href="mailto:admin@vovix.in?subject=Demo Request">Schedule demo</a>
+              <a class="btn btn-primary btn-sm" href="mailto:admin@vovix.in?subject=Demo%20request%20-%20vovix.in">Request a demo</a>
             </div>
           </div>
         </section>
 
         <section class="py-5 reveal-up">
           <div class="text-center mb-4">
-            <h2 class="section-heading h3 mb-2">Ready to Automate Your Alpha?</h2>
-            <p class="text-secondary mb-0">Trusted by teams improving daily operational speed and quality.</p>
+            <h2 class="section-heading h3 mb-2">Built for Indian B2B teams</h2>
+            <p class="text-secondary mb-0">Automation, integrations, and internal tools—scoped so your ops stay maintainable.</p>
           </div>
           <div class="row row-cols-1 row-cols-md-3 g-3 text-center">
             <div class="col"><div class="rounded-4 border bg-light p-4 h-100"><p class="display-6 text-vovix fw-bold mb-1"><span data-count="24">0</span>hrs</p><p class="small text-secondary mb-0">Response time</p></div></div>
@@ -169,13 +193,16 @@
         <div class="row gy-4">
           <div class="col-md-6 col-lg-4">
             <p class="fw-bold text-dark mb-2 brand-word">Vovix</p>
-            <p class="small text-secondary mb-0">Automate Your Alpha: products, services, and custom automation over time.</p>
+            <p class="small text-secondary mb-2">Automation and data engineering for businesses—plus software products.</p>
+            <a class="btn btn-primary btn-sm" href="/services.html">View B2B services</a>
+            <p class="small text-secondary mt-3 mb-0"><a href="mailto:admin@vovix.in">admin@vovix.in</a></p>
           </div>
           <div class="col-6 col-lg-2">
             <p class="small fw-semibold text-uppercase text-secondary mb-2">Company</p>
             <ul class="list-unstyled small mb-0">
-              <li><a href="/about.html">About</a></li>
+              <li><a href="/services.html">Services</a></li>
               <li><a href="/products.html">Products</a></li>
+              <li><a href="/about.html">About</a></li>
               <li><a href="/">Home</a></li>
             </ul>
           </div>
@@ -189,7 +216,7 @@
           <div class="col-lg-4">
             <p class="small fw-semibold text-uppercase text-secondary mb-2">Our work</p>
             <p class="small mb-0">
-              See products and releases on <a href="/products.html">Products</a>, and reach out for custom automation projects.
+              <a href="/services.html">B2B services</a>, <a href="/products.html">products</a>, or start on this page—whichever fits your need.
             </p>
           </div>
         </div>
@@ -211,8 +238,8 @@
     </footer>
 
     <div class="mobile-sticky-cta" aria-label="Quick contact actions">
-      <a class="btn btn-primary" href="/contact.html">Book discovery call</a>
-      <a class="btn btn-outline-secondary" href="mailto:admin@vovix.in">Email now</a>
+      <a class="btn btn-primary" href="/contact.html">Book a free 20-minute call</a>
+      <a class="btn btn-outline-secondary" href="mailto:admin@vovix.in">Email admin@vovix.in</a>
     </div>
 
     <script src="/js/bootstrap.bundle.min.js"></script>

@@ -41,22 +41,26 @@
     const company = form.querySelector("[name='company']")?.value?.trim() || "";
     const scope = form.querySelector("[name='scope']")?.value?.trim() || "";
     const timeline = form.querySelector("[name='timeline']")?.value?.trim() || "";
+    const automation = form.querySelector("[name='automation']")?.value?.trim() || "";
     const notes = form.querySelector("[name='notes']")?.value?.trim() || "";
 
     const plainBody = [
-      "New discovery call request",
+      "Talk to us — vovix.in",
       "",
       `Name: ${name}`,
-      `Email: ${email}`,
+      `Work email: ${email}`,
       `Company: ${company}`,
-      `Scope: ${scope}`,
+      `Interest: ${scope}`,
       `Timeline: ${timeline}`,
       "",
-      "Project notes:",
+      "What do you want to automate?",
+      automation || "N/A",
+      "",
+      "Additional context:",
       notes || "N/A"
     ].join("\n");
 
-    const subject = encodeURIComponent("Discovery call request - vovix.in");
+    const subject = encodeURIComponent("Talk to us - vovix.in");
     const body = encodeURIComponent(plainBody);
     const gmailBody = encodeURIComponent(plainBody);
 
