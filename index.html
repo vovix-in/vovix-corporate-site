@@ -39,7 +39,7 @@
     />
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link href="/css/site.css?v=20260514b" rel="stylesheet" />
+    <link href="/css/site.css?v=20260514d" rel="stylesheet" />
     <script src="/js/site.js" defer></script>
     <script type="application/ld+json">
       {
@@ -76,9 +76,9 @@
     </script>
   </head>
   <body class="bg-white">
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
     <nav
-      class="navbar navbar-expand-lg navbar-light sticky-top border-bottom border-secondary border-opacity-25"
-      style="background: var(--vovix-secondary)"
+      class="navbar navbar-expand-lg navbar-light sticky-top"
     >
       <div class="container">
         <a class="navbar-brand d-flex align-items-center gap-2 py-2" href="/">
@@ -117,12 +117,12 @@
       </div>
     </nav>
 
-    <header class="hero-navy py-5 py-lg-6 border-bottom border-secondary border-opacity-25 text-white" style="background: linear-gradient(135deg, #102a43 0%, #0d1f31 100%)">
+    <header class="hero-navy py-5 py-lg-6 text-white">
       <div class="container py-lg-5">
         <div class="row justify-content-center">
           <div class="col-lg-11 col-xl-10 text-center text-lg-start">
-            <p class="hero-kicker mb-3 text-vovix">Vovix Private Limited</p>
-            <h1 class="display-hero display-4 headline-tight text-white mb-3">Automation and data engineering, with transparent scoping</h1>
+            <p class="hero-kicker mb-3">Vovix Private Limited</p>
+            <h1 class="display-hero display-4 headline-tight text-white mb-3">Automation and <span class="text-gradient">data engineering</span>, with transparent scoping</h1>
             <p class="lead text-white-50 mb-3 page-lead mx-lg-0 mx-auto">
               <strong class="text-white">Open to automation and data projects</strong>, with honest scoping. We're early-stage.
               <strong class="text-white">Shipped today:</strong> two products:
@@ -133,9 +133,10 @@
             <p class="small text-white-50 col-lg-10 mb-4 mb-lg-4 mx-lg-0 mx-auto">
               The <a class="hero-navy-link" href="/services.html">Services</a> page describes <strong class="text-white">types of projects we can take on</strong>, not a list of past deliveries. Every engagement begins with a conversation and a written scope.
             </p>
-            <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start mb-0 mb-lg-4">
+            <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start mb-0 mb-lg-4 hero-cta-row">
               <a class="btn btn-primary btn-lg px-4" href="/contact.html">Schedule a discussion</a>
               <a class="btn btn-outline-light btn-lg px-4" href="/services.html">Review services</a>
+              <span class="live-pill ms-lg-2 align-self-center">Live products shipping</span>
             </div>
           </div>
         </div>
@@ -187,20 +188,26 @@
           <div class="row g-4 justify-content-center">
             <div class="col-md-6 col-lg-5">
               <div class="product-showcase-card reveal-up">
-                <p class="psc-kicker">Market intelligence</p>
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                  <p class="psc-kicker mb-0">Market intelligence</p>
+                  <span class="live-pill">Live</span>
+                </div>
                 <div class="icon-tile mb-3"><i class="bx bx-bar-chart-alt-2"></i></div>
-                <h3 class="h5 fw-bold">Vovix OneView</h3>
+                <h3 class="h4 fw-bold mb-2">Vovix OneView</h3>
                 <p class="small text-secondary mb-3">NSE/BSE research workspace: news, screeners, and structured analysis flows in one environment.</p>
-                <a class="btn btn-outline-primary btn-sm" href="/products.html">Product overview</a>
+                <a class="btn btn-outline-primary btn-sm" href="/products.html">Product overview <i class="bx bx-right-arrow-alt"></i></a>
               </div>
             </div>
             <div class="col-md-6 col-lg-5">
               <div class="product-showcase-card reveal-up">
-                <p class="psc-kicker">Authorized web capture</p>
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                  <p class="psc-kicker mb-0">Authorized web capture</p>
+                  <span class="live-pill">Live</span>
+                </div>
                 <div class="icon-tile mb-3"><i class="bx bx-globe"></i></div>
-                <h3 class="h5 fw-bold">Vovix OneCrawl</h3>
+                <h3 class="h4 fw-bold mb-2">Vovix OneCrawl</h3>
                 <p class="small text-secondary mb-3">Scoped crawling from a seed URL into structured exports for downstream processing and archives.</p>
-                <a class="btn btn-outline-primary btn-sm" href="/products.html">Product overview</a>
+                <a class="btn btn-outline-primary btn-sm" href="/products.html">Product overview <i class="bx bx-right-arrow-alt"></i></a>
               </div>
             </div>
           </div>
@@ -270,9 +277,10 @@
         </div>
       </section>
 
-      <section class="py-5 py-lg-6 text-white cta-premium" style="background: linear-gradient(135deg, #102a43 0%, #0d1f31 100%)">
+      <section class="py-5 py-lg-6 text-white cta-premium">
         <div class="container text-center">
-          <h2 class="section-heading h2 mb-3">Discuss your requirements</h2>
+          <p class="hero-kicker mb-3">Let's talk</p>
+          <h2 class="section-heading display-5 mb-3 text-white">Discuss your <span class="text-gradient">requirements</span></h2>
           <p class="text-white-50 mb-4 col-lg-8 mx-auto">
             Share one recurring manual process your organisation would like to retire. We will respond with a concise, practical next step, typically within one business day.
           </p>

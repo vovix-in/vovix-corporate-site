@@ -9,6 +9,36 @@
   }
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // --- Scroll progress bar (gradient) + navbar elevation ---
+  const progressEl = document.getElementById("scrollProgress");
+  const navEl = document.querySelector(".navbar");
+  let scrollTicking = false;
+
+  const updateScrollUI = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight =
+      (document.documentElement.scrollHeight || document.body.scrollHeight) - window.innerHeight;
+    const pct = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
+    if (progressEl) progressEl.style.width = pct + "%";
+    if (navEl) navEl.classList.toggle("is-scrolled", scrollTop > 12);
+    scrollTicking = false;
+  };
+
+  if (progressEl || navEl) {
+    updateScrollUI();
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!scrollTicking) {
+          window.requestAnimationFrame(updateScrollUI);
+          scrollTicking = true;
+        }
+      },
+      { passive: true }
+    );
+  }
+
   const revealNodes = document.querySelectorAll(".reveal-up");
 
   if (revealNodes.length > 0) {

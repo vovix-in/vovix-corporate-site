@@ -38,13 +38,13 @@
     />
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link href="/css/site.css?v=20260514b" rel="stylesheet" />
+    <link href="/css/site.css?v=20260514d" rel="stylesheet" />
     <script src="/js/site.js" defer></script>
   </head>
   <body class="bg-white">
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
     <nav
-      class="navbar navbar-expand-lg navbar-light sticky-top border-bottom border-secondary border-opacity-25"
-      style="background: var(--vovix-secondary)"
+      class="navbar navbar-expand-lg navbar-light sticky-top"
     >
       <div class="container">
         <a class="navbar-brand d-flex align-items-center gap-2 py-2" href="/">
@@ -75,10 +75,10 @@
       </div>
     </nav>
 
-    <header class="hero-navy py-5 py-lg-6 border-bottom border-secondary border-opacity-25 text-white" style="background: linear-gradient(135deg, #102a43 0%, #0d1f31 100%)">
+    <header class="hero-navy py-5 py-lg-6 text-white">
       <div class="container py-lg-4 text-center">
-        <p class="hero-kicker mb-3 text-vovix">Product catalogue</p>
-        <h1 class="display-hero display-5 headline-tight mb-3 text-white">Software products</h1>
+        <p class="hero-kicker mb-3">Product catalogue</p>
+        <h1 class="display-hero display-5 headline-tight mb-3 text-white">Software <span class="text-gradient">products</span></h1>
         <p class="lead text-white-50 col-lg-9 mx-auto mb-0">
           <strong class="text-white">Two production offerings</strong> available for evaluation today. Custom engineering follows the same written-scoping standards outlined on our <a class="hero-navy-link" href="/services.html">Services</a> page. We prefer clarity over borrowed case studies.
         </p>
@@ -91,7 +91,10 @@
           <div class="section-frame p-4 p-lg-5 mb-5 reveal-up">
             <div class="row g-5 align-items-center">
               <div class="col-lg-6">
-                <p class="section-eyebrow mb-2">Stock research</p>
+                <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                  <p class="section-eyebrow mb-0">Stock research</p>
+                  <span class="live-pill">Live</span>
+                </div>
                 <h2 class="section-heading h2 mb-3">Vovix OneView</h2>
                 <p class="text-secondary mb-4">
                   End-to-end NSE/BSE stock analysis in one click, with an integrated news dashboard and filtered stock screeners in a single practical workspace.
@@ -121,7 +124,10 @@
           <div class="section-frame p-4 p-lg-5 reveal-up">
             <div class="row g-5 align-items-center">
               <div class="col-lg-6">
-                <p class="section-eyebrow mb-2">Authorized capture</p>
+                <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                  <p class="section-eyebrow mb-0">Authorized capture</p>
+                  <span class="live-pill">Live</span>
+                </div>
                 <h2 class="section-heading h2 mb-3">Vovix OneCrawl</h2>
                 <p class="text-secondary mb-4">
                   Give OneCrawl a company or target website URL and it maps linked pages within your scope, crawls respectfully, and downloads text, structured content, and files into organized exports for analysis, archives, or downstream automation.
@@ -171,8 +177,9 @@
 
       <section class="py-5 py-lg-6 bg-white reveal-up">
         <div class="container">
-          <div class="rounded-4 p-4 p-lg-5 text-center text-white" style="background: linear-gradient(135deg, #102a43 0%, #0d1f31 100%)">
-            <h2 class="section-heading h3 text-white mb-3">Custom engineering</h2>
+          <div class="rounded-4 cta-premium p-4 p-lg-5 text-center text-white">
+            <p class="hero-kicker mb-3">Bespoke builds</p>
+            <h2 class="section-heading h3 text-white mb-3">Custom <span class="text-gradient">engineering</span></h2>
             <p class="text-white-50 mb-4 col-lg-8 mx-auto">
               If your requirement maps to an existing product, we will say so. If it calls for bespoke development, we will separate what is feasible today from what requires a later phase, always in writing.
             </p>

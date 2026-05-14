@@ -39,7 +39,7 @@
     />
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link href="/css/site.css?v=20260514b" rel="stylesheet" />
+    <link href="/css/site.css?v=20260514d" rel="stylesheet" />
     <script src="/js/site.js" defer></script>
     <script type="application/ld+json">
       {
@@ -66,9 +66,9 @@
     </script>
   </head>
   <body class="bg-white">
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
     <nav
-      class="navbar navbar-expand-lg navbar-light sticky-top border-bottom border-secondary border-opacity-25"
-      style="background: var(--vovix-secondary)"
+      class="navbar navbar-expand-lg navbar-light sticky-top"
     >
       <div class="container">
         <a class="navbar-brand d-flex align-items-center gap-2 py-2" href="/">
@@ -99,10 +99,10 @@
       </div>
     </nav>
 
-    <header class="hero-navy py-5 py-lg-6 border-bottom border-secondary border-opacity-25 text-white" style="background: linear-gradient(135deg, #102a43 0%, #0d1f31 100%)">
+    <header class="hero-navy py-5 py-lg-6 text-white">
       <div class="container py-lg-4 text-center">
-        <p class="hero-kicker mb-3 text-vovix">Company profile</p>
-        <h1 class="display-hero display-5 headline-tight text-white mb-3">Automation and data systems for ambitious teams</h1>
+        <p class="hero-kicker mb-3">Company profile</p>
+        <h1 class="display-hero display-5 headline-tight text-white mb-3">Automation and <span class="text-gradient">data systems</span> for ambitious teams</h1>
         <p class="lead text-white-50 col-lg-8 mx-auto mb-0">
           Vovix is registered in Tamil Nadu and builds software to automate tasks and support operational decisions, plus products where they accelerate delivery. We work with companies <strong class="text-white">around the world</strong> remotely.
         </p>
@@ -205,11 +205,11 @@
         </div>
       </section>
 
-      <section class="py-5 py-lg-6 text-white reveal-up" style="background: linear-gradient(135deg, #102a43 0%, #0d1f31 100%)">
+      <section class="py-5 py-lg-6 text-white reveal-up cta-premium">
         <div class="container">
           <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
-            <div class="col"><p class="display-6 text-vovix fw-bold mb-1">2</p><p class="text-white-50 mb-0">Live products (OneView, OneCrawl)</p></div>
-            <div class="col"><p class="h4 text-vovix fw-bold mb-1">HQ</p><p class="text-white-50 mb-0">Registered · Tamil Nadu</p></div>
+            <div class="col"><p class="display-4 text-gradient fw-bold mb-1" data-count="2">2</p><p class="text-white-50 mb-0">Live products (OneView, OneCrawl)</p></div>
+            <div class="col"><p class="h2 text-gradient fw-bold mb-1">HQ</p><p class="text-white-50 mb-0">Registered &middot; Tamil Nadu</p></div>
             <div class="col d-flex align-items-center justify-content-center"><p class="text-white-50 small mb-0 px-2">Early-stage: we show what exists, say what we're learning, and scope new work transparently.</p></div>
           </div>
         </div>
