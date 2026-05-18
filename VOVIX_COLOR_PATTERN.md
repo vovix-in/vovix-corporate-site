@@ -40,6 +40,15 @@ Defined in `css/site.css` under `:root`:
 - Form focus: cyan border/glow via `--vovix-cyan`
 - Trust strips and cards: silver-based surfaces with navy text
 
+### Homepage (`body.theme-agency`)
+
+- Page surface: `--vovix-bg` (Pearl Silver)
+- Alternating band: `--vovix-secondary`
+- Service & pipeline cards: `--white` on `--border-color`, headings `--text-main`
+- Hero & code panel: `--vovix-navy` / `--vovix-navy-deep` with emerald & cyan radial glows
+- Eyebrows & active code tab: `--vovix-primary`; pipeline step numbers: `--vovix-cyan`
+- Lead form inputs: `--vovix-secondary` background; focus ring `--vovix-cyan`
+
 ## Future Guidance
 
 - Keep light mode as default.
