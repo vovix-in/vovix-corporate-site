@@ -1240,28 +1240,9 @@ body.theme-agency .navbar.agency-nav .navbar-toggler-icon {
   filter: invert(1);
 }
 
-/* Hero CTAs: do not inherit body.theme-agency link navy color */
-body.theme-agency .agency-hero .btn-agency-outline {
-  --bs-btn-color: var(--white);
-  --bs-btn-border-color: rgba(255, 255, 255, 0.4);
-  --bs-btn-hover-color: var(--vovix-navy);
-  --bs-btn-hover-bg: var(--white);
-  --bs-btn-hover-border-color: var(--white);
-  --bs-btn-active-bg: var(--vovix-secondary);
-  --bs-btn-active-border-color: var(--vovix-secondary);
-  color: var(--white) !important;
-}
-
-body.theme-agency .agency-hero .btn-primary {
+/* Homepage hero uses shared .hero-navy (same mesh + grid as products) */
+body.theme-agency .hero-navy .btn-primary {
   color: var(--vovix-navy-deep) !important;
-}
-
-body.theme-agency .agency-hero a:not(.btn) {
-  color: var(--vovix-cyan-soft);
-}
-
-body.theme-agency .agency-hero a:not(.btn):hover {
-  color: var(--white);
 }
 
 body.theme-agency .agency-muted {
@@ -1274,50 +1255,6 @@ body.theme-agency .agency-eyebrow {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--vovix-primary);
-}
-
-/* Hero: navy-led gradient + emerald/cyan glow (pattern) */
-body.theme-agency .agency-hero {
-  position: relative;
-  overflow: hidden;
-  color: var(--white);
-  background: radial-gradient(ellipse 80% 60% at 15% -10%, rgba(0, 200, 83, 0.18), transparent 55%),
-    radial-gradient(ellipse 60% 50% at 95% 15%, rgba(0, 229, 255, 0.12), transparent 50%),
-    linear-gradient(165deg, var(--vovix-navy) 0%, var(--vovix-navy-deep) 55%, var(--vovix-hero-accent) 100%);
-}
-
-body.theme-agency .agency-hero-grid {
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, transparent 88%);
-  pointer-events: none;
-}
-
-body.theme-agency .agency-hero .agency-eyebrow {
-  color: var(--vovix-cyan-soft);
-}
-
-body.theme-agency .agency-hero-title {
-  font-family: "Montserrat", sans-serif;
-  font-size: clamp(2rem, 4.5vw, 3.15rem);
-  font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.03em;
-  color: var(--white);
-}
-
-body.theme-agency .agency-hero-lead {
-  font-size: 1.1rem;
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.72);
-  max-width: 34rem;
-}
-
-body.theme-agency .agency-hero-stats .agency-muted {
-  color: rgba(255, 255, 255, 0.65) !important;
 }
 
 body.theme-agency .agency-section {
@@ -1413,12 +1350,12 @@ body.theme-agency .pipeline-step h3 {
   color: var(--text-main);
 }
 
-/* Code panel: navy foundation zone */
-body.theme-agency .code-transform-panel {
+/* Code panel on hero-navy (matches products-page depth) */
+body.theme-agency .hero-navy .code-transform-panel {
   border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: var(--vovix-navy-deep);
-  box-shadow: var(--shadow-lg), var(--shadow-glow-cyan);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(10, 27, 45, 0.85);
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(0, 229, 255, 0.08);
   overflow: hidden;
 }
 
