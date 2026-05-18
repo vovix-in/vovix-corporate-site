@@ -1,0 +1,270 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" width="1400" height="900">
+  <defs>
+    <filter id="cardshadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="rgba(16,42,67,0.10)"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="900" fill="#f5f7fa"/>
+  <circle cx="1320" cy="0" r="380" fill="rgba(0,229,255,0.04)"/>
+  <circle cx="0" cy="900" r="320" fill="rgba(0,200,83,0.04)"/>
+
+  <!-- Header bar -->
+  <rect x="30" y="28" width="1340" height="52" rx="10" fill="white" stroke="#d9e2ec" stroke-width="1" filter="url(#cardshadow)"/>
+  <circle cx="58" cy="54" r="5" fill="#ef5350" fill-opacity="0.7"/>
+  <circle cx="76" cy="54" r="5" fill="#f59e0b" fill-opacity="0.7"/>
+  <circle cx="94" cy="54" r="5" fill="#00c853" fill-opacity="0.7"/>
+  <text x="118" y="60" font-size="15" font-weight="700" fill="#102a43" font-family="system-ui,sans-serif">Vovix</text>
+  <text x="156" y="60" font-size="15" font-weight="700" fill="#00c853" font-family="system-ui,sans-serif"> OCR</text>
+  <text x="118" y="73" font-size="10" fill="#486581" font-family="system-ui,sans-serif">AI Document Intelligence · Extract structured data from any document</text>
+  <rect x="1074" y="40" width="106" height="24" rx="6" fill="rgba(16,42,67,0.05)" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="1127" y="56" font-size="11" fill="#102a43" text-anchor="middle" font-family="system-ui,sans-serif">&#8593; Upload Doc</text>
+  <rect x="1190" y="40" width="110" height="24" rx="12" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.4)" stroke-width="1"/>
+  <circle cx="1206" cy="52" r="4" fill="#00c853"/>
+  <text x="1216" y="56" font-size="10" font-weight="700" fill="#00c853" font-family="system-ui,sans-serif">PROCESSING</text>
+
+  <!-- ===== LEFT PANEL: DOCUMENT ===== -->
+  <rect x="30" y="92" width="590" height="782" rx="12" fill="white" stroke="#d9e2ec" stroke-width="1" filter="url(#cardshadow)"/>
+  <!-- Panel header -->
+  <rect x="30" y="92" width="590" height="44" rx="12" fill="#f5f7fa"/>
+  <rect x="30" y="120" width="590" height="16" fill="#f5f7fa"/>
+  <text x="52" y="117" font-size="10" font-weight="700" letter-spacing="2" fill="#486581" font-family="system-ui,sans-serif">DOCUMENT INPUT</text>
+  <text x="562" y="117" font-size="10" fill="#00c853" text-anchor="end" font-family="system-ui,sans-serif">&#10003; invoice_may2026.pdf</text>
+
+  <!-- Document card -->
+  <rect x="56" y="148" width="538" height="700" rx="6" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Doc header (navy) -->
+  <rect x="56" y="148" width="538" height="70" rx="6" fill="#102a43"/>
+  <rect x="56" y="196" width="538" height="22" fill="#102a43"/>
+  <rect x="78" y="162" width="110" height="13" rx="3" fill="rgba(255,255,255,0.25)"/>
+  <rect x="78" y="180" width="72" height="8" rx="2" fill="rgba(255,255,255,0.12)"/>
+  <text x="536" y="172" font-size="18" font-weight="700" fill="white" text-anchor="end" font-family="system-ui,sans-serif">INVOICE</text>
+  <text x="536" y="187" font-size="10" fill="rgba(255,255,255,0.5)" text-anchor="end" font-family="system-ui,sans-serif">INV-20260519-042</text>
+
+  <!-- Billed by / to -->
+  <rect x="78" y="232" width="210" height="72" rx="4" fill="rgba(16,42,67,0.03)"/>
+  <text x="90" y="250" font-size="8" font-weight="700" fill="#486581" font-family="system-ui,sans-serif">BILLED BY</text>
+  <rect x="90" y="256" width="115" height="9" rx="2" fill="#d9e2ec"/>
+  <rect x="90" y="270" width="86" height="7" rx="2" fill="#e2e8f0"/>
+  <rect x="90" y="281" width="108" height="7" rx="2" fill="#e2e8f0"/>
+  <rect x="90" y="292" width="78" height="7" rx="2" fill="#e2e8f0"/>
+  <!-- OCR highlight: billed-by block -->
+  <rect x="78" y="232" width="210" height="72" rx="4" fill="rgba(0,200,83,0.09)" stroke="rgba(0,200,83,0.5)" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <rect x="368" y="232" width="204" height="72" rx="4" fill="rgba(16,42,67,0.03)"/>
+  <text x="380" y="250" font-size="8" font-weight="700" fill="#486581" font-family="system-ui,sans-serif">BILLED TO</text>
+  <rect x="380" y="256" width="96" height="9" rx="2" fill="#d9e2ec"/>
+  <rect x="380" y="270" width="136" height="7" rx="2" fill="#e2e8f0"/>
+  <rect x="380" y="281" width="78" height="7" rx="2" fill="#e2e8f0"/>
+  <rect x="380" y="292" width="118" height="7" rx="2" fill="#e2e8f0"/>
+
+  <!-- Invoice meta line -->
+  <line x1="78" y1="316" x2="556" y2="316" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="78" y="325" width="86" height="8" rx="2" fill="#e2e8f0"/>
+  <rect x="182" y="325" width="68" height="8" rx="2" fill="#d9e2ec"/>
+  <!-- OCR highlight: date -->
+  <rect x="178" y="321" width="78" height="16" rx="3" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.5)" stroke-width="1"/>
+  <rect x="376" y="325" width="78" height="8" rx="2" fill="#e2e8f0"/>
+  <rect x="472" y="325" width="68" height="8" rx="2" fill="#d9e2ec"/>
+
+  <!-- Line items table -->
+  <rect x="78" y="348" width="480" height="28" rx="3" fill="#f5f7fa"/>
+  <text x="90" y="366" font-size="8" font-weight="700" fill="#486581" font-family="system-ui,sans-serif">DESCRIPTION</text>
+  <text x="388" y="366" font-size="8" font-weight="700" fill="#486581" font-family="system-ui,sans-serif">QTY</text>
+  <text x="428" y="366" font-size="8" font-weight="700" fill="#486581" font-family="system-ui,sans-serif">RATE</text>
+  <text x="498" y="366" font-size="8" font-weight="700" fill="#486581" font-family="system-ui,sans-serif">AMOUNT</text>
+
+  <!-- Item rows -->
+  <rect x="78" y="376" width="480" height="38" rx="0" fill="rgba(0,229,255,0.06)" stroke="rgba(0,229,255,0.35)" stroke-width="1"/>
+  <rect x="90" y="387" width="195" height="8" rx="2" fill="#d9e2ec"/>
+  <rect x="388" y="387" width="18" height="8" rx="2" fill="#e2e8f0"/>
+  <rect x="422" y="387" width="38" height="8" rx="2" fill="#e2e8f0"/>
+  <rect x="484" y="387" width="58" height="8" rx="2" fill="#d9e2ec"/>
+
+  <rect x="78" y="414" width="480" height="36" rx="0" fill="white"/>
+  <rect x="90" y="425" width="155" height="8" rx="2" fill="#e2e8f0"/>
+  <rect x="388" y="425" width="18" height="8" rx="2" fill="#e2e8f0"/>
+  <rect x="422" y="425" width="38" height="8" rx="2" fill="#e2e8f0"/>
+  <rect x="484" y="425" width="58" height="8" rx="2" fill="#e2e8f0"/>
+
+  <rect x="78" y="450" width="480" height="36" rx="0" fill="#fbfdff"/>
+  <rect x="90" y="461" width="176" height="8" rx="2" fill="#e2e8f0"/>
+  <rect x="388" y="461" width="18" height="8" rx="2" fill="#e2e8f0"/>
+  <rect x="422" y="461" width="38" height="8" rx="2" fill="#e2e8f0"/>
+  <rect x="484" y="461" width="58" height="8" rx="2" fill="#e2e8f0"/>
+
+  <rect x="78" y="486" width="480" height="36" rx="0" fill="white"/>
+  <rect x="90" y="497" width="136" height="8" rx="2" fill="#e2e8f0"/>
+  <rect x="388" y="497" width="18" height="8" rx="2" fill="#e2e8f0"/>
+  <rect x="422" y="497" width="38" height="8" rx="2" fill="#e2e8f0"/>
+  <rect x="484" y="497" width="58" height="8" rx="2" fill="#e2e8f0"/>
+
+  <!-- Scan line -->
+  <rect x="56" y="456" width="538" height="6" fill="rgba(0,229,255,0.08)"/>
+  <rect x="56" y="458" width="538" height="2" fill="rgba(0,229,255,0.5)"/>
+
+  <line x1="78" y1="522" x2="558" y2="522" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Totals -->
+  <rect x="376" y="532" width="162" height="22" rx="3" fill="rgba(16,42,67,0.03)"/>
+  <rect x="388" y="538" width="68" height="7" rx="2" fill="#e2e8f0"/>
+  <rect x="484" y="538" width="58" height="7" rx="2" fill="#d9e2ec"/>
+  <rect x="376" y="562" width="162" height="22" rx="3" fill="rgba(16,42,67,0.03)"/>
+  <rect x="388" y="568" width="68" height="7" rx="2" fill="#e2e8f0"/>
+  <rect x="484" y="568" width="58" height="7" rx="2" fill="#d9e2ec"/>
+
+  <!-- Total box -->
+  <rect x="368" y="594" width="170" height="36" rx="4" fill="#102a43"/>
+  <rect x="368" y="594" width="170" height="36" rx="4" fill="rgba(0,200,83,0.12)" stroke="rgba(0,200,83,0.6)" stroke-width="1.5"/>
+  <text x="382" y="610" font-size="9" font-weight="700" fill="rgba(255,255,255,0.6)" font-family="system-ui,sans-serif">TOTAL DUE</text>
+  <text x="382" y="625" font-size="11" font-weight="700" fill="white" font-family="system-ui,sans-serif">&#8377;1,00,300.00</text>
+
+  <!-- Footer text lines -->
+  <text x="78" y="654" font-size="8" fill="#9bb2c9" font-family="system-ui,sans-serif">Payment terms: Net 15 days. Bank details enclosed.</text>
+  <rect x="78" y="662" width="330" height="6" rx="2" fill="#f0f4f8"/>
+  <rect x="78" y="674" width="270" height="6" rx="2" fill="#f0f4f8"/>
+  <rect x="78" y="686" width="295" height="6" rx="2" fill="#f0f4f8"/>
+  <rect x="78" y="698" width="195" height="6" rx="2" fill="#f0f4f8"/>
+
+  <!-- Detection count badge -->
+  <rect x="440" y="752" width="132" height="22" rx="11" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.3)" stroke-width="1"/>
+  <text x="506" y="767" font-size="10" font-weight="600" fill="#00c853" text-anchor="middle" font-family="system-ui,sans-serif">12 zones detected</text>
+
+  <!-- ===== RIGHT PANEL: EXTRACTED DATA ===== -->
+  <rect x="632" y="92" width="738" height="782" rx="12" fill="white" stroke="#d9e2ec" stroke-width="1" filter="url(#cardshadow)"/>
+  <!-- Panel header -->
+  <rect x="632" y="92" width="738" height="44" rx="12" fill="#f5f7fa"/>
+  <rect x="632" y="120" width="738" height="16" fill="#f5f7fa"/>
+  <text x="654" y="117" font-size="10" font-weight="700" letter-spacing="2" fill="#486581" font-family="system-ui,sans-serif">EXTRACTED FIELDS</text>
+  <rect x="1210" y="102" width="148" height="24" rx="12" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.3)" stroke-width="1"/>
+  <text x="1284" y="118" font-size="10" font-weight="700" fill="#00c853" text-anchor="middle" font-family="system-ui,sans-serif">&#11014; 97.8% accuracy</text>
+
+  <!-- Table header -->
+  <rect x="652" y="148" width="700" height="32" rx="4" fill="#f8fafc"/>
+  <text x="668" y="168" font-size="9" font-weight="700" letter-spacing="1" fill="#486581" font-family="system-ui,sans-serif">FIELD</text>
+  <text x="858" y="168" font-size="9" font-weight="700" letter-spacing="1" fill="#486581" font-family="system-ui,sans-serif">EXTRACTED VALUE</text>
+  <text x="1230" y="168" font-size="9" font-weight="700" letter-spacing="1" fill="#486581" text-anchor="middle" font-family="system-ui,sans-serif">CONF.</text>
+  <line x1="652" y1="180" x2="1352" y2="180" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Row macro: y, bg, label, sublabel, value, conf -->
+  <!-- Row 1: Document Type -->
+  <rect x="652" y="180" width="700" height="46" fill="white"/>
+  <text x="668" y="200" font-size="11" font-weight="600" fill="#102a43" font-family="system-ui,sans-serif">Document Type</text>
+  <text x="668" y="215" font-size="9" fill="#9bb2c9" font-family="system-ui,sans-serif">Category</text>
+  <text x="858" y="205" font-size="12" fill="#486581" font-family="system-ui,sans-serif">Invoice</text>
+  <rect x="1200" y="190" width="54" height="18" rx="9" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.25)" stroke-width="1"/>
+  <text x="1227" y="203" font-size="10" font-weight="700" fill="#00c853" text-anchor="middle" font-family="system-ui,sans-serif">99%</text>
+  <line x1="652" y1="226" x2="1352" y2="226" stroke="#f0f4f8" stroke-width="1"/>
+
+  <!-- Row 2: Invoice Number -->
+  <rect x="652" y="226" width="700" height="46" fill="#fcfeff"/>
+  <text x="668" y="246" font-size="11" font-weight="600" fill="#102a43" font-family="system-ui,sans-serif">Invoice Number</text>
+  <text x="668" y="261" font-size="9" fill="#9bb2c9" font-family="system-ui,sans-serif">Identifier</text>
+  <text x="858" y="251" font-size="12" fill="#486581" font-family="'Courier New',monospace">INV-20260519-042</text>
+  <rect x="1200" y="236" width="54" height="18" rx="9" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.25)" stroke-width="1"/>
+  <text x="1227" y="249" font-size="10" font-weight="700" fill="#00c853" text-anchor="middle" font-family="system-ui,sans-serif">98%</text>
+  <line x1="652" y1="272" x2="1352" y2="272" stroke="#f0f4f8" stroke-width="1"/>
+
+  <!-- Row 3: Vendor Name -->
+  <rect x="652" y="272" width="700" height="46" fill="white"/>
+  <text x="668" y="292" font-size="11" font-weight="600" fill="#102a43" font-family="system-ui,sans-serif">Vendor Name</text>
+  <text x="668" y="307" font-size="9" fill="#9bb2c9" font-family="system-ui,sans-serif">Issuer</text>
+  <text x="858" y="297" font-size="12" fill="#486581" font-family="system-ui,sans-serif">Acme Solutions Pvt. Ltd.</text>
+  <rect x="1200" y="282" width="54" height="18" rx="9" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.25)" stroke-width="1"/>
+  <text x="1227" y="295" font-size="10" font-weight="700" fill="#00c853" text-anchor="middle" font-family="system-ui,sans-serif">97%</text>
+  <line x1="652" y1="318" x2="1352" y2="318" stroke="#f0f4f8" stroke-width="1"/>
+
+  <!-- Row 4: Invoice Date -->
+  <rect x="652" y="318" width="700" height="46" fill="#fcfeff"/>
+  <text x="668" y="338" font-size="11" font-weight="600" fill="#102a43" font-family="system-ui,sans-serif">Invoice Date</text>
+  <text x="668" y="353" font-size="9" fill="#9bb2c9" font-family="system-ui,sans-serif">ISO 8601</text>
+  <text x="858" y="343" font-size="12" fill="#486581" font-family="'Courier New',monospace">2026-05-19</text>
+  <rect x="1200" y="328" width="54" height="18" rx="9" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.25)" stroke-width="1"/>
+  <text x="1227" y="341" font-size="10" font-weight="700" fill="#00c853" text-anchor="middle" font-family="system-ui,sans-serif">99%</text>
+  <line x1="652" y1="364" x2="1352" y2="364" stroke="#f0f4f8" stroke-width="1"/>
+
+  <!-- Row 5: Due Date -->
+  <rect x="652" y="364" width="700" height="46" fill="white"/>
+  <text x="668" y="384" font-size="11" font-weight="600" fill="#102a43" font-family="system-ui,sans-serif">Due Date</text>
+  <text x="668" y="399" font-size="9" fill="#9bb2c9" font-family="system-ui,sans-serif">Payment deadline</text>
+  <text x="858" y="389" font-size="12" fill="#486581" font-family="'Courier New',monospace">2026-06-03</text>
+  <rect x="1200" y="374" width="54" height="18" rx="9" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.25)" stroke-width="1"/>
+  <text x="1227" y="387" font-size="10" font-weight="700" fill="#00c853" text-anchor="middle" font-family="system-ui,sans-serif">98%</text>
+  <line x1="652" y1="410" x2="1352" y2="410" stroke="#f0f4f8" stroke-width="1"/>
+
+  <!-- Row 6: Subtotal -->
+  <rect x="652" y="410" width="700" height="46" fill="#fcfeff"/>
+  <text x="668" y="430" font-size="11" font-weight="600" fill="#102a43" font-family="system-ui,sans-serif">Subtotal</text>
+  <text x="668" y="445" font-size="9" fill="#9bb2c9" font-family="system-ui,sans-serif">Before tax</text>
+  <text x="858" y="435" font-size="12" fill="#486581" font-family="system-ui,sans-serif">&#8377;85,000.00</text>
+  <rect x="1200" y="420" width="54" height="18" rx="9" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.25)" stroke-width="1"/>
+  <text x="1227" y="433" font-size="10" font-weight="700" fill="#00c853" text-anchor="middle" font-family="system-ui,sans-serif">99%</text>
+  <line x1="652" y1="456" x2="1352" y2="456" stroke="#f0f4f8" stroke-width="1"/>
+
+  <!-- Row 7: Tax -->
+  <rect x="652" y="456" width="700" height="46" fill="white"/>
+  <text x="668" y="476" font-size="11" font-weight="600" fill="#102a43" font-family="system-ui,sans-serif">Tax (GST 18%)</text>
+  <text x="668" y="491" font-size="9" fill="#9bb2c9" font-family="system-ui,sans-serif">Applied rate</text>
+  <text x="858" y="481" font-size="12" fill="#486581" font-family="system-ui,sans-serif">&#8377;15,300.00</text>
+  <rect x="1200" y="466" width="54" height="18" rx="9" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.25)" stroke-width="1"/>
+  <text x="1227" y="479" font-size="10" font-weight="700" fill="#00c853" text-anchor="middle" font-family="system-ui,sans-serif">98%</text>
+  <line x1="652" y1="502" x2="1352" y2="502" stroke="#f0f4f8" stroke-width="1"/>
+
+  <!-- Row 8: Total (highlighted) -->
+  <rect x="652" y="502" width="700" height="52" fill="rgba(0,200,83,0.04)"/>
+  <text x="668" y="524" font-size="12" font-weight="700" fill="#102a43" font-family="system-ui,sans-serif">Total Amount</text>
+  <text x="668" y="542" font-size="9" fill="#9bb2c9" font-family="system-ui,sans-serif">Final payable</text>
+  <text x="858" y="532" font-size="14" font-weight="700" fill="#102a43" font-family="system-ui,sans-serif">&#8377;1,00,300.00</text>
+  <rect x="1200" y="514" width="54" height="18" rx="9" fill="rgba(0,200,83,0.18)" stroke="rgba(0,200,83,0.4)" stroke-width="1"/>
+  <text x="1227" y="527" font-size="10" font-weight="700" fill="#00c853" text-anchor="middle" font-family="system-ui,sans-serif">99%</text>
+  <line x1="652" y1="554" x2="1352" y2="554" stroke="#d9e2ec" stroke-width="1"/>
+
+  <!-- Row 9: Currency -->
+  <rect x="652" y="554" width="700" height="46" fill="#fcfeff"/>
+  <text x="668" y="574" font-size="11" font-weight="600" fill="#102a43" font-family="system-ui,sans-serif">Currency</text>
+  <text x="668" y="589" font-size="9" fill="#9bb2c9" font-family="system-ui,sans-serif">ISO 4217</text>
+  <text x="858" y="579" font-size="12" fill="#486581" font-family="'Courier New',monospace">INR</text>
+  <rect x="1200" y="564" width="54" height="18" rx="9" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.25)" stroke-width="1"/>
+  <text x="1227" y="577" font-size="10" font-weight="700" fill="#00c853" text-anchor="middle" font-family="system-ui,sans-serif">100%</text>
+  <line x1="652" y1="600" x2="1352" y2="600" stroke="#f0f4f8" stroke-width="1"/>
+
+  <!-- Row 10: Line Items -->
+  <rect x="652" y="600" width="700" height="46" fill="white"/>
+  <text x="668" y="620" font-size="11" font-weight="600" fill="#102a43" font-family="system-ui,sans-serif">Line Items</text>
+  <text x="668" y="635" font-size="9" fill="#9bb2c9" font-family="system-ui,sans-serif">Array · 4 items parsed</text>
+  <rect x="858" y="610" width="52" height="18" rx="9" fill="rgba(0,229,255,0.1)" stroke="rgba(0,229,255,0.3)" stroke-width="1"/>
+  <text x="884" y="623" font-size="10" font-weight="700" fill="#00e5ff" text-anchor="middle" font-family="system-ui,sans-serif">[ ] 4</text>
+  <rect x="1200" y="610" width="54" height="18" rx="9" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.25)" stroke-width="1"/>
+  <text x="1227" y="623" font-size="10" font-weight="700" fill="#00c853" text-anchor="middle" font-family="system-ui,sans-serif">94%</text>
+  <line x1="652" y1="646" x2="1352" y2="646" stroke="#f0f4f8" stroke-width="1"/>
+
+  <!-- Export actions -->
+  <rect x="652" y="658" width="700" height="50" rx="8" fill="#f8fafc"/>
+  <text x="668" y="680" font-size="9" font-weight="700" letter-spacing="2" fill="#486581" font-family="system-ui,sans-serif">EXPORT</text>
+  <rect x="722" y="666" width="78" height="26" rx="6" fill="white" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="761" y="683" font-size="11" fill="#102a43" text-anchor="middle" font-family="system-ui,sans-serif">JSON</text>
+  <rect x="810" y="666" width="78" height="26" rx="6" fill="white" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="849" y="683" font-size="11" fill="#102a43" text-anchor="middle" font-family="system-ui,sans-serif">CSV</text>
+  <rect x="898" y="666" width="100" height="26" rx="6" fill="white" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="948" y="683" font-size="11" fill="#102a43" text-anchor="middle" font-family="system-ui,sans-serif">Webhook</text>
+  <rect x="1208" y="666" width="136" height="26" rx="6" fill="#00c853"/>
+  <text x="1276" y="683" font-size="11" font-weight="700" fill="#0a1b2d" text-anchor="middle" font-family="system-ui,sans-serif">&#8595; Download All</text>
+
+  <!-- Metrics bar -->
+  <rect x="652" y="720" width="700" height="76" rx="8" fill="rgba(16,42,67,0.02)" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="668" y="740" font-size="9" font-weight="700" letter-spacing="2" fill="#486581" font-family="system-ui,sans-serif">EXTRACTION METRICS</text>
+  <rect x="668" y="750" width="140" height="30" rx="8" fill="white" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="680" y="762" font-size="9" fill="#9bb2c9" font-family="system-ui,sans-serif">Avg. Confidence</text>
+  <text x="680" y="776" font-size="13" font-weight="700" fill="#00c853" font-family="system-ui,sans-serif">97.8%</text>
+  <rect x="820" y="750" width="140" height="30" rx="8" fill="white" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="832" y="762" font-size="9" fill="#9bb2c9" font-family="system-ui,sans-serif">Process Time</text>
+  <text x="832" y="776" font-size="13" font-weight="700" fill="#102a43" font-family="system-ui,sans-serif">1.2s</text>
+  <rect x="972" y="750" width="140" height="30" rx="8" fill="white" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="984" y="762" font-size="9" fill="#9bb2c9" font-family="system-ui,sans-serif">Fields Extracted</text>
+  <text x="984" y="776" font-size="13" font-weight="700" fill="#102a43" font-family="system-ui,sans-serif">10 / 10</text>
+  <rect x="1124" y="750" width="140" height="30" rx="8" fill="white" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="1136" y="762" font-size="9" fill="#9bb2c9" font-family="system-ui,sans-serif">Pages Processed</text>
+  <text x="1136" y="776" font-size="13" font-weight="700" fill="#102a43" font-family="system-ui,sans-serif">2 pages</text>
+</svg>

@@ -97,33 +97,33 @@
             <form class="row g-3" data-mailto-form novalidate>
               <div class="col-md-6">
                 <label class="form-label small fw-semibold mb-1" for="name">Full name *</label>
-                <input class="form-control" id="name" name="name" type="text" required />
+                <input class="form-control agency-input" id="name" name="name" type="text" required />
               </div>
               <div class="col-md-6">
                 <label class="form-label small fw-semibold mb-1" for="email">Work email *</label>
-                <input class="form-control" id="email" name="email" type="email" required autocomplete="email" />
+                <input class="form-control agency-input" id="email" name="email" type="email" required autocomplete="email" />
               </div>
               <div class="col-md-6">
                 <label class="form-label small fw-semibold mb-1" for="company">Company</label>
-                <input class="form-control" id="company" name="company" type="text" />
+                <input class="form-control agency-input" id="company" name="company" type="text" />
               </div>
               <div class="col-md-6">
                 <label class="form-label small fw-semibold mb-1" for="phone">Phone</label>
-                <input class="form-control" id="phone" name="phone" type="tel" />
+                <input class="form-control agency-input" id="phone" name="phone" type="tel" />
               </div>
               <div class="col-md-6">
                 <label class="form-label small fw-semibold mb-1" for="scope">I am interested in *</label>
-                <select class="form-select" id="scope" name="scope" required>
+                <select class="form-select agency-input" id="scope" name="scope" required>
                   <option value="">Select one</option>
                   <option>Custom automation project</option>
-                  <option>Vovix OneView</option>
-                  <option>Vovix OneCrawl</option>
+                  <option>Vovix Crawler</option>
+                  <option>Vovix OCR</option>
                   <option>Product Demo</option>
                 </select>
               </div>
               <div class="col-md-6">
                 <label class="form-label small fw-semibold mb-1" for="timeline">Timeline</label>
-                <select class="form-select" id="timeline" name="timeline">
+                <select class="form-select agency-input" id="timeline" name="timeline">
                   <option value="">Select timeline</option>
                   <option>Immediate (0-2 weeks)</option>
                   <option>Near term (2-6 weeks)</option>
@@ -133,7 +133,7 @@
               <div class="col-12">
                 <label class="form-label small fw-semibold mb-1" for="automation">What is one manual task your team does every week that should not be manual? *</label>
                 <textarea
-                  class="form-control"
+                  class="form-control agency-input"
                   id="automation"
                   name="automation"
                   rows="3"
@@ -144,7 +144,7 @@
               <div class="col-12">
                 <label class="form-label small fw-semibold mb-1" for="notes">Additional context (optional)</label>
                 <textarea
-                  class="form-control"
+                  class="form-control agency-input"
                   id="notes"
                   name="notes"
                   rows="4"
@@ -217,7 +217,7 @@
           </div>
           <div class="col-6 col-lg-2">
             <p class="small fw-semibold text-uppercase text-secondary mb-2">Company</p>
-            <ul class="list-unstyled small mb-0">
+            <ul class="list-unstyled small mb-0 agency-footer-links">
               <li><a href="/services.html">Services</a></li>
               <li><a href="/products.html">Products</a></li>
               <li><a href="/about.html">About</a></li>
@@ -226,7 +226,7 @@
           </div>
           <div class="col-6 col-lg-2">
             <p class="small fw-semibold text-uppercase text-secondary mb-2">Legal</p>
-            <ul class="list-unstyled small mb-0">
+            <ul class="list-unstyled small mb-0 agency-footer-links">
               <li><a href="/legal/privacy.html">Privacy</a></li>
               <li><a href="/legal/terms.html">Terms</a></li>
             </ul>
