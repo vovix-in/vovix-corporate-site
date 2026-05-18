@@ -1173,13 +1173,24 @@ body.theme-agency {
   color: var(--text-main);
 }
 
-body.theme-agency a:not(.btn) {
+body.theme-agency a:not(.btn):not(.hero-navy-link) {
   color: var(--vovix-navy);
   text-decoration-color: rgba(0, 200, 83, 0.4);
 }
 
-body.theme-agency a:not(.btn):hover {
+body.theme-agency a:not(.btn):not(.hero-navy-link):hover {
   color: var(--vovix-emerald);
+}
+
+body.theme-agency .hero-navy a.hero-navy-link {
+  color: #fff !important;
+  text-decoration-color: rgba(0, 229, 255, 0.55) !important;
+}
+
+body.theme-agency .hero-navy a.hero-navy-link:hover,
+body.theme-agency .hero-navy a.hero-navy-link:focus {
+  color: var(--vovix-cyan-soft) !important;
+  text-decoration-color: var(--vovix-mint) !important;
 }
 
 body.theme-agency .skip-link {
