@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<!-- vovix-static-build: 20260514 formal site refresh -->
+<!-- vovix-static-build: 20260514 agency landing -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Vovix Private Limited: automation and data engineering for operations teams worldwide. Products OneView and OneCrawl; custom projects with written scope."
+      content="Vovix: enterprise web crawling, AI OCR, and custom automation. We turn unstructured web data and documents into clean APIs, JSON feeds, and integrated workflows."
     />
-    <meta name="theme-color" content="#00C853" />
-    <meta property="og:title" content="Vovix | Automation and data engineering" />
+    <meta name="theme-color" content="#0a0f14" />
+    <meta property="og:title" content="Vovix | Data provider &amp; automation agency" />
     <meta
       property="og:description"
-      content="Early-stage company: live products OneView and OneCrawl; first custom automation projects worldwide with honest scoping."
+      content="Scalable web scraping, advanced OCR, and bespoke workflow automation. Structured data delivery for modern operations teams."
     />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Vovix" />
@@ -22,15 +22,15 @@
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="512" />
     <meta property="og:image:height" content="512" />
-    <meta property="og:image:alt" content="Vovix: automation for brokers, SaaS, and finance ops teams" />
+    <meta property="og:image:alt" content="Vovix Private Limited" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Vovix | Automation and data engineering" />
+    <meta name="twitter:title" content="Vovix | Data provider &amp; automation agency" />
     <meta
       name="twitter:description"
-      content="Early-stage company: live products OneView and OneCrawl; first custom automation projects worldwide with honest scoping."
+      content="Web crawling at scale, intelligent OCR, and custom automation pipelines."
     />
     <meta name="twitter:image" content="https://www.vovix.in/assets/logo-512.png" />
-    <title>Vovix | Automation and data engineering for operations teams</title>
+    <title>Vovix | Data Provider &amp; Automation Agency</title>
     <link rel="canonical" href="https://www.vovix.in/" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <link
@@ -39,8 +39,8 @@
     />
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link href="/css/site.css?v=20260514d" rel="stylesheet" />
-    <script src="/js/site.js" defer></script>
+    <link href="/css/site.css?v=20260514e" rel="stylesheet" />
+    <script src="/js/site.js?v=20260514e" defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -51,7 +51,7 @@
         "alternateName": ["Vovix", "VOVIX"],
         "url": "https://www.vovix.in/",
         "logo": "https://www.vovix.in/assets/favicon.svg",
-        "description": "Early-stage private limited company: software products OneView and OneCrawl; open to custom automation and data-engineering projects worldwide with transparent scoping.",
+        "description": "Data provider and automation agency: enterprise web crawling, AI OCR, and custom workflow automation with structured API delivery.",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "S. No 61/8a, Door No: S8, 'B' Block, 2nd Floor, Thanigaivel Flats, Sirpi Nagar, Guduvancheri",
@@ -61,7 +61,8 @@
           "addressCountry": "IN"
         },
         "foundingDate": "2026",
-        "areaServed": "Worldwide"
+        "areaServed": "Worldwide",
+        "knowsAbout": ["Web scraping", "Data extraction", "OCR", "Workflow automation", "API integration"]
       }
     </script>
     <script type="application/ld+json">
@@ -75,14 +76,14 @@
       }
     </script>
   </head>
-  <body class="bg-white">
+  <body class="theme-agency">
     <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
-    <nav
-      class="navbar navbar-expand-lg navbar-light sticky-top"
-    >
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top agency-nav" aria-label="Primary">
       <div class="container">
         <a class="navbar-brand d-flex align-items-center gap-2 py-2" href="/">
-          <span class="brand-word fs-4 fw-bold tracking-tight">Vovix</span>
+          <span class="brand-word fs-4 fw-bold">Vovix</span>
         </a>
         <button
           class="navbar-toggler"
@@ -97,257 +98,296 @@
         </button>
         <div class="collapse navbar-collapse" id="navMain">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-lg-1">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/services.html">Services</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/products.html">Products</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/about.html">About</a>
-            </li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#capabilities">Capabilities</a></li>
+            <li class="nav-item"><a class="nav-link" href="#pipeline">Pipeline</a></li>
+            <li class="nav-item"><a class="nav-link" href="/products.html">Products</a></li>
+            <li class="nav-item"><a class="nav-link" href="/about.html">About</a></li>
             <li class="nav-item ms-lg-2 d-lg-flex align-items-lg-center mt-2 mt-lg-0">
-              <a class="btn btn-primary btn-sm px-3 w-100 w-lg-auto" href="/contact.html">Contact us</a>
+              <a class="btn btn-primary btn-sm px-3 w-100 w-lg-auto" href="#contact">Get custom data</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <header class="hero-navy py-5 py-lg-6 text-white">
-      <div class="container py-lg-5">
-        <div class="row justify-content-center">
-          <div class="col-lg-11 col-xl-10 text-center text-lg-start">
-            <p class="hero-kicker mb-3">Vovix Private Limited</p>
-            <h1 class="display-hero display-4 headline-tight text-white mb-3">Automation and <span class="text-gradient">data engineering</span>, with transparent scoping</h1>
-            <p class="lead text-white-50 mb-3 page-lead mx-lg-0 mx-auto">
-              <strong class="text-white">Open to automation and data projects</strong>, with honest scoping. We're early-stage.
-              <strong class="text-white">Shipped today:</strong> two products:
-              <a class="hero-navy-link" href="/products.html">OneView</a> and
-              <a class="hero-navy-link" href="/products.html">OneCrawl</a>.
-              <strong class="text-white">Custom work:</strong> if you have a manual operations challenge, we will clarify what we can deliver now, what may fit a product, and what we would not take on yet.
+    <header class="agency-hero" id="top">
+      <div class="agency-hero-grid" aria-hidden="true"></div>
+      <div class="container position-relative">
+        <div class="row align-items-center g-5 py-5 py-lg-6">
+          <div class="col-lg-6 reveal-up">
+            <p class="agency-eyebrow mb-3">Data provider &amp; automation agency</p>
+            <h1 class="agency-hero-title mb-4">
+              We turn unstructured web data &amp; documents into <span class="text-gradient">clean, actionable APIs</span>
+            </h1>
+            <p class="agency-hero-lead mb-4">
+              Scalable web scraping, advanced AI OCR, and bespoke workflow automation tailored to your business infrastructure.
             </p>
-            <p class="small text-white-50 col-lg-10 mb-4 mb-lg-4 mx-lg-0 mx-auto">
-              The <a class="hero-navy-link" href="/services.html">Services</a> page describes <strong class="text-white">types of projects we can take on</strong>, not a list of past deliveries. Every engagement begins with a conversation and a written scope.
-            </p>
-            <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start mb-0 mb-lg-4 hero-cta-row">
-              <a class="btn btn-primary btn-lg px-4" href="/contact.html">Schedule a discussion</a>
-              <a class="btn btn-outline-light btn-lg px-4" href="/services.html">Review services</a>
-              <span class="live-pill ms-lg-2 align-self-center">Live products shipping</span>
+            <div class="d-flex flex-wrap gap-3 hero-cta-row">
+              <a class="btn btn-primary btn-lg px-4" href="#contact">Get custom data / Request automation</a>
+              <a class="btn btn-agency-outline btn-lg px-4" href="#capabilities">View capabilities</a>
             </div>
+            <ul class="agency-hero-stats list-unstyled d-flex flex-wrap gap-4 mt-5 mb-0 small">
+              <li><strong class="text-white">Scale</strong><span class="d-block agency-muted">Proxies, JS rendering, anti-bot</span></li>
+              <li><strong class="text-white">Structure</strong><span class="d-block agency-muted">JSON, webhooks, REST</span></li>
+              <li><strong class="text-white">Scope</strong><span class="d-block agency-muted">Written delivery plan</span></li>
+            </ul>
           </div>
-        </div>
-        <div class="formal-intro-band mt-5 pt-4 pb-4 px-2 rounded-3">
-          <div class="container">
-            <div class="row row-cols-1 row-cols-md-3 g-3">
-              <div class="col">
-                <div class="at-a-glance-card">
-                  <p class="aag-label">Engagement</p>
-                  <p class="aag-text">Written scope and staged delivery. No implied enterprise bench you cannot see.</p>
-                </div>
+          <div class="col-lg-6 reveal-up">
+            <div class="code-transform-panel" role="img" aria-label="Illustration: raw HTML and image input transforming into structured JSON output">
+              <div class="code-transform-tabs">
+                <span class="code-tab is-active" data-code-pane="input">INPUT</span>
+                <span class="code-tab-arrow"><i class="bx bx-right-arrow-alt"></i></span>
+                <span class="code-tab" data-code-pane="output">OUTPUT</span>
               </div>
-              <div class="col">
-                <div class="at-a-glance-card">
-                  <p class="aag-label">Products</p>
-                  <p class="aag-text">OneView and OneCrawl are live today for evaluation, demo, and fit assessment.</p>
-                </div>
+              <div class="code-transform-body">
+                <pre class="code-pane is-visible" id="codePaneInput" aria-hidden="false"><code>&lt;div class="price"&gt;$42.00&lt;/div&gt;
+&lt;span data-sku="VX-2041"&gt;…&lt;/span&gt;
+&lt;img src="/scan/invoice_09.png" /&gt;</code></pre>
+                <pre class="code-pane" id="codePaneOutput" aria-hidden="true"><code>{
+  "sku": "VX-2041",
+  "price_usd": 42.00,
+  "source": "crawl",
+  "confidence": 0.98,
+  "extracted_at": "2026-05-14T12:00:00Z"
+}</code></pre>
               </div>
-              <div class="col">
-                <div class="at-a-glance-card">
-                  <p class="aag-label">Footprint</p>
-                  <p class="aag-text">Registered in Tamil Nadu; we collaborate with teams worldwide on a remote-first basis.</p>
-                </div>
-              </div>
+              <p class="code-transform-caption mb-0">Raw web &amp; documents → validated structured feeds</p>
             </div>
           </div>
         </div>
       </div>
     </header>
 
-    <section class="py-3 bg-white border-bottom">
-      <div class="container">
-        <p class="small text-secondary text-center mb-0 reveal-up">
-          To discuss requirements or book an introductory call, please <a href="/contact.html">contact us</a>.
-        </p>
-      </div>
-    </section>
-
-    <main>
-      <section class="py-5 py-lg-6 bg-white border-bottom">
+    <main id="main">
+      <section class="agency-section" id="capabilities" aria-labelledby="capabilities-heading">
         <div class="container">
-          <div class="text-center mb-5 reveal-up">
-            <p class="section-eyebrow mb-2">Software products</p>
-            <h2 class="section-heading h2 mb-3">What you can evaluate today</h2>
-            <p class="text-secondary mb-0 col-lg-9 mx-auto">
-              Both tools are listed on our <a href="/products.html">Products</a> page with technical detail. We welcome serious enquiries from operations, technology, and research functions.
+          <header class="agency-section-header text-center reveal-up">
+            <p class="agency-eyebrow mb-2">Core services</p>
+            <h2 id="capabilities-heading" class="agency-section-title">Built for high-volume data &amp; ops teams</h2>
+            <p class="agency-section-lead col-lg-8 mx-auto">
+              Three pillars: extract at scale, digitize complex documents, and automate the workflows that connect them to your stack.
             </p>
-          </div>
-          <div class="row g-4 justify-content-center">
-            <div class="col-md-6 col-lg-5">
-              <div class="product-showcase-card reveal-up">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                  <p class="psc-kicker mb-0">Market intelligence</p>
-                  <span class="live-pill">Live</span>
-                </div>
-                <div class="icon-tile mb-3"><i class="bx bx-bar-chart-alt-2"></i></div>
-                <h3 class="h4 fw-bold mb-2">Vovix OneView</h3>
-                <p class="small text-secondary mb-3">NSE/BSE research workspace: news, screeners, and structured analysis flows in one environment.</p>
-                <a class="btn btn-outline-primary btn-sm" href="/products.html">Product overview <i class="bx bx-right-arrow-alt"></i></a>
+          </header>
+          <div class="row g-4 mt-2">
+            <article class="col-md-6 col-lg-4 reveal-up">
+              <div class="agency-card h-100">
+                <div class="agency-card-icon"><i class="bx bx-globe"></i></div>
+                <h3 class="h5 fw-bold mb-3">Enterprise web crawling</h3>
+                <p class="agency-card-copy mb-0">
+                  Extract data from any website at scale. We handle proxies, captchas, dynamic JavaScript, and complex anti-bot systems so you get pure, reliable data feeds.
+                </p>
               </div>
-            </div>
-            <div class="col-md-6 col-lg-5">
-              <div class="product-showcase-card reveal-up">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                  <p class="psc-kicker mb-0">Authorized web capture</p>
-                  <span class="live-pill">Live</span>
-                </div>
-                <div class="icon-tile mb-3"><i class="bx bx-globe"></i></div>
-                <h3 class="h4 fw-bold mb-2">Vovix OneCrawl</h3>
-                <p class="small text-secondary mb-3">Scoped crawling from a seed URL into structured exports for downstream processing and archives.</p>
-                <a class="btn btn-outline-primary btn-sm" href="/products.html">Product overview <i class="bx bx-right-arrow-alt"></i></a>
+            </article>
+            <article class="col-md-6 col-lg-4 reveal-up">
+              <div class="agency-card h-100">
+                <div class="agency-card-icon"><i class="bx bx-scan"></i></div>
+                <h3 class="h5 fw-bold mb-3">Intelligent AI OCR</h3>
+                <p class="agency-card-copy mb-0">
+                  Convert unstructured documents, invoices, receipts, and images into structured databases. High-accuracy processing powered by advanced computer vision.
+                </p>
               </div>
-            </div>
-          </div>
-
-          <div class="statement-panel mt-5 reveal-up">
-            <div class="sp-rule"></div>
-            <h3 class="h5 fw-bold text-dark mb-2">Custom automation and data projects</h3>
-            <p class="text-secondary mb-3 mb-lg-0">
-              Beyond the product line, we selectively take on pipelines, integrations, and internal tools where scope, access, and compliance are clear. We work with brokers and trading operations, SaaS organisations, and finance and operations leadership, always with explicit boundaries on what we commit to deliver.
-            </p>
-            <div class="mt-3">
-              <a class="btn btn-primary" href="/services.html">View engagement areas</a>
-            </div>
+            </article>
+            <article class="col-md-6 col-lg-4 reveal-up">
+              <div class="agency-card h-100">
+                <div class="agency-card-icon"><i class="bx bx-git-merge"></i></div>
+                <h3 class="h5 fw-bold mb-3">Custom automation &amp; workflows</h3>
+                <p class="agency-card-copy mb-0">
+                  Eliminate repetitive manual tasks. We design, build, and deploy custom bots, API integrations, and end-to-end automated workflows that scale your operations.
+                </p>
+              </div>
+            </article>
           </div>
         </div>
       </section>
 
-      <section class="py-5 py-lg-6 bg-white border-bottom reveal-up">
-        <div class="container col-lg-10 mx-auto">
-          <p class="section-eyebrow text-center mb-2">Illustrative example only</p>
-          <h2 class="section-heading h2 mb-3 text-center">How we think about a first engagement</h2>
-          <p class="text-secondary text-center small mb-4 col-lg-10 mx-auto">
-            <strong class="text-dark">Not a delivered client project.</strong> The scenario below is <strong class="text-dark">hypothetical</strong>, intended only to illustrate scoping discipline.
+      <section class="agency-section agency-section-alt" id="pipeline" aria-labelledby="pipeline-heading">
+        <div class="container">
+          <header class="agency-section-header text-center reveal-up">
+            <p class="agency-eyebrow mb-2">How it works</p>
+            <h2 id="pipeline-heading" class="agency-section-title">Our pipeline</h2>
+            <p class="agency-section-lead col-lg-7 mx-auto">From brief to production delivery, with clear milestones and integration options.</p>
+          </header>
+          <ol class="agency-pipeline list-unstyled row g-4 mt-2">
+            <li class="col-md-4 reveal-up">
+              <div class="pipeline-step">
+                <span class="pipeline-num">01</span>
+                <h3 class="h5 fw-bold mb-2">Define &amp; scope</h3>
+                <p class="agency-card-copy mb-0">Tell us what data you need or what workflow you want automated. We align on sources, volume, compliance, and success metrics.</p>
+              </div>
+            </li>
+            <li class="col-md-4 reveal-up">
+              <div class="pipeline-step">
+                <span class="pipeline-num">02</span>
+                <h3 class="h5 fw-bold mb-2">Custom engine build</h3>
+                <p class="agency-card-copy mb-0">We engineer custom crawlers, OCR pipelines, or API integrations with monitoring, retries, and validation baked in.</p>
+              </div>
+            </li>
+            <li class="col-md-4 reveal-up">
+              <div class="pipeline-step">
+                <span class="pipeline-num">03</span>
+                <h3 class="h5 fw-bold mb-2">Delivery &amp; integration</h3>
+                <p class="agency-card-copy mb-0">Receive data via webhooks, S3, Google Sheets, or a dedicated REST API. We document schemas and hand off runbooks your team can own.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="agency-section" id="stack" aria-labelledby="stack-heading">
+        <div class="container">
+          <header class="agency-section-header text-center reveal-up">
+            <p class="agency-eyebrow mb-2">Tech stack</p>
+            <h2 id="stack-heading" class="agency-section-title">Tools we ship with</h2>
+          </header>
+          <div class="tech-marquee reveal-up" aria-label="Technologies used for crawling, OCR, and automation">
+            <div class="tech-marquee-track">
+              <span class="tech-chip">Python</span>
+              <span class="tech-chip">Playwright</span>
+              <span class="tech-chip">Scrapy</span>
+              <span class="tech-chip">Selenium</span>
+              <span class="tech-chip">Tesseract</span>
+              <span class="tech-chip">Vision OCR</span>
+              <span class="tech-chip">AWS</span>
+              <span class="tech-chip">Airflow</span>
+              <span class="tech-chip">FastAPI</span>
+              <span class="tech-chip">PostgreSQL</span>
+              <span class="tech-chip">Redis</span>
+              <span class="tech-chip">Docker</span>
+              <span class="tech-chip">Python</span>
+              <span class="tech-chip">Playwright</span>
+              <span class="tech-chip">Scrapy</span>
+              <span class="tech-chip">Selenium</span>
+              <span class="tech-chip">Tesseract</span>
+              <span class="tech-chip">Vision OCR</span>
+              <span class="tech-chip">AWS</span>
+              <span class="tech-chip">Airflow</span>
+              <span class="tech-chip">FastAPI</span>
+            </div>
+          </div>
+          <p class="text-center agency-muted small mt-4 mb-0 reveal-up">
+            Also explore our product line: <a href="/products.html">OneView</a> and <a href="/products.html">OneCrawl</a>.
           </p>
-          <div class="rounded-4 border p-4 p-lg-5 bg-white shadow-sm">
-            <p class="small text-vovix fw-semibold mb-2">Hypothetical scenario</p>
-            <h3 class="h5 fw-bold mb-3">Monday reconciliation across three exports</h3>
-            <p class="text-secondary small mb-2">
-              <strong class="text-dark">Situation:</strong> An operations lead consolidates three CSV extracts each week to review cash and positions; manual steps increase the risk of error when volumes rise.
-            </p>
-            <p class="text-secondary small mb-0">
-              <strong class="text-dark">Possible first slice:</strong> automate consolidation, surface exceptions, and deliver a single summary view or notification before any larger build. Feasibility depends on your systems and access; we state constraints up front.
-            </p>
-          </div>
         </div>
       </section>
 
-      <section class="py-5 py-lg-6 surface-muted border-bottom">
+      <section class="agency-section agency-section-contact" id="contact" aria-labelledby="contact-heading">
         <div class="container">
-          <div class="row align-items-center g-5">
-            <div class="col-lg-6">
-              <img
-                src="/assets/oneview-stock-hero.jpg?v=20260510"
-                alt="NSE/BSE equities and market research workspace"
-                class="img-fluid showcase-image"
-                width="1400"
-                height="933"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div class="col-lg-6">
-              <p class="section-eyebrow mb-2">Product spotlight</p>
-              <h2 class="section-heading h2 mb-3">Vovix OneView</h2>
-              <p class="lead text-secondary mb-3">
-                End-to-end NSE/BSE analysis flows in one workspace: fundamentals, technical context, daily market news, and filtered screeners for disciplined research.
+          <div class="row g-5 align-items-start">
+            <div class="col-lg-5 reveal-up">
+              <p class="agency-eyebrow mb-2">Start a project</p>
+              <h2 id="contact-heading" class="agency-section-title">Request custom data or automation</h2>
+              <p class="agency-section-lead">
+                Share your use case. We respond with feasibility, timeline options, and what a first delivery slice could look like.
               </p>
-              <ul class="small text-secondary ps-3 mb-4">
-                <li class="mb-2">One-click full read on NSE/BSE listed names</li>
-                <li class="mb-2">Fundamentals and technical context together</li>
-                <li class="mb-2">Daily news dashboard aligned to your workflow</li>
-                <li class="mb-0">Screeners for discovery and shortlisting</li>
-              </ul>
-              <a class="btn btn-outline-primary" href="/products.html">Full product specification</a>
+              <p class="agency-muted small mb-0">
+                Prefer email? <a href="mailto:admin@vovix.in">admin@vovix.in</a>
+              </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="py-5 py-lg-6 text-white cta-premium">
-        <div class="container text-center">
-          <p class="hero-kicker mb-3">Let's talk</p>
-          <h2 class="section-heading display-5 mb-3 text-white">Discuss your <span class="text-gradient">requirements</span></h2>
-          <p class="text-white-50 mb-4 col-lg-8 mx-auto">
-            Share one recurring manual process your organisation would like to retire. We will respond with a concise, practical next step, typically within one business day.
-          </p>
-          <div class="d-flex flex-wrap justify-content-center gap-2">
-            <a class="btn btn-primary btn-lg px-4" href="/contact.html">Contact Vovix</a>
-            <a class="btn btn-outline-light btn-lg px-4" href="/services.html">Services</a>
+            <div class="col-lg-7 reveal-up">
+              <form class="agency-lead-form" data-mailto-form data-lead-form novalidate>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label" for="leadName">Name</label>
+                    <input class="form-control agency-input" type="text" id="leadName" name="name" autocomplete="name" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="leadEmail">Corporate email</label>
+                    <input
+                      class="form-control agency-input"
+                      type="email"
+                      id="leadEmail"
+                      name="email"
+                      autocomplete="email"
+                      inputmode="email"
+                      placeholder="you@company.com"
+                      required
+                    />
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label" for="leadCompany">Company name</label>
+                    <input class="form-control agency-input" type="text" id="leadCompany" name="company" autocomplete="organization" required />
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label" for="leadService">Service needed</label>
+                    <select class="form-select agency-input" id="leadService" name="service" required>
+                      <option value="" disabled selected>Select a service</option>
+                      <option value="Web Crawling">Web crawling</option>
+                      <option value="OCR">OCR</option>
+                      <option value="Custom Automation">Custom automation</option>
+                      <option value="Full Workflow Overhaul">Full workflow overhaul</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label" for="leadBrief">Project brief / requirements</label>
+                    <textarea
+                      class="form-control agency-input"
+                      id="leadBrief"
+                      name="brief"
+                      rows="5"
+                      placeholder="Target sites or document types, volume, delivery format, compliance constraints…"
+                      required
+                    ></textarea>
+                  </div>
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-lg w-100" data-discovery-submit>Submit enquiry</button>
+                    <p class="form-text agency-muted mt-2 mb-0" id="leadFormStatus" role="status" aria-live="polite">
+                      Opens your email client with a pre-filled message to admin@vovix.in. No data is stored on this site.
+                    </p>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="border-top pt-5 pb-4 mt-0 bg-white">
+    <footer class="agency-footer pt-5 pb-4">
       <div class="container">
         <div class="row gy-4">
           <div class="col-md-6 col-lg-4">
-            <p class="fw-bold text-dark mb-2 brand-word">Vovix</p>
-            <p class="small text-secondary mb-2">
-              Vovix Private Limited: software products OneView and OneCrawl; selective custom automation and data engagements worldwide. Each proposal is supported by written scope.
+            <p class="fw-bold mb-2 brand-word">Vovix</p>
+            <p class="small agency-muted mb-3">
+              Vovix Private Limited: data extraction, OCR, and automation for teams that need reliable structured feeds and integrated workflows.
             </p>
-            <p class="small text-secondary mb-3">
-              <a class="btn btn-primary btn-sm" href="/contact.html">Contact us</a>
-            </p>
-            <p class="small text-secondary mb-0">
-              Prefer email? <a href="mailto:admin@vovix.in">admin@vovix.in</a>
-            </p>
+            <p class="small agency-muted mb-0"><a href="mailto:admin@vovix.in">admin@vovix.in</a></p>
           </div>
           <div class="col-6 col-lg-2">
-            <p class="small fw-semibold text-uppercase text-secondary mb-2">Company</p>
-            <ul class="list-unstyled small mb-0">
+            <p class="small fw-semibold text-uppercase agency-muted mb-2">Company</p>
+            <ul class="list-unstyled small mb-0 agency-footer-links">
               <li><a href="/services.html">Services</a></li>
               <li><a href="/products.html">Products</a></li>
               <li><a href="/about.html">About</a></li>
             </ul>
           </div>
           <div class="col-6 col-lg-2">
-            <p class="small fw-semibold text-uppercase text-secondary mb-2">Legal</p>
-            <ul class="list-unstyled small mb-0">
+            <p class="small fw-semibold text-uppercase agency-muted mb-2">Legal</p>
+            <ul class="list-unstyled small mb-0 agency-footer-links">
               <li><a href="/legal/privacy.html">Privacy</a></li>
               <li><a href="/legal/terms.html">Terms</a></li>
             </ul>
           </div>
           <div class="col-lg-4">
-            <p class="small fw-semibold text-uppercase text-secondary mb-2">Our work</p>
-            <p class="small mb-2">
-              <a href="/services.html">Services</a>, <a href="/products.html">products</a>, or <a href="/contact.html">contact us</a> to scope custom work.
-            </p>
+            <p class="small fw-semibold text-uppercase agency-muted mb-2">On this page</p>
+            <ul class="list-unstyled small mb-0 agency-footer-links">
+              <li><a href="#capabilities">Capabilities</a></li>
+              <li><a href="#pipeline">Pipeline</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
           </div>
         </div>
-        <div class="trust-strip-advanced mt-4 reveal-up">
-          <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-lg-start">
-            <span class="trust-chip"><i class="bx bx-buildings"></i> Registered · Tamil Nadu</span>
-            <span class="trust-chip"><i class="bx bx-package"></i> 2 live products (OneView, OneCrawl)</span>
-            <span class="trust-chip"><i class="bx bx-globe"></i> Remote-friendly worldwide</span>
-          </div>
-        </div>
-        <hr class="my-4 opacity-25" />
-        <p class="disclaimer-box mb-3">
-          Vovix builds software tools to automate tasks and support operational decisions. Site content is general in nature and
-          not bespoke professional, legal, tax, or investment advice unless you have a separate agreement with us.
+        <hr class="agency-hr my-4" />
+        <p class="disclaimer-box agency-disclaimer mb-3">
+          Web crawling and data extraction are provided for lawful, authorized use only. Customers are responsible for rights to access target sources and compliance with applicable laws. Site content is not professional or legal advice unless agreed separately.
         </p>
-        <p class="small text-secondary mb-0">&copy; <span id="y"></span> Vovix Private Limited. All rights reserved.</p>
+        <p class="small agency-muted mb-0">&copy; <span id="y"></span> Vovix Private Limited.</p>
       </div>
     </footer>
 
-    <div class="mobile-sticky-cta" aria-label="Quick contact actions">
-      <a class="btn btn-primary" href="/contact.html">Contact Vovix</a>
-      <a class="btn btn-outline-secondary" href="mailto:admin@vovix.in">Email</a>
+    <div class="mobile-sticky-cta agency-sticky-cta" aria-label="Quick contact">
+      <a class="btn btn-primary" href="#contact">Get custom data</a>
+      <a class="btn btn-agency-outline" href="mailto:admin@vovix.in">Email</a>
     </div>
 
     <script src="/js/bootstrap.bundle.min.js"></script>

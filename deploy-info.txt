@@ -1,4 +1,4 @@
 vovix-corporate-site static deploy marker
-Expected HTML asset query: /css/site.css?v=20260514d (or newer)
+Expected HTML asset query: /css/site.css?v=20260514e (or newer)
 If this file or newer CSS query is missing on www.vovix.in, production is not building from the latest GitHub main branch. Open the Vovix project in Vercel and redeploy, or reconnect the Git integration.
 Sitemap: sitemap.xml includes lastmod (YYYY-MM-DD). Update lastmod for a URL when that page changes in a way that matters for search; git log --format=%cs -- path/to/file is a practical reference.

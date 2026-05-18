@@ -69,30 +69,52 @@
     const name = form.querySelector("[name='name']")?.value?.trim() || "";
     const email = form.querySelector("[name='email']")?.value?.trim() || "";
     const company = form.querySelector("[name='company']")?.value?.trim() || "";
+    const service = form.querySelector("[name='service']")?.value?.trim() || "";
+    const brief = form.querySelector("[name='brief']")?.value?.trim() || "";
     const scope = form.querySelector("[name='scope']")?.value?.trim() || "";
     const timeline = form.querySelector("[name='timeline']")?.value?.trim() || "";
     const automation = form.querySelector("[name='automation']")?.value?.trim() || "";
     const notes = form.querySelector("[name='notes']")?.value?.trim() || "";
 
-    const plainBody = [
-      "Contact Vovix (vovix.in)",
-      "",
-      `Name: ${name}`,
-      `Work email: ${email}`,
-      `Company: ${company}`,
-      `Interest: ${scope}`,
-      `Timeline: ${timeline}`,
-      "",
-      "What is one manual task each week that should not be manual?",
-      automation || "N/A",
-      "",
-      "Additional context:",
-      notes || "N/A"
-    ].join("\n");
+    const isLeadForm = form.hasAttribute("data-lead-form");
+    const plainBody = isLeadForm
+      ? [
+          "Vovix lead enquiry (vovix.in)",
+          "",
+          `Name: ${name}`,
+          `Corporate email: ${email}`,
+          `Company: ${company}`,
+          `Service needed: ${service}`,
+          "",
+          "Project brief:",
+          brief || "N/A"
+        ].join("\n")
+      : [
+          "Contact Vovix (vovix.in)",
+          "",
+          `Name: ${name}`,
+          `Work email: ${email}`,
+          `Company: ${company}`,
+          `Interest: ${scope}`,
+          `Timeline: ${timeline}`,
+          "",
+          "What is one manual task each week that should not be manual?",
+          automation || "N/A",
+          "",
+          "Additional context:",
+          notes || "N/A"
+        ].join("\n");
 
-    const subject = encodeURIComponent("Contact Vovix - vovix.in");
+    const subject = encodeURIComponent(
+      isLeadForm ? `Vovix enquiry: ${service || "Custom data"}` : "Contact Vovix - vovix.in"
+    );
     const body = encodeURIComponent(plainBody);
     const gmailBody = encodeURIComponent(plainBody);
+
+    const statusEl = form.closest("section")?.querySelector("#leadFormStatus") || document.getElementById("leadFormStatus");
+    if (statusEl) {
+      statusEl.textContent = "Opening your email client with your enquiry…";
+    }
 
     window.location.href = `mailto:admin@vovix.in?subject=${subject}&body=${body}`;
 
@@ -164,4 +186,25 @@
   );
 
   counterNodes.forEach((node) => counterObserver.observe(node));
+
+  // --- Hero code panel: alternate INPUT / OUTPUT ---
+  const codeInput = document.getElementById("codePaneInput");
+  const codeOutput = document.getElementById("codePaneOutput");
+  const codeTabs = document.querySelectorAll("[data-code-pane]");
+
+  if (codeInput && codeOutput && !reducedMotion) {
+    let showOutput = false;
+    const swapPanes = () => {
+      showOutput = !showOutput;
+      codeInput.classList.toggle("is-visible", !showOutput);
+      codeInput.setAttribute("aria-hidden", showOutput ? "true" : "false");
+      codeOutput.classList.toggle("is-visible", showOutput);
+      codeOutput.setAttribute("aria-hidden", showOutput ? "false" : "true");
+      codeTabs.forEach((tab) => {
+        const pane = tab.getAttribute("data-code-pane");
+        tab.classList.toggle("is-active", (pane === "output") === showOutput);
+      });
+    };
+    window.setInterval(swapPanes, 4200);
+  }
 })();
