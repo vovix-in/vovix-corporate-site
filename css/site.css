@@ -1562,10 +1562,22 @@ body.theme-agency .section-eyebrow {
 }
 
 body.theme-agency .hero-navy .btn-outline-light {
-  --bs-btn-color: var(--white);
-  --bs-btn-border-color: rgba(255, 255, 255, 0.4);
+  --bs-btn-color: #fff;
+  --bs-btn-border-color: rgba(255, 255, 255, 0.55);
   --bs-btn-hover-color: var(--vovix-navy);
-  --bs-btn-hover-bg: var(--white);
+  --bs-btn-hover-bg: #fff;
+  --bs-btn-hover-border-color: #fff;
+  color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.55) !important;
+  background: rgba(255, 255, 255, 0.06);
+  text-decoration: none;
+}
+
+body.theme-agency .hero-navy .btn-outline-light:hover,
+body.theme-agency .hero-navy .btn-outline-light:focus {
+  color: var(--vovix-navy) !important;
+  background: #fff !important;
+  border-color: #fff !important;
 }
 
 body.theme-agency .hero-navy .btn-primary {
