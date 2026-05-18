@@ -1173,12 +1173,12 @@ body.theme-agency {
   color: var(--text-main);
 }
 
-body.theme-agency a {
+body.theme-agency a:not(.btn) {
   color: var(--vovix-navy);
   text-decoration-color: rgba(0, 200, 83, 0.4);
 }
 
-body.theme-agency a:hover {
+body.theme-agency a:not(.btn):hover {
   color: var(--vovix-emerald);
 }
 
@@ -1561,7 +1561,7 @@ body.theme-agency .section-eyebrow {
   color: var(--vovix-primary);
 }
 
-body.theme-agency .hero-navy .btn-outline-light {
+body.theme-agency .hero-navy a.btn.btn-outline-light {
   --bs-btn-color: #fff;
   --bs-btn-border-color: rgba(255, 255, 255, 0.55);
   --bs-btn-hover-color: var(--vovix-navy);
@@ -1569,12 +1569,12 @@ body.theme-agency .hero-navy .btn-outline-light {
   --bs-btn-hover-border-color: #fff;
   color: #fff !important;
   border-color: rgba(255, 255, 255, 0.55) !important;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.06) !important;
   text-decoration: none;
 }
 
-body.theme-agency .hero-navy .btn-outline-light:hover,
-body.theme-agency .hero-navy .btn-outline-light:focus {
+body.theme-agency .hero-navy a.btn.btn-outline-light:hover,
+body.theme-agency .hero-navy a.btn.btn-outline-light:focus {
   color: var(--vovix-navy) !important;
   background: #fff !important;
   border-color: #fff !important;
