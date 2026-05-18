@@ -40,6 +40,10 @@ Defined in `css/site.css` under `:root`:
 - Form focus: cyan border/glow via `--vovix-cyan`
 - Trust strips and cards: silver-based surfaces with navy text
 
+### Site-wide (`body.theme-agency`)
+
+All main pages use `body.theme-agency` with `navbar.agency-nav` (navy bar, white links) and `footer.agency-footer` (pearl silver). Inner pages keep `hero-navy` headers; homepage uses `agency-hero`.
+
 ### Homepage (`body.theme-agency`)
 
 - Page surface: `--vovix-bg` (Pearl Silver)

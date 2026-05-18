@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vovix — Automation &amp; data engineering, scoped in writing.</title>
+    <meta
+      name="description"
+      content="Vovix Private Limited: live software products OneView and OneCrawl, and selective custom automation engagements scoped in writing. Tamil Nadu, working worldwide."
+    />
+    <meta name="theme-color" content="#F1ECE0" />
+    <link rel="canonical" href="https://www.vovix.in/" />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+
+    <!-- Google Fonts: Fraunces (display serif) + DM Sans (body) + JetBrains Mono (labels) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              bone: "#F1ECE0",
+              paper: "#F8F4E9",
+              ink: "#14110D",
+              char: "#56514A",
+              rule: "#D9D0BB",
+              accent: "#C04A2A",
+              accentDeep: "#8A2F18",
+            },
+            fontFamily: {
+              display: ['"Fraunces"', "ui-serif", "Georgia", "serif"],
+              sans: ['"DM Sans"', "ui-sans-serif", "system-ui", "sans-serif"],
+              mono: ['"JetBrains Mono"', "ui-monospace", "SFMono-Regular", "monospace"],
+            },
+            letterSpacing: {
+              "ultra-tight": "-0.045em",
+              "mega-tight": "-0.06em",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      :root {
+        --bone: #f1ece0;
+        --paper: #f8f4e9;
+        --ink: #14110d;
+        --char: #56514a;
+        --rule: #d9d0bb;
+        --rule-soft: #e7dfc9;
+        --accent: #c04a2a;
+        --accent-deep: #8a2f18;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bone);
+        color: var(--ink);
+        font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+        font-feature-settings: "ss01", "ss02", "cv01", "cv11";
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      ::selection {
+        background: var(--ink);
+        color: var(--bone);
+      }
+
+      /* Display type uses Fraunces with optical sizing + soft styling */
+      .display {
+        font-family: "Fraunces", ui-serif, Georgia, serif;
+        font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 0;
+        font-weight: 420;
+        letter-spacing: -0.045em;
+        line-height: 0.94;
+      }
+      .display em {
+        font-style: italic;
+        font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+        font-weight: 360;
+        color: var(--accent);
+      }
+
+      .display-mega {
+        font-family: "Fraunces", ui-serif, Georgia, serif;
+        font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 0;
+        font-weight: 440;
+        letter-spacing: -0.06em;
+        line-height: 0.88;
+        font-size: clamp(3.4rem, 11.2vw, 11.5rem);
+      }
+
+      .display-mega em {
+        font-style: italic;
+        color: var(--accent);
+        font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+      }
+
+      .serif {
+        font-family: "Fraunces", ui-serif, Georgia, serif;
+      }
+
+      .mono {
+        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+        font-feature-settings: "ss01", "calt", "zero";
+      }
+
+      .eyebrow {
+        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+        font-size: 11px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: var(--char);
+      }
+
+      .rule {
+        height: 1px;
+        background: var(--rule);
+        width: 100%;
+      }
+
+      .rule-ink {
+        height: 1px;
+        background: var(--ink);
+        width: 100%;
+      }
+
+      /* Editorial section number tag */
+      .sec-num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        color: var(--char);
+      }
+
+      /* Accent dot */
+      .dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: var(--accent);
+        border-radius: 999px;
+        vertical-align: middle;
+      }
+      .dot-pulse {
+        position: relative;
+      }
+      .dot-pulse::after {
+        content: "";
+        position: absolute;
+        inset: -4px;
+        border-radius: 999px;
+        border: 1px solid var(--accent);
+        opacity: 0.6;
+        animation: pulse 2.2s ease-out infinite;
+      }
+      @keyframes pulse {
+        0% { transform: scale(0.6); opacity: 0.8; }
+        100% { transform: scale(2.4); opacity: 0; }
+      }
+
+      /* Primary button */
+      .btn-ink {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 22px 14px 24px;
+        background: var(--ink);
+        color: var(--bone);
+        border-radius: 999px;
+        font-weight: 500;
+        font-size: 14px;
+        letter-spacing: -0.005em;
+        transition: transform 0.25s ease, background 0.25s ease;
+      }
+      .btn-ink:hover {
+        background: var(--accent-deep);
+        transform: translateY(-1px);
+      }
+      .btn-ink .arrow {
+        display: inline-flex;
+        width: 22px;
+        height: 22px;
+        border-radius: 999px;
+        background: var(--bone);
+        color: var(--ink);
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.25s ease;
+      }
+      .btn-ink:hover .arrow {
+        transform: translateX(3px);
+      }
+
+      .btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 13px 22px;
+        background: transparent;
+        color: var(--ink);
+        border: 1px solid var(--ink);
+        border-radius: 999px;
+        font-weight: 500;
+        font-size: 14px;
+        transition: background 0.25s ease, color 0.25s ease;
+      }
+      .btn-ghost:hover {
+        background: var(--ink);
+        color: var(--bone);
+      }
+
+      .btn-text {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 500;
+        font-size: 14px;
+        color: var(--ink);
+        border-bottom: 1px solid var(--ink);
+        padding-bottom: 2px;
+        transition: color 0.2s ease, border-color 0.2s ease;
+      }
+      .btn-text:hover {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+
+      /* Editorial card */
+      .card-edit {
+        background: var(--paper);
+        border: 1px solid var(--rule);
+        border-radius: 22px;
+        padding: 32px;
+        transition: transform 0.4s ease, border-color 0.3s ease, background 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .card-edit:hover {
+        border-color: var(--ink);
+        transform: translateY(-4px);
+      }
+
+      .card-ink {
+        background: var(--ink);
+        color: var(--bone);
+        border-radius: 22px;
+        padding: 32px;
+      }
+
+      /* Marquee ticker */
+      .marquee {
+        overflow: hidden;
+        border-top: 1px solid var(--rule);
+        border-bottom: 1px solid var(--rule);
+        background: var(--bone);
+      }
+      .marquee-track {
+        display: flex;
+        gap: 64px;
+        animation: marquee 38s linear infinite;
+        width: max-content;
+        padding: 18px 0;
+      }
+      .marquee-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 18px;
+        font-family: "Fraunces", serif;
+        font-size: 28px;
+        font-variation-settings: "opsz" 60, "SOFT" 50;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+      }
+      .marquee-item .star {
+        color: var(--accent);
+        font-size: 18px;
+      }
+      @keyframes marquee {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+      }
+
+      /* Scroll progress */
+      .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 2px;
+        width: 0%;
+        background: var(--accent);
+        z-index: 100;
+        transition: width 0.1s linear;
+      }
+
+      /* Reveal on scroll */
+      .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Grid columns for editorial */
+      .edit-grid {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      /* Tag pill */
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border: 1px solid var(--rule);
+        border-radius: 999px;
+        background: var(--bone);
+        font-size: 11px;
+        font-weight: 500;
+        font-family: "JetBrains Mono", monospace;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--char);
+      }
+      .pill.live {
+        background: var(--ink);
+        color: var(--bone);
+        border-color: var(--ink);
+      }
+      .pill.live .live-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--accent);
+        border-radius: 999px;
+        animation: blink 1.6s ease-in-out infinite;
+      }
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.35; }
+      }
+
+      /* Spec rows in product cards */
+      .spec-row {
+        display: grid;
+        grid-template-columns: 70px 1fr;
+        gap: 18px;
+        padding: 14px 0;
+        border-top: 1px dashed var(--rule);
+        font-size: 13.5px;
+      }
+      .spec-row:first-of-type {
+        border-top: 1px solid var(--rule);
+      }
+      .spec-key {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10.5px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--char);
+        padding-top: 2px;
+      }
+      .spec-val {
+        color: var(--ink);
+      }
+
+      /* Quote */
+      blockquote.editorial {
+        font-family: "Fraunces", serif;
+        font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 0;
+        font-weight: 380;
+        font-style: italic;
+        letter-spacing: -0.025em;
+        line-height: 1.05;
+        font-size: clamp(2rem, 5.2vw, 4.5rem);
+      }
+
+      /* Numbered ToC line */
+      .toc-row {
+        display: grid;
+        grid-template-columns: 60px 1fr auto;
+        gap: 24px;
+        padding: 22px 0;
+        border-top: 1px solid var(--rule);
+        align-items: baseline;
+        transition: padding-left 0.3s ease, color 0.3s ease;
+      }
+      .toc-row:last-child {
+        border-bottom: 1px solid var(--rule);
+      }
+      .toc-row:hover {
+        padding-left: 10px;
+      }
+      .toc-row:hover .toc-title {
+        color: var(--accent);
+      }
+      .toc-title {
+        font-family: "Fraunces", serif;
+        font-variation-settings: "opsz" 144, "SOFT" 30;
+        font-weight: 420;
+        font-size: clamp(1.4rem, 3vw, 2.4rem);
+        letter-spacing: -0.03em;
+        line-height: 1;
+        transition: color 0.25s ease;
+      }
+      .toc-num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.16em;
+        color: var(--char);
+        padding-top: 8px;
+      }
+      .toc-meta {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--char);
+      }
+
+      /* Footer columns */
+      footer a:hover {
+        color: var(--accent);
+      }
+
+      /* Subtle grain (cheap, no image) */
+      .grain {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.04;
+        z-index: 1;
+        background-image: radial-gradient(rgba(20, 17, 13, 0.6) 0.6px, transparent 0.6px);
+        background-size: 3px 3px;
+        mix-blend-mode: multiply;
+      }
+
+      /* Mobile tweaks */
+      @media (max-width: 768px) {
+        .card-edit {
+          padding: 24px;
+        }
+        .toc-row {
+          grid-template-columns: 40px 1fr;
+          gap: 14px;
+        }
+        .toc-meta {
+          grid-column: 2;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- ============== TOP BAR ============== -->
+    <div class="relative z-10">
+      <div class="max-w-[1320px] mx-auto px-6 md:px-10">
+        <div class="flex items-center justify-between pt-7 pb-5">
+          <a href="/" class="flex items-center gap-3 group">
+            <span class="block w-9 h-9 rounded-full bg-ink relative overflow-hidden">
+              <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-accent"></span>
+            </span>
+            <span class="display text-[26px] tracking-mega-tight" style="font-variation-settings: 'opsz' 144, 'SOFT' 40; font-weight: 460;">Vovix</span>
+          </a>
+
+          <nav class="hidden md:flex items-center gap-9 mono text-[12px] uppercase tracking-[0.16em] text-char">
+            <a href="#index" class="hover:text-ink transition">Index</a>
+            <a href="#products" class="hover:text-ink transition">Products</a>
+            <a href="#approach" class="hover:text-ink transition">Approach</a>
+            <a href="#contact" class="hover:text-ink transition">Contact</a>
+          </nav>
+
+          <div class="hidden md:flex items-center gap-4">
+            <span class="mono text-[11px] uppercase tracking-[0.18em] text-char">
+              <span class="dot dot-pulse mr-2"></span> Tamil Nadu &nbsp;/&nbsp; Worldwide
+            </span>
+            <a href="/contact.html" class="btn-ink text-[13px] py-2.5 px-4">
+              Begin a conversation
+              <span class="arrow">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+          </div>
+
+          <button id="mobileMenuBtn" class="md:hidden mono text-[11px] uppercase tracking-[0.16em] border border-ink rounded-full px-4 py-2">Menu</button>
+        </div>
+        <div class="rule-ink"></div>
+      </div>
+    </div>
+
+    <!-- ============== HERO ============== -->
+    <header class="relative z-10">
+      <div class="max-w-[1320px] mx-auto px-6 md:px-10 pt-10 md:pt-16 pb-14 md:pb-24">
+        <div class="edit-grid">
+          <!-- Left: meta column -->
+          <div class="col-span-12 md:col-span-3 flex flex-col gap-6">
+            <div>
+              <p class="eyebrow mb-2">Edition</p>
+              <p class="mono text-[13px] text-ink">№ 01 · MMXXVI</p>
+            </div>
+            <div>
+              <p class="eyebrow mb-2">Filed</p>
+              <p class="mono text-[13px] text-ink">Vovix Private Limited<br/>Guduvancheri · TN</p>
+            </div>
+            <div class="hidden md:block">
+              <p class="eyebrow mb-2">Status</p>
+              <p class="mono text-[13px] text-ink flex items-center gap-2">
+                <span class="dot dot-pulse"></span> Open to engagements
+              </p>
+            </div>
+          </div>
+
+          <!-- Right: headline column -->
+          <div class="col-span-12 md:col-span-9">
+            <h1 class="display-mega mb-10 md:mb-12 reveal">
+              Automation,<br/>
+              <em>engineered</em><br/>
+              in writing.
+            </h1>
+
+            <div class="edit-grid">
+              <div class="col-span-12 md:col-span-7">
+                <p class="serif text-[20px] md:text-[22px] leading-[1.45] text-ink max-w-[58ch]" style="font-variation-settings: 'opsz' 30, 'SOFT' 60; font-weight: 380;">
+                  We build <em class="text-accent not-italic font-medium">small, sharp software</em> that retires repetitive operations work — and we say in writing what we will deliver, and what we will not, before any engagement begins.
+                </p>
+
+                <div class="flex flex-wrap items-center gap-3 mt-9">
+                  <a href="#contact" class="btn-ink">
+                    Schedule a discussion
+                    <span class="arrow">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                  </a>
+                  <a href="#products" class="btn-ghost">Review live products</a>
+                </div>
+              </div>
+
+              <div class="col-span-12 md:col-span-5 md:pl-8 md:border-l md:border-rule">
+                <p class="eyebrow mb-3">Shipping today</p>
+                <div class="space-y-3">
+                  <a href="#products" class="group flex items-baseline justify-between gap-4 py-2 border-b border-dashed border-rule">
+                    <span class="serif text-[24px] text-ink" style="font-variation-settings:'opsz' 80,'SOFT' 30; font-weight: 440; letter-spacing:-0.03em;">OneView</span>
+                    <span class="mono text-[10.5px] uppercase tracking-[0.16em] text-char">Market research</span>
+                  </a>
+                  <a href="#products" class="group flex items-baseline justify-between gap-4 py-2 border-b border-dashed border-rule">
+                    <span class="serif text-[24px] text-ink" style="font-variation-settings:'opsz' 80,'SOFT' 30; font-weight: 440; letter-spacing:-0.03em;">OneCrawl</span>
+                    <span class="mono text-[10.5px] uppercase tracking-[0.16em] text-char">Authorized capture</span>
+                  </a>
+                  <a href="/services.html" class="group flex items-baseline justify-between gap-4 py-2">
+                    <span class="serif text-[24px] text-ink" style="font-variation-settings:'opsz' 80,'SOFT' 30; font-weight: 440; letter-spacing:-0.03em;">Custom builds</span>
+                    <span class="mono text-[10.5px] uppercase tracking-[0.16em] text-char">Scoped &amp; written</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============== MARQUEE ============== -->
+    <section class="marquee">
+      <div class="marquee-track">
+        <span class="marquee-item">Operations, retired one process at a time <span class="star">✶</span></span>
+        <span class="marquee-item"><em style="font-style:italic;color:var(--accent)">Honest scoping</em>, every engagement</span>
+        <span class="marquee-item">OneView · OneCrawl · Custom <span class="star">✶</span></span>
+        <span class="marquee-item">Remote-first, worldwide</span>
+        <span class="marquee-item">Operations, retired one process at a time <span class="star">✶</span></span>
+        <span class="marquee-item"><em style="font-style:italic;color:var(--accent)">Honest scoping</em>, every engagement</span>
+        <span class="marquee-item">OneView · OneCrawl · Custom <span class="star">✶</span></span>
+        <span class="marquee-item">Remote-first, worldwide</span>
+      </div>
+    </section>
+
+    <!-- ============== INDEX / TOC ============== -->
+    <section id="index" class="relative z-10">
+      <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-20 md:py-28">
+        <div class="edit-grid mb-10">
+          <div class="col-span-12 md:col-span-3">
+            <p class="sec-num mb-3">01 / 04</p>
+            <p class="eyebrow text-ink">Inside this edition</p>
+          </div>
+          <div class="col-span-12 md:col-span-9">
+            <h2 class="display text-[44px] md:text-[64px] reveal">
+              A short table of <em>contents</em>.
+            </h2>
+          </div>
+        </div>
+
+        <div class="edit-grid">
+          <div class="col-span-12 md:col-start-4 md:col-span-9">
+            <a href="#products" class="toc-row group">
+              <span class="toc-num">001</span>
+              <span class="toc-title">Live products you can evaluate today</span>
+              <span class="toc-meta hidden md:inline">OneView · OneCrawl</span>
+            </a>
+            <a href="#approach" class="toc-row group">
+              <span class="toc-num">002</span>
+              <span class="toc-title">How we scope a first engagement</span>
+              <span class="toc-meta hidden md:inline">Written · Staged</span>
+            </a>
+            <a href="#scenario" class="toc-row group">
+              <span class="toc-num">003</span>
+              <span class="toc-title">An illustrative scenario, end to end</span>
+              <span class="toc-meta hidden md:inline">Hypothetical</span>
+            </a>
+            <a href="#contact" class="toc-row group">
+              <span class="toc-num">004</span>
+              <span class="toc-title">Begin a conversation with Vovix</span>
+              <span class="toc-meta hidden md:inline">~1 business day</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-[1320px] mx-auto px-6 md:px-10"><div class="rule"></div></div>
+
+    <!-- ============== PRODUCTS ============== -->
+    <section id="products" class="relative z-10">
+      <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-20 md:py-28">
+        <div class="edit-grid mb-14 md:mb-20">
+          <div class="col-span-12 md:col-span-3">
+            <p class="sec-num mb-3">02 / 04</p>
+            <p class="eyebrow text-ink">Shipping now</p>
+          </div>
+          <div class="col-span-12 md:col-span-9">
+            <h2 class="display text-[44px] md:text-[78px] mb-5 reveal">
+              Two products, <em>both&nbsp;live</em>.
+            </h2>
+            <p class="serif text-[18px] md:text-[19px] text-char max-w-[60ch]" style="font-variation-settings: 'opsz' 30; font-weight: 380;">
+              Each is documented on a dedicated page with technical detail. Operations, technology, and research functions are welcome to evaluate.
+            </p>
+          </div>
+        </div>
+
+        <!-- Asymmetric bento -->
+        <div class="edit-grid">
+          <!-- OneView : big card -->
+          <article class="col-span-12 md:col-span-7 card-edit flex flex-col justify-between min-h-[460px] reveal">
+            <div>
+              <div class="flex items-center justify-between mb-8">
+                <span class="pill"><span>01</span> · Market intelligence</span>
+                <span class="pill live"><span class="live-dot"></span> Live</span>
+              </div>
+              <h3 class="display text-[52px] md:text-[80px] mb-4" style="font-variation-settings: 'opsz' 144, 'SOFT' 40; font-weight: 440;">
+                One<em style="color:var(--accent)">View</em>
+              </h3>
+              <p class="serif text-[18px] text-char max-w-[44ch]" style="font-variation-settings: 'opsz' 30; font-weight: 380;">
+                A single workspace for NSE/BSE research — fundamentals, technicals, daily market news, and filtered screeners flowing through one disciplined view.
+              </p>
+            </div>
+            <div class="mt-8">
+              <div class="spec-row"><span class="spec-key">Coverage</span><span class="spec-val">NSE &amp; BSE listed</span></div>
+              <div class="spec-row"><span class="spec-key">Layers</span><span class="spec-val">Fundamentals · Technicals · News</span></div>
+              <div class="spec-row"><span class="spec-key">For</span><span class="spec-val">Analysts, PMs, research teams</span></div>
+              <div class="mt-7">
+                <a href="/products.html" class="btn-text">Read the specification
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H9M17 7v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- OneCrawl : tall card on right -->
+          <article class="col-span-12 md:col-span-5 card-ink flex flex-col justify-between min-h-[460px] reveal">
+            <div>
+              <div class="flex items-center justify-between mb-8">
+                <span class="pill" style="background:transparent;border-color:rgba(241,236,224,0.25);color:var(--bone);">02 · Authorized web capture</span>
+                <span class="pill live" style="border-color:var(--bone);"><span class="live-dot"></span> Live</span>
+              </div>
+              <h3 class="display text-[44px] md:text-[68px] mb-4" style="font-variation-settings: 'opsz' 144, 'SOFT' 40; font-weight: 440;">
+                One<em style="color:var(--accent);">Crawl</em>
+              </h3>
+              <p class="serif text-[17px] max-w-[36ch] opacity-80" style="font-variation-settings: 'opsz' 30; font-weight: 380;">
+                Scoped crawling from a seed URL into clean, structured exports — ready for downstream processing, archives, or analysis.
+              </p>
+            </div>
+            <div class="mt-10">
+              <div class="space-y-2 mb-7">
+                <div class="flex items-center gap-3 mono text-[12px] uppercase tracking-[0.14em]" style="color:rgba(241,236,224,0.7);"><span style="color:var(--accent);">◦</span> Seed-URL discipline</div>
+                <div class="flex items-center gap-3 mono text-[12px] uppercase tracking-[0.14em]" style="color:rgba(241,236,224,0.7);"><span style="color:var(--accent);">◦</span> Structured CSV / JSON output</div>
+                <div class="flex items-center gap-3 mono text-[12px] uppercase tracking-[0.14em]" style="color:rgba(241,236,224,0.7);"><span style="color:var(--accent);">◦</span> Authorized targets only</div>
+              </div>
+              <a href="/products.html" class="btn-text" style="color:var(--bone);border-color:var(--bone);">
+                Read the specification
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H9M17 7v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Custom builds : wide card -->
+          <article class="col-span-12 card-edit reveal" style="background:linear-gradient(180deg, var(--paper) 0%, var(--bone) 100%);">
+            <div class="edit-grid items-center">
+              <div class="col-span-12 md:col-span-7">
+                <div class="flex items-center gap-3 mb-5">
+                  <span class="pill">03 · Custom builds</span>
+                  <span class="mono text-[11px] uppercase tracking-[0.14em] text-char">By engagement</span>
+                </div>
+                <h3 class="display text-[36px] md:text-[54px] mb-4" style="font-variation-settings: 'opsz' 144,'SOFT' 40; font-weight: 440;">
+                  Pipelines, integrations, internal tools — <em>scoped in writing</em>.
+                </h3>
+                <p class="serif text-[17px] text-char max-w-[58ch]" style="font-variation-settings:'opsz' 30; font-weight: 380;">
+                  Where access, compliance, and outcomes are clear, we will commit. We work selectively with brokers, SaaS, and finance &amp; operations leadership. Every commitment ends in writing — what we will deliver, and what we will not.
+                </p>
+              </div>
+              <div class="col-span-12 md:col-span-5 md:pl-10">
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="border-t border-ink pt-3">
+                    <p class="mono text-[10.5px] uppercase tracking-[0.14em] text-char mb-1">Brokers</p>
+                    <p class="text-[14.5px] text-ink">Reconciliation · Position views</p>
+                  </div>
+                  <div class="border-t border-ink pt-3">
+                    <p class="mono text-[10.5px] uppercase tracking-[0.14em] text-char mb-1">SaaS</p>
+                    <p class="text-[14.5px] text-ink">Internal tooling · ETL</p>
+                  </div>
+                  <div class="border-t border-ink pt-3">
+                    <p class="mono text-[10.5px] uppercase tracking-[0.14em] text-char mb-1">Finance Ops</p>
+                    <p class="text-[14.5px] text-ink">Exception flows · Reports</p>
+                  </div>
+                  <div class="border-t border-ink pt-3">
+                    <p class="mono text-[10.5px] uppercase tracking-[0.14em] text-char mb-1">Research</p>
+                    <p class="text-[14.5px] text-ink">Data ingestion · Dashboards</p>
+                  </div>
+                </div>
+                <a href="/services.html" class="btn-text mt-7">View engagement areas
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H9M17 7v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-[1320px] mx-auto px-6 md:px-10"><div class="rule"></div></div>
+
+    <!-- ============== APPROACH (PULL QUOTE) ============== -->
+    <section id="approach" class="relative z-10">
+      <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-20 md:py-28">
+        <div class="edit-grid mb-12">
+          <div class="col-span-12 md:col-span-3">
+            <p class="sec-num mb-3">03 / 04</p>
+            <p class="eyebrow text-ink">On approach</p>
+          </div>
+          <div class="col-span-12 md:col-span-9">
+            <blockquote class="editorial reveal max-w-[24ch]">
+              We tell you, <em>in writing</em>, what we will deliver — and what we will not.
+            </blockquote>
+            <p class="mono text-[12px] uppercase tracking-[0.16em] text-char mt-10">— Vovix engagement principle</p>
+          </div>
+        </div>
+
+        <div class="edit-grid mt-16">
+          <div class="col-span-12 md:col-start-4 md:col-span-9">
+            <div class="grid md:grid-cols-3 gap-0 border-t border-ink">
+              <div class="p-6 md:p-8 border-b md:border-r md:border-b-0 border-rule">
+                <p class="mono text-[11px] uppercase tracking-[0.16em] text-char mb-4">Step 01</p>
+                <h4 class="serif text-[24px] text-ink mb-2" style="font-variation-settings:'opsz' 80,'SOFT' 40; font-weight: 440; letter-spacing:-0.02em;">A direct conversation</h4>
+                <p class="text-[14.5px] text-char">Tell us one recurring manual process. We listen, we clarify, we don't pitch.</p>
+              </div>
+              <div class="p-6 md:p-8 border-b md:border-r md:border-b-0 border-rule">
+                <p class="mono text-[11px] uppercase tracking-[0.16em] text-char mb-4">Step 02</p>
+                <h4 class="serif text-[24px] text-ink mb-2" style="font-variation-settings:'opsz' 80,'SOFT' 40; font-weight: 440; letter-spacing:-0.02em;">A written scope</h4>
+                <p class="text-[14.5px] text-char">Outcome, boundaries, dependencies — committed to paper before any code is written.</p>
+              </div>
+              <div class="p-6 md:p-8 border-b md:border-b-0 border-rule">
+                <p class="mono text-[11px] uppercase tracking-[0.16em] text-char mb-4">Step 03</p>
+                <h4 class="serif text-[24px] text-ink mb-2" style="font-variation-settings:'opsz' 80,'SOFT' 40; font-weight: 440; letter-spacing:-0.02em;">A staged delivery</h4>
+                <p class="text-[14.5px] text-char">Small slice first, then earned trust. Nothing implied, nothing hidden, no enterprise theatre.</p>
+              </div>
+            </div>
+            <div class="rule-ink"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== HYPOTHETICAL SCENARIO ============== -->
+    <section id="scenario" class="relative z-10 bg-paper border-y border-rule">
+      <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-20 md:py-28">
+        <div class="edit-grid">
+          <div class="col-span-12 md:col-span-3">
+            <p class="sec-num mb-3">— Illustrative</p>
+            <p class="eyebrow text-ink">Hypothetical only</p>
+            <p class="mono text-[11px] text-char mt-3 leading-relaxed">Not a delivered client project. Presented to demonstrate scoping discipline.</p>
+          </div>
+
+          <div class="col-span-12 md:col-span-9">
+            <div class="flex items-center gap-3 mb-5">
+              <span class="dot"></span>
+              <p class="eyebrow text-ink">A scenario · End to end</p>
+            </div>
+            <h3 class="display text-[36px] md:text-[58px] mb-10 max-w-[20ch] reveal" style="font-variation-settings:'opsz' 144,'SOFT' 40;">
+              Monday reconciliation, across <em>three exports</em>.
+            </h3>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="card-edit">
+                <p class="mono text-[10.5px] uppercase tracking-[0.16em] text-char mb-3">A · Situation</p>
+                <p class="text-[15px] text-ink leading-relaxed">An operations lead consolidates three CSV extracts each Monday to review cash and positions. Manual stitching introduces error risk as volume grows.</p>
+              </div>
+              <div class="card-edit">
+                <p class="mono text-[10.5px] uppercase tracking-[0.16em] text-char mb-3">B · First slice</p>
+                <p class="text-[15px] text-ink leading-relaxed">Automate consolidation, surface exceptions, deliver one summary view — <em class="serif italic text-accent">before</em> any larger build is committed.</p>
+              </div>
+              <div class="card-edit">
+                <p class="mono text-[10.5px] uppercase tracking-[0.16em] text-char mb-3">C · Constraints</p>
+                <p class="text-[15px] text-ink leading-relaxed">Feasibility depends on your systems &amp; access. We state limitations up front and never paper over what we cannot deliver yet.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== CONTACT / CTA ============== -->
+    <section id="contact" class="relative z-10 bg-ink text-bone overflow-hidden">
+      <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-24 md:py-36 relative">
+        <!-- Decorative giant glyph -->
+        <div aria-hidden="true" class="absolute -right-12 -bottom-24 select-none pointer-events-none opacity-[0.07]" style="font-family:'Fraunces',serif; font-variation-settings:'opsz' 144,'SOFT' 100,'WONK' 1; font-style:italic; font-size: clamp(20rem, 38vw, 42rem); line-height:0.8; color: var(--bone);">
+          V&amp;
+        </div>
+
+        <div class="edit-grid relative">
+          <div class="col-span-12 md:col-span-3">
+            <p class="sec-num mb-3" style="color:rgba(241,236,224,0.55);">04 / 04</p>
+            <p class="eyebrow" style="color:rgba(241,236,224,0.7);">Closing pages</p>
+          </div>
+
+          <div class="col-span-12 md:col-span-9">
+            <h2 class="display text-[52px] md:text-[110px] mb-10 reveal" style="color:var(--bone);">
+              Tell us one <em>tired</em><br/>
+              process you would<br/>
+              like to retire.
+            </h2>
+            <p class="serif text-[18px] md:text-[20px] max-w-[58ch] mb-10 opacity-85" style="font-variation-settings:'opsz' 30; font-weight: 380;">
+              We will respond with a concise, practical next step — typically within one business day. No decks, no theatrics, no implied bench you cannot see.
+            </p>
+            <div class="flex flex-wrap items-center gap-4">
+              <a href="/contact.html" class="btn-ink" style="background:var(--bone); color:var(--ink);">
+                Contact Vovix
+                <span class="arrow" style="background:var(--ink); color:var(--bone);">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </a>
+              <a href="mailto:admin@vovix.in" class="btn-ghost" style="border-color:var(--bone);color:var(--bone);">
+                admin@vovix.in
+              </a>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 pt-10 border-t" style="border-color:rgba(241,236,224,0.22);">
+              <div>
+                <p class="mono text-[10.5px] uppercase tracking-[0.16em] mb-2" style="color:rgba(241,236,224,0.55);">Reply window</p>
+                <p class="serif text-[22px]" style="font-variation-settings:'opsz' 80,'SOFT' 30; font-weight: 440;">~ 1 business day</p>
+              </div>
+              <div>
+                <p class="mono text-[10.5px] uppercase tracking-[0.16em] mb-2" style="color:rgba(241,236,224,0.55);">Footprint</p>
+                <p class="serif text-[22px]" style="font-variation-settings:'opsz' 80,'SOFT' 30; font-weight: 440;">Worldwide · Remote</p>
+              </div>
+              <div>
+                <p class="mono text-[10.5px] uppercase tracking-[0.16em] mb-2" style="color:rgba(241,236,224,0.55);">Live products</p>
+                <p class="serif text-[22px]" style="font-variation-settings:'opsz' 80,'SOFT' 30; font-weight: 440;">02</p>
+              </div>
+              <div>
+                <p class="mono text-[10.5px] uppercase tracking-[0.16em] mb-2" style="color:rgba(241,236,224,0.55);">Engagements</p>
+                <p class="serif text-[22px]" style="font-variation-settings:'opsz' 80,'SOFT' 30; font-weight: 440;">Selective</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== FOOTER ============== -->
+    <footer class="relative z-10">
+      <div class="max-w-[1320px] mx-auto px-6 md:px-10 py-16">
+        <div class="edit-grid">
+          <div class="col-span-12 md:col-span-5">
+            <a href="/" class="flex items-center gap-3 mb-6">
+              <span class="block w-8 h-8 rounded-full bg-ink relative overflow-hidden">
+                <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-accent"></span>
+              </span>
+              <span class="display text-[24px]" style="font-variation-settings:'opsz' 144,'SOFT' 40; font-weight: 460;">Vovix</span>
+            </a>
+            <p class="serif text-[18px] text-char max-w-[44ch] mb-6" style="font-variation-settings:'opsz' 30; font-weight: 380;">
+              Vovix Private Limited — software products and selective custom automation, scoped in writing for operations teams worldwide.
+            </p>
+            <p class="text-[14px] text-char">
+              <a href="mailto:admin@vovix.in" class="border-b border-char hover:border-accent">admin@vovix.in</a>
+            </p>
+          </div>
+
+          <div class="col-span-6 md:col-span-2 md:col-start-7">
+            <p class="eyebrow mb-4">Site</p>
+            <ul class="space-y-2 text-[14.5px]">
+              <li><a href="/services.html">Services</a></li>
+              <li><a href="/products.html">Products</a></li>
+              <li><a href="/about.html">About</a></li>
+              <li><a href="/contact.html">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="col-span-6 md:col-span-2">
+            <p class="eyebrow mb-4">Legal</p>
+            <ul class="space-y-2 text-[14.5px]">
+              <li><a href="/legal/privacy.html">Privacy</a></li>
+              <li><a href="/legal/terms.html">Terms</a></li>
+            </ul>
+          </div>
+
+          <div class="col-span-12 md:col-span-3">
+            <p class="eyebrow mb-4">Registered</p>
+            <address class="text-[14px] text-char not-italic leading-relaxed">
+              Vovix Private Limited<br/>
+              S. No 61/8a, B Block, 2nd Floor<br/>
+              Sirpi Nagar, Guduvancheri<br/>
+              Tamil Nadu 603202 · IN
+            </address>
+          </div>
+        </div>
+
+        <div class="rule mt-14 mb-6"></div>
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-[12px] text-char mono uppercase tracking-[0.14em]">
+          <p>&copy; <span id="y"></span> Vovix Private Limited</p>
+          <p>Set in Fraunces &amp; DM Sans · Edition MMXXVI</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Year
+      document.getElementById("y").textContent = new Date().getFullYear();
+
+      // Scroll progress
+      const sp = document.getElementById("scrollProgress");
+      const onScroll = () => {
+        const h = document.documentElement;
+        const max = h.scrollHeight - h.clientHeight;
+        const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+        sp.style.width = pct + "%";
+      };
+      document.addEventListener("scroll", onScroll, { passive: true });
+
+      // Reveal on scroll
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+      // Mobile menu (simple anchor scroll for now)
+      const mb = document.getElementById("mobileMenuBtn");
+      if (mb) {
+        mb.addEventListener("click", () => {
+          const next = document.getElementById("index");
+          if (next) next.scrollIntoView({ behavior: "smooth" });
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1600,3 +1600,60 @@ body.theme-agency .agency-sticky-cta .btn-outline-secondary {
     width: 100%;
   }
 }
+
+/* ----- Inner pages (theme-agency + existing hero-navy / section classes) ----- */
+
+body.theme-agency main,
+body.theme-agency main .bg-white {
+  background: var(--vovix-bg);
+}
+
+body.theme-agency .surface-muted {
+  background: var(--vovix-secondary);
+  border-block: 1px solid var(--border-color);
+}
+
+body.theme-agency .section-frame {
+  background: var(--white);
+  border-color: var(--border-color);
+}
+
+body.theme-agency .section-eyebrow {
+  color: var(--vovix-primary);
+}
+
+body.theme-agency .hero-navy .btn-outline-light {
+  --bs-btn-color: var(--white);
+  --bs-btn-border-color: rgba(255, 255, 255, 0.4);
+  --bs-btn-hover-color: var(--vovix-navy);
+  --bs-btn-hover-bg: var(--white);
+}
+
+body.theme-agency .hero-navy .btn-primary {
+  color: var(--vovix-navy-deep) !important;
+}
+
+body.theme-agency .text-dark {
+  color: var(--text-main) !important;
+}
+
+body.theme-agency footer:not(.agency-footer) {
+  background: var(--vovix-secondary);
+  border-top: 1px solid var(--border-color);
+}
+
+body.theme-agency footer:not(.agency-footer) .brand-word {
+  color: var(--text-main);
+}
+
+body.theme-agency footer:not(.agency-footer) a {
+  color: var(--text-muted);
+}
+
+body.theme-agency footer:not(.agency-footer) a:hover {
+  color: var(--vovix-emerald);
+}
+
+body.theme-agency footer:not(.agency-footer) .text-secondary {
+  color: var(--text-muted) !important;
+}
