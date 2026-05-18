@@ -42,7 +42,7 @@ Defined in `css/site.css` under `:root`:
 
 ### Site-wide (`body.theme-agency`)
 
-All main pages use `body.theme-agency` with `navbar.agency-nav` (navy bar, white links) and `footer.agency-footer` (pearl silver). Inner pages keep `hero-navy` headers; homepage uses `agency-hero`.
+All main pages use `body.theme-agency` with `navbar.agency-nav` (white/pearl bar, navy links, gradient logo) and `footer.agency-footer` (pearl silver). Hero bands use shared `hero-navy` (mesh + grid).
 
 ### Homepage (`body.theme-agency`)
 

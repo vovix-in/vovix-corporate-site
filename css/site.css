@@ -1198,46 +1198,48 @@ body.theme-agency .skip-link:focus {
   left: 0.75rem;
 }
 
-/* Navbar: Foundation (Trust) — Deep Navy (override global .navbar light glass) */
+/* Navbar: pearl/white bar + navy links (matches products page) */
 body.theme-agency .navbar.agency-nav {
-  background: var(--vovix-navy) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: none;
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  box-shadow: 0 4px 24px rgba(16, 42, 67, 0.06);
 }
 
 body.theme-agency .navbar.agency-nav.is-scrolled {
-  box-shadow: var(--shadow-md);
+  background: var(--white) !important;
+  box-shadow: 0 8px 28px rgba(16, 42, 67, 0.08);
 }
 
 body.theme-agency .navbar.agency-nav .navbar-nav .nav-link {
-  color: rgba(255, 255, 255, 0.88) !important;
+  color: var(--vovix-navy) !important;
   font-weight: 500;
 }
 
 body.theme-agency .navbar.agency-nav .navbar-nav .nav-link:hover,
 body.theme-agency .navbar.agency-nav .navbar-nav .nav-link:focus {
-  color: var(--white) !important;
-  background: rgba(0, 200, 83, 0.12) !important;
+  color: var(--vovix-emerald) !important;
+  background: rgba(0, 200, 83, 0.08) !important;
 }
 
 body.theme-agency .navbar.agency-nav .navbar-nav .nav-link.active {
-  color: var(--white) !important;
+  color: var(--vovix-emerald) !important;
   font-weight: 600;
-  background: linear-gradient(135deg, rgba(0, 200, 83, 0.22), rgba(0, 229, 255, 0.12)) !important;
+  background: linear-gradient(135deg, rgba(0, 200, 83, 0.14), rgba(0, 229, 255, 0.08)) !important;
 }
 
 body.theme-agency .navbar.agency-nav .brand-word {
-  background: none !important;
-  -webkit-text-fill-color: var(--white) !important;
-  color: var(--white) !important;
+  background: linear-gradient(135deg, var(--vovix-navy) 0%, var(--vovix-primary) 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
 }
 
 body.theme-agency .navbar.agency-nav .navbar-toggler {
-  border-color: rgba(255, 255, 255, 0.35);
+  border-color: var(--border-color);
 }
 
 body.theme-agency .navbar.agency-nav .navbar-toggler-icon {
-  filter: invert(1);
+  filter: none;
 }
 
 /* Homepage hero uses shared .hero-navy (same mesh + grid as products) */
