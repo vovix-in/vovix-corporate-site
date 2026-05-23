@@ -1,82 +1,95 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" width="1400" height="900">
   <defs>
+    <filter id="ovshadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="rgba(16,42,67,0.10)"/>
+    </filter>
     <pattern id="ovgrid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <circle cx="20" cy="20" r="0.8" fill="rgba(255,255,255,0.07)"/>
+      <circle cx="20" cy="20" r="0.8" fill="rgba(16,42,67,0.06)"/>
     </pattern>
     <linearGradient id="ovchart" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#00c853"/>
       <stop offset="100%" stop-color="#00e5ff"/>
     </linearGradient>
     <linearGradient id="ovfill" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="rgba(0,200,83,0.35)"/>
+      <stop offset="0%" stop-color="rgba(0,200,83,0.22)"/>
       <stop offset="100%" stop-color="rgba(0,200,83,0)"/>
     </linearGradient>
   </defs>
-  <rect width="1400" height="900" fill="#0a1b2d"/>
+
+  <rect width="1400" height="900" fill="#f5f7fa"/>
   <rect width="1400" height="900" fill="url(#ovgrid)"/>
-  <circle cx="1200" cy="100" r="280" fill="rgba(0,229,255,0.06)"/>
-  <circle cx="80" cy="780" r="220" fill="rgba(0,200,83,0.06)"/>
+  <circle cx="1320" cy="0" r="380" fill="rgba(0,229,255,0.05)"/>
+  <circle cx="0" cy="900" r="320" fill="rgba(0,200,83,0.05)"/>
 
-  <rect x="30" y="28" width="1340" height="52" rx="10" fill="rgba(16,42,67,0.95)" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>
-  <circle cx="58" cy="54" r="5" fill="#ef5350" fill-opacity="0.75"/>
-  <circle cx="76" cy="54" r="5" fill="#f59e0b" fill-opacity="0.75"/>
-  <circle cx="94" cy="54" r="5" fill="#00c853" fill-opacity="0.75"/>
-  <text x="118" y="60" font-size="15" font-weight="700" fill="white" font-family="system-ui,sans-serif">Vovix</text>
+  <rect x="30" y="28" width="1340" height="52" rx="10" fill="#ffffff" stroke="#d9e2ec" stroke-width="1" filter="url(#ovshadow)"/>
+  <circle cx="58" cy="54" r="5" fill="#ef5350" fill-opacity="0.7"/>
+  <circle cx="76" cy="54" r="5" fill="#f59e0b" fill-opacity="0.7"/>
+  <circle cx="94" cy="54" r="5" fill="#00c853" fill-opacity="0.7"/>
+  <text x="118" y="60" font-size="15" font-weight="700" fill="#102a43" font-family="system-ui,sans-serif">Vovix</text>
   <text x="156" y="60" font-size="15" font-weight="700" fill="#00c853" font-family="system-ui,sans-serif"> OneView</text>
-  <text x="118" y="73" font-size="10" fill="rgba(255,255,255,0.35)" font-family="system-ui,sans-serif">Indian stock analysis - NSE / BSE</text>
-  <rect x="1188" y="40" width="88" height="24" rx="12" fill="rgba(0,200,83,0.14)" stroke="rgba(0,200,83,0.5)" stroke-width="1"/>
-  <text x="1232" y="56" font-size="10" font-weight="700" fill="#00c853" text-anchor="middle" font-family="system-ui,sans-serif">LIVE</text>
+  <text x="118" y="73" font-size="10" fill="#486581" font-family="system-ui,sans-serif">Indian stock analysis - NSE / BSE</text>
+  <rect x="1188" y="40" width="88" height="24" rx="12" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.4)" stroke-width="1"/>
+  <circle cx="1204" cy="52" r="4" fill="#00c853"/>
+  <text x="1214" y="56" font-size="10" font-weight="700" fill="#00c853" font-family="system-ui,sans-serif">LIVE</text>
 
-  <rect x="30" y="92" width="1340" height="52" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(0,229,255,0.35)" stroke-width="1.5"/>
-  <text x="54" y="124" font-size="11" fill="rgba(255,255,255,0.35)" font-family="system-ui,sans-serif">Search stock</text>
-  <text x="160" y="124" font-size="16" font-weight="600" fill="white" font-family="system-ui,sans-serif">RELIANCE - NSE</text>
+  <rect x="30" y="92" width="1340" height="52" rx="10" fill="#ffffff" stroke="#d9e2ec" stroke-width="1" filter="url(#ovshadow)"/>
+  <text x="54" y="124" font-size="11" fill="#486581" font-family="system-ui,sans-serif">Search stock</text>
+  <text x="160" y="124" font-size="16" font-weight="600" fill="#102a43" font-family="system-ui,sans-serif">RELIANCE - NSE</text>
   <rect x="1180" y="102" width="170" height="32" rx="8" fill="#00c853"/>
-  <text x="1265" y="123" font-size="12" font-weight="700" fill="#0a1b2d" text-anchor="middle" font-family="system-ui,sans-serif">Analyze</text>
+  <text x="1265" y="123" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle" font-family="system-ui,sans-serif">Analyze</text>
 
-  <rect x="30" y="160" width="880" height="420" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-  <text x="52" y="188" font-size="10" font-weight="700" letter-spacing="2" fill="rgba(255,255,255,0.3)" font-family="system-ui,sans-serif">PRICE &amp; FUNDAMENTALS</text>
-  <text x="52" y="218" font-size="28" font-weight="700" fill="white" font-family="system-ui,sans-serif">Rs 2,847.50</text>
-  <text x="240" y="218" font-size="14" font-weight="600" fill="#00c853" font-family="system-ui,sans-serif">+1.24%</text>
+  <rect x="30" y="160" width="880" height="420" rx="12" fill="#ffffff" stroke="#d9e2ec" stroke-width="1" filter="url(#ovshadow)"/>
+  <rect x="30" y="160" width="880" height="44" rx="12" fill="#f5f7fa"/>
+  <rect x="30" y="188" width="880" height="16" fill="#f5f7fa"/>
+  <text x="52" y="188" font-size="10" font-weight="700" letter-spacing="2" fill="#486581" font-family="system-ui,sans-serif">PRICE &amp; FUNDAMENTALS</text>
+  <text x="52" y="228" font-size="28" font-weight="700" fill="#102a43" font-family="system-ui,sans-serif">Rs 2,847.50</text>
+  <text x="260" y="228" font-size="14" font-weight="600" fill="#00c853" font-family="system-ui,sans-serif">+1.24%</text>
   <path d="M52 380 L120 340 L200 355 L280 300 L360 310 L440 260 L520 270 L600 220 L680 235 L760 200 L840 210" fill="none" stroke="url(#ovchart)" stroke-width="3" stroke-linecap="round"/>
   <path d="M52 380 L120 340 L200 355 L280 300 L360 310 L440 260 L520 270 L600 220 L680 235 L760 200 L840 210 L840 400 L52 400 Z" fill="url(#ovfill)"/>
-  <line x1="52" y1="400" x2="860" y2="400" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-  <rect x="52" y="420" width="120" height="48" rx="8" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-  <text x="64" y="442" font-size="9" fill="rgba(255,255,255,0.35)" font-family="system-ui,sans-serif">P/E</text>
-  <text x="64" y="460" font-size="14" font-weight="600" fill="white" font-family="system-ui,sans-serif">24.8</text>
-  <rect x="186" y="420" width="120" height="48" rx="8" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-  <text x="198" y="442" font-size="9" fill="rgba(255,255,255,0.35)" font-family="system-ui,sans-serif">ROE</text>
-  <text x="198" y="460" font-size="14" font-weight="600" fill="white" font-family="system-ui,sans-serif">12.4%</text>
-  <rect x="320" y="420" width="140" height="48" rx="8" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-  <text x="332" y="442" font-size="9" fill="rgba(255,255,255,0.35)" font-family="system-ui,sans-serif">Market cap</text>
-  <text x="332" y="460" font-size="14" font-weight="600" fill="white" font-family="system-ui,sans-serif">Rs 19.2L Cr</text>
+  <line x1="52" y1="400" x2="860" y2="400" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="52" y="420" width="120" height="48" rx="8" fill="#f5f7fa" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="64" y="442" font-size="9" fill="#486581" font-family="system-ui,sans-serif">P/E</text>
+  <text x="64" y="460" font-size="14" font-weight="600" fill="#102a43" font-family="system-ui,sans-serif">24.8</text>
+  <rect x="186" y="420" width="120" height="48" rx="8" fill="#f5f7fa" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="198" y="442" font-size="9" fill="#486581" font-family="system-ui,sans-serif">ROE</text>
+  <text x="198" y="460" font-size="14" font-weight="600" fill="#102a43" font-family="system-ui,sans-serif">12.4%</text>
+  <rect x="320" y="420" width="140" height="48" rx="8" fill="#f5f7fa" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="332" y="442" font-size="9" fill="#486581" font-family="system-ui,sans-serif">Market cap</text>
+  <text x="332" y="460" font-size="14" font-weight="600" fill="#102a43" font-family="system-ui,sans-serif">Rs 19.2L Cr</text>
 
-  <rect x="930" y="160" width="440" height="200" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-  <text x="952" y="188" font-size="10" font-weight="700" letter-spacing="2" fill="rgba(255,255,255,0.3)" font-family="system-ui,sans-serif">SENTIMENT</text>
-  <rect x="952" y="200" width="100" height="28" rx="14" fill="rgba(0,200,83,0.2)" stroke="rgba(0,200,83,0.5)" stroke-width="1"/>
-  <text x="1002" y="219" font-size="11" font-weight="700" fill="#00c853" text-anchor="middle" font-family="system-ui,sans-serif">Bullish</text>
-  <text x="952" y="248" font-size="11" fill="rgba(255,255,255,0.55)" font-family="system-ui,sans-serif">News tone: positive - FII flow: net buy</text>
-  <text x="952" y="268" font-size="11" fill="rgba(255,255,255,0.55)" font-family="system-ui,sans-serif">Sector vs index: outperforming</text>
-  <text x="952" y="300" font-size="10" fill="rgba(255,255,255,0.35)" font-family="system-ui,sans-serif">Full report: fundamentals, technicals, news digest</text>
-  <rect x="952" y="318" width="396" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
-  <rect x="952" y="318" width="320" height="6" rx="3" fill="url(#ovchart)"/>
+  <rect x="930" y="160" width="440" height="200" rx="12" fill="#ffffff" stroke="#d9e2ec" stroke-width="1" filter="url(#ovshadow)"/>
+  <rect x="930" y="160" width="440" height="40" rx="12" fill="#f5f7fa"/>
+  <rect x="930" y="184" width="440" height="16" fill="#f5f7fa"/>
+  <text x="952" y="186" font-size="10" font-weight="700" letter-spacing="2" fill="#486581" font-family="system-ui,sans-serif">SENTIMENT</text>
+  <rect x="952" y="208" width="100" height="28" rx="14" fill="rgba(0,200,83,0.12)" stroke="rgba(0,200,83,0.45)" stroke-width="1"/>
+  <text x="1002" y="227" font-size="11" font-weight="700" fill="#00a844" text-anchor="middle" font-family="system-ui,sans-serif">Bullish</text>
+  <text x="952" y="256" font-size="11" fill="#486581" font-family="system-ui,sans-serif">News tone: positive - FII flow: net buy</text>
+  <text x="952" y="276" font-size="11" fill="#486581" font-family="system-ui,sans-serif">Sector vs index: outperforming</text>
+  <text x="952" y="308" font-size="10" fill="#627d98" font-family="system-ui,sans-serif">Full report: fundamentals, technicals, news digest</text>
+  <rect x="952" y="326" width="396" height="6" rx="3" fill="#e2e8f0"/>
+  <rect x="952" y="326" width="320" height="6" rx="3" fill="url(#ovchart)"/>
 
-  <rect x="930" y="380" width="440" height="370" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-  <text x="952" y="408" font-size="10" font-weight="700" letter-spacing="2" fill="rgba(255,255,255,0.3)" font-family="system-ui,sans-serif">ASK AI - STOCK Q&amp;A</text>
-  <rect x="952" y="420" width="396" height="44" rx="10" fill="rgba(255,255,255,0.05)" stroke="rgba(0,229,255,0.25)" stroke-width="1"/>
-  <text x="968" y="448" font-size="12" fill="rgba(255,255,255,0.7)" font-family="system-ui,sans-serif">What is the debt-to-equity trend over 3 years?</text>
-  <rect x="952" y="478" width="320" height="120" rx="10" fill="rgba(16,42,67,0.8)" stroke="rgba(0,200,83,0.25)" stroke-width="1"/>
-  <text x="968" y="502" font-size="10" font-weight="700" fill="#00c853" font-family="system-ui,sans-serif">OneView AI</text>
-  <text x="968" y="524" font-size="11" fill="rgba(255,255,255,0.75)" font-family="system-ui,sans-serif">D/E improved from 0.42 to 0.31 (FY22-24). Interest</text>
-  <text x="968" y="542" font-size="11" fill="rgba(255,255,255,0.75)" font-family="system-ui,sans-serif">coverage stable at 4.2x. Sources: annual report,</text>
-  <text x="968" y="560" font-size="11" fill="rgba(255,255,255,0.75)" font-family="system-ui,sans-serif">exchange filings, and latest concall summary.</text>
-  <rect x="952" y="618" width="396" height="44" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-  <text x="968" y="646" font-size="12" fill="rgba(255,255,255,0.4)" font-family="system-ui,sans-serif">Ask another question about this stock...</text>
+  <rect x="930" y="380" width="440" height="370" rx="12" fill="#ffffff" stroke="#d9e2ec" stroke-width="1" filter="url(#ovshadow)"/>
+  <rect x="930" y="380" width="440" height="40" rx="12" fill="#f5f7fa"/>
+  <rect x="930" y="404" width="440" height="16" fill="#f5f7fa"/>
+  <text x="952" y="406" font-size="10" font-weight="700" letter-spacing="2" fill="#486581" font-family="system-ui,sans-serif">ASK AI - STOCK Q&amp;A</text>
+  <rect x="952" y="428" width="396" height="44" rx="10" fill="#f5f7fa" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="968" y="456" font-size="12" fill="#102a43" font-family="system-ui,sans-serif">What is the debt-to-equity trend over 3 years?</text>
+  <rect x="952" y="486" width="396" height="120" rx="10" fill="#f0f9f4" stroke="rgba(0,200,83,0.25)" stroke-width="1"/>
+  <text x="968" y="510" font-size="10" font-weight="700" fill="#00a844" font-family="system-ui,sans-serif">OneView AI</text>
+  <text x="968" y="532" font-size="11" fill="#486581" font-family="system-ui,sans-serif">D/E improved from 0.42 to 0.31 (FY22-24). Interest</text>
+  <text x="968" y="550" font-size="11" fill="#486581" font-family="system-ui,sans-serif">coverage stable at 4.2x. Sources: annual report,</text>
+  <text x="968" y="568" font-size="11" fill="#486581" font-family="system-ui,sans-serif">exchange filings, and latest concall summary.</text>
+  <rect x="952" y="626" width="396" height="44" rx="10" fill="#ffffff" stroke="#d9e2ec" stroke-width="1"/>
+  <text x="968" y="654" font-size="12" fill="#627d98" font-family="system-ui,sans-serif">Ask another question about this stock...</text>
 
-  <rect x="30" y="600" width="880" height="150" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-  <text x="52" y="628" font-size="10" font-weight="700" letter-spacing="2" fill="rgba(255,255,255,0.3)" font-family="system-ui,sans-serif">ANALYSIS REPORT</text>
-  <text x="52" y="656" font-size="12" fill="rgba(255,255,255,0.65)" font-family="system-ui,sans-serif">+ End-to-end NSE/BSE coverage - fundamentals and technicals</text>
-  <text x="52" y="678" font-size="12" fill="rgba(255,255,255,0.65)" font-family="system-ui,sans-serif">+ Daily news dashboard - screeners - exportable summary PDF</text>
-  <text x="52" y="700" font-size="12" fill="rgba(255,255,255,0.65)" font-family="system-ui,sans-serif">+ Context-aware Q&amp;A grounded in filings and live market data</text>
-  <rect x="52" y="718" width="140" height="24" rx="6" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.35)" stroke-width="1"/>
-  <text x="122" y="734" font-size="10" font-weight="600" fill="#00e5ff" text-anchor="middle" font-family="system-ui,sans-serif">Report ready</text>
+  <rect x="30" y="600" width="880" height="150" rx="12" fill="#ffffff" stroke="#d9e2ec" stroke-width="1" filter="url(#ovshadow)"/>
+  <rect x="30" y="600" width="880" height="40" rx="12" fill="#f5f7fa"/>
+  <rect x="30" y="624" width="880" height="16" fill="#f5f7fa"/>
+  <text x="52" y="626" font-size="10" font-weight="700" letter-spacing="2" fill="#486581" font-family="system-ui,sans-serif">ANALYSIS REPORT</text>
+  <text x="52" y="662" font-size="12" fill="#486581" font-family="system-ui,sans-serif">+ End-to-end NSE/BSE coverage - fundamentals and technicals</text>
+  <text x="52" y="684" font-size="12" fill="#486581" font-family="system-ui,sans-serif">+ Daily news dashboard - screeners - exportable summary PDF</text>
+  <text x="52" y="706" font-size="12" fill="#486581" font-family="system-ui,sans-serif">+ Context-aware Q&amp;A grounded in filings and live market data</text>
+  <rect x="52" y="718" width="140" height="24" rx="6" fill="rgba(0,229,255,0.1)" stroke="rgba(0,229,255,0.35)" stroke-width="1"/>
+  <text x="122" y="734" font-size="10" font-weight="600" fill="#007a8c" text-anchor="middle" font-family="system-ui,sans-serif">Report ready</text>
 </svg>
