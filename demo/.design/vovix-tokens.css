@@ -1,0 +1,104 @@
+/* =========================================================================
+ * Vovix · OneCrawl — Design Tokens
+ * Single source of truth referenced by the `design` plugin skills.
+ * Import this into any product surface; never hardcode hex values.
+ * ========================================================================= */
+
+:root {
+  /* ---------- Brand ---------- */
+  --vx-brand-600: #1d4ed8;
+  --vx-brand-500: #2563eb;
+  --vx-brand-400: #3b82f6;
+  --vx-brand-300: #60a5fa;
+  --vx-brand-200: #93c5fd;
+  --vx-brand-100: #dbeafe;
+  --vx-brand-050: #eff6ff;
+
+  /* ---------- Neutral (slate) ---------- */
+  --vx-ink-900: #0f172a;
+  --vx-ink-800: #1e293b;
+  --vx-ink-700: #334155;
+  --vx-ink-600: #475569;
+  --vx-ink-500: #64748b;
+  --vx-ink-400: #94a3b8;
+  --vx-ink-300: #cbd5e1;
+  --vx-ink-200: #e2e8f0;
+  --vx-ink-100: #eef2f7;
+  --vx-ink-050: #f7f9fc;
+  --vx-paper:   #ffffff;
+
+  /* ---------- Semantic ---------- */
+  --vx-success-700: #15803d;
+  --vx-success-500: #16a34a;
+  --vx-success-100: #dcfce7;
+  --vx-success-050: #ecfdf5;
+
+  --vx-warning-700: #b45309;
+  --vx-warning-500: #d97706;
+  --vx-warning-100: #fef3c7;
+  --vx-warning-050: #fffbeb;
+
+  --vx-danger-700: #b91c1c;
+  --vx-danger-500: #dc2626;
+  --vx-danger-100: #fee2e2;
+  --vx-danger-050: #fef2f2;
+
+  --vx-violet-700: #6d28d9;
+  --vx-violet-500: #7c3aed;
+  --vx-violet-100: #ede9fe;
+  --vx-violet-050: #f5f3ff;
+
+  /* ---------- Type ---------- */
+  --vx-font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --vx-font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --vx-text-display-1: 800 40px/1.15 var(--vx-font-sans);
+  --vx-text-h1:        700 22px/1.25 var(--vx-font-sans);
+  --vx-text-h2:        700 18px/1.30 var(--vx-font-sans);
+  --vx-text-h3:        600 15px/1.35 var(--vx-font-sans);
+  --vx-text-body:      400 14px/1.50 var(--vx-font-sans);
+  --vx-text-body-sm:   400 12.5px/1.50 var(--vx-font-sans);
+  --vx-text-label:     600 11px/1.30 var(--vx-font-sans);
+  --vx-text-code:      500 13px/1.45 var(--vx-font-mono);
+
+  /* ---------- Spacing ---------- */
+  --vx-s-1: 4px;
+  --vx-s-2: 6px;
+  --vx-s-3: 8px;
+  --vx-s-4: 12px;
+  --vx-s-5: 16px;
+  --vx-s-6: 20px;
+  --vx-s-7: 24px;
+  --vx-s-8: 28px;
+  --vx-s-9: 36px;
+  --vx-s-10: 48px;
+
+  /* ---------- Radii ---------- */
+  --vx-r-sm: 6px;
+  --vx-r-md: 8px;
+  --vx-r-lg: 10px;
+  --vx-r-xl: 12px;
+  --vx-r-2xl: 14px;
+  --vx-r-pill: 999px;
+
+  /* ---------- Elevation ---------- */
+  --vx-e1: 0 1px 0 rgba(15,23,42,.04), 0 1px 3px rgba(15,23,42,.06);
+  --vx-e2: 0 16px 40px rgba(15,23,42,.12);
+  --vx-e3: 0 30px 80px rgba(15,23,42,.16);
+  --vx-ring: 0 0 0 4px var(--vx-brand-100);
+
+  /* ---------- Motion ---------- */
+  --vx-ease: cubic-bezier(.22,1,.36,1);
+  --vx-dur-1: 160ms;
+  --vx-dur-2: 240ms;
+  --vx-dur-3: 360ms;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --vx-dur-1: 0ms;
+    --vx-dur-2: 0ms;
+    --vx-dur-3: 0ms;
+  }
+}

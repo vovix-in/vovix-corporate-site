@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Vovix OneCrawl — 30s Product Demo (1920×1080 screen recording)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ---------- Reset & base ---------- */
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%; height: 100%; min-height: 100vh; overflow: hidden;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      background: #eef1f6;
+      color: #0f172a;
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    body {
+      display: flex; align-items: center; justify-content: center;
+    }
+    #stage {
+      position: relative; width: 1920px; height: 1080px;
+      background:
+        radial-gradient(1200px 600px at 20% 0%, #eaf1ff 0%, transparent 60%),
+        radial-gradient(900px 600px at 100% 100%, #e6efff 0%, transparent 60%),
+        #f1f4fa;
+      transform-origin: center center;
+      flex: 0 0 1920px;
+    }
+
+    /* ---------- Browser chrome ---------- */
+    .browser {
+      position: absolute; top: 28px; left: 36px; right: 36px; bottom: 36px;
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 30px 80px rgba(15,23,42,.16), 0 4px 16px rgba(15,23,42,.06);
+      border: 1px solid #d9e0ea;
+      overflow: hidden;
+      opacity: 0.96; transform: scale(.998);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    .browser.visible { opacity: 1; transform: scale(1); }
+
+    /* Boot splash inside the browser shell while scene 1 warms up */
+    .boot {
+      position: absolute; inset: 46px 0 0 0; /* below the browser bar */
+      background: linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 14px; z-index: 200;
+      opacity: 1; transition: opacity .45s ease;
+    }
+    .boot.gone { opacity: 0; pointer-events: none; }
+    .boot-logo {
+      width: 56px; height: 56px; border-radius: 14px;
+      background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+      box-shadow: 0 12px 30px rgba(37,99,235,.30);
+      display: grid; place-items: center;
+      color: #fff; font-weight: 800; font-size: 24px;
+      animation: bootPulse 1.4s ease-in-out infinite;
+    }
+    @keyframes bootPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 12px 30px rgba(37,99,235,.30); }
+      50%      { transform: scale(1.06); box-shadow: 0 16px 38px rgba(37,99,235,.45); }
+    }
+    .boot-title { font-size: 16px; font-weight: 700; color: #0f172a; letter-spacing: -.01em; }
+    .boot-sub { font-size: 12px; color: #64748b; }
+    .boot-bar { width: 220px; height: 4px; background: #eef2f7; border-radius: 4px; overflow: hidden; margin-top: 4px; }
+    .boot-bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg,#3b82f6,#2563eb); animation: bootFill 1.4s ease-in-out infinite; }
+    @keyframes bootFill {
+      0%   { width: 0%;   margin-left: 0%; }
+      50%  { width: 70%;  margin-left: 15%; }
+      100% { width: 0%;   margin-left: 100%; }
+    }
+
+    .browser-bar {
+      height: 46px; background: #f6f8fb;
+      border-bottom: 1px solid #e6eaf2;
+      display: flex; align-items: center; padding: 0 16px; gap: 8px;
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; box-shadow: inset 0 -1px 0 rgba(0,0,0,.08); }
+    .dot-r { background: #ff5f57; } .dot-y { background: #febc2e; } .dot-g { background: #28c840; }
+    .tab {
+      margin-left: 16px; height: 30px; padding: 0 18px 0 14px;
+      background: #ffffff; border: 1px solid #e6eaf2; border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12.5px; color: #334155; font-weight: 500;
+      max-width: 280px;
+    }
+    .tab .fav { width: 14px; height: 14px; border-radius: 3px; background: linear-gradient(135deg,#2563eb,#60a5fa); display:inline-block; }
+    .url-bar {
+      flex: 1; margin-left: 14px; height: 30px;
+      background: #ffffff; border: 1px solid #d8dee8; border-radius: 8px;
+      font-size: 12.5px; color: #475569; padding: 0 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .url-bar .lock { font-size: 11px; color: #16a34a; }
+    .browser-icons { display:flex; gap:14px; margin-left: 12px; }
+    .browser-icons span { width: 18px; height: 18px; border-radius: 4px; background: #e6eaf2; }
+
+    /* ---------- App shell ---------- */
+    .app { display: flex; height: calc(100% - 46px); }
+
+    /* Sidebar */
+    .sidebar {
+      width: 248px; background: #ffffff; border-right: 1px solid #eaeef5;
+      display: flex; flex-direction: column; padding: 18px 12px 14px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px; padding: 6px 10px 18px;
+      border-bottom: 1px solid #f1f4fa; margin-bottom: 12px;
+    }
+    .brand-logo {
+      width: 32px; height: 32px; border-radius: 9px;
+      background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+      box-shadow: 0 4px 12px rgba(37,99,235,.35);
+      display: grid; place-items: center; color:#fff; font-weight: 800; font-size: 14px;
+    }
+    .brand-name { font-size: 15.5px; font-weight: 700; color: #0f172a; letter-spacing: -.01em; }
+    .brand-name span { color: #2563eb; font-weight: 800; }
+    .nav-section {
+      font-size: 10.5px; font-weight: 600; color: #94a3b8;
+      text-transform: uppercase; letter-spacing: .08em;
+      padding: 14px 12px 6px;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 12px; border-radius: 8px; font-size: 13.5px;
+      color: #475569; cursor: default; font-weight: 500; margin: 2px 0;
+    }
+    .nav-item .ico {
+      width: 18px; height: 18px; border-radius: 4px;
+      background: #eef2f7; display: grid; place-items: center;
+    }
+    .nav-item .ico svg { width: 12px; height: 12px; }
+    .nav-item.active {
+      background: #eff6ff; color: #1d4ed8; font-weight: 600;
+    }
+    .nav-item.active .ico { background: #dbeafe; }
+    .nav-item.active .ico svg path { fill: #1d4ed8; }
+    .nav-item .count {
+      margin-left: auto; font-size: 11px; padding: 2px 7px;
+      background: #f1f5f9; color: #64748b; border-radius: 10px; font-weight: 600;
+    }
+    .nav-item.active .count { background: #dbeafe; color: #1d4ed8; }
+
+    .sidebar-foot {
+      margin-top: auto; padding: 12px; background: #f8fafc;
+      border-radius: 10px; display: flex; align-items: center; gap: 10px;
+    }
+    .avatar {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: linear-gradient(135deg, #14b8a6, #2563eb);
+      color: #fff; font-weight: 700; font-size: 13px;
+      display: grid; place-items: center;
+    }
+    .avatar.sm { width: 22px; height: 22px; font-size: 10px; }
+    .sf-name { font-size: 12.5px; font-weight: 600; color: #0f172a; }
+    .sf-sub { font-size: 10.5px; color: #64748b; }
+
+    /* Topbar */
+    .topbar {
+      height: 64px; background: #ffffff; border-bottom: 1px solid #eaeef5;
+      display: flex; align-items: center; padding: 0 28px; gap: 16px;
+    }
+    .crumb { font-size: 13px; color: #64748b; display: flex; align-items: center; gap: 8px; }
+    .crumb b { color: #0f172a; font-weight: 600; }
+    .crumb .slash { color: #cbd5e1; }
+    .search {
+      margin-left: auto; height: 38px; width: 360px;
+      background: #f5f8fc; border: 1px solid #e6eaf2; border-radius: 9px;
+      display: flex; align-items: center; gap: 10px; padding: 0 12px;
+      font-size: 12.5px; color: #94a3b8;
+    }
+    .search .kbd { margin-left: auto; font-size: 10.5px; color: #94a3b8; padding: 2px 7px; background: #fff; border: 1px solid #e6eaf2; border-radius: 4px; font-family: ui-monospace, monospace; }
+    .icon-btn { width: 38px; height: 38px; border-radius: 9px; background: #f5f8fc; border: 1px solid #e6eaf2; display:grid; place-items:center; position: relative; }
+    .icon-btn .dot-r { width: 7px; height: 7px; position: absolute; top: 8px; right: 8px; }
+
+    /* Main content */
+    .content {
+      flex: 1; display: flex; flex-direction: column; min-width: 0;
+      background: #f7f9fc;
+    }
+    .main {
+      flex: 1; padding: 22px 28px 26px; overflow: hidden; position: relative;
+    }
+
+    /* Page header */
+    .page-head {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .page-title { font-size: 22px; font-weight: 700; color: #0f172a; letter-spacing: -.01em; }
+    .page-sub { font-size: 12.5px; color: #64748b; margin-top: 4px; }
+    .head-actions { display: flex; gap: 10px; align-items: center; }
+    .btn {
+      height: 38px; padding: 0 16px;
+      border-radius: 9px; font-size: 13px; font-weight: 600; border: 1px solid transparent;
+      display: inline-flex; align-items: center; gap: 8px; cursor: default;
+    }
+    .btn-ghost { background: #fff; color: #334155; border-color: #e2e8f0; }
+    .btn-primary {
+      background: linear-gradient(180deg, #2563eb, #1d4ed8);
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(37,99,235,.32), inset 0 1px 0 rgba(255,255,255,.18);
+    }
+    .btn-primary.pulse { animation: btnPulse 1.6s ease-out infinite; }
+    @keyframes btnPulse {
+      0%,100% { box-shadow: 0 6px 16px rgba(37,99,235,.32), inset 0 1px 0 rgba(255,255,255,.18), 0 0 0 0 rgba(37,99,235,.45); }
+      50% { box-shadow: 0 6px 16px rgba(37,99,235,.32), inset 0 1px 0 rgba(255,255,255,.18), 0 0 0 10px rgba(37,99,235,0); }
+    }
+
+    /* KPI cards */
+    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 18px; }
+    .card {
+      background: #fff; border: 1px solid #e6eaf2; border-radius: 12px;
+      padding: 16px 18px;
+      opacity: 0; transform: translateY(14px);
+      transition: opacity .55s ease, transform .55s ease;
+      position: relative; overflow: hidden;
+    }
+    .card.show { opacity: 1; transform: translateY(0); }
+    .card-top { display: flex; justify-content: space-between; align-items: center; }
+    .card-label { font-size: 11.5px; color: #64748b; text-transform: uppercase; letter-spacing: .06em; font-weight: 600; }
+    .card-icon {
+      width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center;
+    }
+    .card-icon.blue { background: #eff6ff; color: #2563eb; }
+    .card-icon.green { background: #ecfdf5; color: #059669; }
+    .card-icon.amber { background: #fffbeb; color: #d97706; }
+    .card-icon.purple { background: #f5f3ff; color: #7c3aed; }
+    .card-val { font-size: 26px; font-weight: 800; margin-top: 8px; color: #0f172a; letter-spacing: -.01em; }
+    .card-delta { font-size: 11.5px; color: #16a34a; margin-top: 4px; font-weight: 600; }
+    .card-delta.neg { color: #dc2626; }
+    .progress-wrap { height: 6px; background: #eef2f7; border-radius: 4px; margin-top: 12px; overflow: hidden; }
+    .progress-fill {
+      height: 100%; width: 0;
+      background: linear-gradient(90deg, #3b82f6, #2563eb);
+      border-radius: 4px;
+      transition: width 1s cubic-bezier(.22,1,.36,1);
+    }
+    .sparkline { position: absolute; bottom: 0; right: 0; opacity: .55; }
+
+    /* URL input row */
+    .crawl-row {
+      display: flex; gap: 12px; margin-bottom: 18px; align-items: center;
+      opacity: 0; transition: opacity .4s ease;
+      background: #fff; border: 1px solid #e6eaf2; border-radius: 12px;
+      padding: 14px;
+    }
+    .crawl-row.show { opacity: 1; }
+    .crawl-row .label { font-size: 12px; font-weight: 600; color: #64748b; padding-left: 4px; }
+    .url-input {
+      flex: 1; height: 44px;
+      border: 1px solid #d8dee8; border-radius: 10px;
+      padding: 0 14px; font-size: 14px; background: #f8fafc;
+      display: flex; align-items: center; color: #0f172a; font-weight: 500;
+      font-family: ui-monospace, 'SF Mono', monospace;
+    }
+    .url-input .glob { color: #94a3b8; margin-right: 8px; font-size: 12px; }
+    .url-input .typed { border-right: 2px solid #2563eb; padding-right: 1px; }
+    .url-input.focused { border-color: #2563eb; background: #fff; box-shadow: 0 0 0 4px rgba(37,99,235,.12); }
+
+    /* Status badge row */
+    .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .badge {
+      font-size: 11.5px; font-weight: 600; padding: 6px 12px 6px 10px;
+      border-radius: 999px;
+      background: #f1f5f9; color: #64748b;
+      display: inline-flex; align-items: center; gap: 7px;
+      opacity: 0; transform: translateY(4px) scale(.96);
+      transition: all .35s cubic-bezier(.22,1,.36,1);
+    }
+    .badge.on { opacity: 1; transform: translateY(0) scale(1); }
+    .badge .pip {
+      width: 6px; height: 6px; border-radius: 50%; background: #94a3b8;
+    }
+    .badge.blue { background: #dbeafe; color: #1d4ed8; }
+    .badge.blue .pip { background: #2563eb; animation: pip 1s infinite; }
+    .badge.amber { background: #fef3c7; color: #b45309; }
+    .badge.amber .pip { background: #f59e0b; animation: pip 1s infinite; }
+    .badge.green { background: #dcfce7; color: #15803d; }
+    .badge.green .pip { background: #16a34a; }
+    .badge.purple { background: #ede9fe; color: #6d28d9; }
+    .badge.purple .pip { background: #7c3aed; animation: pip 1s infinite; }
+    @keyframes pip { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(.6); opacity: .55; } }
+
+    /* Content split: doc + table */
+    .split { display: grid; grid-template-columns: 1fr 1.35fr; gap: 16px; height: 420px; }
+    .panel {
+      background: #fff; border: 1px solid #e6eaf2; border-radius: 12px;
+      overflow: hidden; display: flex; flex-direction: column; min-height: 0;
+    }
+    .panel-head {
+      padding: 12px 16px; border-bottom: 1px solid #eef2f7;
+      font-size: 13px; font-weight: 600; color: #0f172a;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .panel-head .sub { font-size: 11.5px; color: #94a3b8; font-weight: 500; margin-left: auto; }
+    .panel-body { flex: 1; padding: 12px; overflow: hidden; position: relative; }
+
+    /* Document queue list */
+    .doc-item {
+      display: grid; grid-template-columns: 28px 1fr auto; gap: 10px; align-items: center;
+      padding: 9px 10px; margin-bottom: 6px;
+      background: #f8fafc; border: 1px solid #eef2f7; border-radius: 8px;
+      opacity: 0; transform: translateY(8px);
+      transition: all .4s cubic-bezier(.22,1,.36,1);
+    }
+    .doc-item.in { opacity: 1; transform: translateY(0); }
+    .doc-ico {
+      width: 28px; height: 32px; border-radius: 4px;
+      background: linear-gradient(180deg, #f87171, #dc2626);
+      color: #fff; font-size: 9px; font-weight: 800;
+      display: grid; place-items: center; position: relative;
+    }
+    .doc-ico::after {
+      content: ''; position: absolute; top:0; right:0;
+      width: 0; height: 0;
+      border-left: 6px solid #fff;
+      border-bottom: 6px solid transparent;
+    }
+    .doc-name { font-size: 12.5px; color: #0f172a; font-weight: 600; }
+    .doc-meta { font-size: 10.5px; color: #94a3b8; margin-top: 2px; }
+    .doc-status {
+      font-size: 10.5px; font-weight: 700;
+      padding: 3px 8px; border-radius: 999px;
+      background: #dbeafe; color: #1d4ed8;
+    }
+    .doc-status.done { background: #dcfce7; color: #15803d; }
+
+    /* PDF preview */
+    .pdf-preview {
+      margin-top: 10px;
+      height: 230px; background: #fafafa;
+      border: 1px solid #eef2f7; border-radius: 8px;
+      position: relative; overflow: hidden;
+      opacity: 0; transition: opacity .4s ease;
+    }
+    .pdf-preview.show { opacity: 1; }
+    .pdf-page {
+      position: absolute; inset: 12px; background: #fff;
+      box-shadow: 0 4px 14px rgba(15,23,42,.08); border-radius: 4px;
+      padding: 12px 14px; font-size: 8.5px; color: #334155;
+      line-height: 1.5; overflow: hidden;
+    }
+    .pdf-page h4 { font-size: 11px; margin-bottom: 8px; color: #0f172a; }
+    .pdf-page .row { display: flex; gap: 10px; margin: 3px 0; }
+    .pdf-page .row .l { flex: 1; height: 5px; background: #e6eaf2; border-radius: 2px; }
+    .pdf-page .row .l.sh { width: 60%; flex: none; }
+    .pdf-page .row .l.med { width: 75%; flex: none; }
+    .pdf-page table { width: 100%; margin-top: 8px; border-collapse: collapse; font-size: 8px; }
+    .pdf-page table th, .pdf-page table td { border-bottom: 1px dashed #e6eaf2; padding: 3px 4px; text-align: left; }
+    .pdf-page table th { color: #94a3b8; font-weight: 600; }
+    .scan {
+      position: absolute; left: 0; right: 0;
+      height: 28px; pointer-events: none; top: 0;
+      background: linear-gradient(180deg,
+        rgba(37,99,235,0) 0%,
+        rgba(37,99,235,.15) 45%,
+        rgba(37,99,235,.45) 50%,
+        rgba(37,99,235,.15) 55%,
+        rgba(37,99,235,0) 100%);
+      opacity: 0; transition: opacity .3s ease;
+    }
+    .scan-line {
+      position: absolute; left: 0; right: 0; top: 50%;
+      height: 2px; background: #2563eb;
+      box-shadow: 0 0 14px 2px rgba(37,99,235,.6);
+    }
+    .scan.on { opacity: 1; animation: scan 2.6s linear infinite; }
+    @keyframes scan {
+      0% { top: -10%; } 100% { top: 110%; }
+    }
+
+    /* Tabs + structured table */
+    .tabs {
+      display: flex; gap: 6px; padding: 10px 14px;
+      border-bottom: 1px solid #eef2f7; align-items: center;
+    }
+    .tab-btn {
+      font-size: 11.5px; font-weight: 600; padding: 6px 12px;
+      border-radius: 8px; background: transparent; color: #64748b;
+      border: 1px solid transparent;
+      opacity: 0; transform: translateY(4px);
+      transition: all .35s ease;
+    }
+    .tab-btn.in { opacity: 1; transform: translateY(0); }
+    .tab-btn.active { background: #eff6ff; color: #1d4ed8; }
+    .tab-btn.disabled { opacity: 0; text-decoration: line-through; transform: scale(.9); pointer-events: none; }
+
+    .table-wrap { padding: 4px 12px 10px; overflow: hidden; }
+    table.data {
+      width: 100%; border-collapse: collapse; font-size: 12px;
+    }
+    table.data thead th {
+      text-align: left; padding: 9px 10px;
+      background: #f8fafc; color: #475569;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .04em; border-bottom: 1px solid #eef2f7;
+    }
+    table.data thead th:first-child { border-top-left-radius: 6px; }
+    table.data thead th:last-child { border-top-right-radius: 6px; text-align: right; }
+    table.data tbody td {
+      padding: 9px 10px; border-bottom: 1px solid #f1f5f9; color: #0f172a;
+      font-variant-numeric: tabular-nums;
+    }
+    table.data tbody td:last-child { text-align: right; }
+    table.data tbody tr {
+      opacity: 0; transform: translateY(6px);
+      transition: opacity .35s ease, transform .35s ease;
+    }
+    table.data tbody tr.in { opacity: 1; transform: translateY(0); }
+    table.data tbody tr td .chip {
+      font-size: 10.5px; font-weight: 700;
+      padding: 2px 8px; border-radius: 999px;
+      background: #ecfdf5; color: #15803d;
+    }
+    table.data tbody tr td .chip.amber { background: #fffbeb; color: #b45309; }
+    .table-foot {
+      padding: 10px 14px; border-top: 1px solid #eef2f7;
+      font-size: 11.5px; color: #64748b;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .table-foot .sheets-ico {
+      width: 16px; height: 16px; border-radius: 3px;
+      background: #16a34a; color: #fff; font-size: 9px; font-weight: 800;
+      display: grid; place-items: center;
+    }
+    .table-foot b { color: #0f172a; }
+
+    /* Toast / notification */
+    .toast {
+      position: absolute; bottom: 24px; right: 24px;
+      background: #fff; border: 1px solid #e6eaf2;
+      border-left: 4px solid #2563eb;
+      border-radius: 10px; padding: 12px 18px 12px 14px;
+      font-size: 13px; font-weight: 600; color: #0f172a;
+      box-shadow: 0 16px 40px rgba(15,23,42,.18);
+      opacity: 0; transform: translateY(12px);
+      transition: all .35s cubic-bezier(.22,1,.36,1);
+      z-index: 70; display: flex; align-items: center; gap: 10px;
+      min-width: 280px;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast .spinner {
+      width: 14px; height: 14px; border-radius: 50%;
+      border: 2px solid #dbeafe; border-top-color: #2563eb;
+      animation: spin .9s linear infinite;
+    }
+    .toast.success { border-left-color: #16a34a; }
+    .toast.success .spinner { border: 0; width: 16px; height: 16px; background: #16a34a; border-radius: 50%; position: relative; animation: none; }
+    .toast.success .spinner::after {
+      content: ''; position: absolute; left: 4px; top: 7px;
+      width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .toast .sub { font-size: 11px; font-weight: 500; color: #64748b; }
+
+    /* Cursor */
+    .cursor {
+      position: absolute; width: 22px; height: 22px;
+      pointer-events: none; z-index: 100; opacity: 0;
+      transition: opacity .3s ease;
+      filter: drop-shadow(0 2px 6px rgba(15,23,42,.25));
+    }
+    .ripple {
+      position: absolute; width: 36px; height: 36px;
+      border: 2px solid #2563eb; border-radius: 50%;
+      transform: translate(-50%, -50%) scale(.4);
+      opacity: 0; pointer-events: none; z-index: 99;
+    }
+    .ripple.go { animation: ripple .55s ease-out forwards; }
+    @keyframes ripple {
+      0% { opacity: .65; transform: translate(-50%,-50%) scale(.4); }
+      100% { opacity: 0; transform: translate(-50%,-50%) scale(1.6); }
+    }
+
+    /* Sheets overlay */
+    .sheets {
+      position: absolute; inset: 0; padding: 22px 28px;
+      background: rgba(247,249,252,.96);
+      opacity: 0; pointer-events: none;
+      transition: opacity .55s ease;
+      z-index: 60; display: flex; flex-direction: column;
+    }
+    .sheets.show { opacity: 1; }
+    .sheets-head {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+    }
+    .sheets-logo {
+      width: 32px; height: 32px; border-radius: 6px;
+      background: #16a34a; color: #fff; font-weight: 800; font-size: 14px;
+      display: grid; place-items: center;
+    }
+    .sheets-title { font-size: 16px; font-weight: 700; color: #0f172a; }
+    .sheets-sub { font-size: 12px; color: #64748b; }
+    .sheets-toolbar {
+      height: 38px; background: #fff; border: 1px solid #e6eaf2; border-radius: 8px;
+      margin-bottom: 10px; display: flex; align-items: center; padding: 0 10px; gap: 10px;
+    }
+    .stb { width: 22px; height: 22px; border-radius: 4px; background: #f1f5f9; }
+    .sheet-area { flex: 1; background: #fff; border: 1px solid #e6eaf2; border-radius: 10px; overflow: hidden; display:flex; flex-direction: column; }
+    .sheet-row { display: grid; grid-template-columns: 50px repeat(8, 1fr); border-bottom: 1px solid #f1f5f9; }
+    .sheet-row.header { background: #f5f8fc; font-size: 11.5px; color: #475569; font-weight: 700; }
+    .sheet-row.row-num { font-size: 11px; color: #94a3b8; font-weight: 600; }
+    .sheet-cell { padding: 8px 10px; border-right: 1px solid #f1f5f9; font-size: 11.5px; color: #0f172a; font-variant-numeric: tabular-nums; }
+    .sheet-cell.idx { color: #94a3b8; font-weight: 600; background: #f8fafc; text-align: center; }
+    .sheet-cell.col { color: #475569; font-weight: 700; background: #f5f8fc; text-align: center; }
+    .sheet-row.populating .sheet-cell:not(.idx) {
+      opacity: 0; transform: translateY(4px);
+      transition: opacity .25s ease, transform .25s ease;
+    }
+    .sheet-row.populating.in .sheet-cell:not(.idx) {
+      opacity: 1; transform: translateY(0);
+    }
+
+    /* End overlay — centered success card on a SOFT dim, dashboard stays visible behind */
+    .end {
+      position: absolute; inset: 0;
+      background: rgba(15, 23, 42, .35);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .55s ease;
+      z-index: 90;
+    }
+    .end.show { opacity: 1; }
+    .end::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(800px 500px at 50% 40%, rgba(37,99,235,.18), transparent 60%);
+      pointer-events: none;
+    }
+    .end > * { position: relative; z-index: 1; }
+    .end-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 32px 56px 36px;
+      box-shadow: 0 40px 80px rgba(15, 23, 42, .35);
+      border: 1px solid #e6eaf2;
+      display: flex; flex-direction: column; align-items: center;
+      max-width: 760px;
+      transform: translateY(12px) scale(.98);
+      transition: transform .5s cubic-bezier(.22,1,.36,1);
+    }
+    .end.show .end-card { transform: translateY(0) scale(1); }
+    .end-success-dot {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: #16a34a; color: #fff;
+      display: grid; place-items: center;
+      margin-bottom: 18px;
+      box-shadow: 0 10px 24px rgba(22,163,74,.35);
+      position: relative;
+    }
+    .end-success-dot::after {
+      content: ''; position: absolute; left: 22px; top: 28px;
+      width: 10px; height: 20px; border: solid #fff; border-width: 0 3px 3px 0;
+      transform: rotate(45deg);
+    }
+    .end-flow { display: flex; gap: 18px; align-items: center; margin-bottom: 28px; }
+    .end-flow .word {
+      font-size: 22px; font-weight: 800; color: #1d4ed8;
+      letter-spacing: -.01em;
+      padding: 8px 18px; background: #fff;
+      border: 1px solid #dbeafe; border-radius: 999px;
+      box-shadow: 0 6px 18px rgba(37,99,235,.12);
+      opacity: 0; transform: translateY(8px);
+      transition: all .4s cubic-bezier(.22,1,.36,1);
+    }
+    .end-flow .word.in { opacity: 1; transform: translateY(0); }
+    .end-flow .arr { color: #cbd5e1; font-weight: 700; font-size: 20px; opacity: 0; transition: opacity .3s ease; }
+    .end-flow .arr.in { opacity: 1; }
+    .end-brand { display: flex; align-items: center; gap: 14px; }
+    .end-brand .logo {
+      width: 56px; height: 56px; border-radius: 14px;
+      background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+      box-shadow: 0 12px 30px rgba(37,99,235,.32);
+      display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 24px;
+    }
+    .end-title { font-size: 40px; font-weight: 800; color: #0f172a; letter-spacing: -.02em; }
+    .end-sub {
+      margin-top: 10px; font-size: 18px; color: #475569; font-weight: 500;
+      letter-spacing: -.005em; max-width: 720px; text-align: center;
+    }
+    .end-cta {
+      margin-top: 22px; font-size: 12px; color: #94a3b8; font-weight: 500;
+    }
+
+    /* watermark */
+    .stamp {
+      position: fixed; z-index: 9999; top: 10px; left: 10px;
+      font-size: 11px; color: #64748b; background: rgba(255,255,255,.92);
+      padding: 5px 10px; border-radius: 6px; border: 1px solid #e6eaf2;
+      font-weight: 500;
+    }
+
+    /* notification banner top right (live updates feed) */
+    .live-feed {
+      position: absolute; top: 18px; right: 24px;
+      width: 280px;
+      display: flex; flex-direction: column; gap: 8px;
+      z-index: 65; pointer-events: none;
+    }
+    .lf-item {
+      background: #fff; border: 1px solid #e6eaf2; border-radius: 10px;
+      padding: 10px 12px;
+      display: flex; gap: 10px; align-items: center;
+      font-size: 12px; color: #0f172a;
+      box-shadow: 0 12px 28px rgba(15,23,42,.08);
+      opacity: 0; transform: translateX(16px);
+      transition: all .35s cubic-bezier(.22,1,.36,1);
+    }
+    .lf-item.show { opacity: 1; transform: translateX(0); }
+    .lf-item .lfi {
+      width: 26px; height: 26px; border-radius: 7px;
+      background: #eff6ff; color: #2563eb; display: grid; place-items: center;
+      font-size: 12px; font-weight: 800;
+    }
+    .lf-item .lfi.g { background: #ecfdf5; color: #16a34a; }
+    .lf-item .lft { font-weight: 600; }
+    .lf-item .lfs { font-size: 10.5px; color: #94a3b8; }
+  </style>
+</head>
+<body>
+  <div class="stamp">Vovix OneCrawl · 1920×1080 · 30s loop · Press <b>R</b> to restart</div>
+  <div id="stage"></div>
+
+  <script>
+  (function () {
+    /* ---------- DOM build ---------- */
+    const stage = document.getElementById('stage');
+
+    const iconHome = `<svg viewBox="0 0 24 24" width="12" height="12"><path fill="#64748b" d="M12 3l9 8h-3v9h-4v-6h-4v6H6v-9H3z"/></svg>`;
+    const iconJobs = `<svg viewBox="0 0 24 24" width="12" height="12"><path fill="#64748b" d="M4 6h16v2H4zM4 11h16v2H4zM4 16h10v2H4z"/></svg>`;
+    const iconDocs = `<svg viewBox="0 0 24 24" width="12" height="12"><path fill="#64748b" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 7V3.5L18.5 9H14z"/></svg>`;
+    const iconExp  = `<svg viewBox="0 0 24 24" width="12" height="12"><path fill="#64748b" d="M5 20h14v-2H5v2zM12 4l-7 8h4v4h6v-4h4z"/></svg>`;
+    const iconSet  = `<svg viewBox="0 0 24 24" width="12" height="12"><path fill="#64748b" d="M19.4 13a7.5 7.5 0 0 0 0-2l2.1-1.6-2-3.4-2.5 1a7.5 7.5 0 0 0-1.7-1L15 3h-4l-.3 2a7.5 7.5 0 0 0-1.7 1l-2.5-1-2 3.4L6.6 11a7.5 7.5 0 0 0 0 2L4.5 14.6l2 3.4 2.5-1a7.5 7.5 0 0 0 1.7 1l.3 2h4l.3-2a7.5 7.5 0 0 0 1.7-1l2.5 1 2-3.4L19.4 13zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z"/></svg>`;
+    const iconBolt = `<svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M13 2L4.5 13H11l-1 9 8.5-11H12z"/></svg>`;
+    const iconDl   = `<svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M12 3v10l4-4 1.5 1.5L12 16 6.5 10.5 8 9l4 4V3zM5 19h14v2H5z"/></svg>`;
+    const iconRows = `<svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M3 4h18v4H3zm0 6h18v4H3zm0 6h18v4H3z"/></svg>`;
+    const iconClock= `<svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 11h-2V6h2v5h4v2h-4z"/></svg>`;
+    const iconSearch = `<svg viewBox="0 0 24 24" width="14" height="14"><path fill="#94a3b8" d="M10 4a6 6 0 1 0 3.9 10.6l4.4 4.4 1.4-1.4-4.4-4.4A6 6 0 0 0 10 4zm0 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/></svg>`;
+    const iconBell = `<svg viewBox="0 0 24 24" width="14" height="14"><path fill="#475569" d="M12 22a2 2 0 0 0 2-2h-4a2 2 0 0 0 2 2zm6-6V11a6 6 0 0 0-5-5.9V4a1 1 0 1 0-2 0v1.1A6 6 0 0 0 6 11v5l-2 2v1h16v-1z"/></svg>`;
+
+    stage.innerHTML = `
+      <div class="browser" id="browser">
+        <div class="boot" id="boot">
+          <div class="boot-logo">V</div>
+          <div class="boot-title">Vovix OneCrawl</div>
+          <div class="boot-sub">Loading workspace · app.vovix.in</div>
+          <div class="boot-bar"><i></i></div>
+        </div>
+        <div class="browser-bar">
+          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+          <div class="tab"><span class="fav"></span> Vovix OneCrawl — Dashboard</div>
+          <div class="url-bar" id="urlBar">
+            <span class="lock">🔒</span>
+            <span>app.vovix.in/onecrawl/dashboard</span>
+          </div>
+          <div class="browser-icons"><span></span><span></span><span></span></div>
+        </div>
+
+        <div class="app">
+          <aside class="sidebar">
+            <div class="brand">
+              <div class="brand-logo">V</div>
+              <div>
+                <div class="brand-name">Vovix <span>OneCrawl</span></div>
+                <div style="font-size:10.5px;color:#94a3b8;margin-top:1px">Enterprise · v4.2</div>
+              </div>
+            </div>
+
+            <div class="nav-section">Workspace</div>
+            <div class="nav-item active">
+              <span class="ico">${iconHome.replace('#64748b','#1d4ed8')}</span> Dashboard
+            </div>
+            <div class="nav-item">
+              <span class="ico">${iconJobs}</span> Crawl jobs <span class="count">14</span>
+            </div>
+            <div class="nav-item">
+              <span class="ico">${iconDocs}</span> Documents <span class="count">2,481</span>
+            </div>
+            <div class="nav-item">
+              <span class="ico">${iconExp}</span> Exports <span class="count">37</span>
+            </div>
+
+            <div class="nav-section">Pipelines</div>
+            <div class="nav-item">
+              <span class="ico">${iconBolt.replace('currentColor','#64748b')}</span> NSE filings
+            </div>
+            <div class="nav-item">
+              <span class="ico">${iconRows.replace('currentColor','#64748b')}</span> SEC EDGAR
+            </div>
+            <div class="nav-item">
+              <span class="ico">${iconSet}</span> Settings
+            </div>
+
+            <div class="sidebar-foot">
+              <div class="avatar">HV</div>
+              <div>
+                <div class="sf-name">Hariharan V.</div>
+                <div class="sf-sub">admin@vovix.in</div>
+              </div>
+            </div>
+          </aside>
+
+          <div class="content">
+            <div class="topbar">
+              <div class="crumb">
+                <span>Workspace</span><span class="slash">/</span>
+                <span>OneCrawl</span><span class="slash">/</span>
+                <b>Dashboard</b>
+              </div>
+              <div class="search">
+                ${iconSearch}
+                <span>Search jobs, documents, tables…</span>
+                <span class="kbd">⌘K</span>
+              </div>
+              <div class="icon-btn">${iconBell}<span class="dot dot-r"></span></div>
+              <div class="avatar sm">HV</div>
+            </div>
+
+            <main class="main" id="main">
+              <div class="page-head">
+                <div>
+                  <div class="page-title" id="pageTitle">Crawl &amp; Extract Dashboard</div>
+                  <div class="page-sub" id="pageSub">Live document intelligence pipeline · ${new Date().toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}</div>
+                </div>
+                <div class="head-actions">
+                  <button class="btn btn-ghost">↻ Refresh</button>
+                  <button class="btn btn-primary pulse" id="startBtn">${iconBolt} New Crawl Job</button>
+                </div>
+              </div>
+
+              <div class="cards" id="cards">
+                <div class="card" data-card="0">
+                  <div class="card-top">
+                    <div class="card-label">Pages queued</div>
+                    <div class="card-icon blue">${iconBolt}</div>
+                  </div>
+                  <div class="card-val" id="v0">0</div>
+                  <div class="card-delta">▲ 12.4% today</div>
+                  <div class="progress-wrap"><div class="progress-fill" id="p0"></div></div>
+                </div>
+                <div class="card" data-card="1">
+                  <div class="card-top">
+                    <div class="card-label">PDFs downloaded</div>
+                    <div class="card-icon amber">${iconDl}</div>
+                  </div>
+                  <div class="card-val" id="v1">0</div>
+                  <div class="card-delta">▲ 8.1% today</div>
+                  <div class="progress-wrap"><div class="progress-fill" id="p1"></div></div>
+                </div>
+                <div class="card" data-card="2">
+                  <div class="card-top">
+                    <div class="card-label">Rows structured</div>
+                    <div class="card-icon green">${iconRows}</div>
+                  </div>
+                  <div class="card-val" id="v2">0</div>
+                  <div class="card-delta">▲ 21.3% today</div>
+                  <div class="progress-wrap"><div class="progress-fill" id="p2"></div></div>
+                </div>
+                <div class="card" data-card="3">
+                  <div class="card-top">
+                    <div class="card-label">Avg cycle time</div>
+                    <div class="card-icon purple">${iconClock}</div>
+                  </div>
+                  <div class="card-val" id="v3">0s</div>
+                  <div class="card-delta neg">▼ 4.2s vs last week</div>
+                  <div class="progress-wrap"><div class="progress-fill" id="p3" style="background:linear-gradient(90deg,#a855f7,#7c3aed)"></div></div>
+                </div>
+              </div>
+
+              <div class="crawl-row" id="crawlRow">
+                <div class="label">Source URL</div>
+                <div class="url-input" id="urlInput">
+                  <span class="glob">⌁</span><span class="typed" id="typedUrl"></span>
+                </div>
+                <button class="btn btn-ghost">Browse presets</button>
+                <button class="btn btn-primary" id="startCrawlBtn">${iconBolt} Start Crawl</button>
+              </div>
+
+              <div class="badges" id="badges">
+                <span class="badge" data-b="fetch"><span class="pip"></span>Fetching</span>
+                <span class="badge" data-b="dl"><span class="pip"></span>Downloading</span>
+                <span class="badge" data-b="proc"><span class="pip"></span>Processing</span>
+                <span class="badge" data-b="ocr"><span class="pip"></span>OCR</span>
+                <span class="badge" data-b="struct"><span class="pip"></span>Structuring</span>
+                <span class="badge" data-b="exp"><span class="pip"></span>Export</span>
+              </div>
+
+              <div class="split">
+                <div class="panel" id="pdfPanel">
+                  <div class="panel-head">
+                    <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2563eb"></span>
+                    Document queue <span class="sub" id="docSub">0 documents</span>
+                  </div>
+                  <div class="panel-body">
+                    <div id="docList"></div>
+                    <div class="pdf-preview" id="pdfPreview">
+                      <div class="pdf-page">
+                        <h4>Annual Report FY24 — Reliance Industries Ltd.</h4>
+                        <div class="row"><div class="l"></div></div>
+                        <div class="row"><div class="l med"></div></div>
+                        <div class="row"><div class="l"></div></div>
+                        <div class="row"><div class="l sh"></div></div>
+                        <table>
+                          <thead><tr><th>Metric</th><th>FY22</th><th>FY23</th><th>FY24</th></tr></thead>
+                          <tbody>
+                            <tr><td>Revenue (₹ Cr)</td><td>7,92,756</td><td>8,79,580</td><td>10,01,122</td></tr>
+                            <tr><td>EBITDA (₹ Cr)</td><td>1,25,887</td><td>1,42,001</td><td>1,78,677</td></tr>
+                            <tr><td>Net Profit</td><td>67,845</td><td>74,088</td><td>79,020</td></tr>
+                            <tr><td>EPS (₹)</td><td>97.2</td><td>104.6</td><td>112.4</td></tr>
+                          </tbody>
+                        </table>
+                        <div class="row" style="margin-top:8px"><div class="l med"></div></div>
+                        <div class="row"><div class="l"></div></div>
+                      </div>
+                      <div class="scan" id="scan"><div class="scan-line"></div></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="panel" id="tablePanel">
+                  <div class="panel-head">
+                    <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#16a34a"></span>
+                    Structured output <span class="sub" id="tableSub">0 rows · awaiting input</span>
+                  </div>
+                  <div class="tabs" id="tabs"></div>
+                  <div class="table-wrap">
+                    <table class="data" id="dataTable">
+                      <thead><tr>
+                        <th style="width:34%">Metric</th>
+                        <th>FY22</th>
+                        <th>FY23</th>
+                        <th>FY24</th>
+                        <th style="width:18%">Status</th>
+                      </tr></thead>
+                      <tbody id="tbody"></tbody>
+                    </table>
+                  </div>
+                  <div class="table-foot" id="tableFoot" style="opacity:0;transition:opacity .4s ease">
+                    <span class="sheets-ico">G</span>
+                    <span>Streaming to <b>Vovix · FY24 Financials.xlsx</b> · auto-saved 2 sec ago</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- live feed (popup notifications stack) -->
+              <div class="live-feed" id="liveFeed"></div>
+
+              <!-- single toast (status text) -->
+              <div class="toast" id="toast">
+                <div class="spinner"></div>
+                <div>
+                  <div id="toastTitle">Initializing Data Pipeline…</div>
+                  <div class="sub" id="toastSub">Connecting workers</div>
+                </div>
+              </div>
+
+              <!-- End screen -->
+              <div class="end" id="end">
+                <div class="end-card">
+                  <div class="end-success-dot"></div>
+                  <div class="end-flow" id="endFlow"></div>
+                  <div class="end-brand">
+                    <div class="logo">V</div>
+                    <div>
+                      <div class="end-title">Vovix OneCrawl</div>
+                      <div class="end-sub">From raw documents to structured intelligence — in seconds, not days.</div>
+                    </div>
+                  </div>
+                  <div class="end-cta">app.vovix.in · enterprise document intelligence</div>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+
+      <!-- cursor & ripple -->
+      <div class="cursor" id="cursor">
+        <svg width="22" height="22" viewBox="0 0 24 24">
+          <path fill="#0f172a" stroke="#fff" stroke-width="1.2" d="M5 3l3 18 3-7 7-2z"/>
+        </svg>
+      </div>
+      <div class="ripple" id="ripple"></div>
+    `;
+
+    /* ---------- helpers ---------- */
+    const $ = (id) => document.getElementById(id);
+    const browser  = $('browser');
+    const cursor   = $('cursor');
+    const ripple   = $('ripple');
+    const toast    = $('toast');
+    const liveFeed = $('liveFeed');
+    const end      = $('end');
+    const endFlow  = $('endFlow');
+
+    let t0 = performance.now();
+
+    function waitUntil(ms) {
+      const left = ms - (performance.now() - t0);
+      return left > 0 ? new Promise((r) => setTimeout(r, left)) : Promise.resolve();
+    }
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+    function moveCursor(x, y, dur = 600) {
+      return new Promise((res) => {
+        cursor.style.opacity = '1';
+        cursor.style.transition = `left ${dur}ms cubic-bezier(.22,1,.36,1), top ${dur}ms cubic-bezier(.22,1,.36,1)`;
+        cursor.style.left = x + 'px';
+        cursor.style.top  = y + 'px';
+        setTimeout(res, dur);
+      });
+    }
+    function clickFx(x, y) {
+      cursor.style.transition = 'transform .12s ease';
+      cursor.style.transform = 'scale(.82)';
+      setTimeout(() => { cursor.style.transform = 'scale(1)'; }, 130);
+      if (x != null) {
+        ripple.style.left = x + 'px';
+        ripple.style.top  = y + 'px';
+        ripple.classList.remove('go');
+        // restart anim
+        void ripple.offsetWidth;
+        ripple.classList.add('go');
+      }
+    }
+    function showToast(title, sub, variant) {
+      $('toastTitle').textContent = title;
+      $('toastSub').textContent = sub || '';
+      toast.classList.toggle('success', variant === 'success');
+      toast.classList.add('show');
+    }
+    function hideToast() { toast.classList.remove('show'); }
+
+    function pushFeed(title, sub, variant) {
+      const item = document.createElement('div');
+      item.className = 'lf-item';
+      item.innerHTML = `
+        <div class="lfi ${variant === 'g' ? 'g' : ''}">${variant === 'g' ? '✓' : 'i'}</div>
+        <div>
+          <div class="lft">${title}</div>
+          <div class="lfs">${sub || ''}</div>
+        </div>`;
+      liveFeed.appendChild(item);
+      requestAnimationFrame(() => item.classList.add('show'));
+
+      // Trim oldest items beyond MAX. CRITICAL: use a snapshot array and a
+      // 'removing' flag so we never re-enter the same element across
+      // iterations — the deferred setTimeout removal must not interact with
+      // the while-loop guard, or the loop spins synchronously forever and
+      // OOM-crashes the tab.
+      const MAX = 3;
+      const live = Array.from(liveFeed.children).filter(
+        (c) => !c.classList.contains('removing')
+      );
+      let excess = live.length - MAX;
+      while (excess-- > 0) {
+        const old = live.shift();
+        if (!old) break;
+        old.classList.add('removing');
+        old.classList.remove('show');
+        setTimeout(() => {
+          if (old && old.parentNode) old.parentNode.removeChild(old);
+        }, 400);
+      }
+    }
+    function clearFeed() {
+      Array.from(liveFeed.children).forEach((c) => c.classList.remove('show'));
+      setTimeout(() => liveFeed.innerHTML = '', 400);
+    }
+
+    function showCards() {
+      document.querySelectorAll('.card').forEach((c, i) => {
+        setTimeout(() => c.classList.add('show'), i * 110);
+      });
+    }
+
+    function setProgress(pid, a, b, c) {
+      // Two call styles supported:
+      //   setProgress(pid, pct)                      -> just set width
+      //   setProgress(pid, vid, pct, val)            -> width + value text
+      if (b === undefined && c === undefined) {
+        $(pid).style.width = (a || 0) + '%';
+        return;
+      }
+      $(pid).style.width = (b || 0) + '%';
+      if (c !== undefined) $(a).textContent = c;
+    }
+    function animateCount(id, from, to, dur, suffix='') {
+      const start = performance.now();
+      function tick(now) {
+        const t = Math.min(1, (now - start) / dur);
+        const e = 1 - Math.pow(1 - t, 3);
+        const v = Math.round(from + (to - from) * e);
+        $(id).textContent = (typeof to === 'string')
+          ? to
+          : v.toLocaleString('en-IN') + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    /* ---------- Data ---------- */
+    const docs = [
+      { name: 'RIL_Annual_Report_FY24.pdf',          size: '4.2 MB', pages: 286 },
+      { name: 'RIL_Investor_Presentation_Q4.pdf',    size: '2.1 MB', pages: 48  },
+      { name: 'RIL_Financial_Results_31Mar24.pdf',   size: '1.7 MB', pages: 32  },
+      { name: 'RIL_BSE_Filing_Form10K.pdf',          size: '3.8 MB', pages: 124 },
+    ];
+
+    const rows = [
+      ['Revenue (₹ Cr)',     '7,92,756',  '8,79,580',  '10,01,122', 'verified'],
+      ['EBITDA (₹ Cr)',      '1,25,887',  '1,42,001',  '1,78,677',  'verified'],
+      ['Net Profit (₹ Cr)',  '67,845',    '74,088',    '79,020',    'verified'],
+      ['EPS (₹)',            '97.2',      '104.6',     '112.4',     'verified'],
+      ['D/E Ratio',          '0.42',      '0.36',      '0.31',      'review'],
+      ['Return on Equity %', '10.1',      '11.4',      '12.4',      'verified'],
+    ];
+
+    /* ---------- Scenes ---------- */
+    async function scene1() {
+      // 0:00 - 0:05
+      browser.classList.add('visible');
+      await sleep(600);
+      // dismiss boot splash
+      const boot = $('boot');
+      if (boot) { boot.classList.add('gone'); setTimeout(() => boot.remove(), 500); }
+      showToast('Initializing Data Pipeline…', 'Connecting workers · 4/4 nodes online');
+      await sleep(250);
+      showCards();
+      // animate KPI baselines (initial "warm-up" snapshot)
+      setProgress('p0', 28); animateCount('v0', 0, 124, 700);
+      setProgress('p1', 12); animateCount('v1', 0, 18,  700);
+      setProgress('p2', 5);  animateCount('v2', 0, 412, 700);
+      setProgress('p3', 65);
+      animateCount('v3', 0, 0, 100); // placeholder
+      setTimeout(() => $('v3').textContent = '11.4s', 350);
+      await sleep(900);
+      pushFeed('Workers ready', '4 OCR · 2 Parser · 1 Export', '');
+      await sleep(700);
+      showToast('Pipeline ready', 'Awaiting source URL', 'success');
+      await waitUntil(5000);
+    }
+
+    async function scene2() {
+      // 0:05 - 0:10
+      hideToast();
+      $('crawlRow').classList.add('show');
+
+      // cursor moves to URL input (center of the input field)
+      const inputRect = $('urlInput').getBoundingClientRect();
+      const stageRect = stage.getBoundingClientRect();
+      const scale = stageRect.width / 1920;
+      const inX = (inputRect.left  - stageRect.left) / scale + (inputRect.width  / scale) / 2;
+      const inY = (inputRect.top   - stageRect.top)  / scale + (inputRect.height / scale) / 2;
+      await moveCursor(inX, inY, 700);
+      clickFx(inX, inY);
+      $('urlInput').classList.add('focused');
+      await sleep(220);
+
+      // type URL
+      const url = 'https://nseindia.com/companies/RELIANCE/filings/annual-report';
+      const el = $('typedUrl');
+      for (let i = 0; i <= url.length; i++) {
+        el.textContent = url.slice(0, i);
+        await sleep(22 + Math.random() * 16);
+      }
+      await sleep(220);
+
+      // click start crawl (use the real button position so the cursor lands on it)
+      const btnRect = $('startCrawlBtn').getBoundingClientRect();
+      const stageR2 = stage.getBoundingClientRect();
+      const scale2 = stageR2.width / 1920;
+      const btnX = (btnRect.left - stageR2.left) / scale2 + (btnRect.width  / scale2) / 2;
+      const btnY = (btnRect.top  - stageR2.top)  / scale2 + (btnRect.height / scale2) / 2;
+      await moveCursor(btnX, btnY, 520);
+      clickFx(btnX, btnY);
+      $('urlInput').classList.remove('focused');
+      await sleep(180);
+
+      // turn on badges
+      ['fetch','dl','proc'].forEach((b, i) => {
+        setTimeout(() => {
+          const el = document.querySelector(`[data-b="${b}"]`);
+          el.classList.add('on');
+          el.classList.add(b === 'proc' ? 'amber' : 'blue');
+        }, i * 280);
+      });
+
+      showToast('Crawling source…', 'Discovering documents');
+
+      // doc list populating
+      const list = $('docList');
+      docs.forEach((d, i) => {
+        setTimeout(() => {
+          const e = document.createElement('div');
+          e.className = 'doc-item';
+          e.innerHTML = `
+            <div class="doc-ico">PDF</div>
+            <div>
+              <div class="doc-name">${d.name}</div>
+              <div class="doc-meta">${d.size} · ${d.pages} pages</div>
+            </div>
+            <div class="doc-status">Downloading</div>
+          `;
+          list.appendChild(e);
+          requestAnimationFrame(() => e.classList.add('in'));
+          $('docSub').textContent = `${i + 1} document${i ? 's' : ''}`;
+        }, 320 + i * 320);
+      });
+
+      // KPI growth
+      setTimeout(() => { setProgress('p0', 72); animateCount('v0', 124, 348, 900); }, 600);
+      setTimeout(() => { setProgress('p1', 38); animateCount('v1', 18, 26, 900); }, 1200);
+
+      pushFeed('Source resolved', 'NSE · Reliance Industries Ltd.', '');
+      setTimeout(() => pushFeed('4 documents discovered', 'PDF · 11.8 MB total', ''), 1400);
+
+      await waitUntil(10000);
+    }
+
+    async function scene3() {
+      // 0:10 - 0:15
+      $('pdfPreview').classList.add('show');
+      $('scan').classList.add('on');
+
+      // flip first 3 docs to "downloaded"
+      const items = $('docList').children;
+      for (let i = 0; i < items.length; i++) {
+        setTimeout(() => {
+          const status = items[i].querySelector('.doc-status');
+          if (status) { status.textContent = 'Downloaded'; status.classList.add('done'); }
+        }, 200 + i * 180);
+      }
+
+      showToast('Document Loaded', 'RIL_Annual_Report_FY24.pdf');
+      await sleep(900);
+      showToast('Parsing Content', 'Layout · headings · 286 pages');
+      pushFeed('Parser online', '286 pages queued', '');
+      setProgress('p1', 88); animateCount('v1', 26, 42, 800);
+      await sleep(1100);
+      showToast('Extracting Tables', '34 candidate tables detected');
+      pushFeed('Tables detected', '34 candidates · 6 verified', 'g');
+
+      // turn proc badge green, ocr blue
+      const proc = document.querySelector('[data-b="proc"]');
+      proc.classList.remove('amber'); proc.classList.add('green');
+      const ocr = document.querySelector('[data-b="ocr"]');
+      ocr.classList.add('on'); ocr.classList.add('purple');
+      await waitUntil(15000);
+    }
+
+    async function scene4() {
+      // 0:15 - 0:20
+      hideToast();
+      $('scan').classList.remove('on');
+      const struct = document.querySelector('[data-b="struct"]');
+      struct.classList.add('on'); struct.classList.add('blue');
+
+      showToast('OCR + Structuring', 'Text → rows · 0/6');
+
+      const tb = $('tbody');
+      for (let i = 0; i < rows.length; i++) {
+        await sleep(280);
+        const tr = document.createElement('tr');
+        rows[i].forEach((cell, j) => {
+          const td = document.createElement('td');
+          if (j === rows[i].length - 1) {
+            const ch = document.createElement('span');
+            ch.className = 'chip' + (cell === 'review' ? ' amber' : '');
+            ch.textContent = cell === 'review' ? 'Review' : 'Verified';
+            td.appendChild(ch);
+          } else {
+            td.textContent = cell;
+          }
+          tr.appendChild(td);
+        });
+        tb.appendChild(tr);
+        requestAnimationFrame(() => tr.classList.add('in'));
+
+        setProgress('p2', ((i + 1) / rows.length) * 100);
+        animateCount('v2', 412, 412 + (i + 1) * 84, 250);
+        $('tableSub').textContent = `${i + 1} rows · live`;
+        $('toastTitle').textContent = `OCR + Structuring`;
+        $('toastSub').textContent  = `Text → rows · ${i + 1}/${rows.length}`;
+      }
+
+      pushFeed('Data structured', '6 rows · 4 metrics extracted', 'g');
+      const ocr = document.querySelector('[data-b="ocr"]');
+      ocr.classList.remove('purple'); ocr.classList.add('green');
+      await waitUntil(20000);
+    }
+
+    async function scene5() {
+      // 0:20 - 0:26 — tabs animate in, filter, then sheet export ribbon inside the panel
+      hideToast();
+      const tabs = [
+        { name: 'Summary',    enabled: true,  active: false },
+        { name: 'Financials', enabled: true,  active: true  },
+        { name: 'Ratios',     enabled: true,  active: false },
+        { name: 'Receipts',   enabled: false, active: false },
+      ];
+      const tabsEl = $('tabs');
+      tabsEl.innerHTML = '';
+      tabs.forEach((t, i) => {
+        const b = document.createElement('button');
+        b.className = 'tab-btn' + (t.active ? ' active' : '') + (t.enabled ? '' : ' disabled');
+        b.textContent = t.name;
+        tabsEl.appendChild(b);
+        setTimeout(() => b.classList.add('in'), 80 + i * 90);
+      });
+
+      await sleep(700);
+      showToast('0 Rows Detected — Tab Filtered', 'Receipts tab auto-hidden');
+      // collapse the disabled tab
+      setTimeout(() => {
+        const dis = tabsEl.querySelector('.disabled');
+        if (dis) { dis.style.transition = 'all .4s ease'; dis.style.opacity = '0'; dis.style.width = '0'; dis.style.padding = '0'; dis.style.margin = '0'; }
+      }, 800);
+      await sleep(900);
+      hideToast();
+
+      // export badge → blue
+      const exp = document.querySelector('[data-b="exp"]');
+      exp.classList.add('on'); exp.classList.add('blue');
+
+      // sheets export ribbon appears INSIDE the table panel — no fullscreen overlay
+      $('tableFoot').style.opacity = 1;
+      showToast('Exporting to Sheets…', 'Vovix · FY24 Financials.xlsx');
+
+      // add enrichment columns one by one (YoY%, CAGR, Source, Confidence)
+      const dataTable = $('dataTable');
+      const thead = dataTable.querySelector('thead tr');
+      const tbodyRows = dataTable.querySelectorAll('tbody tr');
+
+      const newCols = [
+        { header: 'YoY%',       data: ['13.8%', '25.8%', '6.6%',  '7.4%',  '-13.9%', '8.8%'],  color: '#15803d' },
+        { header: '3Y CAGR',    data: ['12.3%', '19.1%', '7.9%',  '7.5%',  '-13.8%', '10.9%'], color: '#15803d' },
+      ];
+
+      for (let c = 0; c < newCols.length; c++) {
+        await sleep(520);
+        const col = newCols[c];
+        // remove the old "Status" th so we can re-insert it after the new cols
+        const oldStatusTh = thead.lastElementChild;
+        const oldStatusCells = Array.from(tbodyRows).map(tr => tr.lastElementChild);
+
+        const newTh = document.createElement('th');
+        newTh.textContent = col.header;
+        newTh.style.cssText = 'opacity:0;transform:translateY(-4px);transition:opacity .4s ease, transform .4s ease;';
+        thead.insertBefore(newTh, oldStatusTh);
+        requestAnimationFrame(() => { newTh.style.opacity = '1'; newTh.style.transform = 'translateY(0)'; });
+
+        for (let r = 0; r < tbodyRows.length; r++) {
+          const td = document.createElement('td');
+          td.style.cssText = `opacity:0;transition:opacity .35s ease;color:${col.color};font-weight:600;`;
+          td.textContent = col.data[r] || '';
+          tbodyRows[r].insertBefore(td, oldStatusCells[r]);
+          setTimeout(() => { td.style.opacity = '1'; }, 60 + r * 60);
+        }
+      }
+
+      await sleep(400);
+      hideToast();
+      showToast('Source linked', 'Each row → page in original PDF', 'success');
+      pushFeed('Workbook updated', 'YoY% · CAGR · Source · Confidence', 'g');
+      $('tableSub').textContent = '6 rows · 7 columns · streaming to Sheets';
+
+      await waitUntil(26000);
+    }
+
+    async function scene6() {
+      // 0:26 - 0:30 — success card overlays a softly dimmed dashboard
+      hideToast();
+      showToast('Export Complete', '6 rows · Vovix · FY24 Financials.xlsx', 'success');
+      await sleep(400);
+
+      // build the flow chips
+      const words = ['Crawl','Parse','OCR','Export'];
+      words.forEach((w, i) => {
+        const span = document.createElement('span');
+        span.className = 'word';
+        span.textContent = w;
+        endFlow.appendChild(span);
+        if (i < words.length - 1) {
+          const arr = document.createElement('span');
+          arr.className = 'arr';
+          arr.textContent = '→';
+          endFlow.appendChild(arr);
+        }
+      });
+
+      // reveal end overlay (now a centered card, dashboard remains visible behind a soft dim)
+      end.classList.add('show');
+      cursor.style.opacity = '0';
+
+      // pop words in sequence
+      const wordEls = endFlow.querySelectorAll('.word, .arr');
+      for (let i = 0; i < wordEls.length; i++) {
+        await sleep(200);
+        wordEls[i].classList.add('in');
+      }
+
+      await waitUntil(30000);
+    }
+
+    /* ---------- Run ---------- */
+    async function run() {
+      t0 = performance.now();
+      // reset
+      browser.classList.remove('visible');
+      browser.style.transform = '';
+      end.classList.remove('show');
+      endFlow.innerHTML = '';
+      // restore the original 5-column <thead> in case scene 5 added enrichment columns
+      const dataTableEl = document.getElementById('dataTable');
+      if (dataTableEl) {
+        const thead = dataTableEl.querySelector('thead');
+        thead.innerHTML = `
+          <tr>
+            <th style="width:34%">Metric</th>
+            <th>FY22</th>
+            <th>FY23</th>
+            <th>FY24</th>
+            <th style="width:18%">Status</th>
+          </tr>`;
+      }
+      // re-mount boot splash if it was removed
+      if (!document.getElementById('boot')) {
+        const b = document.createElement('div');
+        b.className = 'boot'; b.id = 'boot';
+        b.innerHTML = `
+          <div class="boot-logo">V</div>
+          <div class="boot-title">Vovix OneCrawl</div>
+          <div class="boot-sub">Loading workspace · app.vovix.in</div>
+          <div class="boot-bar"><i></i></div>`;
+        browser.prepend(b);
+      } else {
+        document.getElementById('boot').classList.remove('gone');
+      }
+      $('tbody').innerHTML = '';
+      $('docList').innerHTML = '';
+      $('docSub').textContent = '0 documents';
+      $('tableSub').textContent = '0 rows · awaiting input';
+      $('tabs').innerHTML = '';
+      $('typedUrl').textContent = '';
+      $('crawlRow').classList.remove('show');
+      $('pdfPreview').classList.remove('show');
+      $('scan').classList.remove('on');
+      $('tableFoot').style.opacity = 0;
+      clearFeed();
+      document.querySelectorAll('.card').forEach((c) => c.classList.remove('show'));
+      document.querySelectorAll('.badge').forEach((b) => {
+        b.classList.remove('on','blue','amber','green','purple');
+      });
+      [['p0','v0'],['p1','v1'],['p2','v2'],['p3','v3']].forEach(([p, v]) => setProgress(p, v, 0, '0'));
+      hideToast();
+
+      cursor.style.left = '960px';
+      cursor.style.top  = '900px';
+      cursor.style.opacity = '0';
+
+      const safe = async (fn, label) => {
+        try { await fn(); }
+        catch (err) {
+          console.error('[OneCrawl demo] ' + label + ' failed:', err);
+          // Surface a visible note so a silent crash never looks like a blank page
+          showToast(label + ' interrupted', String(err && err.message || err));
+        }
+      };
+
+      await safe(scene1, 'Scene 1 (init)');
+      await safe(scene2, 'Scene 2 (crawl)');
+      await safe(scene3, 'Scene 3 (parse)');
+      await safe(scene4, 'Scene 4 (OCR)');
+      await safe(scene5, 'Scene 5 (export)');
+      await safe(scene6, 'Scene 6 (success)');
+
+      // auto-loop after a brief pause
+      setTimeout(run, 1800);
+    }
+
+    run();
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'r' || e.key === 'R') run();
+    });
+
+    /* ---------- Auto-scale to window (with letterboxing) ---------- */
+    function fit() {
+      const s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      stage.style.transform = `scale(${s})`;
+    }
+    window.addEventListener('resize', fit);
+    // run after layout settles
+    requestAnimationFrame(fit);
+    setTimeout(fit, 100);
+  })();
+  </script>
+</body>
+</html>

@@ -1,178 +1,332 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" width="1400" height="900">
   <defs>
-    <pattern id="dotgrid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <circle cx="20" cy="20" r="0.8" fill="rgba(255,255,255,0.07)"/>
-    </pattern>
-    <linearGradient id="pgbar" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#00c853"/>
-      <stop offset="100%" stop-color="#00e5ff"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#edf9f2"/>
+      <stop offset="50%" stop-color="#f4fbf8"/>
+      <stop offset="100%" stop-color="#f0f8ff"/>
     </linearGradient>
-    <linearGradient id="codefade" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="transparent"/>
-      <stop offset="100%" stop-color="#060f1a"/>
-    </linearGradient>
+    <radialGradient id="spiderGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00c853" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#00c853" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="spiderBody" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#1e3a5c"/>
+      <stop offset="100%" stop-color="#0d2035"/>
+    </radialGradient>
+    <marker id="arrowGreen" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0.5 L0,6.5 L8,3.5 z" fill="#00a86b"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0.5 L0,6.5 L8,3.5 z" fill="#0071e3"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0.5 L0,6.5 L8,3.5 z" fill="#c62828"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0.5 L0,6.5 L8,3.5 z" fill="#6a1ea0"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0.5 L0,6.5 L8,3.5 z" fill="#f5a623"/>
+    </marker>
+    <marker id="arrowGrey" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0.5 L0,6.5 L8,3.5 z" fill="#b0bec5"/>
+    </marker>
+    <filter id="cardShadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#00000018"/>
+    </filter>
+    <filter id="nodeShadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#00000015"/>
+    </filter>
+    <filter id="spiderShadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#00c85330"/>
+    </filter>
   </defs>
 
   <!-- Background -->
-  <rect width="1400" height="900" fill="#0a1b2d"/>
-  <rect width="1400" height="900" fill="url(#dotgrid)"/>
-  <circle cx="1180" cy="120" r="300" fill="rgba(0,200,83,0.07)"/>
-  <circle cx="100" cy="800" r="240" fill="rgba(0,229,255,0.07)"/>
+  <rect width="1400" height="900" fill="url(#bg)"/>
 
-  <!-- Header bar -->
-  <rect x="30" y="28" width="1340" height="52" rx="10" fill="rgba(16,42,67,0.95)" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>
-  <circle cx="58" cy="54" r="5" fill="#ef5350" fill-opacity="0.75"/>
-  <circle cx="76" cy="54" r="5" fill="#f59e0b" fill-opacity="0.75"/>
-  <circle cx="94" cy="54" r="5" fill="#00c853" fill-opacity="0.75"/>
-  <text x="118" y="60" font-size="15" font-weight="700" fill="white" font-family="system-ui,sans-serif">Vovix</text>
-  <text x="156" y="60" font-size="15" font-weight="700" fill="#00c853" font-family="system-ui,sans-serif"> Crawler</text>
-  <text x="118" y="73" font-size="10" fill="rgba(255,255,255,0.35)" font-family="system-ui,sans-serif">Enterprise Web Data Extraction</text>
-  <text x="840" y="57" font-size="11" fill="rgba(255,255,255,0.35)" font-family="system-ui,sans-serif">1,482 pages discovered · 2 req/s · proxy rotation ON · JS rendering ON</text>
-  <rect x="1196" y="40" width="94" height="24" rx="12" fill="rgba(0,200,83,0.14)" stroke="rgba(0,200,83,0.5)" stroke-width="1"/>
-  <circle cx="1212" cy="52" r="4" fill="#00c853"/>
-  <text x="1222" y="56" font-size="10" font-weight="700" fill="#00c853" font-family="system-ui,sans-serif">RUNNING</text>
+  <!-- Guide rings around spider -->
+  <circle cx="490" cy="440" r="135" fill="none" stroke="#00a86b" stroke-width="1" stroke-opacity="0.12"/>
+  <circle cx="490" cy="440" r="250" fill="none" stroke="#00a86b" stroke-width="1" stroke-opacity="0.08"/>
+  <circle cx="490" cy="440" r="365" fill="none" stroke="#00a86b" stroke-width="0.5" stroke-opacity="0.05"/>
 
-  <!-- URL bar -->
-  <rect x="30" y="92" width="1020" height="44" rx="8" fill="rgba(255,255,255,0.04)" stroke="rgba(0,229,255,0.35)" stroke-width="1.5"/>
-  <text x="54" y="118" font-size="10" fill="rgba(255,255,255,0.3)" font-family="system-ui,sans-serif">URL</text>
-  <text x="88" y="118" font-size="13" fill="rgba(255,255,255,0.85)" font-family="'Courier New',monospace">https://target-company.com</text>
-  <rect x="1062" y="92" width="110" height="44" rx="8" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-  <text x="1076" y="111" font-size="9" fill="rgba(255,255,255,0.35)" font-family="system-ui,sans-serif">DEPTH</text>
-  <text x="1076" y="129" font-size="14" font-weight="600" fill="rgba(255,255,255,0.8)" font-family="system-ui,sans-serif">3 levels</text>
-  <rect x="1184" y="92" width="186" height="44" rx="8" fill="#00c853"/>
-  <text x="1277" y="119" font-size="13" font-weight="700" fill="#0a1b2d" text-anchor="middle" font-family="system-ui,sans-serif">&#9654;  Start Crawl</text>
+  <!-- Spider glow aura -->
+  <circle cx="490" cy="440" r="110" fill="url(#spiderGlow)"/>
 
-  <!-- Left panel: crawl map -->
-  <rect x="30" y="148" width="590" height="610" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-  <text x="52" y="174" font-size="10" font-weight="700" letter-spacing="2" fill="rgba(255,255,255,0.3)" font-family="system-ui,sans-serif">CRAWL MAP</text>
-  <rect x="52" y="184" width="488" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
-  <rect x="52" y="184" width="366" height="6" rx="3" fill="url(#pgbar)"/>
-  <text x="548" y="191" font-size="10" font-weight="700" fill="#00c853" font-family="system-ui,sans-serif">75%</text>
+  <!-- WEB THREADS (silk lines from spider to each file) -->
+  <line x1="490" y1="440" x2="750" y2="145" stroke="#e53935" stroke-width="1.2" stroke-opacity="0.22" stroke-dasharray="7,5"/>
+  <line x1="490" y1="440" x2="950" y2="265" stroke="#e56c00" stroke-width="1.2" stroke-opacity="0.22" stroke-dasharray="7,5"/>
+  <line x1="490" y1="440" x2="990" y2="440" stroke="#0071e3" stroke-width="1.2" stroke-opacity="0.22" stroke-dasharray="7,5"/>
+  <line x1="490" y1="440" x2="950" y2="615" stroke="#7c3aed" stroke-width="1.2" stroke-opacity="0.22" stroke-dasharray="7,5"/>
+  <line x1="490" y1="440" x2="750" y2="730" stroke="#c62828" stroke-width="1.2" stroke-opacity="0.22" stroke-dasharray="7,5"/>
+  <line x1="490" y1="440" x2="560" y2="790" stroke="#00897b" stroke-width="1.2" stroke-opacity="0.22" stroke-dasharray="7,5"/>
+  <line x1="490" y1="440" x2="310" y2="760" stroke="#e08c00" stroke-width="1.2" stroke-opacity="0.22" stroke-dasharray="7,5"/>
+  <line x1="490" y1="440" x2="155" y2="590" stroke="#546e7a" stroke-width="1.2" stroke-opacity="0.22" stroke-dasharray="7,5"/>
+  <line x1="490" y1="440" x2="120" y2="440" stroke="#1565c0" stroke-width="1.2" stroke-opacity="0.22" stroke-dasharray="7,5"/>
+  <line x1="490" y1="440" x2="165" y2="290" stroke="#c62828" stroke-width="1.2" stroke-opacity="0.22" stroke-dasharray="7,5"/>
+  <line x1="490" y1="440" x2="320" y2="155" stroke="#6a1ea0" stroke-width="1.2" stroke-opacity="0.22" stroke-dasharray="7,5"/>
+  <line x1="490" y1="440" x2="490" y2="90" stroke="#f5a623" stroke-width="1.2" stroke-opacity="0.22" stroke-dasharray="7,5"/>
 
-  <!-- Network lines: root to L1 -->
-  <line x1="320" y1="310" x2="155" y2="420" stroke="rgba(0,229,255,0.3)" stroke-width="1.5"/>
-  <line x1="320" y1="310" x2="320" y2="438" stroke="rgba(0,229,255,0.3)" stroke-width="1.5"/>
-  <line x1="320" y1="310" x2="484" y2="420" stroke="rgba(0,229,255,0.3)" stroke-width="1.5"/>
-  <!-- L1 to L2 -->
-  <line x1="155" y1="420" x2="90" y2="530" stroke="rgba(0,200,83,0.22)" stroke-width="1"/>
-  <line x1="155" y1="420" x2="175" y2="545" stroke="rgba(0,200,83,0.22)" stroke-width="1"/>
-  <line x1="320" y1="438" x2="270" y2="545" stroke="rgba(0,200,83,0.22)" stroke-width="1"/>
-  <line x1="320" y1="438" x2="372" y2="545" stroke="rgba(0,200,83,0.22)" stroke-width="1"/>
-  <line x1="484" y1="420" x2="446" y2="530" stroke="rgba(0,200,83,0.22)" stroke-width="1"/>
-  <line x1="484" y1="420" x2="524" y2="530" stroke="rgba(0,200,83,0.22)" stroke-width="1"/>
-  <!-- L2 to L3 -->
-  <line x1="90" y1="530" x2="72" y2="626" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
-  <line x1="175" y1="545" x2="155" y2="628" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
-  <line x1="175" y1="545" x2="194" y2="628" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
-  <line x1="270" y1="545" x2="258" y2="628" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
-  <line x1="372" y1="545" x2="384" y2="628" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
-  <line x1="446" y1="530" x2="436" y2="626" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
-  <line x1="524" y1="530" x2="512" y2="626" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
-  <line x1="524" y1="530" x2="534" y2="626" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+  <!-- DOWNLOAD ARROWS (flowing TOWARD spider) -->
+  <!-- Downloaded (solid) -->
+  <line x1="715" y1="165" x2="535" y2="408" stroke="#00a86b" stroke-width="2.8" marker-end="url(#arrowGreen)"/>
+  <line x1="155" y1="440" x2="435" y2="440" stroke="#1565c0" stroke-width="2.8" marker-end="url(#arrowBlue)"/>
+  <line x1="348" y1="174" x2="456" y2="402" stroke="#6a1ea0" stroke-width="2.5" marker-end="url(#arrowPurple)"/>
+  <line x1="197" y1="308" x2="447" y2="414" stroke="#c62828" stroke-width="2.5" marker-end="url(#arrowRed)"/>
+  <line x1="490" y1="122" x2="490" y2="384" stroke="#f5a623" stroke-width="2.5" marker-end="url(#arrowOrange)"/>
+  <!-- Downloading (dashed) -->
+  <line x1="914" y1="290" x2="548" y2="418" stroke="#0071e3" stroke-width="2.5" stroke-dasharray="12,6" marker-end="url(#arrowBlue)"/>
+  <line x1="952" y1="440" x2="548" y2="440" stroke="#0071e3" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  <!-- Queued (light grey dashed) -->
+  <line x1="916" y1="595" x2="548" y2="462" stroke="#b0bec5" stroke-width="1.8" stroke-dasharray="7,6" marker-end="url(#arrowGrey)"/>
+  <line x1="718" y1="710" x2="524" y2="468" stroke="#b0bec5" stroke-width="1.8" stroke-dasharray="7,6" marker-end="url(#arrowGrey)"/>
+  <line x1="550" y1="758" x2="500" y2="490" stroke="#b0bec5" stroke-width="1.8" stroke-dasharray="7,6" marker-end="url(#arrowGrey)"/>
+  <line x1="334" y1="736" x2="466" y2="478" stroke="#b0bec5" stroke-width="1.8" stroke-dasharray="7,6" marker-end="url(#arrowGrey)"/>
+  <line x1="185" y1="568" x2="447" y2="462" stroke="#b0bec5" stroke-width="1.8" stroke-dasharray="7,6" marker-end="url(#arrowGrey)"/>
 
-  <!-- Root node -->
-  <circle cx="320" cy="295" r="30" fill="#102a43" stroke="#00e5ff" stroke-width="2.5"/>
-  <circle cx="320" cy="295" r="20" fill="rgba(0,229,255,0.1)"/>
-  <text x="320" y="291" font-size="8" font-weight="700" fill="#00e5ff" text-anchor="middle" font-family="system-ui,sans-serif">ROOT</text>
-  <text x="320" y="303" font-size="10" fill="rgba(0,229,255,0.6)" text-anchor="middle" font-family="'Courier New',monospace">/</text>
+  <!-- SPIDER BOT -->
+  <circle cx="490" cy="440" r="56" fill="url(#spiderBody)" filter="url(#spiderShadow)"/>
+  <circle cx="490" cy="440" r="53" fill="none" stroke="#2a5a8a" stroke-width="1.5"/>
+  <!-- 8 legs: 4 left, 4 right -->
+  <path d="M448,422 C425,412 408,400 390,385" stroke="#0d2035" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M444,435 C420,432 402,432 382,430" stroke="#0d2035" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M444,450 C420,452 402,458 382,465" stroke="#0d2035" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M448,463 C428,472 412,484 396,498" stroke="#0d2035" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M532,422 C555,412 572,400 590,385" stroke="#0d2035" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M536,435 C560,432 578,432 598,430" stroke="#0d2035" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M536,450 C560,452 578,458 598,465" stroke="#0d2035" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M532,463 C552,472 568,484 584,498" stroke="#0d2035" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Leg joints -->
+  <circle cx="390" cy="385" r="4" fill="#1a3a5c"/>
+  <circle cx="382" cy="430" r="4" fill="#1a3a5c"/>
+  <circle cx="382" cy="465" r="4" fill="#1a3a5c"/>
+  <circle cx="396" cy="498" r="4" fill="#1a3a5c"/>
+  <circle cx="590" cy="385" r="4" fill="#1a3a5c"/>
+  <circle cx="598" cy="430" r="4" fill="#1a3a5c"/>
+  <circle cx="598" cy="465" r="4" fill="#1a3a5c"/>
+  <circle cx="584" cy="498" r="4" fill="#1a3a5c"/>
+  <!-- Face screen -->
+  <rect x="464" y="420" width="52" height="34" rx="7" fill="#0f1f30"/>
+  <!-- Glowing eyes -->
+  <ellipse cx="477" cy="437" rx="8" ry="7" fill="#00e676"/>
+  <ellipse cx="503" cy="437" rx="8" ry="7" fill="#00e676"/>
+  <ellipse cx="477" cy="437" rx="4" ry="3.5" fill="#fff" fill-opacity="0.5"/>
+  <ellipse cx="503" cy="437" rx="4" ry="3.5" fill="#fff" fill-opacity="0.5"/>
+  <circle cx="478" cy="436" r="2" fill="#006633"/>
+  <circle cx="504" cy="436" r="2" fill="#006633"/>
+  <!-- Antenna -->
+  <line x1="490" y1="384" x2="490" y2="358" stroke="#1a3a5c" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="490" cy="355" r="6" fill="#00e676"/>
+  <circle cx="490" cy="355" r="10" fill="none" stroke="#00e676" stroke-width="1.5" stroke-opacity="0.4"/>
+  <!-- Chest download status -->
+  <rect x="467" y="456" width="46" height="16" rx="5" fill="#00a86b"/>
+  <text x="490" y="468" font-family="monospace" font-size="8" fill="#ccffee" text-anchor="middle" font-weight="bold">DL 47/83</text>
 
-  <!-- L1 nodes -->
-  <circle cx="155" cy="420" r="22" fill="#102a43" stroke="#00c853" stroke-width="2"/>
-  <circle cx="155" cy="420" r="14" fill="rgba(0,200,83,0.1)"/>
-  <text x="155" y="424" font-size="8" fill="#00c853" text-anchor="middle" font-family="'Courier New',monospace">/about</text>
-  <circle cx="320" cy="438" r="22" fill="#102a43" stroke="#00c853" stroke-width="2"/>
-  <circle cx="320" cy="438" r="14" fill="rgba(0,200,83,0.1)"/>
-  <text x="320" y="442" font-size="8" fill="#00c853" text-anchor="middle" font-family="'Courier New',monospace">/docs</text>
-  <circle cx="484" cy="420" r="22" fill="#102a43" stroke="#00c853" stroke-width="2"/>
-  <circle cx="484" cy="420" r="14" fill="rgba(0,200,83,0.1)"/>
-  <text x="484" y="424" font-size="8" fill="#00c853" text-anchor="middle" font-family="'Courier New',monospace">/blog</text>
+  <!-- FILE NODES -->
 
-  <!-- L2 nodes -->
-  <circle cx="90" cy="530" r="15" fill="#102a43" stroke="rgba(0,229,255,0.5)" stroke-width="1.5"/>
-  <text x="90" y="534" font-size="7" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-family="'Courier New',monospace">/team</text>
-  <circle cx="175" cy="545" r="15" fill="#102a43" stroke="rgba(0,229,255,0.5)" stroke-width="1.5"/>
-  <text x="175" y="549" font-size="7" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-family="'Courier New',monospace">/faq</text>
-  <circle cx="270" cy="545" r="15" fill="#102a43" stroke="rgba(0,229,255,0.5)" stroke-width="1.5"/>
-  <text x="270" y="549" font-size="7" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-family="'Courier New',monospace">/api</text>
-  <circle cx="372" cy="545" r="15" fill="#102a43" stroke="rgba(0,229,255,0.5)" stroke-width="1.5"/>
-  <text x="372" y="549" font-size="7" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-family="'Courier New',monospace">/ref</text>
-  <circle cx="446" cy="530" r="15" fill="#102a43" stroke="rgba(0,229,255,0.5)" stroke-width="1.5"/>
-  <text x="446" y="534" font-size="7" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-family="'Courier New',monospace">/cat</text>
-  <circle cx="524" cy="530" r="15" fill="#102a43" stroke="rgba(0,229,255,0.5)" stroke-width="1.5"/>
-  <text x="524" y="534" font-size="7" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-family="'Courier New',monospace">/tag</text>
+  <!-- PDF — top-right — DOWNLOADED -->
+  <circle cx="750" cy="145" r="48" fill="#fff" stroke="#e53935" stroke-width="3" filter="url(#nodeShadow)"/>
+  <rect x="728" y="114" width="44" height="52" rx="6" fill="#e53935"/>
+  <path d="M750,114 L772,114 L772,130 L758,130 Z" fill="#b71c1c"/>
+  <text x="750" y="150" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">PDF</text>
+  <text x="750" y="184" font-family="Arial,sans-serif" font-size="10" fill="#e53935" text-anchor="middle" font-weight="700">✓ Downloaded</text>
 
-  <!-- L3 dots -->
-  <circle cx="72" cy="626" r="8" fill="rgba(0,200,83,0.2)" stroke="rgba(0,200,83,0.45)" stroke-width="1"/>
-  <circle cx="155" cy="628" r="8" fill="rgba(0,200,83,0.2)" stroke="rgba(0,200,83,0.45)" stroke-width="1"/>
-  <circle cx="194" cy="628" r="8" fill="rgba(0,200,83,0.2)" stroke="rgba(0,200,83,0.45)" stroke-width="1"/>
-  <circle cx="258" cy="628" r="8" fill="rgba(0,200,83,0.2)" stroke="rgba(0,200,83,0.45)" stroke-width="1"/>
-  <circle cx="384" cy="628" r="8" fill="rgba(0,200,83,0.2)" stroke="rgba(0,200,83,0.45)" stroke-width="1"/>
-  <circle cx="436" cy="626" r="8" fill="rgba(0,200,83,0.2)" stroke="rgba(0,200,83,0.45)" stroke-width="1"/>
-  <circle cx="512" cy="626" r="8" fill="rgba(0,200,83,0.2)" stroke="rgba(0,200,83,0.45)" stroke-width="1"/>
-  <circle cx="534" cy="626" r="8" fill="rgba(0,200,83,0.2)" stroke="rgba(0,200,83,0.45)" stroke-width="1"/>
+  <!-- HTML — right-top — DOWNLOADING -->
+  <circle cx="950" cy="265" r="48" fill="#fff" stroke="#e56c00" stroke-width="3" filter="url(#nodeShadow)"/>
+  <rect x="928" y="234" width="44" height="52" rx="6" fill="#e56c00"/>
+  <text x="950" y="268" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">HTML</text>
+  <text x="950" y="303" font-family="Arial,sans-serif" font-size="10" fill="#e56c00" text-anchor="middle" font-weight="700">↓ Loading…</text>
+  <circle cx="950" cy="265" r="44" fill="none" stroke="#e56c00" stroke-width="3" stroke-dasharray="178 98" stroke-dashoffset="-25" transform="rotate(-90 950 265)" stroke-linecap="round"/>
 
-  <!-- Stats row -->
-  <rect x="52" y="655" width="155" height="56" rx="8" fill="rgba(0,229,255,0.06)" stroke="rgba(0,229,255,0.15)" stroke-width="1"/>
-  <text x="68" y="675" font-size="9" fill="rgba(255,255,255,0.4)" font-family="system-ui,sans-serif">Pages found</text>
-  <text x="68" y="699" font-size="20" font-weight="700" fill="#00e5ff" font-family="system-ui,sans-serif">1,482</text>
-  <rect x="217" y="655" width="155" height="56" rx="8" fill="rgba(0,200,83,0.06)" stroke="rgba(0,200,83,0.15)" stroke-width="1"/>
-  <text x="233" y="675" font-size="9" fill="rgba(255,255,255,0.4)" font-family="system-ui,sans-serif">Extracted</text>
-  <text x="233" y="699" font-size="20" font-weight="700" fill="#00c853" font-family="system-ui,sans-serif">1,248</text>
-  <rect x="382" y="655" width="120" height="56" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-  <text x="398" y="675" font-size="9" fill="rgba(255,255,255,0.4)" font-family="system-ui,sans-serif">Errors</text>
-  <text x="398" y="699" font-size="20" font-weight="700" fill="rgba(255,255,255,0.25)" font-family="system-ui,sans-serif">3</text>
+  <!-- XML — right — ACTIVE -->
+  <circle cx="990" cy="440" r="48" fill="#fff" stroke="#0071e3" stroke-width="3.5" filter="url(#nodeShadow)"/>
+  <rect x="968" y="409" width="44" height="52" rx="6" fill="#0071e3"/>
+  <text x="990" y="443" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">XML</text>
+  <text x="990" y="477" font-family="Arial,sans-serif" font-size="10" fill="#0071e3" text-anchor="middle" font-weight="700">↓ Active</text>
+  <circle cx="990" cy="440" r="54" fill="none" stroke="#0071e3" stroke-width="2" stroke-opacity="0.3"/>
+  <circle cx="990" cy="440" r="60" fill="none" stroke="#0071e3" stroke-width="1" stroke-opacity="0.12"/>
 
-  <!-- Right panel: JSON output -->
-  <rect x="632" y="148" width="738" height="610" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-  <rect x="652" y="162" width="62" height="26" rx="5" fill="rgba(0,200,83,0.15)" stroke="rgba(0,200,83,0.4)" stroke-width="1"/>
-  <text x="683" y="179" font-size="10" font-weight="700" fill="#00c853" text-anchor="middle" font-family="system-ui,sans-serif">JSON</text>
-  <text x="728" y="179" font-size="10" fill="rgba(255,255,255,0.3)" font-family="system-ui,sans-serif">CSV</text>
-  <text x="766" y="179" font-size="10" fill="rgba(255,255,255,0.3)" font-family="system-ui,sans-serif">Webhook</text>
-  <text x="830" y="179" font-size="10" fill="rgba(255,255,255,0.3)" font-family="system-ui,sans-serif">REST API</text>
-  <text x="1355" y="179" font-size="9" font-weight="700" letter-spacing="2" fill="rgba(255,255,255,0.2)" text-anchor="end" font-family="system-ui,sans-serif">LIVE OUTPUT</text>
+  <!-- PNG — right-bottom — QUEUED -->
+  <circle cx="950" cy="615" r="46" fill="#fff" stroke="#7c3aed" stroke-width="2" stroke-dasharray="9,5" filter="url(#nodeShadow)"/>
+  <rect x="929" y="585" width="42" height="50" rx="6" fill="#7c3aed" fill-opacity="0.6"/>
+  <text x="950" y="618" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">PNG</text>
+  <text x="950" y="651" font-family="Arial,sans-serif" font-size="10" fill="#9e6fe0" text-anchor="middle" font-weight="600">⋯ Queued</text>
 
-  <!-- Code area -->
-  <rect x="652" y="198" width="700" height="520" rx="8" fill="rgba(0,0,0,0.32)"/>
+  <!-- JPG — bottom-right — QUEUED -->
+  <circle cx="750" cy="730" r="46" fill="#fff" stroke="#c62828" stroke-width="2" stroke-dasharray="9,5" filter="url(#nodeShadow)"/>
+  <rect x="729" y="700" width="42" height="50" rx="6" fill="#c62828" fill-opacity="0.6"/>
+  <text x="750" y="733" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">JPG</text>
+  <text x="750" y="767" font-family="Arial,sans-serif" font-size="10" fill="#c62828" text-anchor="middle" font-weight="600">⋯ Queued</text>
 
-  <!-- JSON code text (multi-line with tspan) -->
-  <text font-size="12" font-family="'Courier New',Courier,monospace">
-    <tspan x="672" y="224" fill="rgba(0,229,255,0.75)">[</tspan>
-    <tspan x="672" dy="22" fill="rgba(0,229,255,0.75)">  {</tspan>
-    <tspan x="692" dy="22" fill="rgba(0,229,255,0.9)">"url"</tspan><tspan fill="rgba(255,255,255,0.4)">: </tspan><tspan fill="#00c853">"https://target-company.com/about"</tspan><tspan fill="rgba(255,255,255,0.4)">,</tspan>
-    <tspan x="692" dy="22" fill="rgba(0,229,255,0.9)">"title"</tspan><tspan fill="rgba(255,255,255,0.4)">: </tspan><tspan fill="#00c853">"About Our Company"</tspan><tspan fill="rgba(255,255,255,0.4)">,</tspan>
-    <tspan x="692" dy="22" fill="rgba(0,229,255,0.9)">"status"</tspan><tspan fill="rgba(255,255,255,0.4)">: </tspan><tspan fill="#00c853">200</tspan><tspan fill="rgba(255,255,255,0.4)">,</tspan>
-    <tspan x="692" dy="22" fill="rgba(0,229,255,0.9)">"depth"</tspan><tspan fill="rgba(255,255,255,0.4)">: </tspan><tspan fill="#00c853">2</tspan><tspan fill="rgba(255,255,255,0.4)">,</tspan>
-    <tspan x="692" dy="22" fill="rgba(0,229,255,0.9)">"word_count"</tspan><tspan fill="rgba(255,255,255,0.4)">: </tspan><tspan fill="#00c853">842</tspan><tspan fill="rgba(255,255,255,0.4)">,</tspan>
-    <tspan x="692" dy="22" fill="rgba(0,229,255,0.9)">"links_found"</tspan><tspan fill="rgba(255,255,255,0.4)">: </tspan><tspan fill="#00c853">23</tspan><tspan fill="rgba(255,255,255,0.4)">,</tspan>
-    <tspan x="692" dy="22" fill="rgba(0,229,255,0.9)">"crawled_at"</tspan><tspan fill="rgba(255,255,255,0.4)">: </tspan><tspan fill="#00c853">"2026-05-19T10:42:18Z"</tspan>
-    <tspan x="672" dy="22" fill="rgba(0,229,255,0.75)">  },</tspan>
-    <tspan x="672" dy="24" fill="rgba(0,229,255,0.32)">  { "url": "/docs", "status": 200, "word_count": 1240, ... },</tspan>
-    <tspan x="672" dy="22" fill="rgba(0,229,255,0.18)">  { "url": "/blog/intro", "status": 200, "word_count": 580, ... },</tspan>
-    <tspan x="672" dy="22" fill="rgba(0,229,255,0.1)">  { "url": "/blog/post-2", "status": 200, "word_count": 720, ... },</tspan>
-    <tspan x="672" dy="22" fill="rgba(0,229,255,0.05)">  { "url": "/api/reference", "status": 200, ... }</tspan>
-  </text>
+  <!-- CSV — bottom — QUEUED -->
+  <circle cx="560" cy="790" r="44" fill="#fff" stroke="#00897b" stroke-width="2" stroke-dasharray="9,5" filter="url(#nodeShadow)"/>
+  <rect x="540" y="762" width="40" height="48" rx="6" fill="#00897b" fill-opacity="0.6"/>
+  <text x="560" y="793" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">CSV</text>
+  <text x="560" y="825" font-family="Arial,sans-serif" font-size="10" fill="#00897b" text-anchor="middle" font-weight="600">⋯ Queued</text>
 
-  <!-- Fade overlay -->
-  <rect x="652" y="570" width="700" height="148" fill="url(#codefade)"/>
+  <!-- JSON — bottom-left — QUEUED -->
+  <circle cx="310" cy="760" r="44" fill="#fff" stroke="#e08c00" stroke-width="2" stroke-dasharray="9,5" filter="url(#nodeShadow)"/>
+  <rect x="290" y="732" width="40" height="48" rx="6" fill="#e08c00" fill-opacity="0.6"/>
+  <text x="310" y="764" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">JSON</text>
+  <text x="310" y="795" font-family="Arial,sans-serif" font-size="10" fill="#e08c00" text-anchor="middle" font-weight="600">⋯ Queued</text>
 
-  <!-- Status bar in right panel -->
-  <rect x="652" y="724" width="700" height="27" rx="6" fill="rgba(0,200,83,0.06)" stroke="rgba(0,200,83,0.15)" stroke-width="1"/>
-  <circle cx="668" cy="737" r="4" fill="#00c853"/>
-  <text x="680" y="741" font-size="10" fill="rgba(255,255,255,0.45)" font-family="system-ui,sans-serif">Crawling active · Rate: 2 req/s · Proxy rotation enabled · JS rendering: ON</text>
+  <!-- TXT — left-bottom — QUEUED -->
+  <circle cx="155" cy="590" r="44" fill="#fff" stroke="#546e7a" stroke-width="2" stroke-dasharray="9,5" filter="url(#nodeShadow)"/>
+  <rect x="135" y="562" width="40" height="48" rx="6" fill="#546e7a" fill-opacity="0.6"/>
+  <text x="155" y="594" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">TXT</text>
+  <text x="155" y="625" font-family="Arial,sans-serif" font-size="10" fill="#546e7a" text-anchor="middle" font-weight="600">⋯ Queued</text>
 
-  <!-- Export bar -->
-  <rect x="30" y="770" width="1340" height="52" rx="10" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-  <text x="54" y="799" font-size="9" font-weight="700" letter-spacing="2" fill="rgba(255,255,255,0.28)" font-family="system-ui,sans-serif">EXPORT TO</text>
-  <rect x="138" y="781" width="90" height="28" rx="6" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>
-  <text x="183" y="799" font-size="11" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-family="system-ui,sans-serif">Webhook</text>
-  <rect x="238" y="781" width="90" height="28" rx="6" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>
-  <text x="283" y="799" font-size="11" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-family="system-ui,sans-serif">Amazon S3</text>
-  <rect x="338" y="781" width="90" height="28" rx="6" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>
-  <text x="383" y="799" font-size="11" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-family="system-ui,sans-serif">REST API</text>
-  <rect x="438" y="781" width="90" height="28" rx="6" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>
-  <text x="483" y="799" font-size="11" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-family="system-ui,sans-serif">G. Sheets</text>
-  <rect x="538" y="781" width="70" height="28" rx="6" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>
-  <text x="573" y="799" font-size="11" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-family="system-ui,sans-serif">CSV</text>
-  <rect x="1142" y="781" width="200" height="28" rx="6" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.3)" stroke-width="1"/>
-  <text x="1242" y="799" font-size="11" font-weight="600" fill="#00c853" text-anchor="middle" font-family="system-ui,sans-serif">&#9200;  Schedule Runs</text>
+  <!-- DOCX — left — DOWNLOADED -->
+  <circle cx="120" cy="440" r="46" fill="#fff" stroke="#1565c0" stroke-width="3" filter="url(#nodeShadow)"/>
+  <rect x="99" y="410" width="42" height="50" rx="6" fill="#1565c0"/>
+  <text x="120" y="443" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle">DOCX</text>
+  <text x="120" y="476" font-family="Arial,sans-serif" font-size="10" fill="#1565c0" text-anchor="middle" font-weight="700">✓ Downloaded</text>
+
+  <!-- MP4 — left-top — DOWNLOADED -->
+  <circle cx="165" cy="290" r="46" fill="#fff" stroke="#c62828" stroke-width="3" filter="url(#nodeShadow)"/>
+  <rect x="144" y="260" width="42" height="50" rx="6" fill="#c62828"/>
+  <path d="M158,274 L175,285 L158,296 Z" fill="#fff" fill-opacity="0.85"/>
+  <text x="165" y="317" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#c62828" text-anchor="middle">MP4</text>
+  <text x="165" y="330" font-family="Arial,sans-serif" font-size="10" fill="#c62828" text-anchor="middle" font-weight="700">✓ Downloaded</text>
+
+  <!-- CSS — top-left — DOWNLOADED -->
+  <circle cx="320" cy="155" r="46" fill="#fff" stroke="#6a1ea0" stroke-width="3" filter="url(#nodeShadow)"/>
+  <rect x="299" y="125" width="42" height="50" rx="6" fill="#6a1ea0"/>
+  <text x="320" y="158" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">CSS</text>
+  <text x="320" y="191" font-family="Arial,sans-serif" font-size="10" fill="#6a1ea0" text-anchor="middle" font-weight="700">✓ Downloaded</text>
+
+  <!-- JS — top — DOWNLOADED -->
+  <circle cx="490" cy="88" r="46" fill="#fff" stroke="#f5a623" stroke-width="3" filter="url(#nodeShadow)"/>
+  <rect x="469" y="58" width="42" height="50" rx="6" fill="#f5a623"/>
+  <text x="490" y="91" font-family="Arial,sans-serif" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">JS</text>
+  <text x="490" y="125" font-family="Arial,sans-serif" font-size="10" fill="#d48800" text-anchor="middle" font-weight="700">✓ Downloaded</text>
+
+  <!-- RIGHT PANEL: DOWNLOADED FILES -->
+  <rect x="1060" y="44" width="308" height="816" rx="16" fill="#fff" stroke="#d8ece4" stroke-width="1.5" filter="url(#cardShadow)"/>
+  <rect x="1060" y="44" width="308" height="58" rx="16" fill="#102A43"/>
+  <rect x="1060" y="82" width="308" height="20" fill="#102A43"/>
+  <text x="1214" y="72" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">⬇ Downloaded Files</text>
+  <text x="1214" y="94" font-family="Arial,sans-serif" font-size="10" fill="#7ab8a0" text-anchor="middle">47 files collected · 128 MB total</text>
+
+  <!-- PDF row -->
+  <rect x="1072" y="114" width="284" height="46" rx="8" fill="#fff5f5"/>
+  <rect x="1072" y="114" width="5" height="46" rx="2.5" fill="#e53935"/>
+  <text x="1090" y="133" font-family="monospace" font-size="10" font-weight="bold" fill="#e53935">PDF</text>
+  <text x="1090" y="150" font-family="monospace" font-size="9" fill="#555">annual_report_2024.pdf</text>
+  <text x="1348" y="141" font-family="monospace" font-size="9" fill="#888" text-anchor="end">2.3 MB ✓</text>
+
+  <!-- DOCX row -->
+  <rect x="1072" y="166" width="284" height="46" rx="8" fill="#f0f4ff"/>
+  <rect x="1072" y="166" width="5" height="46" rx="2.5" fill="#1565c0"/>
+  <text x="1090" y="185" font-family="monospace" font-size="10" font-weight="bold" fill="#1565c0">DOCX</text>
+  <text x="1090" y="202" font-family="monospace" font-size="9" fill="#555">contract_template.docx</text>
+  <text x="1348" y="193" font-family="monospace" font-size="9" fill="#888" text-anchor="end">318 KB ✓</text>
+
+  <!-- CSS row -->
+  <rect x="1072" y="218" width="284" height="46" rx="8" fill="#f9f0ff"/>
+  <rect x="1072" y="218" width="5" height="46" rx="2.5" fill="#6a1ea0"/>
+  <text x="1090" y="237" font-family="monospace" font-size="10" font-weight="bold" fill="#6a1ea0">CSS</text>
+  <text x="1090" y="254" font-family="monospace" font-size="9" fill="#555">styles.min.css</text>
+  <text x="1348" y="245" font-family="monospace" font-size="9" fill="#888" text-anchor="end">42 KB ✓</text>
+
+  <!-- JS row -->
+  <rect x="1072" y="270" width="284" height="46" rx="8" fill="#fffbf0"/>
+  <rect x="1072" y="270" width="5" height="46" rx="2.5" fill="#f5a623"/>
+  <text x="1090" y="289" font-family="monospace" font-size="10" font-weight="bold" fill="#d48800">JS</text>
+  <text x="1090" y="306" font-family="monospace" font-size="9" fill="#555">app.bundle.js</text>
+  <text x="1348" y="297" font-family="monospace" font-size="9" fill="#888" text-anchor="end">198 KB ✓</text>
+
+  <!-- MP4 row -->
+  <rect x="1072" y="322" width="284" height="46" rx="8" fill="#fff0f0"/>
+  <rect x="1072" y="322" width="5" height="46" rx="2.5" fill="#c62828"/>
+  <text x="1090" y="341" font-family="monospace" font-size="10" font-weight="bold" fill="#c62828">MP4</text>
+  <text x="1090" y="358" font-family="monospace" font-size="9" fill="#555">promo_video.mp4</text>
+  <text x="1348" y="349" font-family="monospace" font-size="9" fill="#888" text-anchor="end">18.2 MB ✓</text>
+
+  <!-- HTML row (downloading + progress) -->
+  <rect x="1072" y="374" width="284" height="56" rx="8" fill="#fff8f0"/>
+  <rect x="1072" y="374" width="5" height="56" rx="2.5" fill="#e56c00"/>
+  <text x="1090" y="393" font-family="monospace" font-size="10" font-weight="bold" fill="#e56c00">HTML</text>
+  <text x="1090" y="410" font-family="monospace" font-size="9" fill="#555">product_listing.html</text>
+  <rect x="1090" y="416" width="244" height="5" rx="2.5" fill="#ffe0c0"/>
+  <rect x="1090" y="416" width="161" height="5" rx="2.5" fill="#e56c00"/>
+  <text x="1348" y="421" font-family="monospace" font-size="8" fill="#e56c00" text-anchor="end">66%</text>
+
+  <!-- XML row (active + progress) -->
+  <rect x="1072" y="436" width="284" height="56" rx="8" fill="#f0f8ff"/>
+  <rect x="1072" y="436" width="5" height="56" rx="2.5" fill="#0071e3"/>
+  <text x="1090" y="455" font-family="monospace" font-size="10" font-weight="bold" fill="#0071e3">XML</text>
+  <text x="1090" y="472" font-family="monospace" font-size="9" fill="#555">sitemap_index.xml</text>
+  <rect x="1090" y="478" width="244" height="5" rx="2.5" fill="#cce0f5"/>
+  <rect x="1090" y="478" width="98" height="5" rx="2.5" fill="#0071e3"/>
+  <text x="1348" y="483" font-family="monospace" font-size="8" fill="#0071e3" text-anchor="end">40%</text>
+
+  <!-- PNG queued -->
+  <rect x="1072" y="498" width="284" height="46" rx="8" fill="#faf5ff"/>
+  <rect x="1072" y="498" width="5" height="46" rx="2.5" fill="#b0bec5"/>
+  <text x="1090" y="517" font-family="monospace" font-size="10" font-weight="bold" fill="#9e6fe0">PNG</text>
+  <text x="1090" y="534" font-family="monospace" font-size="9" fill="#aaa">product_image_001.png</text>
+  <text x="1348" y="525" font-family="monospace" font-size="9" fill="#b0bec5" text-anchor="end">queued</text>
+
+  <!-- JPG queued -->
+  <rect x="1072" y="550" width="284" height="46" rx="8" fill="#fff5f5"/>
+  <rect x="1072" y="550" width="5" height="46" rx="2.5" fill="#b0bec5"/>
+  <text x="1090" y="569" font-family="monospace" font-size="10" font-weight="bold" fill="#c62828">JPG</text>
+  <text x="1090" y="586" font-family="monospace" font-size="9" fill="#aaa">banner_hero.jpg</text>
+  <text x="1348" y="577" font-family="monospace" font-size="9" fill="#b0bec5" text-anchor="end">queued</text>
+
+  <!-- CSV queued -->
+  <rect x="1072" y="602" width="284" height="46" rx="8" fill="#f0faf8"/>
+  <rect x="1072" y="602" width="5" height="46" rx="2.5" fill="#b0bec5"/>
+  <text x="1090" y="621" font-family="monospace" font-size="10" font-weight="bold" fill="#00897b">CSV</text>
+  <text x="1090" y="638" font-family="monospace" font-size="9" fill="#aaa">export_data.csv</text>
+  <text x="1348" y="629" font-family="monospace" font-size="9" fill="#b0bec5" text-anchor="end">queued</text>
+
+  <!-- JSON queued -->
+  <rect x="1072" y="654" width="284" height="46" rx="8" fill="#fffbf0"/>
+  <rect x="1072" y="654" width="5" height="46" rx="2.5" fill="#b0bec5"/>
+  <text x="1090" y="673" font-family="monospace" font-size="10" font-weight="bold" fill="#e08c00">JSON</text>
+  <text x="1090" y="690" font-family="monospace" font-size="9" fill="#aaa">api_response.json</text>
+  <text x="1348" y="681" font-family="monospace" font-size="9" fill="#b0bec5" text-anchor="end">queued</text>
+
+  <!-- TXT queued -->
+  <rect x="1072" y="706" width="284" height="46" rx="8" fill="#f5f8fa"/>
+  <rect x="1072" y="706" width="5" height="46" rx="2.5" fill="#b0bec5"/>
+  <text x="1090" y="725" font-family="monospace" font-size="10" font-weight="bold" fill="#546e7a">TXT</text>
+  <text x="1090" y="742" font-family="monospace" font-size="9" fill="#aaa">readme.txt</text>
+  <text x="1348" y="733" font-family="monospace" font-size="9" fill="#b0bec5" text-anchor="end">queued</text>
+
+  <!-- More files -->
+  <text x="1214" y="774" font-family="Arial,sans-serif" font-size="11" fill="#00a86b" text-anchor="middle" font-weight="600">+ 35 more files in queue</text>
+
+  <!-- Summary -->
+  <rect x="1072" y="786" width="284" height="62" rx="8" fill="#f5faf8"/>
+  <text x="1088" y="806" font-family="monospace" font-size="10" fill="#555">Downloaded</text>
+  <text x="1348" y="806" font-family="monospace" font-size="10" fill="#00a86b" text-anchor="end" font-weight="bold">47 ✓</text>
+  <text x="1088" y="822" font-family="monospace" font-size="10" fill="#555">Downloading</text>
+  <text x="1348" y="822" font-family="monospace" font-size="10" fill="#0071e3" text-anchor="end" font-weight="bold">2 ↓</text>
+  <text x="1088" y="838" font-family="monospace" font-size="10" fill="#555">Queued / Total</text>
+  <text x="1348" y="838" font-family="monospace" font-size="10" fill="#888" text-anchor="end">34 / 83</text>
+
+  <!-- TOP-LEFT CONFIG CARD -->
+  <rect x="40" y="32" width="375" height="80" rx="12" fill="#102A43" filter="url(#cardShadow)"/>
+  <text x="62" y="61" font-family="Arial,sans-serif" font-size="17" font-weight="bold" fill="#fff">Vovix OneCrawl</text>
+  <text x="62" y="81" font-family="monospace" font-size="10" fill="#7ab8a0">Target: www.example.com · All file types</text>
+  <text x="62" y="98" font-family="monospace" font-size="10" fill="#7ab8a0">Rate: 3 req/s · Depth: unlimited · Mode: deep</text>
+
+  <!-- LEGEND -->
+  <rect x="40" y="828" width="700" height="46" rx="8" fill="#fff" fill-opacity="0.88" stroke="#d8ece4" stroke-width="1"/>
+  <line x1="62" y1="851" x2="84" y2="851" stroke="#00a86b" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+  <text x="92" y="855" font-family="Arial,sans-serif" font-size="11" fill="#333">Downloaded</text>
+  <line x1="192" y1="851" x2="214" y2="851" stroke="#0071e3" stroke-width="2.5" stroke-dasharray="10,5" marker-end="url(#arrowBlue)"/>
+  <text x="222" y="855" font-family="Arial,sans-serif" font-size="11" fill="#333">Downloading</text>
+  <line x1="330" y1="851" x2="352" y2="851" stroke="#b0bec5" stroke-width="2" stroke-dasharray="6,5" marker-end="url(#arrowGrey)"/>
+  <text x="360" y="855" font-family="Arial,sans-serif" font-size="11" fill="#333">Queued</text>
+  <line x1="428" y1="851" x2="450" y2="851" stroke="#00a86b" stroke-width="1.2" stroke-dasharray="7,5"/>
+  <text x="458" y="855" font-family="Arial,sans-serif" font-size="11" fill="#333">Silk thread (web link)</text>
+  <circle cx="622" cy="851" r="7" fill="#fff" stroke="#e53935" stroke-width="2.5"/>
+  <text x="636" y="855" font-family="Arial,sans-serif" font-size="11" fill="#333">Crawled node</text>
+
+  <!-- Watermark -->
+  <text x="700" y="884" font-family="Arial,sans-serif" font-size="11" fill="#102A43" fill-opacity="0.18" text-anchor="middle" letter-spacing="4">VOVIX ONCRAWL · UNIVERSAL FILE EXTRACTOR</text>
 </svg>
