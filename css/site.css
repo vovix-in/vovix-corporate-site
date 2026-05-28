@@ -185,9 +185,9 @@ a:hover { color: var(--vx-green-dk); }
 
 .brand-logo {
   display: block;
-  height: 30px;
+  height: 40px;
   width: auto;
-  max-width: 130px;
+  max-width: 220px;
   object-fit: contain;
 }
 
