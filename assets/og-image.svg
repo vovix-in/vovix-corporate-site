@@ -1,9 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none" aria-hidden="true">
-  <!-- 1200x630 Open Graph / Facebook share card. White background like apple-touch-icon; tagline: AUTOMATE YOUR ALPHA. -->
-  <rect width="1200" height="630" fill="#ffffff"/>
-  <!-- Interlocking V logo (scaled from logo-vovix) -->
-  <path d="M420 200 L480 350 L560 120" stroke="#00C853" stroke-width="48" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M540 200 L600 350 L680 120" stroke="#C0C0C0" stroke-width="48" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="600" y="440" text-anchor="middle" font-family="Montserrat, system-ui, sans-serif" font-weight="bold" font-size="72" fill="#102A43" letter-spacing="0.08em">VOVIX</text>
-  <text x="600" y="510" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="500" fill="#102A43" letter-spacing="0.25em">AUTOMATE YOUR ALPHA.</text>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 630" width="1200" height="630" aria-hidden="true">
+  <image href="./og-image.png" xlink:href="./og-image.png" x="0" y="0" width="1200" height="630" preserveAspectRatio="xMidYMid slice" />
 </svg>
