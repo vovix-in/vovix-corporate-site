@@ -185,17 +185,17 @@ a:hover { color: var(--vx-green-dk); }
 
 .brand-logo {
   display: block;
-  height: 40px;
+  height: 30px;
   width: auto;
-  max-width: 160px;
+  max-width: 130px;
   object-fit: contain;
 }
 
 .brand-logo-footer {
   display: block;
-  height: auto;
-  width: 100%;
-  max-width: 200px;
+  height: 34px;
+  width: auto;
+  max-width: 150px;
   object-fit: contain;
 }
 
