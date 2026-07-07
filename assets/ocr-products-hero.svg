@@ -16,8 +16,8 @@
   <circle cx="76" cy="54" r="5" fill="#f59e0b" fill-opacity="0.7"/>
   <circle cx="94" cy="54" r="5" fill="#00c853" fill-opacity="0.7"/>
   <text x="118" y="60" font-size="15" font-weight="700" fill="#102a43" font-family="system-ui,sans-serif">Vovix</text>
-  <text x="156" y="60" font-size="15" font-weight="700" fill="#00c853" font-family="system-ui,sans-serif"> OCR</text>
-  <text x="118" y="73" font-size="10" fill="#486581" font-family="system-ui,sans-serif">AI Document Intelligence · Extract structured data from any document</text>
+  <text x="156" y="60" font-size="15" font-weight="700" fill="#00c853" font-family="system-ui,sans-serif"> Lens</text>
+  <text x="118" y="73" font-size="10" fill="#486581" font-family="system-ui,sans-serif">Full extraction engine for CA firms · Invoices, GST &amp; bank statements &#8594; Tally-ready data</text>
   <rect x="1074" y="40" width="106" height="24" rx="6" fill="rgba(16,42,67,0.05)" stroke="#d9e2ec" stroke-width="1"/>
   <text x="1127" y="56" font-size="11" fill="#102a43" text-anchor="middle" font-family="system-ui,sans-serif">&#8593; Upload Doc</text>
   <rect x="1190" y="40" width="110" height="24" rx="12" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.4)" stroke-width="1"/>
@@ -223,9 +223,9 @@
 
   <!-- Row 9: Currency -->
   <rect x="652" y="554" width="700" height="46" fill="#fcfeff"/>
-  <text x="668" y="574" font-size="11" font-weight="600" fill="#102a43" font-family="system-ui,sans-serif">Currency</text>
-  <text x="668" y="589" font-size="9" fill="#9bb2c9" font-family="system-ui,sans-serif">ISO 4217</text>
-  <text x="858" y="579" font-size="12" fill="#486581" font-family="'Courier New',monospace">INR</text>
+  <text x="668" y="574" font-size="11" font-weight="600" fill="#102a43" font-family="system-ui,sans-serif">GSTIN</text>
+  <text x="668" y="589" font-size="9" fill="#9bb2c9" font-family="system-ui,sans-serif">GST validated</text>
+  <text x="858" y="579" font-size="12" fill="#486581" font-family="'Courier New',monospace">27AAACR5055K1Z5</text>
   <rect x="1200" y="564" width="54" height="18" rx="9" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.25)" stroke-width="1"/>
   <text x="1227" y="577" font-size="10" font-weight="700" fill="#00c853" text-anchor="middle" font-family="system-ui,sans-serif">100%</text>
   <line x1="652" y1="600" x2="1352" y2="600" stroke="#f0f4f8" stroke-width="1"/>
@@ -248,9 +248,9 @@
   <rect x="810" y="666" width="78" height="26" rx="6" fill="white" stroke="#d9e2ec" stroke-width="1"/>
   <text x="849" y="683" font-size="11" fill="#102a43" text-anchor="middle" font-family="system-ui,sans-serif">CSV</text>
   <rect x="898" y="666" width="100" height="26" rx="6" fill="white" stroke="#d9e2ec" stroke-width="1"/>
-  <text x="948" y="683" font-size="11" fill="#102a43" text-anchor="middle" font-family="system-ui,sans-serif">Webhook</text>
+  <text x="948" y="683" font-size="11" fill="#102a43" text-anchor="middle" font-family="system-ui,sans-serif">Excel</text>
   <rect x="1208" y="666" width="136" height="26" rx="6" fill="#00c853"/>
-  <text x="1276" y="683" font-size="11" font-weight="700" fill="#0a1b2d" text-anchor="middle" font-family="system-ui,sans-serif">&#8595; Download All</text>
+  <text x="1276" y="683" font-size="11" font-weight="700" fill="#0a1b2d" text-anchor="middle" font-family="system-ui,sans-serif">&#8594; Post to Tally</text>
 
   <!-- Metrics bar -->
   <rect x="652" y="720" width="700" height="76" rx="8" fill="rgba(16,42,67,0.02)" stroke="#e2e8f0" stroke-width="1"/>
