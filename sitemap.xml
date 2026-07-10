@@ -13,12 +13,6 @@
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://www.vovix.in/market-news.html</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://www.vovix.in/products.html</loc>
     <lastmod>2026-07-07</lastmod>
     <changefreq>weekly</changefreq>
