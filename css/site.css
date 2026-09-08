@@ -1798,66 +1798,271 @@ main.py-5, main.py-lg-6 {
   .pipe-dot { display: none; }
 }
 
-/* ── 47. HERO MARKET TICKER ─────────────────────────────────── */
-.hero-ticker {
+/* ══════════════════════════════════════════════════════════════
+   AUTOMATION HOMEPAGE LAYER — 2026-09-08 repositioning
+   Vovix as an automation software company. Replaces the former
+   market-ticker / stock-phone hero furniture.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 47. HERO WORKFLOW RUN PANEL ────────────────────────────── */
+.org-run-panel {
+  width: 310px;
+  max-width: 100%;
+  /* the hero grid centers text when stacked; the panel must stay left-aligned */
+  text-align: left;
+  background: #ffffff;
+  border: 1px solid rgba(16, 42, 67, 0.10);
+  border-radius: 1.15rem;
+  box-shadow:
+    0 32px 80px rgba(16, 42, 67, 0.20),
+    0 4px 14px rgba(16, 42, 67, 0.06);
+  overflow: hidden;
   position: relative;
   z-index: 2;
-  display: flex;
-  align-items: stretch;
-  margin-top: 1.75rem;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
 }
-.hero-ticker-tag {
+
+.org-run-head {
+  background: var(--vx-navy);
+  padding: 0.72rem 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.org-run-head-label {
+  font-size: 0.46rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.48);
+  margin-bottom: 0.12rem;
+}
+.org-run-head-name {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+}
+.org-run-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-shrink: 0;
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vx-mint);
+  background: rgba(0, 230, 118, 0.14);
+  border: 1px solid rgba(0, 230, 118, 0.32);
+  border-radius: 999px;
+  padding: 0.16rem 0.44rem;
+}
+.org-run-pill::before {
+  content: "";
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--vx-mint);
+  box-shadow: 0 0 7px var(--vx-mint);
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+.org-run-body { padding: 0.7rem 0.9rem 0.55rem; }
+
+.org-run-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  padding: 0.34rem 0;
+  position: relative;
+}
+/* connector rail between step markers */
+.org-run-step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 0.62rem;
+  top: 1.55rem;
+  bottom: -0.12rem;
+  width: 1.5px;
+  background: rgba(16, 42, 67, 0.10);
+}
+.org-run-step.is-done:not(:last-child)::before { background: rgba(0, 200, 83, 0.32); }
+
+.org-run-mark {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.55rem 1rem;
+  justify-content: center;
+  font-size: 0.62rem;
+  position: relative;
+  z-index: 1;
+}
+.org-run-step.is-done    .org-run-mark { background: rgba(0, 200, 83, 0.13);  color: var(--vx-green-dk); }
+.org-run-step.is-active  .org-run-mark { background: rgba(0, 229, 255, 0.16); color: #0090a8; }
+.org-run-step.is-queued  .org-run-mark { background: rgba(16, 42, 67, 0.06);  color: var(--text-3); }
+.org-run-step.is-active  .org-run-mark i { animation: run-spin 1.4s linear infinite; }
+@keyframes run-spin { to { transform: rotate(360deg); } }
+
+.org-run-text { flex: 1; min-width: 0; }
+.org-run-name {
   font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+}
+.org-run-step.is-queued .org-run-name { color: var(--text-3); }
+.org-run-detail {
+  font-size: 0.6rem;
+  color: var(--text-2);
+  line-height: 1.35;
+  margin-top: 0.04rem;
+}
+.org-run-time {
+  flex-shrink: 0;
+  font-size: 0.55rem;
+  font-weight: 600;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+  padding-top: 0.1rem;
+}
+.org-run-step.is-active .org-run-time { color: #0090a8; }
+
+/* progress rail */
+.org-run-progress {
+  height: 3px;
+  background: rgba(16, 42, 67, 0.07);
+  overflow: hidden;
+}
+.org-run-progress span {
+  display: block;
+  height: 100%;
+  width: 72%;
+  background: linear-gradient(90deg, var(--vx-green), var(--vx-cyan));
+  animation: run-fill 4.5s var(--ease-out) infinite;
+}
+@keyframes run-fill {
+  0%   { width: 8%; }
+  70%  { width: 72%; }
+  100% { width: 72%; }
+}
+
+.org-run-foot {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(16, 42, 67, 0.07);
+  background: #fbfdfc;
+}
+.org-run-stat {
+  padding: 0.5rem 0.4rem;
+  text-align: center;
+}
+.org-run-stat + .org-run-stat { border-left: 1px solid rgba(16, 42, 67, 0.07); }
+.org-run-stat-val {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.1;
+}
+.org-run-stat-lbl {
+  font-size: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-top: 0.1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .org-run-pill::before,
+  .org-run-step.is-active .org-run-mark i { animation: none; }
+  .org-run-progress span { animation: none; width: 72%; }
+}
+
+/* Homepage headline — sized so the hard line breaks never orphan a word.
+   The hero column is half the container, so this scales off a smaller vw
+   ratio than the full-width interior-page headlines. */
+.org-headline-home { font-size: clamp(2.1rem, 3.6vw, 3.3rem); }
+
+/* Floating capability cards.
+   The panel is pinned to the right of the hero column and the cards stack
+   down its left, so they never cover the step timings or the stat row.
+   Below 1200px the column is too narrow for both — cards are hidden. */
+.org-illu-wrap { justify-content: flex-end; }
+
+.org-fc-cap-a { top: 4%;     left: 0;   animation-delay: 0s; }
+.org-fc-cap-b { top: 39%;    left: 12%; animation-delay: 1.6s; }
+.org-fc-cap-c { bottom: 6%;  left: 0;   animation-delay: 3.2s; }
+
+@media (max-width: 1199.98px) {
+  .org-illu-wrap { justify-content: center; }
+  .org-fc-cap-a, .org-fc-cap-b, .org-fc-cap-c { display: none; }
+}
+
+/* ── 48. MANUAL vs AUTOMATED SWAP STRIP ─────────────────────── */
+.org-swap-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1.75rem;
+}
+.org-swap-col {
+  background: #ffffff;
+  border: 1px solid rgba(16, 42, 67, 0.08);
+  border-radius: 1.25rem;
+  padding: 1.6rem 1.5rem;
+  box-shadow: 0 2px 12px rgba(16, 42, 67, 0.05);
+  height: 100%;
+}
+.org-swap-col.is-after { border-color: rgba(0, 200, 83, 0.28); box-shadow: 0 8px 28px rgba(0, 200, 83, 0.09); }
+
+.org-swap-label {
+  font-size: 0.63rem;
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #fff;
-  background: var(--vx-navy);
+  color: var(--text-3);
+  margin-bottom: 0.9rem;
 }
-.hero-ticker-tag::before {
-  content: "";
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--vx-mint);
-  box-shadow: 0 0 8px var(--vx-mint);
-  animation: pulse-dot 1.8s ease-in-out infinite;
-}
-.hero-ticker-viewport {
-  flex: 1;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
-}
-.hero-ticker-track {
+.org-swap-col.is-after .org-swap-label { color: var(--vx-green-dk); }
+
+.org-swap-item {
   display: flex;
-  align-items: center;
-  gap: 2.2rem;
-  width: max-content;
-  padding: 0.55rem 1.5rem;
-  animation: ticker-scroll 48s linear infinite;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--text-2);
+  padding: 0.4rem 0;
 }
-.hero-ticker:hover .hero-ticker-track { animation-play-state: paused; }
-@keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.tk { display: inline-flex; align-items: baseline; gap: 0.45rem; font-size: 0.82rem; white-space: nowrap; }
-.tk-sym { font-weight: 700; color: var(--text); }
-.tk-px { color: var(--text-2); font-variant-numeric: tabular-nums; }
-.tk-chg { font-weight: 700; font-variant-numeric: tabular-nums; }
-.tk-chg.up { color: var(--vx-green); }
-.tk-chg.down { color: var(--vx-loss); }
-@media (prefers-reduced-motion: reduce) {
-  .hero-ticker-track { animation: none; }
-  .hero-ticker-tag::before { animation: none; }
+.org-swap-item i { font-size: 1rem; flex-shrink: 0; margin-top: 0.06em; }
+.org-swap-col.is-before .org-swap-item i { color: var(--vx-loss); }
+.org-swap-col.is-after  .org-swap-item i { color: var(--vx-green); }
+.org-swap-col.is-after  .org-swap-item { color: var(--text); font-weight: 500; }
+
+.org-swap-arrow {
+  width: 2.9rem; height: 2.9rem;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, rgba(0, 200, 83, 0.16), rgba(0, 229, 255, 0.12));
+  border: 1.5px solid rgba(0, 200, 83, 0.30);
+  color: var(--vx-green-dk);
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 991.98px) {
+  .org-swap-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .org-swap-arrow { transform: rotate(90deg); margin: 0 auto; }
+}
+
+/* ── 49. HOMEPAGE HERO RESPONSIVE (run panel) ───────────────── */
+@media (max-width: 991.98px) {
+  .org-illu-wrap { height: auto; padding: 1.5rem 0 0.5rem; }
 }
 @media (max-width: 575.98px) {
-  .hero-ticker-tag { font-size: 0.6rem; padding: 0.5rem 0.7rem; letter-spacing: 0.1em; }
+  .org-run-panel { width: 100%; }
 }

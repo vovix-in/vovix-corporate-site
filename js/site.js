@@ -263,7 +263,7 @@
 
   // ── Card cursor spotlight
   if (hoverCapable && !reducedMotion) {
-    const fxSel = ".org-product-card,.agency-card,.services-pillar-card,.product-showcase-card,.pipeline-step,.org-step,.impact-pill,.discovery-step-card,.section-frame,.org-mini-service-card";
+    const fxSel = ".org-product-card,.agency-card,.services-pillar-card,.product-showcase-card,.pipeline-step,.org-step,.impact-pill,.discovery-step-card,.section-frame,.org-mini-service-card,.org-swap-col";
     document.querySelectorAll(fxSel).forEach((card) => {
       card.classList.add("fx-card");
       card.addEventListener("pointermove", (e) => {
