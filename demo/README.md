@@ -1,16 +1,22 @@
-# Vovix OneCrawl — 30s product demo (screen record)
+# Vovix Lens — 30s filings demo (screen record)
 
-This folder contains an **auto-playing HTML demo** you can screen-record to produce an MP4. Cursor cannot generate continuous video files directly; this is the standard workflow for crisp SaaS UI demos.
+This folder contains an **auto-playing HTML demo** you can screen-record to produce an MP4. A browser page is the standard workflow for crisp SaaS UI demos — nothing here generates a video file directly.
 
 ## File
 
-- `onecrawl-product-demo.html` — 1920×1080, 30 seconds, light enterprise UI
+- `lens-filings-demo.html` — 1920×1080, 30 seconds, light enterprise UI
+
+## What it shows
+
+Vovix Lens applied to financial filings: point it at a filings source, and it fetches the documents, parses layout, runs OCR across the financial tables, and streams structured rows out to a workbook — with the source page and a confidence score carried on every cell.
+
+This is the same source-grounded extraction Lens does for invoices, bank statements and KYC records, shown against annual reports because that's where the auditability story lands hardest.
 
 ## Record on Mac (QuickTime)
 
 1. Open the file in Chrome (full screen optional):
    ```bash
-   open -a "Google Chrome" "/path/to/vovix-corporate-site/demo/onecrawl-product-demo.html"
+   open -a "Google Chrome" "/path/to/vovix-corporate-site/demo/lens-filings-demo.html"
    ```
 2. Zoom the window so the canvas fills the frame (page auto-scales).
 3. **QuickTime Player** → File → New Screen Recording → record the browser window.
@@ -28,13 +34,15 @@ This folder contains an **auto-playing HTML demo** you can screen-record to prod
 
 | Time | Scene |
 |------|--------|
-| 0:00–0:05 | Dashboard load, “Initializing Data Pipeline…” |
-| 0:05–0:10 | URL paste, Start Crawl, badges, PDF queue |
+| 0:00–0:05 | Dashboard load, "Initializing Data Pipeline…" |
+| 0:05–0:10 | Source URL, fetch starts, badges, PDF queue |
 | 0:10–0:15 | PDF scan line, parse status toasts |
 | 0:15–0:20 | Table rows populate, OCR structured |
 | 0:20–0:26 | Tabs, filtered tab toast, export |
-| 0:26–0:30 | Zoom out, “Export Complete”, end card |
+| 0:26–0:30 | Zoom out, "Export Complete", end card |
 
-## Note on product name
+## Before you publish this
 
-The public site uses **Vovix Crawler** for web data extraction. This demo uses **OneCrawl** as requested for the video asset; rename in HTML if you want it to match the live site.
+The figures animated in the demo (286 pages, 11.4 seconds) are **illustrative timings written for the animation**. Check them against a real Lens run before quoting them in a post, a deck, or a proposal — the same applies to the copy in `linkedin-post.md`.
+
+The live product is at **lens.vovix.in**. The demo's chrome points there; there is no separate app domain.

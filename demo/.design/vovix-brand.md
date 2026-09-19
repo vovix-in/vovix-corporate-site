@@ -8,8 +8,8 @@
 ## 1. Company
 
 - **Name:** Vovix Pvt Ltd
-- **Domain:** vovix.in · app domain `app.vovix.in`
-- **Primary product:** **Vovix OneCrawl** — enterprise document intelligence platform.
+- **Domain:** vovix.in · app domain `lens.vovix.in`
+- **Primary product:** **Vovix Lens** — enterprise document intelligence platform.
   Crawls public sources (NSE, BSE, SEC EDGAR, company IR sites), downloads PDFs,
   parses + OCRs them, and exports structured rows to Sheets / Excel / API.
 - **Buyer:** Equity research analysts, financial data ops teams, compliance teams,
@@ -150,7 +150,7 @@ Use these exact CSS custom property names in all design-handoff specs.
 
 ## 7. Common Vovix UI surfaces (for design-handoff context)
 
-1. **OneCrawl Dashboard** — KPI strip (4 tiles), URL input row, status badge strip,
+1. **Lens Dashboard** — KPI strip (4 tiles), URL input row, status badge strip,
    split: Document queue + Structured output table, table footer with export status.
 2. **Crawl Job Detail** — left: document tree with status; right: tabs
    (Summary, Financials, Ratios, Receipts), live populating table.

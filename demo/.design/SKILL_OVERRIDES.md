@@ -104,7 +104,7 @@ designing studies:
   is a better filter than "VP, Research".
 - Always include a **trust scenario** ("how would you audit this number?")
   alongside the speed scenario.
-- For usability tests on OneCrawl, prefer think-aloud over satisfaction Likerts.
+- For usability tests on Lens, prefer think-aloud over satisfaction Likerts.
 - Sample size guidance: 6–8 for qualitative usability; ≥ 30 for any quantitative
   preference test.
 

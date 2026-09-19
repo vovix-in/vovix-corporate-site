@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Vovix OneCrawl — 30s Product Demo (1920×1080 screen recording)</title>
+  <title>Vovix Lens — 30s Product Demo (1920×1080 screen recording)</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     /* ---------- Reset & base ---------- */
@@ -626,7 +626,7 @@
   </style>
 </head>
 <body>
-  <div class="stamp">Vovix OneCrawl · 1920×1080 · 30s loop · Press <b>R</b> to restart</div>
+  <div class="stamp">Vovix Lens · 1920×1080 · 30s loop · Press <b>R</b> to restart</div>
   <div id="stage"></div>
 
   <script>
@@ -650,16 +650,16 @@
       <div class="browser" id="browser">
         <div class="boot" id="boot">
           <div class="boot-logo">V</div>
-          <div class="boot-title">Vovix OneCrawl</div>
-          <div class="boot-sub">Loading workspace · app.vovix.in</div>
+          <div class="boot-title">Vovix Lens</div>
+          <div class="boot-sub">Loading workspace · lens.vovix.in</div>
           <div class="boot-bar"><i></i></div>
         </div>
         <div class="browser-bar">
           <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
-          <div class="tab"><span class="fav"></span> Vovix OneCrawl — Dashboard</div>
+          <div class="tab"><span class="fav"></span> Vovix Lens — Dashboard</div>
           <div class="url-bar" id="urlBar">
             <span class="lock">🔒</span>
-            <span>app.vovix.in/onecrawl/dashboard</span>
+            <span>lens.vovix.in/filings</span>
           </div>
           <div class="browser-icons"><span></span><span></span><span></span></div>
         </div>
@@ -669,7 +669,7 @@
             <div class="brand">
               <div class="brand-logo">V</div>
               <div>
-                <div class="brand-name">Vovix <span>OneCrawl</span></div>
+                <div class="brand-name">Vovix <span>Lens</span></div>
                 <div style="font-size:10.5px;color:#94a3b8;margin-top:1px">Enterprise · v4.2</div>
               </div>
             </div>
@@ -712,7 +712,7 @@
             <div class="topbar">
               <div class="crumb">
                 <span>Workspace</span><span class="slash">/</span>
-                <span>OneCrawl</span><span class="slash">/</span>
+                <span>Lens</span><span class="slash">/</span>
                 <b>Dashboard</b>
               </div>
               <div class="search">
@@ -870,11 +870,11 @@
                   <div class="end-brand">
                     <div class="logo">V</div>
                     <div>
-                      <div class="end-title">Vovix OneCrawl</div>
+                      <div class="end-title">Vovix Lens</div>
                       <div class="end-sub">From raw documents to structured intelligence — in seconds, not days.</div>
                     </div>
                   </div>
-                  <div class="end-cta">app.vovix.in · enterprise document intelligence</div>
+                  <div class="end-cta">lens.vovix.in · enterprise document intelligence</div>
                 </div>
               </div>
             </main>
@@ -1338,8 +1338,8 @@
         b.className = 'boot'; b.id = 'boot';
         b.innerHTML = `
           <div class="boot-logo">V</div>
-          <div class="boot-title">Vovix OneCrawl</div>
-          <div class="boot-sub">Loading workspace · app.vovix.in</div>
+          <div class="boot-title">Vovix Lens</div>
+          <div class="boot-sub">Loading workspace · lens.vovix.in</div>
           <div class="boot-bar"><i></i></div>`;
         browser.prepend(b);
       } else {
@@ -1370,7 +1370,7 @@
       const safe = async (fn, label) => {
         try { await fn(); }
         catch (err) {
-          console.error('[OneCrawl demo] ' + label + ' failed:', err);
+          console.error('[Lens demo] ' + label + ' failed:', err);
           // Surface a visible note so a silent crash never looks like a blank page
           showToast(label + ' interrupted', String(err && err.message || err));
         }
