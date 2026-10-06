@@ -2,7 +2,9 @@ import type { Config } from "tailwindcss";
 
 /** Vovix Light System — tokens from the approved design spec.
  *  brand.fill vs brand.ink is load-bearing: fill is 2.24:1 on white and
- *  must never carry text; ink is 5.47:1 and is the text-safe emerald. */
+ *  must never carry text; ink is 5.47:1 and is the text-safe emerald.
+ *  ink.muted is 4.66:1 on ground.sub (the lightest surface it sits on);
+ *  brand.onspec is the only green allowed as text, and only on ground.spec. */
 const config: Config = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
@@ -10,8 +12,8 @@ const config: Config = {
       colors: {
         ground: { paper: "#FFFFFF", sub: "#F7F9FB", sunken: "#EDF1F5", spec: "#0B1B2B" },
         line:   { DEFAULT: "#E3EAF0", strong: "#CBD6E2", spec: "rgba(255,255,255,0.10)" },
-        ink:    { DEFAULT: "#102A43", secondary: "#44617E", muted: "#5E7892", onspec: "#D7E3EF" },
-        brand:  { fill: "#00C853", hover: "#00A844", ink: "#007A37", wash: "#EAF9F0" },
+        ink:    { DEFAULT: "#102A43", secondary: "#44617E", muted: "#587390", onspec: "#D7E3EF" },
+        brand:  { fill: "#00C853", hover: "#00A844", ink: "#007A37", wash: "#EAF9F0", onspec: "#4FE08A" },
         cyan:   { fill: "#00E5FF", ink: "#00707F", wash: "#E6FAFD" },
         state:  { ok: "#007A37", warn: "#B45309", crit: "#C2342C", critwash: "#FDF0EF" },
       },

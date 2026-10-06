@@ -75,16 +75,16 @@ export function SignalStream() {
   return (
     <div className="overflow-hidden rounded-card border border-white/10 bg-ground-spec shadow-lifted">
       <div className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-2.5">
-        <span className="flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-white/45">
-          <Activity size={13} className="text-[#4FE08A]" /> Vovix Edge
+        <span className="flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-white/55">
+          <Activity size={13} className="text-brand-onspec" /> Vovix Edge
         </span>
-        <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-white/40">MT5 · live</span>
+        <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-white/55">MT5 · live</span>
       </div>
 
       <div className="px-4 pt-3">
         <div className="flex items-baseline justify-between">
           <span className="font-mono text-[11px] text-white/50">EUR/USD</span>
-          <span className="font-mono text-[11px] text-[#4FE08A] tnum">+0.42%</span>
+          <span className="font-mono text-[11px] text-brand-onspec tnum">+0.42%</span>
         </div>
         <svg viewBox="0 0 240 64" className="mt-1 h-[52px] w-full" preserveAspectRatio="none" aria-hidden>
           <defs>
@@ -102,7 +102,7 @@ export function SignalStream() {
       <div className="space-y-px px-4 pb-1">
         {[["Entry", "1.0842"], ["Stop", "1.0818"], ["Target", "1.0906"], ["Size", "0.42 lot"]].map(([k, v]) => (
           <div key={k} className="flex items-center justify-between border-b border-white/[0.07] py-[5px] last:border-0">
-            <span className="font-mono text-[10px] uppercase tracking-wider text-white/40">{k}</span>
+            <span className="font-mono text-[10px] uppercase tracking-wider text-white/55">{k}</span>
             <span className="font-mono text-[12px] font-semibold text-white tnum">{v}</span>
           </div>
         ))}
@@ -111,10 +111,10 @@ export function SignalStream() {
       {/* the differentiator */}
       <div className="mx-3 mb-3 mt-2 rounded-[10px] border border-white/10 bg-white/[0.04] px-3 py-2.5">
         <div className="flex items-start gap-2">
-          <Ban size={13} className="mt-px shrink-0 text-white/35" />
+          <Ban size={13} className="mt-px shrink-0 text-white/55" />
           <div>
             <p className="font-mono text-[10.5px] font-bold uppercase tracking-wider text-white/55">GBP/JPY — stood down</p>
-            <p className="mt-0.5 text-[11.5px] leading-snug text-white/45">
+            <p className="mt-0.5 text-[11.5px] leading-snug text-white/55">
               Regime unclear, reward-to-risk below gate. No signal issued.
             </p>
           </div>
