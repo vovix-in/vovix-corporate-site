@@ -68,19 +68,20 @@ export default function Home() {
           <div aria-hidden className="pointer-events-none absolute -right-40 -top-56 h-[620px] w-[620px] rounded-full bg-[radial-gradient(circle,rgba(0,200,83,0.11),transparent_68%)]" />
           <div aria-hidden className="pointer-events-none absolute -bottom-52 -left-40 h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle,rgba(0,229,255,0.09),transparent_68%)]" />
           <div className="shell relative grid items-center gap-14 py-16 md:py-20 lg:grid-cols-[1fr_1.05fr]">
-            <div className="animate-[fadeUp_.5s_cubic-bezier(.16,1,.3,1)_both]">
-              <p className="eyebrow mb-4">Enterprise software engineering · India, working worldwide</p>
-              <h1 className="text-balance text-[clamp(34px,5.2vw,56px)] font-extrabold leading-[1.06] tracking-[-0.03em] text-ink">
+            {/* Staggered entrance, matching the Figma motion flow (80ms steps). Pure CSS: paints without JS. */}
+            <div>
+              <p className="eyebrow rise mb-4 [animation-delay:.1s]">Enterprise software engineering · India, working worldwide</p>
+              <h1 className="rise [animation-delay:.18s] text-balance text-[clamp(34px,5.2vw,56px)] font-extrabold leading-[1.06] tracking-[-0.03em] text-ink">
                 We build enterprise platforms — and run three of our own.
               </h1>
-              <p className="mt-6 max-w-[54ch] text-lead text-ink-secondary">
+              <p className="rise mt-6 max-w-[54ch] text-lead text-ink-secondary [animation-delay:.26s]">
                 Custom web platforms, SaaS dashboards and automation pipelines for teams who need them to hold up under real load. The same engineering runs Vovix Lens, Edge and OneView in production — so you can inspect our work before you commission any.
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="rise mt-8 flex flex-wrap gap-3 [animation-delay:.34s]">
                 <Button href="#start" size="lg">Start your project <ArrowRight size={18} /></Button>
                 <Button href="#products" size="lg" variant="secondary">See what we&rsquo;ve built</Button>
               </div>
-              <div className="mt-8 flex flex-wrap gap-2">
+              <div className="rise mt-8 flex flex-wrap gap-2 [animation-delay:.42s]">
                 <Chip>Written scope before we build</Chip>
                 <Chip>White-label under NDA</Chip>
                 <Chip>You own the code and the runbook</Chip>
@@ -88,9 +89,9 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:gap-5 animate-[fadeUp_.5s_cubic-bezier(.16,1,.3,1)_.1s_both]">
-              <ExtractionViewer />
-              <SignalStream />
+            <div className="grid gap-4 sm:grid-cols-2 lg:gap-5">
+              <div className="rise [animation-delay:.3s]"><ExtractionViewer /></div>
+              <div className="rise [animation-delay:.4s]"><SignalStream /></div>
             </div>
           </div>
         </section>
@@ -249,11 +250,11 @@ export default function Home() {
                     ["First deliverable", "A written scope, before any build"],
                     ["Engagement", "Direct, or white-label behind your brand"],
                     ["Where we are", "Guduvancheri, Tamil Nadu · remote worldwide"],
-                  ].map(([k, v]) => (
-                    <div key={k} className="border-b border-line pb-3 last:border-0 last:pb-0">
+                  ].map(([k, v], i) => (
+                    <Reveal key={k} delay={0.3 + i * 0.1} className="border-b border-line pb-3 last:border-0 last:pb-0">
                       <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-muted">{k}</p>
                       <p className="mt-0.5 text-small font-semibold text-ink">{v}</p>
-                    </div>
+                    </Reveal>
                   ))}
                 </div>
               </div>

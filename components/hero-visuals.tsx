@@ -93,15 +93,15 @@ export function SignalStream() {
               <stop offset="1" stopColor="#00C853" stopOpacity="0" />
             </linearGradient>
           </defs>
-          <polygon points={`0,64 ${pts} 240,64`} fill="url(#sg)" />
-          <polyline points={pts} fill="none" stroke="#4FE08A" strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round" />
-          <circle cx="240" cy={60 - SPARK[SPARK.length - 1]} r="2.6" fill="#4FE08A" />
+          <polygon points={`0,64 ${pts} 240,64`} fill="url(#sg)" className="animate-[fadeIn_.8s_ease-out_1.2s_both]" />
+          <polyline points={pts} pathLength={1} fill="none" stroke="#4FE08A" strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round" className="spark-draw" />
+          <circle cx="240" cy={60 - SPARK[SPARK.length - 1]} r="2.6" fill="#4FE08A" className="animate-[fadeIn_.2s_ease-out_1.9s_both]" />
         </svg>
       </div>
 
       <div className="space-y-px px-4 pb-1">
-        {[["Entry", "1.0842"], ["Stop", "1.0818"], ["Target", "1.0906"], ["Size", "0.42 lot"]].map(([k, v]) => (
-          <div key={k} className="flex items-center justify-between border-b border-white/[0.07] py-[5px] last:border-0">
+        {[["Entry", "1.0842"], ["Stop", "1.0818"], ["Target", "1.0906"], ["Size", "0.42 lot"]].map(([k, v], i) => (
+          <div key={k} style={{ animationDelay: `${1 + 0.12 * i}s` }} className="slide-in flex items-center justify-between border-b border-white/[0.07] py-[5px] last:border-0">
             <span className="font-mono text-[10px] uppercase tracking-wider text-white/55">{k}</span>
             <span className="font-mono text-[12px] font-semibold text-white tnum">{v}</span>
           </div>
@@ -109,7 +109,7 @@ export function SignalStream() {
       </div>
 
       {/* the differentiator */}
-      <div className="mx-3 mb-3 mt-2 rounded-[10px] border border-white/10 bg-white/[0.04] px-3 py-2.5">
+      <div className="rise mx-3 mb-3 mt-2 rounded-[10px] border border-white/10 bg-white/[0.04] px-3 py-2.5 [animation-delay:1.6s]">
         <div className="flex items-start gap-2">
           <Ban size={13} className="mt-px shrink-0 text-white/55" />
           <div>
