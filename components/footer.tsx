@@ -1,3 +1,5 @@
+import { Reveal } from "./ui";
+
 const COLS = [
   { h: "Products", links: [
     { l: "Vovix Lens", href: "https://lens.vovix.in/", ext: true },
@@ -33,7 +35,7 @@ export function Footer() {
     <footer className="border-t border-line bg-ground-sub pt-14 pb-10">
       <div className="shell">
         <div className="grid gap-10 md:grid-cols-[1.6fr_repeat(4,1fr)]">
-          <div>
+          <Reveal>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/assets/logo-vovix.png" alt="Vovix" width={300} height={164}
                  className="mb-4 h-auto w-full max-w-[220px] object-contain" />
@@ -43,9 +45,9 @@ export function Footer() {
             <a href="mailto:admin@vovix.in" className="mt-3 inline-block text-small font-semibold text-brand-ink hover:underline">
               admin@vovix.in
             </a>
-          </div>
-          {COLS.map((c) => (
-            <div key={c.h}>
+          </Reveal>
+          {COLS.map((c, i) => (
+            <Reveal key={c.h} delay={0.08 * (i + 1)}>
               <p className="eyebrow mb-3">{c.h}</p>
               <ul className="space-y-2">
                 {c.links.map((x) => (
@@ -55,19 +57,19 @@ export function Footer() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </Reveal>
           ))}
         </div>
 
         <div className="my-9 h-px bg-line" />
 
-        <div className="space-y-2.5">
+        <Reveal delay={0.4} className="space-y-2.5">
           {DISCLAIMERS.map(([t, body]) => (
             <p key={t} className="text-[12.5px] leading-relaxed text-ink-muted">
               <strong className="font-semibold text-ink-secondary">{t}:</strong> {body}
             </p>
           ))}
-        </div>
+        </Reveal>
 
         <p className="mt-7 text-[12.5px] text-ink-muted">
           © {new Date().getFullYear()} Vovix Private Limited · Guduvancheri, Tamil Nadu, India
