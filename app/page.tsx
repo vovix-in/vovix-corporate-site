@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer";
 import { Button, Chip, Reveal, Section, SectionHead, BentoCard } from "@/components/ui";
 import { ExtractionViewer, SignalStream } from "@/components/hero-visuals";
 import { ScopeBuilder } from "@/components/scope-builder";
+import { AgentOrchestra, AGENT_TYPES } from "@/components/agent-orchestra";
 
 const PRODUCTS = [
   {
@@ -159,6 +160,42 @@ export default function Home() {
           </div>
         </Section>
 
+        {/* ── AI agents ── */}
+        <Section id="agents" alt>
+          <SectionHead
+            eyebrow="AI agents"
+            title="Agents that do the work, not just answer questions"
+            lead="A chatbot replies. An agent reads the document, checks it against your ledger, posts the entry, and escalates the one case it isn't sure about. These run on schedules and events, inside your systems — here's four of them working on one job at once."
+          />
+          <Reveal><AgentOrchestra /></Reveal>
+
+          <div className="mt-14">
+            <Reveal className="mb-8 text-center">
+              <p className="eyebrow mb-3">What we can build for you</p>
+              <h3 className="text-balance text-[clamp(21px,2.6vw,26px)] font-[750] tracking-[-0.018em] text-ink">Six agents we have patterns for</h3>
+            </Reveal>
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {AGENT_TYPES.map((a, i) => (
+                <Reveal key={a.name} delay={i * 0.05}>
+                  <BentoCard className="h-full">
+                    <div className="mb-5 flex items-center justify-between gap-3">
+                      <span className="flex h-11 w-11 items-center justify-center rounded-control bg-brand-wash text-brand-ink"><a.icon size={20} /></span>
+                      <Chip>{a.chip}</Chip>
+                    </div>
+                    <h4 className="text-[17px] font-bold tracking-[-0.01em] text-ink">{a.name}</h4>
+                    <p className="mt-2 text-small leading-relaxed text-ink-secondary">{a.body}</p>
+                  </BentoCard>
+                </Reveal>
+              ))}
+            </div>
+            <Reveal className="mt-9 text-center">
+              <p className="mx-auto max-w-[58ch] text-small text-ink-muted">
+                Every one of these needs a threshold for when it stops and asks a person. Getting that line right is most of the work, and it is the first thing we scope with you.
+              </p>
+            </Reveal>
+          </div>
+        </Section>
+
         {/* ── Process ── */}
         <Section id="process">
           <SectionHead eyebrow="How we work" title="Three steps, and one of them is saying no" />
@@ -176,7 +213,7 @@ export default function Home() {
         </Section>
 
         {/* ── Scope builder ── */}
-        <Section id="estimate" alt>
+        <Section id="estimate">
           <SectionHead
             eyebrow="Scope builder"
             title="Roughly what would this take?"
@@ -186,7 +223,7 @@ export default function Home() {
         </Section>
 
         {/* ── CTA ── */}
-        <Section id="start">
+        <Section id="start" alt>
           <Reveal>
             <div className="relative overflow-hidden rounded-panel border-[1.5px] border-brand-fill/25 bg-gradient-to-br from-brand-wash via-ground-paper to-cyan-wash p-10 md:p-14">
               <div aria-hidden className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(0,200,83,0.14),transparent_70%)]" />
