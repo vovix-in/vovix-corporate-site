@@ -79,7 +79,7 @@ export function AgentOrchestra() {
 
       {/* run log */}
       <div className="border-t border-line bg-ground-spec px-5 py-3">
-        <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.14em] text-white/35">Run log</p>
+        <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.14em] text-white/55">Run log</p>
         <div className="space-y-1">
           {LOG.map(([t, who, msg], i) => (
             <div
@@ -87,8 +87,8 @@ export function AgentOrchestra() {
               style={{ animationDelay: `${0.35 * i}s` }}
               className="flex animate-[fieldIn_.4s_cubic-bezier(.16,1,.3,1)_both] items-baseline gap-3 font-mono text-[11px]"
             >
-              <span className="shrink-0 text-white/30 tnum">{t}</span>
-              <span className="w-[52px] shrink-0 text-[#4FE08A]">{who}</span>
+              <span className="shrink-0 text-white/55 tnum">{t}</span>
+              <span className="w-[52px] shrink-0 text-brand-onspec">{who}</span>
               <span className="truncate text-white/60">{msg}</span>
             </div>
           ))}
