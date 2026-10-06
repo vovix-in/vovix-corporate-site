@@ -10,6 +10,9 @@
   --vx-green:     #00C853;
   --vx-green-dk:  #00A844;
   --vx-green-dkr: #00913A;
+  /* brand/ink — the text-safe emerald. #00C853 is 2.24:1 on white and must
+     never carry text; this is 5.47:1. See the Vovix Light System spec. */
+  --vx-green-ink: #007A37;
   --vx-cyan:      #00E5FF;
   --vx-mint:      #00E676;
   --vx-navy:      #102A43;
@@ -246,9 +249,15 @@ a:hover { color: var(--vx-green-dk); }
   --bs-btn-border-color: var(--vx-green);
   --bs-btn-hover-bg: var(--vx-green-dk);
   --bs-btn-hover-border-color: var(--vx-green-dk);
-  --bs-btn-active-bg: var(--vx-green-dkr);
-  --bs-btn-color: #fff;
-  --bs-btn-hover-color: #fff;
+  /* was --vx-green-dkr (#00913A): navy on it is 3.56:1, below AA.
+     #00A844 is the darkest emerald that still clears 4.5:1 with navy. */
+  --bs-btn-active-bg: var(--vx-green-dk);
+  /* navy, not white: #fff on #00C853 is 2.24:1 and fails AA outright.
+     #102A43 on #00C853 is 6.54:1, and on the #00A844 hover 4.66:1. */
+  --bs-btn-color: var(--vx-navy);
+  --bs-btn-hover-color: var(--vx-navy);
+  --bs-btn-active-color: var(--vx-navy);
+  font-weight: 700;
   position: relative;
   box-shadow: 0 6px 18px rgba(0, 200, 83, 0.30);
   overflow: hidden;
@@ -265,9 +274,9 @@ a:hover { color: var(--vx-green-dk); }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,200,83,0.40); }
 .btn-primary:hover::after { transform: translateX(130%); }
 
-/* Hero gets navy-colored text on green */
-.hero-navy .btn-primary,
-.site-hero .btn-primary { color: var(--vx-navy) !important; font-weight: 700; }
+/* (The former .hero-navy/.site-hero override that forced navy-on-green lived
+   here. It is redundant now that .btn-primary is navy everywhere, and those
+   two classes are unused on every current page.) */
 
 .btn-outline-light {
   border-width: 1.5px;
@@ -281,11 +290,15 @@ a:hover { color: var(--vx-green-dk); }
 }
 
 .btn-outline-primary {
-  --bs-btn-color: var(--vx-green);
+  /* label was --vx-green (2.24:1 on white). The border keeps the bright
+     emerald — brand/fill is fine as a stroke, just not as text. */
+  --bs-btn-color: var(--vx-green-ink);
   --bs-btn-border-color: var(--vx-green);
   --bs-btn-hover-bg: var(--vx-green);
-  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-color: var(--vx-navy);
+  --bs-btn-active-color: var(--vx-navy);
   border-width: 1.5px;
+  font-weight: 700;
 }
 .btn-outline-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,200,83,0.22); }
 
