@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1128 191" width="1128" height="191">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#102a43"/>
+      <stop offset="55%" stop-color="#163a5c"/>
+      <stop offset="100%" stop-color="#0a1b2d"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00c853"/>
+      <stop offset="100%" stop-color="#00e5ff"/>
+    </linearGradient>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="12" cy="12" r="0.6" fill="rgba(255,255,255,0.08)"/>
+    </pattern>
+  </defs>
+  <rect width="1128" height="191" fill="url(#bg)"/>
+  <rect width="1128" height="191" fill="url(#dots)"/>
+  <circle cx="980" cy="-20" r="180" fill="rgba(0,229,255,0.12)"/>
+  <circle cx="200" cy="200" r="160" fill="rgba(0,200,83,0.1)"/>
+  <path d="M520 20 Q720 95 1128 40" fill="none" stroke="url(#accent)" stroke-width="2" opacity="0.35"/>
+  <path d="M600 160 Q850 80 1128 150" fill="none" stroke="rgba(0,229,255,0.25)" stroke-width="1.5"/>
+  <text x="48" y="88" font-size="42" font-weight="800" fill="#ffffff" font-family="Montserrat, system-ui, sans-serif">Vovix</text>
+  <rect x="48" y="98" width="72" height="4" rx="2" fill="url(#accent)"/>
+  <text x="48" y="128" font-size="14" fill="rgba(245,247,250,0.88)" font-family="system-ui, sans-serif">Data provider &amp; automation agency</text>
+  <text x="48" y="152" font-size="11" fill="rgba(245,247,250,0.55)" font-family="system-ui, sans-serif">Web crawling - AI OCR - Indian stock intelligence</text>
+  <rect x="720" y="72" width="118" height="36" rx="18" fill="rgba(255,255,255,0.06)" stroke="rgba(0,200,83,0.45)" stroke-width="1"/>
+  <circle cx="738" cy="90" r="4" fill="#00c853"/>
+  <text x="750" y="95" font-size="12" font-weight="600" fill="#ffffff" font-family="system-ui, sans-serif">OneView</text>
+  <rect x="848" y="72" width="118" height="36" rx="18" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <circle cx="866" cy="90" r="4" fill="#00e5ff"/>
+  <text x="878" y="95" font-size="12" font-weight="600" fill="#ffffff" font-family="system-ui, sans-serif">Crawler</text>
+  <rect x="976" y="72" width="100" height="36" rx="18" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <circle cx="994" cy="90" r="4" fill="#00c853"/>
+  <text x="1006" y="95" font-size="12" font-weight="600" fill="#ffffff" font-family="system-ui, sans-serif">OCR</text>
+  <text x="1080" y="168" font-size="10" fill="rgba(245,247,250,0.4)" text-anchor="end" font-family="system-ui, sans-serif">vovix.in</text>
+</svg>

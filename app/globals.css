@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply bg-ground-paper text-ink font-sans antialiased; }
+  ::selection { background: #00C85333; }
+  :focus-visible { outline: 2px solid #00707F; outline-offset: 2px; border-radius: 4px; }
+}
+
+@layer utilities {
+  .shell { @apply mx-auto w-full max-w-shell px-6; }
+  .eyebrow { @apply font-mono text-label uppercase text-ink-muted; }
+  /* dotted field used behind light sections */
+  .dotfield {
+    background-image: radial-gradient(circle at 1px 1px, rgba(16,42,67,0.055) 1px, transparent 0);
+    background-size: 28px 28px;
+  }
+  .tnum { font-variant-numeric: tabular-nums; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes fieldIn {
+  from { opacity: 0; transform: translateX(5px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes scanline {
+  from { top: -12%; }
+  to   { top: 102%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}

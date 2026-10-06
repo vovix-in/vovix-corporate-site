@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" width="1400" height="900" font-family="system-ui,sans-serif">
+  <defs>
+    <filter id="cardshadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="rgba(16,42,67,0.10)"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="900" fill="#f5f7fa"/>
+  <circle cx="1320" cy="0" r="380" fill="rgba(0,229,255,0.04)"/>
+  <circle cx="0" cy="900" r="320" fill="rgba(0,200,83,0.04)"/>
+
+  <!-- Header bar -->
+  <rect x="30" y="28" width="1340" height="52" rx="10" fill="white" stroke="#d9e2ec" stroke-width="1" filter="url(#cardshadow)"/>
+  <circle cx="58" cy="54" r="5" fill="#ef5350" fill-opacity="0.7"/>
+  <circle cx="76" cy="54" r="5" fill="#f59e0b" fill-opacity="0.7"/>
+  <circle cx="94" cy="54" r="5" fill="#00c853" fill-opacity="0.7"/>
+  <text x="118" y="60" font-size="15" font-weight="700" fill="#102a43">Vovix</text>
+  <text x="156" y="60" font-size="15" font-weight="700" fill="#00c853"> Edge</text>
+  <text x="118" y="73" font-size="10" fill="#486581">AI-assisted signals &#183; MetaTrader 5 &#183; Windows desktop</text>
+  <rect x="1058" y="40" width="70" height="24" rx="12" fill="rgba(0,229,255,0.10)" stroke="rgba(0,229,255,0.45)" stroke-width="1"/>
+  <text x="1093" y="56" font-size="10" font-weight="700" fill="#0093a8" text-anchor="middle">BETA</text>
+  <rect x="1140" y="40" width="160" height="24" rx="12" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.4)" stroke-width="1"/>
+  <circle cx="1156" cy="52" r="4" fill="#00c853"/>
+  <text x="1166" y="56" font-size="10" font-weight="700" fill="#00c853">A+ SIGNALS ONLY</text>
+
+  <!-- ===== LEFT PANEL: SIGNAL ===== -->
+  <rect x="30" y="92" width="590" height="782" rx="12" fill="white" stroke="#d9e2ec" stroke-width="1" filter="url(#cardshadow)"/>
+  <rect x="30" y="92" width="590" height="44" rx="12" fill="#f5f7fa"/>
+  <rect x="30" y="120" width="590" height="16" fill="#f5f7fa"/>
+  <text x="52" y="117" font-size="10" font-weight="700" letter-spacing="2" fill="#486581">LIVE SIGNAL</text>
+  <text x="596" y="117" font-size="10" fill="#00c853" text-anchor="end">&#9679; London session</text>
+
+  <!-- Pair + direction -->
+  <text x="56" y="182" font-size="27" font-weight="800" fill="#102a43">EUR/USD</text>
+  <rect x="238" y="160" width="66" height="28" rx="14" fill="#00c853"/>
+  <text x="271" y="179" font-size="13" font-weight="800" fill="#06231a" text-anchor="middle">BUY</text>
+  <rect x="316" y="160" width="94" height="28" rx="14" fill="rgba(0,200,83,0.12)" stroke="rgba(0,200,83,0.45)" stroke-width="1"/>
+  <text x="363" y="179" font-size="12" font-weight="800" fill="#00a844" text-anchor="middle">A+ SETUP</text>
+  <text x="594" y="180" font-size="12" fill="#486581" text-anchor="end">Confidence 87%</text>
+
+  <!-- Chart -->
+  <rect x="56" y="204" width="538" height="168" rx="6" fill="#fbfdff" stroke="#e2e8f0" stroke-width="1"/>
+  <line x1="56" y1="246" x2="594" y2="246" stroke="#eef2f6" stroke-width="1"/>
+  <line x1="56" y1="288" x2="594" y2="288" stroke="#eef2f6" stroke-width="1"/>
+  <line x1="56" y1="330" x2="594" y2="330" stroke="#eef2f6" stroke-width="1"/>
+  <!-- price path -->
+  <polyline points="80,344 130,330 170,336 210,318 250,322 300,300 340,306 380,286 430,278 470,262 520,250 566,236"
+            fill="none" stroke="#0071e3" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- target / entry / stop lines -->
+  <line x1="66" y1="232" x2="520" y2="232" stroke="#00c853" stroke-width="1.4" stroke-dasharray="5,4"/>
+  <rect x="520" y="223" width="70" height="18" rx="4" fill="rgba(0,200,83,0.12)"/>
+  <text x="555" y="236" font-size="10" font-weight="700" fill="#00a844" text-anchor="middle">TP 1.0902</text>
+  <line x1="66" y1="286" x2="520" y2="286" stroke="#102a43" stroke-width="1.4" stroke-dasharray="5,4"/>
+  <rect x="520" y="277" width="70" height="18" rx="4" fill="rgba(16,42,67,0.08)"/>
+  <text x="555" y="290" font-size="10" font-weight="700" fill="#102a43" text-anchor="middle">1.0842</text>
+  <line x1="66" y1="338" x2="520" y2="338" stroke="#ef5350" stroke-width="1.4" stroke-dasharray="5,4"/>
+  <rect x="520" y="329" width="70" height="18" rx="4" fill="rgba(239,83,80,0.12)"/>
+  <text x="555" y="342" font-size="10" font-weight="700" fill="#ef5350" text-anchor="middle">SL 1.0818</text>
+  <circle cx="380" cy="286" r="4.5" fill="#0071e3" stroke="white" stroke-width="1.5"/>
+
+  <!-- Plan grid -->
+  <g>
+    <rect x="56" y="388" width="262" height="52" rx="8" fill="rgba(16,42,67,0.03)" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="70" y="408" font-size="9" fill="#9bb2c9">ENTRY</text>
+    <text x="70" y="427" font-size="15" font-weight="800" fill="#102a43">1.0842</text>
+    <rect x="332" y="388" width="262" height="52" rx="8" fill="rgba(16,42,67,0.03)" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="346" y="408" font-size="9" fill="#9bb2c9">STOP LOSS</text>
+    <text x="346" y="427" font-size="15" font-weight="800" fill="#102a43">1.0818 <tspan font-size="10" font-weight="600" fill="#ef5350">-24 pips</tspan></text>
+    <rect x="56" y="450" width="262" height="52" rx="8" fill="rgba(0,200,83,0.05)" stroke="rgba(0,200,83,0.25)" stroke-width="1"/>
+    <text x="70" y="470" font-size="9" fill="#9bb2c9">TAKE PROFIT</text>
+    <text x="70" y="489" font-size="15" font-weight="800" fill="#102a43">1.0902 <tspan font-size="10" font-weight="600" fill="#00a844">+60 pips</tspan></text>
+    <rect x="332" y="450" width="262" height="52" rx="8" fill="rgba(0,229,255,0.06)" stroke="rgba(0,229,255,0.3)" stroke-width="1"/>
+    <text x="346" y="470" font-size="9" fill="#9bb2c9">REWARD : RISK</text>
+    <text x="346" y="489" font-size="15" font-weight="800" fill="#102a43">1 : 2.5</text>
+  </g>
+
+  <!-- Position size -->
+  <rect x="56" y="514" width="538" height="58" rx="8" fill="#102a43"/>
+  <text x="74" y="537" font-size="10" font-weight="700" letter-spacing="1" fill="rgba(255,255,255,0.55)">POSITION SIZE &#183; SIZED TO YOUR BALANCE</text>
+  <text x="74" y="560" font-size="18" font-weight="800" fill="#ffffff">0.35 lots</text>
+  <text x="200" y="560" font-size="12" fill="rgba(0,229,255,0.9)">risk 1.0% of balance &#183; priced to your broker</text>
+
+  <!-- News clear -->
+  <rect x="56" y="584" width="538" height="30" rx="8" fill="rgba(0,200,83,0.07)" stroke="rgba(0,200,83,0.25)" stroke-width="1"/>
+  <text x="74" y="603" font-size="11" font-weight="600" fill="#00a844">&#10003; News clear &#8212; no high-impact events for the next 2 hours</text>
+
+  <!-- Actions -->
+  <rect x="56" y="626" width="330" height="42" rx="8" fill="#00c853"/>
+  <text x="221" y="652" font-size="13" font-weight="800" fill="#06231a" text-anchor="middle">&#9889; Place on MT5 &#183; 1-click</text>
+  <rect x="398" y="626" width="120" height="42" rx="8" fill="white" stroke="#ef5350" stroke-width="1.4"/>
+  <text x="458" y="652" font-size="12" font-weight="700" fill="#ef5350" text-anchor="middle">Kill switch</text>
+  <text x="536" y="644" font-size="10" fill="#9bb2c9">Daily limit</text>
+  <text x="536" y="658" font-size="12" font-weight="700" fill="#486581">3 / 5 used</text>
+  <text x="56" y="694" font-size="10" fill="#9bb2c9">Assisted execution is opt-in &#8212; the app can manage partial profit, breakeven and trailing exits for you.</text>
+
+  <!-- ===== RIGHT PANEL: MARKET READ ===== -->
+  <rect x="632" y="92" width="738" height="782" rx="12" fill="white" stroke="#d9e2ec" stroke-width="1" filter="url(#cardshadow)"/>
+  <rect x="632" y="92" width="738" height="44" rx="12" fill="#f5f7fa"/>
+  <rect x="632" y="120" width="738" height="16" fill="#f5f7fa"/>
+  <text x="654" y="117" font-size="10" font-weight="700" letter-spacing="2" fill="#486581">WHY THIS SETUP</text>
+  <rect x="1218" y="102" width="134" height="24" rx="12" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.3)" stroke-width="1"/>
+  <text x="1285" y="118" font-size="10" font-weight="700" fill="#00c853" text-anchor="middle">TRENDING REGIME</text>
+
+  <!-- read rows -->
+  <g font-size="12">
+    <rect x="654" y="150" width="694" height="52" rx="8" fill="#fcfeff" stroke="#eef2f6" stroke-width="1"/>
+    <text x="672" y="172" font-size="11" font-weight="700" fill="#102a43">Trend</text>
+    <text x="672" y="190" font-size="11" fill="#486581">H1 and H4 aligned to the upside</text>
+    <rect x="1240" y="164" width="92" height="24" rx="12" fill="rgba(0,200,83,0.12)"/>
+    <text x="1286" y="180" font-weight="700" fill="#00a844" text-anchor="middle">Up &#10003;</text>
+
+    <rect x="654" y="212" width="694" height="52" rx="8" fill="#fcfeff" stroke="#eef2f6" stroke-width="1"/>
+    <text x="672" y="234" font-size="11" font-weight="700" fill="#102a43">Momentum &amp; structure</text>
+    <text x="672" y="252" font-size="11" fill="#486581">Higher lows holding, RSI 58, MACD rising</text>
+    <rect x="1240" y="226" width="92" height="24" rx="12" fill="rgba(0,200,83,0.12)"/>
+    <text x="1286" y="242" font-weight="700" fill="#00a844" text-anchor="middle">Strong</text>
+
+    <rect x="654" y="274" width="694" height="52" rx="8" fill="#fcfeff" stroke="#eef2f6" stroke-width="1"/>
+    <text x="672" y="296" font-size="11" font-weight="700" fill="#102a43">News sentiment</text>
+    <text x="672" y="314" font-size="11" fill="#486581">Risk-on tone, no red events near entry</text>
+    <rect x="1240" y="288" width="92" height="24" rx="12" fill="rgba(0,200,83,0.12)"/>
+    <text x="1286" y="304" font-weight="700" fill="#00a844" text-anchor="middle">Positive</text>
+  </g>
+
+  <!-- Economic calendar -->
+  <rect x="654" y="342" width="694" height="150" rx="8" fill="rgba(16,42,67,0.02)" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="672" y="366" font-size="10" font-weight="700" letter-spacing="1.5" fill="#486581">ECONOMIC CALENDAR &#183; NEXT EVENTS</text>
+  <g font-size="12">
+    <text x="672" y="398" fill="#102a43" font-weight="700">13:30</text>
+    <text x="742" y="398" fill="#486581">USD</text>
+    <text x="800" y="398" fill="#486581">Core CPI m/m</text>
+    <circle cx="1300" cy="393" r="6" fill="#ef5350"/>
+    <text x="1318" y="398" fill="#ef5350" font-size="10" font-weight="700" text-anchor="end">High</text>
+    <line x1="672" y1="414" x2="1330" y2="414" stroke="#eef2f6"/>
+
+    <text x="672" y="440" fill="#102a43" font-weight="700">15:00</text>
+    <text x="742" y="440" fill="#486581">EUR</text>
+    <text x="800" y="440" fill="#486581">Flash Manufacturing PMI</text>
+    <circle cx="1300" cy="435" r="6" fill="#f59e0b"/>
+    <text x="1318" y="440" fill="#c07800" font-size="10" font-weight="700" text-anchor="end">Med</text>
+    <line x1="672" y1="456" x2="1330" y2="456" stroke="#eef2f6"/>
+
+    <text x="672" y="482" fill="#102a43" font-weight="700">18:00</text>
+    <text x="742" y="482" fill="#486581">USD</text>
+    <text x="800" y="482" fill="#486581">FOMC member speaks</text>
+    <circle cx="1300" cy="477" r="6" fill="#f59e0b"/>
+    <text x="1318" y="482" fill="#c07800" font-size="10" font-weight="700" text-anchor="end">Med</text>
+  </g>
+
+  <!-- Assisted exit -->
+  <rect x="654" y="504" width="694" height="66" rx="8" fill="rgba(0,229,255,0.04)" stroke="rgba(0,229,255,0.22)" stroke-width="1"/>
+  <text x="672" y="528" font-size="10" font-weight="700" letter-spacing="1.5" fill="#486581">ASSISTED EXIT &#183; AUTOPILOT (OPT-IN)</text>
+  <rect x="672" y="538" width="196" height="24" rx="12" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.3)" stroke-width="1"/>
+  <text x="770" y="554" font-size="11" font-weight="700" fill="#00a844" text-anchor="middle">Partial TP @ 1R &#183; ON</text>
+  <rect x="880" y="538" width="176" height="24" rx="12" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.3)" stroke-width="1"/>
+  <text x="968" y="554" font-size="11" font-weight="700" fill="#00a844" text-anchor="middle">Breakeven @ 1R &#183; ON</text>
+  <rect x="1068" y="538" width="164" height="24" rx="12" fill="rgba(0,200,83,0.1)" stroke="rgba(0,200,83,0.3)" stroke-width="1"/>
+  <text x="1150" y="554" font-size="11" font-weight="700" fill="#00a844" text-anchor="middle">Trailing 20p &#183; ON</text>
+
+  <!-- Stand down card -->
+  <rect x="654" y="582" width="694" height="118" rx="10" fill="rgba(245,158,11,0.06)" stroke="rgba(245,158,11,0.45)" stroke-width="1.4"/>
+  <rect x="672" y="600" width="128" height="24" rx="12" fill="rgba(245,158,11,0.16)"/>
+  <text x="736" y="616" font-size="10" font-weight="800" letter-spacing="1" fill="#c07800" text-anchor="middle">STAND DOWN</text>
+  <text x="814" y="618" font-size="14" font-weight="800" fill="#102a43">GBP/JPY</text>
+  <text x="672" y="650" font-size="12" fill="#5b4a2a">Choppy regime &#183; red news in 40 min &#183; reward-to-risk below the bar.</text>
+  <text x="672" y="676" font-size="13" font-weight="700" fill="#c07800">No signal shown &#8212; discipline over noise.</text>
+
+  <!-- Footer metrics -->
+  <rect x="654" y="712" width="694" height="60" rx="8" fill="rgba(16,42,67,0.02)" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="672" y="734" font-size="10" font-weight="700" letter-spacing="1.5" fill="#486581">THIS WEEK (BETA)</text>
+  <text x="672" y="757" font-size="13" font-weight="700" fill="#102a43">6 signals &#183; 4 stand-downs &#183; avg planned R:R 1 : 2.4</text>
+  <text x="1332" y="757" font-size="11" fill="#9bb2c9" text-anchor="end">You decide every trade.</text>
+</svg>
