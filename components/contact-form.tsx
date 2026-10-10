@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import type { FormEvent } from "react";
-import { Mail, Copy, Check, AlertCircle } from "lucide-react";
+import { Mail, Copy, Check, AlertCircle, CheckCircle2 } from "lucide-react";
 import { Button } from "./ui";
 
-/* Submission path: there is no form backend on this site, so the form
-   composes a fully-addressed email in the visitor's own mail app. We
-   never show "sent" — only that the draft was handed to their mail
-   client, with a copy-to-clipboard fallback if no client opens.      */
+/* Submission path: the form posts to /api/contact, which delivers the
+   enquiry to our inbox. We only show "sent" when the server confirms it.
+   If that fails for any reason, we fall back to composing the email in
+   the visitor's own mail app, with a copy-to-clipboard fallback if no
+   client opens — so an enquiry is never silently lost.                */
 
 const TO = "admin@vovix.in";
 const TOPICS = [
@@ -21,12 +22,13 @@ type Errors = Partial<Record<"name" | "email" | "message", string>>;
 
 export function ContactForm({ dark = false }: { dark?: boolean }) {
   const [errors, setErrors] = useState<Errors>({});
-  const [state, setState] = useState<"idle" | "handed" | "copied">("idle");
+  const [state, setState] = useState<"idle" | "sending" | "sent" | "handed" | "copied">("idle");
   const [draft, setDraft] = useState("");
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const f = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const f = new FormData(form);
     const v = (k: string) => String(f.get(k) ?? "").trim();
     const next: Errors = {};
     if (!v("name")) next.name = "Please tell us your name.";
@@ -35,7 +37,7 @@ export function ContactForm({ dark = false }: { dark?: boolean }) {
     setErrors(next);
     if (Object.keys(next).length) {
       const first = Object.keys(next)[0];
-      (e.currentTarget.elements.namedItem(first) as HTMLElement | null)?.focus();
+      (form.elements.namedItem(first) as HTMLElement | null)?.focus();
       return;
     }
     const subject = `Project enquiry — ${v("topic")}${v("company") ? ` — ${v("company")}` : ""}`;
@@ -44,6 +46,16 @@ export function ContactForm({ dark = false }: { dark?: boolean }) {
     lines.push(`Topic: ${v("topic")}`, "", v("message"));
     const body = lines.join("\n");
     setDraft(`To: ${TO}\nSubject: ${subject}\n\n${body}`);
+
+    setState("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(["name", "email", "company", "topic", "message", "website"].map((k) => [k, v(k)]))),
+      });
+      if (res.ok) { form.reset(); setState("sent"); return; }
+    } catch { /* network failure: fall through to the mail-app handoff */ }
     window.location.href = `mailto:${TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setState("handed");
   };
@@ -92,18 +104,33 @@ export function ContactForm({ dark = false }: { dark?: boolean }) {
         {err("message")}
       </div>
 
+      {/* Honeypot: hidden from people and assistive tech; bots that fill it are dropped server-side. */}
+      <div className="hidden" aria-hidden>
+        <label htmlFor="cf-website">Website</label>
+        <input id="cf-website" name="website" tabIndex={-1} autoComplete="off" />
+      </div>
+
       <div className="flex flex-wrap items-center gap-4 pt-1">
-        <Button type="submit" size="lg"><Mail size={17} aria-hidden /> Discuss Your Project</Button>
+        <Button type="submit" size="lg" disabled={state === "sending"}><Mail size={17} aria-hidden /> {state === "sending" ? "Sending…" : "Discuss Your Project"}</Button>
         <p id="form-note" className={`text-[12.5px] leading-snug ${dark ? "text-white/60" : "text-ink-muted"}`}>
-          Opens your email app with this message addressed to {TO}.
+          Sends this message straight to {TO}. We reply to the email you enter.
         </p>
       </div>
 
       <div aria-live="polite">
-        {state !== "idle" && (
+        {state === "sent" && (
+          <div className={`rise mt-2 flex items-start gap-3 rounded-card border p-4 ${dark ? "border-white/15 bg-white/[0.05]" : "border-line bg-ground-sub"}`}>
+            <CheckCircle2 size={18} className={`mt-0.5 shrink-0 ${dark ? "text-brand-onspec" : "text-brand-ink"}`} aria-hidden />
+            <div>
+              <p className={`text-[13.5px] font-semibold ${dark ? "text-white" : "text-ink"}`}>Message sent — it is in our inbox.</p>
+              <p className={`mt-1 text-[12.5px] ${dark ? "text-white/60" : "text-ink-muted"}`}>We will reply to the email address you entered.</p>
+            </div>
+          </div>
+        )}
+        {(state === "handed" || state === "copied") && (
           <div className={`rise mt-2 rounded-card border p-4 ${dark ? "border-white/15 bg-white/[0.05]" : "border-line bg-ground-sub"}`}>
             <p className={`text-[13.5px] font-semibold ${dark ? "text-white" : "text-ink"}`}>
-              Your message is ready in your email app — press send there to reach us.
+              We could not send this from the site, so your message is ready in your email app — press send there to reach us.
             </p>
             <p className={`mt-1 text-[12.5px] ${dark ? "text-white/60" : "text-ink-muted"}`}>
               No email app opened? Copy the message and send it to <a className="font-semibold underline" href={`mailto:${TO}`}>{TO}</a>.
