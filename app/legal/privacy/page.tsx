@@ -3,8 +3,8 @@ import { PageShell, Prose } from "@/components/page-shell";
 import { Section } from "@/components/ui";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Vovix",
-  description: "How the Vovix corporate website collects and uses information.",
+  title: "Privacy Policy",
+  description: "How the VOVIX corporate website collects and uses information.",
   alternates: { canonical: "/legal/privacy" },
 };
 
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
    counsel-adjacent — do not paraphrase when editing. */
 export default function Page() {
   return (
-    <PageShell eyebrow="Legal" title="Privacy Policy" lead="How the Vovix corporate website collects and uses information.">
+    <PageShell eyebrow="Legal" title="Privacy Policy" lead="How the VOVIX corporate website collects and uses information.">
       <Section>
         <Prose>
           <div className="mb-8 rounded-card border border-line bg-ground-sub p-5 text-small text-ink-secondary">

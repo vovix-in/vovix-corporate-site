@@ -1,61 +1,138 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { ReactNode } from "react";
+import type { ReactNode, RefObject } from "react";
+
+/* ── Logo ──────────────────────────────────────────────────────
+   Always the original artwork from public/assets — never redrawn.
+   The only supplied variant is for light backgrounds (navy alpha +
+   green sweep + silver IX), so it is only ever placed on white or
+   pearl surfaces. On navy bands we use the plate variant, which
+   seats the same file on a white tile rather than recolouring it. */
+export function Logo({ variant = "nav", className = "" }: { variant?: "nav" | "footer"; className?: string }) {
+  const src = variant === "nav" ? "/assets/logo-vovix-navbar.png" : "/assets/logo-vovix-footer.png";
+  const dims = variant === "nav" ? { width: 1272, height: 378 } : { width: 1272, height: 461 };
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img src={src} alt="VOVIX — Automate Your Alpha" {...dims} decoding="async" className={`w-auto object-contain ${className}`} />;
+}
 
 /* ── Button ─────────────────────────────────────────────────────
-   primary is navy-on-emerald, never white-on-emerald: #fff on
-   #00C853 is 2.24:1 and fails WCAG AA. Navy is 6.54:1.            */
+   Primary is navy-on-logo-green (4.76:1). White on #09A54C is
+   3.23:1 and fails AA for button-sized text, so we never use it. */
 type BtnProps = {
   children: ReactNode;
   href?: string;
   onClick?: () => void;
-  variant?: "primary" | "secondary" | "ghost";
+  variant?: "primary" | "secondary" | "ghost" | "onDark";
   size?: "sm" | "md" | "lg";
   className?: string;
   type?: "button" | "submit";
+  external?: boolean;
+  disabled?: boolean;
 };
 
-const SIZES = { sm: "px-3.5 py-2 text-small", md: "px-5 py-3 text-small", lg: "px-7 py-4 text-body" };
+const SIZES = { sm: "px-3.5 py-2 text-small", md: "px-5 py-3 text-small", lg: "px-6 py-3.5 text-body" };
 const VARIANTS = {
-  primary: "bg-brand-fill text-ink font-bold shadow-glow hover:bg-brand-hover hover:shadow-glowlg active:bg-brand-hover",
-  secondary: "border-[1.5px] border-ink text-ink font-bold hover:bg-ink hover:text-white",
+  primary: "bg-brand-fill text-navy font-bold shadow-glow hover:bg-brand-hover hover:shadow-glowlg",
+  secondary: "border-[1.5px] border-navy text-navy font-bold hover:bg-navy hover:text-white",
   ghost: "text-ink-secondary font-semibold hover:bg-ground-sunken hover:text-ink",
+  onDark: "border-[1.5px] border-white/30 text-white font-semibold hover:border-white hover:bg-white/5",
 };
 
-export function Button({ children, href, onClick, variant = "primary", size = "md", className = "", type = "button" }: BtnProps) {
-  const cls = `inline-flex items-center justify-center gap-2 rounded-control transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 ${SIZES[size]} ${VARIANTS[variant]} ${className}`;
-  if (href) return <a href={href} className={cls}>{children}</a>;
-  return <button type={type} onClick={onClick} className={cls}>{children}</button>;
+export function Button({ children, href, onClick, variant = "primary", size = "md", className = "", type = "button", external, disabled }: BtnProps) {
+  const cls = `inline-flex min-h-[44px] items-center justify-center gap-2 rounded-control transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 disabled:pointer-events-none disabled:opacity-60 ${SIZES[size]} ${VARIANTS[variant]} ${className}`;
+  if (href) {
+    const ext = external ?? /^https?:\/\//.test(href);
+    return (
+      <a href={href} className={cls} {...(ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
+        {children}
+        {ext && <span className="sr-only"> (opens in a new tab)</span>}
+      </a>
+    );
+  }
+  return <button type={type} onClick={onClick} disabled={disabled} className={cls}>{children}</button>;
 }
 
 /* ── Chip ─────────────────────────────────────────────────────── */
-export function Chip({ children, live = false, className = "" }: { children: ReactNode; live?: boolean; className?: string }) {
+export function Chip({ children, live = false, dark = false, className = "" }: { children: ReactNode; live?: boolean; dark?: boolean; className?: string }) {
+  const tone = dark
+    ? live ? "border-brand-fill/40 bg-brand-fill/10 text-brand-bright" : "border-white/15 bg-white/[0.04] text-ink-onspec"
+    : live ? "border-brand-fill/40 bg-brand-wash text-brand-ink" : "border-line-strong bg-ground-paper text-ink-secondary";
   return (
-    <span className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-2.5 py-1 font-mono text-[11px] font-semibold tracking-[0.04em] ${
-      live ? "border-brand-fill/40 bg-brand-wash text-brand-ink" : "border-line-strong bg-ground-paper text-ink-secondary"
-    } ${className}`}>
+    <span className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-2.5 py-1 font-mono text-[11px] font-semibold tracking-[0.04em] ${tone} ${className}`}>
       {live && <span className="h-1.5 w-1.5 rounded-full bg-brand-fill animate-pulse-dot" aria-hidden />}
       {children}
     </span>
   );
 }
 
+/* ── usePausable ──────────────────────────────────────────────
+   Pauses CSS animation inside `ref` when it's off-screen or the tab
+   is hidden, and reports `active` so JS-driven loops can stop too. */
+export function usePausable<T extends HTMLElement>(): [RefObject<T>, boolean] {
+  const ref = useRef<T>(null);
+  const [active, setActive] = useState(true);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let inView = true;
+    const apply = () => {
+      const on = inView && document.visibilityState === "visible";
+      el.dataset.paused = on ? "false" : "true";
+      setActive(on);
+    };
+    const io = "IntersectionObserver" in window
+      ? new IntersectionObserver(([e]) => { inView = e.isIntersecting; apply(); }, { rootMargin: "80px" })
+      : null;
+    io?.observe(el);
+    document.addEventListener("visibilitychange", apply);
+    return () => { io?.disconnect(); document.removeEventListener("visibilitychange", apply); };
+  }, []);
+  return [ref, active];
+}
+
+export function useReducedMotion() {
+  const [reduce, setReduce] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduce(mq.matches);
+    const on = () => setReduce(mq.matches);
+    mq.addEventListener?.("change", on);
+    return () => mq.removeEventListener?.("change", on);
+  }, []);
+  return reduce;
+}
+
+/* ── useTicker ─ a step counter that only advances while active ── */
+export function useTicker(steps: number, ms: number, active: boolean, reset?: unknown) {
+  const [i, setI] = useState(0);
+  const reduce = useReducedMotion();
+  useEffect(() => { setI(0); }, [reset]);
+  useEffect(() => {
+    if (reduce) { setI(steps - 1); return; }
+    if (!active) return;
+    const t = setInterval(() => setI((x) => (x + 1) % steps), ms);
+    return () => clearInterval(t);
+  }, [steps, ms, active, reduce]);
+  return i;
+}
+
 /* ── Reveal ───────────────────────────────────────────────────
    Renders visible. Only once JS confirms it can animate does it
-   hide and fade in — so a failed or slow bundle never leaves the
-   page blank.                                                    */
-export function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
+   hide and fade in — a failed bundle never leaves the page blank. */
+export function Reveal({ children, delay = 0, className = "", as: Tag = "div" }: { children: ReactNode; delay?: number; className?: string; as?: "div" | "li" }) {
+  const ref = useRef<HTMLDivElement & HTMLLIElement>(null);
   const [armed, setArmed] = useState(false);
   const [shown, setShown] = useState(false);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (!("IntersectionObserver" in window)) return;
-    setArmed(true);
     const el = ref.current;
     if (!el) return;
+    // Already on screen at mount (e.g. deep-linked) → don't hide it.
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return;
+    setArmed(true);
     const io = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) { setShown(true); io.disconnect(); } },
       { rootMargin: "0px 0px -60px 0px" }
@@ -66,49 +143,63 @@ export function Reveal({ children, delay = 0, className = "" }: { children: Reac
 
   const hidden = armed && !shown;
   return (
-    <div
+    <Tag
       ref={ref}
       className={className}
       style={{
         opacity: hidden ? 0 : 1,
-        transform: hidden ? "translateY(14px)" : "none",
-        transition: `opacity .45s cubic-bezier(.16,1,.3,1) ${delay}s, transform .45s cubic-bezier(.16,1,.3,1) ${delay}s`,
+        transform: hidden ? "translateY(16px)" : "none",
+        transition: `opacity .55s cubic-bezier(.16,1,.3,1) ${delay}s, transform .55s cubic-bezier(.16,1,.3,1) ${delay}s`,
       }}
     >
       {children}
-    </div>
+    </Tag>
   );
 }
 
 /* ── Section scaffolding ──────────────────────────────────────── */
-export function Section({ id, alt = false, children, className = "" }: { id?: string; alt?: boolean; children: ReactNode; className?: string }) {
+export function Section({ id, tone: toneProp, alt = false, children, className = "", label }: { id?: string; tone?: "paper" | "sub" | "navy"; alt?: boolean; children: ReactNode; className?: string; label?: string }) {
+  const tone = toneProp ?? (alt ? "sub" : "paper");
+  const bg = tone === "navy" ? "on-dark bg-navy text-white" : tone === "sub" ? "bg-ground-sub" : "bg-ground-paper";
   return (
-    <section id={id} className={`py-16 md:py-24 ${alt ? "bg-ground-sub" : "bg-ground-paper"} ${className}`}>
-      <div className="shell">{children}</div>
+    <section id={id} aria-label={label} className={`relative py-20 md:py-28 ${bg} ${className}`}>
+      <div className="shell relative">{children}</div>
     </section>
   );
 }
 
-export function SectionHead({ eyebrow, title, lead, center = true }: { eyebrow: string; title: string; lead?: string; center?: boolean }) {
+export function SectionHead({ eyebrow, title, lead, center = false, dark = false, className = "" }: { eyebrow: string; title: ReactNode; lead?: ReactNode; center?: boolean; dark?: boolean; className?: string }) {
   return (
-    <Reveal className={`mb-12 ${center ? "text-center" : ""}`}>
-      <p className="eyebrow mb-3">{eyebrow}</p>
-      <h2 className={`text-balance text-[clamp(26px,3.6vw,32px)] font-[750] leading-tight tracking-[-0.022em] text-ink ${lead ? "mb-3" : ""}`}>{title}</h2>
-      {lead && <p className={`text-lead text-ink-secondary ${center ? "mx-auto" : ""} max-w-[62ch]`}>{lead}</p>}
+    <Reveal className={`mb-12 md:mb-16 ${center ? "mx-auto text-center" : ""} max-w-[760px] ${className}`}>
+      <div className={`mb-4 flex items-center gap-3 ${center ? "justify-center" : ""}`}>
+        <span className={dark ? "brand-rule" : "brand-rule-light"} aria-hidden />
+        <p className={dark ? "eyebrow-dark" : "eyebrow"}>{eyebrow}</p>
+      </div>
+      <h2 className={`text-balance text-[clamp(30px,4.2vw,44px)] font-extrabold leading-[1.08] tracking-[-0.03em] ${dark ? "text-white" : "text-ink"}`}>{title}</h2>
+      {lead && <p className={`mt-5 text-pretty text-lead ${dark ? "text-ink-onspec" : "text-ink-secondary"} ${center ? "mx-auto" : ""} max-w-[64ch]`}>{lead}</p>}
     </Reveal>
   );
 }
 
-/* ── Bento card ───────────────────────────────────────────────── */
+/* ── Card ─────────────────────────────────────────────────────── */
 export function BentoCard({ children, className = "", interactive = true }: { children: ReactNode; className?: string; interactive?: boolean }) {
   return (
     <div className={`group relative overflow-hidden rounded-card border border-line bg-ground-paper p-7 transition-all duration-300 ${
-      interactive ? "hover:-translate-y-1 hover:border-brand-fill/30 hover:shadow-lifted" : ""
+      interactive ? "hover:-translate-y-1 hover:border-brand-fill/40 hover:shadow-lifted" : ""
     } ${className}`}>
       {interactive && (
         <span aria-hidden className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-gradient-to-r from-brand-fill to-cyan-fill transition-transform duration-500 group-hover:scale-x-100" />
       )}
       {children}
     </div>
+  );
+}
+
+/* ── Illustrative-data tag — every product mockup carries one ── */
+export function Illustrative({ dark = false }: { dark?: boolean }) {
+  return (
+    <span className={`font-mono text-[10px] uppercase tracking-[0.12em] ${dark ? "text-white/50" : "text-ink-muted"}`}>
+      Illustrative data
+    </span>
   );
 }

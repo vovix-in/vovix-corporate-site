@@ -1,32 +1,30 @@
-import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+// Self-hosted variable fonts: no build-time call to Google Fonts, no runtime third-party request.
+import "@fontsource-variable/plus-jakarta-sans";
+import "@fontsource-variable/jetbrains-mono";
 import "./globals.css";
 
-const sans = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
-
 const SITE = "https://www.vovix.in";
+const TITLE = "VOVIX | IT Automation, AI Document Processing & Data Engineering";
+const DESC =
+  "VOVIX Private Limited engineers business process automation, AI document processing, data pipelines and API integrations — and runs its own products: VOVIX Lens, OneView and Edge.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
-  title: "Vovix | Enterprise Platforms & Automation Engineering",
-  description:
-    "Vovix builds enterprise web platforms, SaaS dashboards and automation pipelines — and runs three products of its own: Vovix Lens, Edge and OneView.",
+  title: { default: TITLE, template: "%s | VOVIX" },
+  description: DESC,
+  applicationName: "VOVIX",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    siteName: "Vovix",
+    siteName: "VOVIX",
     url: SITE,
-    title: "Vovix | Enterprise Platforms & Automation Engineering",
-    description:
-      "Custom web platforms, SaaS dashboards and automation pipelines. The same engineering runs Vovix Lens, Edge and OneView in production.",
-    images: [{ url: "/assets/og-image.png", width: 1200, height: 630, alt: "Vovix Private Limited" }],
+    title: TITLE,
+    description: DESC,
+    locale: "en_IN",
+    images: [{ url: "/assets/og-image.png", width: 1200, height: 630, alt: "VOVIX — Automate Your Alpha" }],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Vovix | Enterprise Platforms & Automation Engineering",
-    images: ["/assets/og-image.png"],
-  },
+  twitter: { card: "summary_large_image", title: TITLE, description: DESC, images: ["/assets/og-image.png"] },
   icons: {
     icon: [
       { url: "/assets/favicon.svg", type: "image/svg+xml" },
@@ -37,18 +35,22 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = { themeColor: "#FFFFFF", width: "device-width", initialScale: 1 };
+
 const orgLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": `${SITE}/#organization`,
-  name: "Vovix Private Limited",
+  name: "VOVIX Private Limited",
   legalName: "Vovix Private Limited",
   alternateName: ["Vovix", "VOVIX"],
+  slogan: "Automate Your Alpha",
   url: `${SITE}/`,
-  logo: `${SITE}/assets/favicon.svg`,
+  logo: `${SITE}/assets/logo-512.png`,
   email: "admin@vovix.in",
+  telephone: "+91-90806-40562",
   description:
-    "Enterprise software engineering: custom web platforms, SaaS dashboards, automation pipelines and ERP integration. Products: Vovix Lens, Vovix OneView, Vovix Edge.",
+    "IT automation and AI engineering: business process automation, AI document processing, data pipelines, API integration and white-label engineering. Products: VOVIX Lens, VOVIX OneView, VOVIX Edge.",
   address: {
     "@type": "PostalAddress",
     streetAddress:
@@ -61,21 +63,20 @@ const orgLd = {
   foundingDate: "2026",
   areaServed: "Worldwide",
   knowsAbout: [
-    "Web platform engineering", "SaaS development", "Next.js", "Business process automation",
-    "Document data extraction", "TallyPrime integration", "ERP integration", "Data pipelines",
-    "API integration", "Internal dashboards", "Design systems",
+    "Business process automation", "AI document processing", "Document intelligence", "OCR",
+    "TallyPrime integration", "Data engineering", "Data pipelines", "API integration",
+    "Workflow automation", "White-label software engineering", "MetaTrader 5 integration",
   ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
+    <html lang="en-IN" style={{ ["--font-sans" as string]: "'Plus Jakarta Sans Variable'", ["--font-mono" as string]: "'JetBrains Mono Variable'" }}>
       <head>
-        <meta name="theme-color" content="#FFFFFF" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }} />
       </head>
       <body>
-        <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-control focus:bg-ink focus:px-4 focus:py-2 focus:text-white">
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-control focus:bg-navy focus:px-4 focus:py-2 focus:text-white">
           Skip to main content
         </a>
         {children}

@@ -1,61 +1,36 @@
-# Vovix Website Color Pattern
+# VOVIX Brand Colours — verified from the logo
 
-This file is the canonical color guide for the `vovix-corporate-site`.
+Canonical colour guide for `vovix-corporate-site` (v3, October 2026).
 
-## Primary Theme (Pattern 1: Wealth and Growth)
+Every brand value below was **sampled from the original logo artwork**
+(`public/assets/logo-vovix.png`, median of opaque pixels per region), not chosen by taste.
+The previous guide listed `#00C853` / `#102A43`; those do not match the logo and are retired.
 
-- Primary (Action): `#00C853` (Emerald Green)
-- Secondary (Surface): `#F5F7FA` (Pearl Silver)
-- Foundation (Trust): `#102A43` (Deep Navy)
-- Accent (Innovation): `#00E5FF` (Electric Cyan)
-- Loss Indicator: `#EF5350`
+| Role | Logo element | Hex | Token |
+| --- | --- | --- | --- |
+| Foundation navy | alpha mark + "VOV" | `#072836` | `navy`, `ink` |
+| Brand green | alpha sweep + pixel trail | `#09A54C` | `brand.fill` |
+| Accent cyan | rule under the wordmark | `#1FF3F3` | `cyan.fill` |
+| Silver | metallic "IX" | `#ADADAC` | `silver` |
 
-## CSS Variable Source of Truth
+## Derived, contrast-safe shades (same hue)
 
-Defined in `css/site.css` under `:root`:
+| Use | Hex | Token | Contrast |
+| --- | --- | --- | --- |
+| Green text on white | `#067D3A` | `brand.ink` | 5.25:1 |
+| Green hover (with navy text) | `#23B862` | `brand.hover` | — |
+| Cyan text on white | `#08737A` | `cyan.ink` | AA |
+| Secondary text | `#3B5666` | `ink.secondary` | 7.75:1 |
+| Muted text | `#5E7787` | `ink.muted` | 4.7:1 |
+| Surfaces | `#FFFFFF` / `#F4F7F9` / `#E9EEF2` | `ground.*` | — |
 
-- `--vovix-primary: #00C853`
-- `--vovix-secondary: #F5F7FA`
-- `--vovix-navy: #102A43`
-- `--vovix-cyan: #00E5FF`
-- `--vovix-loss: #EF5350`
-- `--vovix-bg: #F5F7FA`
-- `--text-main: #102A43`
-- `--text-muted: #486581`
-- `--border-color: #D9E2EC`
+## Rules
 
-## Usage Rules
+- Primary buttons are **navy text on logo green** (4.76:1). White on `#09A54C` is 3.23:1 — never use it for text.
+- `#09A54C` on navy is 4.76:1, so the exact logo green is text-safe on dark bands.
+- Logo green on white only for fills, icons and display-size type; use `brand.ink` for green body text.
+- Cyan is decorative: the brand rule (echoing the logo), focus rings on dark, data pulses.
+- Red/amber only for error and review states — never as brand accents.
+- The logo exists only as a light-background variant; place it on white or pearl surfaces. Never recolour, redraw or crop it.
 
-- Use `--vovix-primary` only for high-intent actions (primary buttons, success states, key highlights).
-- Use `--vovix-navy` for navigation, headings, and trust-heavy UI zones.
-- Use `--vovix-secondary` / `--vovix-bg` for page surfaces and cards to keep a light, transparent feel.
-- Use `--vovix-cyan` for focus and innovation accents (input focus, active technical highlights).
-- Use red only for negative/loss indicators (`--vovix-loss`).
-
-## Applied Website Mapping
-
-- Navbar background: `--vovix-navy`
-- Hero sections: navy-led gradient with emerald/cyan subtle glow
-- Primary CTA: `--vovix-primary` with darker hover
-- Form focus: cyan border/glow via `--vovix-cyan`
-- Trust strips and cards: silver-based surfaces with navy text
-
-### Site-wide (`body.theme-agency`)
-
-All main pages use `body.theme-agency` with `navbar.agency-nav` (white/pearl bar, navy links, gradient logo) and `footer.agency-footer` (pearl silver). Hero bands use shared `hero-navy` (mesh + grid).
-
-### Homepage (`body.theme-agency`)
-
-- Page surface: `--vovix-bg` (Pearl Silver)
-- Alternating band: `--vovix-secondary`
-- Service & pipeline cards: `--white` on `--border-color`, headings `--text-main`
-- Hero & code panel: `--vovix-navy` / `--vovix-navy-deep` with emerald & cyan radial glows
-- Eyebrows & active code tab: `--vovix-primary`; pipeline step numbers: `--vovix-cyan`
-- Lead form inputs: `--vovix-secondary` background; focus ring `--vovix-cyan`
-
-## Future Guidance
-
-- Keep light mode as default.
-- Avoid introducing muddy browns.
-- Avoid using red as a brand accent; reserve it for warnings/loss only.
-- For any new page, start from existing tokens in `css/site.css` instead of hardcoded hex values.
+Source of truth in code: `tailwind.config.ts` (Tailwind tokens) and `:root` in `app/globals.css` (CSS variables for SVG).

@@ -2,64 +2,80 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Brand tokens as CSS variables — for SVG strokes/fills and anything Tailwind classes can't reach.
+   Values are sampled from public/assets/logo-vovix.png; see tailwind.config.ts for contrast rules. */
+:root {
+  --vx-navy: #072836;
+  --vx-navy-deep: #041B25;
+  --vx-navy-raised: #0B3344;
+  --vx-green: #09A54C;
+  --vx-green-ink: #067D3A;
+  --vx-green-bright: #3DD27E;
+  --vx-green-wash: #E8F6EE;
+  --vx-cyan: #1FF3F3;
+  --vx-cyan-ink: #08737A;
+  --vx-silver: #ADADAC;
+  --vx-ink: #072836;
+  --vx-ink-2: #3B5666;
+  --vx-ink-3: #5E7787;
+  --vx-line: #E1E8ED;
+  --vx-sub: #F4F7F9;
+  --vx-warn: #B45309;
+  --vx-crit: #C2342C;
+}
+
 @layer base {
-  html { scroll-behavior: smooth; }
-  body { @apply bg-ground-paper text-ink font-sans antialiased; }
-  ::selection { background: #00C85333; }
-  :focus-visible { outline: 2px solid #00707F; outline-offset: 2px; border-radius: 4px; }
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+  body { @apply bg-ground-paper text-ink font-sans antialiased; font-feature-settings: "ss01", "cv11"; }
+  ::selection { background: rgba(9,165,76,0.22); }
+  :focus-visible { outline: 2px solid var(--vx-cyan-ink); outline-offset: 2px; border-radius: 4px; }
+  .on-dark :focus-visible { outline-color: var(--vx-cyan); }
 }
 
 @layer utilities {
-  .shell { @apply mx-auto w-full max-w-shell px-6; }
+  .shell { @apply mx-auto w-full max-w-shell px-4 sm:px-6; }
   .eyebrow { @apply font-mono text-label uppercase text-ink-muted; }
-  /* dotted field used behind light sections */
+  .eyebrow-dark { @apply font-mono text-label uppercase text-ink-onspec; }
+  .tnum { font-variant-numeric: tabular-nums; }
   .dotfield {
-    background-image: radial-gradient(circle at 1px 1px, rgba(16,42,67,0.055) 1px, transparent 0);
+    background-image: radial-gradient(circle at 1px 1px, rgba(7,40,54,0.06) 1px, transparent 0);
     background-size: 28px 28px;
   }
-  .tnum { font-variant-numeric: tabular-nums; }
-  /* entrance used by the hero and panels — pure CSS so it paints without JS */
-  .rise { animation: fadeUp .5s cubic-bezier(.16,1,.3,1) both; }
+  .gridfield-dark {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  /* The cyan rule that sits under the wordmark in the logo, reused as a section accent. */
+  .brand-rule { @apply block h-[3px] w-12 rounded-full; background: var(--vx-cyan); }
+  .brand-rule-light { @apply block h-[3px] w-12 rounded-full; background: linear-gradient(90deg, var(--vx-green), var(--vx-cyan)); }
+  .rise { animation: fadeUp .6s cubic-bezier(.16,1,.3,1) both; }
   .slide-in { animation: fieldIn .34s cubic-bezier(.16,1,.3,1) both; }
-  /* Edge sparkline draws itself once; pathLength="1" on the polyline makes the dash maths unit-free */
-  .spark-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: drawPath 1.2s ease-in-out .8s forwards; }
+  .fade-in { animation: fadeIn .4s ease-out both; }
+  .spark-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: drawPath 1.2s ease-in-out .4s forwards; }
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
 }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: none; }
-}
+@keyframes fadeUp   { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes fadeIn   { from { opacity: 0; } to { opacity: 1; } }
+@keyframes drawPath { to { stroke-dashoffset: 0; } }
+@keyframes fieldIn  { from { opacity: 0; transform: translateX(6px); } to { opacity: 1; transform: none; } }
+@keyframes scanline { from { top: -12%; } to { top: 102%; } }
+@keyframes laneFill { 0% { transform: scaleX(0); opacity: 0; } 12% { opacity: 1; } 70%,100% { transform: scaleX(1); opacity: 0; } }
+@keyframes laneDot  { 0% { left: -2%; opacity: 0; } 10% { opacity: 1; } 88% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+@keyframes typing   { 0%,60%,100% { opacity: .25; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-2px); } }
+@keyframes nodePulse { 0%,100% { opacity: 0; transform: scale(1); } 40% { opacity: .55; } 100% { transform: scale(1.9); } }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-@keyframes drawPath {
-  to { stroke-dashoffset: 0; }
-}
-
-@keyframes fieldIn {
-  from { opacity: 0; transform: translateX(5px); }
-  to   { opacity: 1; transform: none; }
-}
-@keyframes scanline {
-  from { top: -12%; }
-  to   { top: 102%; }
-}
-
-@keyframes laneFill {
-  0%        { transform: scaleX(0); opacity: 0; }
-  12%       { opacity: 1; }
-  70%, 100% { transform: scaleX(1); opacity: 0; }
-}
-@keyframes laneDot {
-  0%        { left: -2%; opacity: 0; }
-  10%       { opacity: 1; }
-  88%       { opacity: 1; }
-  100%      { left: 100%; opacity: 0; }
-}
+/* Paused when off-screen or tab hidden — set by usePausable() */
+[data-paused="true"] *, [data-paused="true"] { animation-play-state: paused !important; }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important;
-    transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important; scroll-behavior: auto !important;
+  }
 }

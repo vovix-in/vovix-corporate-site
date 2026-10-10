@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { PageShell } from "@/components/page-shell";
-import { Section, Reveal, Button } from "@/components/ui";
+import { Section, Reveal } from "@/components/ui";
+import { ContactForm } from "@/components/contact-form";
 
 export const metadata: Metadata = {
-  title: "Contact | Vovix Private Limited",
-  description: "Talk to Vovix about a platform build, an automation project, or white-label delivery under NDA.",
+  title: "Contact — Discuss Your Automation Project",
+  description: "Talk to VOVIX about workflow automation, AI document processing, data pipelines, API integration or white-label engineering under NDA.",
   alternates: { canonical: "/contact" },
 };
 
@@ -18,38 +19,24 @@ const DETAILS = [
 
 export default function Contact() {
   return (
-    <PageShell eyebrow="Enquiries" title="Let's talk about what you're building"
-      lead="For project scope, partnership discussions or product questions. We aim to reply within one business day (IST, Monday–Friday).">
+    <PageShell eyebrow="Contact" title="Let's Automate What's Slowing Your Business Down."
+      lead="Tell us about your workflow, data challenges, or integration requirements. We'll explore a practical engineering solution tailored to your business.">
       <Section>
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr]">
+        <div className="grid gap-12 lg:grid-cols-[1.3fr_0.9fr]">
           <Reveal>
-            <h2 className="text-h2 text-ink">Start the conversation</h2>
-            <p className="mt-4 text-lead text-ink-secondary">
-              Describe one process your team repeats every week, or the platform you need built. You&rsquo;ll get a straight answer on feasibility, a timeline, and what a first delivery slice looks like — or an honest &ldquo;not a fit&rdquo;.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="mailto:admin@vovix.in?subject=Project%20enquiry%20-%20vovix.in" size="lg"><Mail size={17} /> Email us</Button>
-              <Button href="/services#white-label" size="lg" variant="secondary">White-label enquiry</Button>
-            </div>
-            <div className="mt-10 grid gap-4 sm:grid-cols-3">
-              {[["< 1 day","First reply","Typical first reply within one business day."],
-                ["Scope first","Written understanding","A written scope before we commit to any build."],
-                ["No hype","No fake wins","We won't invent client logos or savings percentages."]].map(([tag,h,p]) => (
-                <div key={h} className="rounded-card border border-line bg-ground-paper p-5">
-                  <span className="inline-block rounded-chip bg-brand-wash px-2 py-1 font-mono text-[11px] font-bold text-brand-ink">{tag}</span>
-                  <p className="mt-3 text-[15px] font-bold text-ink">{h}</p>
-                  <p className="mt-1 text-[13px] leading-snug text-ink-secondary">{p}</p>
-                </div>
-              ))}
+            <div className="rounded-panel border border-line bg-white p-6 shadow-lifted sm:p-8">
+              <h2 className="text-h3 text-ink">Discuss your project</h2>
+              <p className="mb-6 mt-2 text-small text-ink-secondary">Describe one process your team repeats every week, or the system you need connected. You&rsquo;ll get a straight answer on feasibility, a timeline, and what a first delivery slice looks like — or an honest &ldquo;not a fit&rdquo;.</p>
+              <ContactForm />
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="rounded-card border border-line bg-ground-sub p-7">
+            <div className="rounded-panel border border-line bg-ground-sub p-7">
               <p className="eyebrow mb-5">Contact details</p>
               <div className="space-y-5">
                 {DETAILS.map((d) => (
                   <div key={d.k} className="flex gap-3">
-                    <d.i size={17} className="mt-0.5 shrink-0 text-brand-ink" />
+                    <d.i size={17} className="mt-0.5 shrink-0 text-brand-ink" aria-hidden />
                     <div>
                       <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-muted">{d.k}</p>
                       {d.href
@@ -59,6 +46,16 @@ export default function Contact() {
                   </div>
                 ))}
               </div>
+            </div>
+            <div className="mt-5 space-y-3">
+              {[["First reply", "Typically within one business day (IST, Mon–Fri)."],
+                ["Scope first", "A written understanding before we commit to any build."],
+                ["Partners", "White-label work starts with a mutual NDA, signed before you share client details."]].map(([h, p]) => (
+                <div key={h} className="rounded-card border border-line bg-white p-5">
+                  <p className="text-[14.5px] font-bold text-ink">{h}</p>
+                  <p className="mt-1 text-[13px] leading-snug text-ink-secondary">{p}</p>
+                </div>
+              ))}
             </div>
           </Reveal>
         </div>

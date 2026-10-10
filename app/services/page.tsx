@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import { Lock, ShieldCheck, GitBranch, Tag, Check, X } from "lucide-react";
 import { PageShell } from "@/components/page-shell";
 import { Section, Reveal, SectionHead, BentoCard, Button, Chip } from "@/components/ui";
+import { ServiceExplorer } from "@/components/services";
+import { AgentOrchestra, AGENT_TYPES } from "@/components/agent-orchestra";
+import { ScopeBuilder } from "@/components/scope-builder";
 
 export const metadata: Metadata = {
-  title: "Services | Vovix",
-  description: "Custom web platforms, SaaS dashboards, automation pipelines and ERP integration — plus NDA-backed white-label delivery for agencies and studios.",
+  title: "Services — Workflow Automation, AI Document Processing & Data Engineering",
+  description: "Business workflow automation, AI document intelligence, data pipelines, API integration, web data monitoring, custom internal tools and white-label automation engineering from VOVIX.",
   alternates: { canonical: "/services" },
 };
 
@@ -13,7 +16,7 @@ const COMMITMENTS = [
   { i: Lock, h: "A mutual NDA comes first", p: "Signed before you send us anything identifiable — not after the scope call. It covers your client's name, the project, your pricing, and the fact that you work with us at all. Our involvement is confidential in both directions." },
   { i: ShieldCheck, h: "Zero contact with your client", p: "We do not email, call, market to, or solicit your client — during the engagement or after it. If one of them approaches us directly, we route them back to you. That sits in the agreement with a non-solicitation clause, not in a sales call." },
   { i: GitBranch, h: "The IP is yours on creation", p: "Work made for hire: ownership passes as the code is written, not on final payment. It lands in your repository as we go, so there is never a moment where finished work is held against an invoice." },
-  { i: Tag, h: "Nothing carries our name", p: "Unbranded deliverables: no Vovix marks in the code, the documentation, the dashboards, or the runbook. We publish no case study, name no partner, and use no logo — unless you give us that permission in writing." },
+  { i: Tag, h: "Nothing carries our name", p: "Unbranded deliverables: no VOVIX marks in the code, the documentation, the dashboards, or the runbook. We publish no case study, name no partner, and use no logo — unless you give us that permission in writing." },
 ];
 
 const STAGES = [
@@ -28,11 +31,40 @@ const STAGES = [
 export default function Services() {
   return (
     <PageShell
-      eyebrow="Client engineering"
-      title="What we build, and how we scope it"
-      lead="Web platforms, SaaS dashboards, automation pipelines and ERP integration — direct, or white-label behind your brand under NDA. Every engagement starts with a written scope, including the parts we'd advise you not to build yet."
+      eyebrow="Engineering services"
+      title="Automation, AI and data systems, engineered to run unattended."
+      lead="Seven ways we work with businesses, finance teams and technology partners — direct, or white-label behind your brand under NDA. Every engagement starts with a written scope, including the parts we'd advise you not to build yet."
+      actions={<><Button href="/contact" size="lg">Discuss Your Project</Button><Button href="#estimate" size="lg" variant="onDark">Estimate a timeline</Button></>}
     >
-      <Section id="white-label">
+      <Section id="capabilities">
+        <SectionHead eyebrow="What we build" title="Problem, approach, outcome — for each service." lead="Choose a service to see the business problem it addresses, how we engineer it, and what changes once it's running." />
+        <ServiceExplorer />
+      </Section>
+
+      <Section id="agents" tone="sub">
+        <SectionHead
+          eyebrow="AI agents"
+          title="Agents that do the work, not just answer questions."
+          lead="A chatbot replies. An agent reads the document, checks it against your ledger, posts the entry, and escalates the one case it isn't sure about. Here are four working on one job at once."
+        />
+        <Reveal><AgentOrchestra /></Reveal>
+        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {AGENT_TYPES.map((a, i) => (
+            <Reveal key={a.name} delay={i * 0.05}>
+              <BentoCard className="h-full">
+                <div className="mb-5 flex items-center justify-between gap-3">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-control bg-brand-wash text-brand-ink"><a.icon size={20} aria-hidden /></span>
+                  <Chip>{a.chip}</Chip>
+                </div>
+                <h3 className="text-[17px] font-bold tracking-[-0.01em] text-ink">{a.name}</h3>
+                <p className="mt-2 text-small leading-relaxed text-ink-secondary">{a.body}</p>
+              </BentoCard>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+      <Section id="white-label-partners">
         <div className="mb-12 text-center">
           <Reveal>
             <div className="mb-3 flex flex-wrap items-center justify-center gap-2">
@@ -41,7 +73,7 @@ export default function Services() {
             </div>
             <h2 className="text-h2 text-ink">White-label delivery</h2>
             <p className="mx-auto mt-4 max-w-[62ch] text-lead text-ink-secondary">
-              You keep the client, the brand, and the margin. We build behind you and stay invisible — no Vovix name on the work, no contact with your client, ever.
+              You keep the client, the brand, and the margin. We build behind you and stay invisible — no VOVIX name on the work, no contact with your client, ever.
             </p>
           </Reveal>
         </div>
@@ -59,7 +91,7 @@ export default function Services() {
         </div>
       </Section>
 
-      <Section alt>
+      <Section tone="sub">
         <SectionHead eyebrow="The process" title="How a partner engagement runs" lead="Six stages. You stay the only voice your client hears at every one of them." />
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {STAGES.map(([n, h, p], i) => (
@@ -94,7 +126,7 @@ export default function Services() {
             <p className="eyebrow mb-3">Before you ask</p>
             <h3 className="mb-5 text-[20px] font-bold tracking-[-0.015em] text-ink">What we won&rsquo;t do</h3>
             <div className="space-y-3">
-              {["Take a partner engagement we can't properly staff. We're early-stage and hold a small number of slots at a time — you'll get a date or a no, not a maybe.",
+              {["Take a partner engagement we can't properly staff. We hold a limited number of partner slots at a time — you'll get a date or a no, not a maybe.",
                 "Pretend white-labelling fixes an unclear brief. If the requirement is vague it will fail under your brand rather than ours, so we'll say so before you commit to your client.",
                 "Quote your client, sit on your calls unannounced, or ask what your margin is."].map((p) => (
                 <div key={p} className="flex gap-2.5">
@@ -106,9 +138,17 @@ export default function Services() {
           </Reveal>
         </div>
         <Reveal className="mt-12 text-center">
-          <Button href="/#start" size="lg">Start a partner conversation</Button>
+          <Button href="/contact" size="lg">Start a partner conversation</Button>
           <p className="mt-4 text-small text-ink-muted">Send the requirement and we&rsquo;ll return the NDA first. Typical first reply within one business day (IST, Mon–Fri).</p>
         </Reveal>
+      </Section>
+      <Section id="estimate" tone="sub">
+        <SectionHead
+          eyebrow="Scope builder"
+          title="Roughly what would this take?"
+          lead="Pick what you're building and what it has to connect to. You get a timeline range and a phase breakdown — not a price, because a number nobody can stand behind helps neither of us."
+        />
+        <Reveal><ScopeBuilder /></Reveal>
       </Section>
     </PageShell>
   );

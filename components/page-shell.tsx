@@ -2,17 +2,19 @@ import type { ReactNode } from "react";
 import { Navbar } from "./nav";
 import { Footer } from "./footer";
 
-export function PageShell({ eyebrow, title, lead, children }: { eyebrow: string; title: string; lead?: string; children: ReactNode }) {
+export function PageShell({ eyebrow, title, lead, children, actions }: { eyebrow: string; title: string; lead?: string; children: ReactNode; actions?: ReactNode }) {
   return (
     <>
       <Navbar />
       <main id="main">
-        <section className="dotfield relative overflow-hidden border-b border-line bg-gradient-to-b from-ground-sub to-ground-paper">
-          <div aria-hidden className="pointer-events-none absolute -right-32 -top-48 h-[480px] w-[480px] rounded-full bg-[radial-gradient(circle,rgba(0,200,83,0.10),transparent_68%)]" />
-          <div className="shell relative py-14 text-center md:py-20">
-            <p className="eyebrow mb-4">{eyebrow}</p>
-            <h1 className="mx-auto max-w-[20ch] text-balance text-[clamp(30px,4.6vw,46px)] font-extrabold leading-[1.08] tracking-[-0.028em] text-ink">{title}</h1>
-            {lead && <p className="mx-auto mt-5 max-w-[62ch] text-lead text-ink-secondary">{lead}</p>}
+        <section className="on-dark relative overflow-hidden bg-navy text-white">
+          <div aria-hidden className="gridfield-dark absolute inset-0 [mask-image:radial-gradient(ellipse_at_80%_0%,black,transparent_70%)]" />
+          <div aria-hidden className="pointer-events-none absolute -right-32 -top-48 h-[480px] w-[480px] rounded-full bg-[radial-gradient(circle,rgba(9,165,76,0.18),transparent_68%)]" />
+          <div className="shell relative py-16 md:py-24">
+            <p className="rise flex items-center gap-3 font-mono text-label uppercase text-ink-onspec"><span className="brand-rule" aria-hidden />{eyebrow}</p>
+            <h1 className="rise mt-5 max-w-[22ch] text-balance text-[clamp(34px,5vw,56px)] font-extrabold leading-[1.05] tracking-[-0.035em] [animation-delay:.08s]">{title}</h1>
+            {lead && <p className="rise mt-6 max-w-[62ch] text-pretty text-lead text-ink-onspec [animation-delay:.16s]">{lead}</p>}
+            {actions && <div className="rise mt-8 flex flex-wrap gap-3 [animation-delay:.24s]">{actions}</div>}
           </div>
         </section>
         {children}

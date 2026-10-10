@@ -114,7 +114,7 @@ export function ScopeBuilder() {
                 <p className="mt-5 text-[12px] leading-relaxed text-ink-muted">
                   Indicative only. We confirm against your actual requirements in writing before anything is committed.
                 </p>
-                <Button href="#start" className="mt-5 w-full">
+                <Button href="/contact" className="mt-5 w-full">
                   Get this scoped properly <ArrowRight size={16} />
                 </Button>
               </motion.div>

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 const SITE = "https://www.vovix.in";
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date("2026-10-06");
+  const now = new Date("2026-10-10");
   return [
     { url: `${SITE}/`,               lastModified: now, changeFrequency: "weekly",  priority: 1.0 },
     { url: `${SITE}/services`,       lastModified: now, changeFrequency: "monthly", priority: 0.95 },

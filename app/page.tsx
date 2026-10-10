@@ -1,61 +1,73 @@
 import {
-  ScanLine, TrendingUp, MessageSquare, ShieldCheck, Globe, LayoutDashboard,
-  Workflow, Palette, ArrowRight, Check, Mail,
+  ArrowRight, Calculator, Briefcase, FileStack, Landmark, Cloud, Handshake, BarChart3,
+  Search, PenTool, Code2, Plug, FlaskConical, Gauge, X, Check, Mail, Phone, MapPin,
 } from "lucide-react";
 import { Navbar } from "@/components/nav";
 import { Footer } from "@/components/footer";
-import { Button, Chip, Reveal, Section, SectionHead, BentoCard } from "@/components/ui";
-import { ExtractionViewer, SignalStream } from "@/components/hero-visuals";
-import { ScopeBuilder } from "@/components/scope-builder";
-import { AgentOrchestra, AGENT_TYPES } from "@/components/agent-orchestra";
+import { Button, Reveal, Section, SectionHead } from "@/components/ui";
+import { HeroCanvas } from "@/components/hero-canvas";
+import { ProductShowcase } from "@/components/product-showcase";
+import { ServiceExplorer } from "@/components/services";
+import { PipelineDiagram } from "@/components/pipeline";
+import { ContactForm } from "@/components/contact-form";
 
-const PRODUCTS = [
-  {
-    icon: ScanLine, tint: "bg-[#FDF2E3] text-[#B45309]", span: "lg:col-span-2",
-    kicker: "Document intelligence · Live", name: "Vovix Lens",
-    body: "Invoices, bank statements and KYC records read once — every line item, table and tax breakup — then posted into TallyPrime, your ERP or Excel.",
-    bullets: ["Any format, any language — photo, scan or PDF. No templates.", "GSTIN validation and tax-field intelligence built in", "Low-confidence fields flagged for a human before anything posts"],
-    chip: "Every value links to its source page",
-    cta: { l: "Open Vovix Lens", href: "https://lens.vovix.in/", ext: true },
-  },
-  {
-    icon: TrendingUp, tint: "bg-[#E8F2FE] text-[#0071E3]", span: "",
-    kicker: "Market engine · Beta", name: "Vovix Edge",
-    body: "A decision-support engine for MetaTrader 5 built around a strict quality gate — most candidate setups are rejected by design.",
-    bullets: ["Every signal sized to the account", "Kill switch and daily limits", "Shows nothing when conditions don't qualify"],
-    chip: "Knows when not to trade",
-    cta: { l: "Learn more", href: "/products#edge" },
-  },
-  {
-    icon: MessageSquare, tint: "bg-brand-wash text-brand-ink", span: "",
-    kicker: "Conversational delivery · Live", name: "Vovix OneView",
-    body: "Equity research that runs entirely inside WhatsApp. Type an NSE or BSE ticker, get a structured report back — no app to install.",
-    bullets: ["Fundamentals and technicals in one report", "Follow-ups answered in full context", "A workflow living where users already are"],
-    chip: "Zero install · WhatsApp native",
-    cta: { l: "Learn more", href: "/products#oneview" },
-  },
-  {
-    icon: ShieldCheck, tint: "bg-[#EEF1F6] text-ink", span: "lg:col-span-2",
-    kicker: "How we handle your data and your clients", name: "Built to be handed over",
-    body: "Mutual NDA before anything identifiable is shared. IP assigned as it's written, into your repository. Nothing we build carries our name unless you put it there.",
-    bullets: ["Work made for hire — ownership passes at creation, not on payment", "Non-solicitation: we never contact your client, during or after", "Human-in-the-loop wherever a wrong automated call would cost you"],
-    chip: "Under NDA · IP yours at creation",
-    cta: { l: "How white-label works", href: "/services#white-label" },
-  },
+const PROOF = [
+  ["3", "products built and operated in-house"],
+  ["40+", "languages read by VOVIX Lens, incl. Indic scripts"],
+  ["TallyPrime XML", "plus Excel, JSON and CSV exports from Lens"],
+  ["WhatsApp · MT5", "automation delivered where users already work"],
 ];
 
-const PILLARS = [
-  { icon: Globe, name: "Web platforms & portals", body: "Marketing sites and enterprise portals that load fast on a bad connection and stay editable by your team.", stack: ["Next.js", "TypeScript", "Tailwind", "Headless CMS"] },
-  { icon: LayoutDashboard, name: "SaaS & dashboard engineering", body: "Multi-tenant apps, real-time charts, and the unglamorous state management that keeps them correct under load.", stack: ["React", "Node", "PostgreSQL", "Redis"] },
-  { icon: Workflow, name: "AI agents & ERP automation", body: "Document pipelines, Tally and ERP integrations, WhatsApp delivery, scheduled jobs with real error recovery.", stack: ["Python", "FastAPI", "Airflow", "Docker"] },
-  { icon: Palette, name: "Design systems in Figma", body: "Token-driven component libraries that survive contact with a second developer — like the one this site is built from.", stack: ["Figma", "Tokens Studio", "Storybook"] },
+const PROCESS = [
+  { icon: Search, h: "Discover", p: "Map the current process, systems and data — and where it actually breaks. Including what shouldn't be automated." },
+  { icon: PenTool, h: "Architect", p: "Design the workflow, data model, integrations and the thresholds where a person stays in the loop. Scope agreed in writing." },
+  { icon: Code2, h: "Engineer", p: "Build in short increments with validation, retries and structured logging from the first commit." },
+  { icon: Plug, h: "Integrate", p: "Connect to your real accounting, CRM, database and API endpoints — staging first, then production." },
+  { icon: FlaskConical, h: "Validate", p: "Test edge cases, bad inputs and failure paths with your own documents and data before go-live." },
+  { icon: Gauge, h: "Operate", p: "Monitoring, alerts and a runbook. We stay on to support it, or hand it over cleanly to your team." },
 ];
 
-const STEPS = [
-  { n: "01", h: "Written scope first", p: "We map the real requirement, name what we'd advise against, and put the whole thing in writing before a line of code. No verbal commitments." },
-  { n: "02", h: "Build with the checks in", p: "Validation, retries, monitoring and human approval steps engineered from day one — not bolted on after the first incident." },
-  { n: "03", h: "Hand it over properly", p: "Your repository, your branding, schema documentation and a runbook your team can operate without calling us." },
+const CONTRAST = [
+  ["Inputs", "A clean sample file", "Real documents, every format and language"],
+  ["Accuracy", "Looks right, unmeasured", "Confidence per field; low scores routed to a person"],
+  ["Logic", "A prompt", "AI combined with deterministic business rules"],
+  ["Failure", "Fails silently", "Retries, alerts and a runbook"],
+  ["Systems", "Copy-paste the output", "Integrated by API with idempotent, logged writes"],
+  ["Ownership", "Locked to a vendor", "Your repository, your documentation"],
 ];
+
+const PRINCIPLES = [
+  "Automation designed around real operational problems",
+  "Practical AI integrated with business rules",
+  "API-first, integration-friendly architecture",
+  "Data quality, validation and exception handling",
+  "Observability and operational reliability",
+  "Risk-aware system design",
+  "Custom and white-label delivery",
+  "Built to fit existing workflows",
+];
+
+const INDUSTRIES = [
+  { icon: Calculator, h: "Accounting & financial operations", p: "Purchase invoice and bank statement processing, TallyPrime posting, GST checks and ledger reconciliation." },
+  { icon: Briefcase, h: "Professional services", p: "Client document intake, KYC collection, engagement trackers and report assembly." },
+  { icon: FileStack, h: "Back-office & document-heavy teams", p: "Classification, extraction and validation of forms, contracts and statements, with a review queue." },
+  { icon: Landmark, h: "Financial technology", p: "Market and filings data pipelines, research delivery, rule-based decision support and audit trails." },
+  { icon: Cloud, h: "SaaS businesses", p: "Billing and CRM sync, customer data pipelines, internal admin tools and integration backends." },
+  { icon: Handshake, h: "Agencies & technology partners", p: "Headless automation backends and integrations delivered white-label under NDA." },
+  { icon: BarChart3, h: "Data-intensive operations", p: "Scheduled ingestion, change monitoring, reconciliation and dashboards a team can trust." },
+];
+
+const STACK = [
+  ["Backend engineering", "Services and job workers built for correctness under load.", ["Python", "FastAPI", "Node.js", "TypeScript"]],
+  ["APIs & webhooks", "Authenticated, rate-limit aware, idempotent integrations.", ["REST", "Webhooks", "OAuth", "Retry queues"]],
+  ["Data & storage", "Schemas, indexes and migrations planned up front.", ["PostgreSQL", "MongoDB", "Redis"]],
+  ["AI & document processing", "Extraction paired with rules and human review.", ["OCR", "LLM extraction", "Confidence scoring"]],
+  ["Workflow orchestration", "Scheduled and event-driven pipelines with backoff.", ["Airflow", "Docker", "Cron & event triggers"]],
+  ["Cloud infrastructure", "Containerised services in India-region cloud.", ["AWS · Mumbai", "Encrypted at rest", "TLS"]],
+  ["Monitoring & observability", "Know a job failed before your users do.", ["Structured logs", "Run metrics", "Alerting"]],
+  ["Financial platforms", "Market data and delivery channels in production.", ["MetaTrader 5", "NSE / BSE data", "WhatsApp", "Telegram"]],
+  ["ERP & accounting", "Output that posts cleanly into the books.", ["TallyPrime XML", "Excel", "JSON / CSV"]],
+] as const;
 
 export default function Home() {
   return (
@@ -63,205 +75,206 @@ export default function Home() {
       <Navbar />
       <main id="main">
 
-        {/* ── Hero ── */}
-        <section className="dotfield relative overflow-hidden border-b border-line bg-gradient-to-b from-ground-sub to-ground-paper">
-          <div aria-hidden className="pointer-events-none absolute -right-40 -top-56 h-[620px] w-[620px] rounded-full bg-[radial-gradient(circle,rgba(0,200,83,0.11),transparent_68%)]" />
-          <div aria-hidden className="pointer-events-none absolute -bottom-52 -left-40 h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle,rgba(0,229,255,0.09),transparent_68%)]" />
-          <div className="shell relative grid items-center gap-14 py-16 md:py-20 lg:grid-cols-[1fr_1.05fr]">
-            {/* Staggered entrance, matching the Figma motion flow (80ms steps). Pure CSS: paints without JS. */}
-            <div>
-              <p className="eyebrow rise mb-4 [animation-delay:.1s]">Enterprise software engineering · India, working worldwide</p>
-              <h1 className="rise [animation-delay:.18s] text-balance text-[clamp(34px,5.2vw,56px)] font-extrabold leading-[1.06] tracking-[-0.03em] text-ink">
-                We build enterprise platforms — and run three of our own.
-              </h1>
-              <p className="rise mt-6 max-w-[54ch] text-lead text-ink-secondary [animation-delay:.26s]">
-                Custom web platforms, SaaS dashboards and automation pipelines for teams who need them to hold up under real load. The same engineering runs Vovix Lens, Edge and OneView in production — so you can inspect our work before you commission any.
-              </p>
-              <div className="rise mt-8 flex flex-wrap gap-3 [animation-delay:.34s]">
-                <Button href="#start" size="lg">Start your project <ArrowRight size={18} /></Button>
-                <Button href="#products" size="lg" variant="secondary">See what we&rsquo;ve built</Button>
-              </div>
-              <div className="rise mt-8 flex flex-wrap gap-2 [animation-delay:.42s]">
-                <Chip>Written scope before we build</Chip>
-                <Chip>White-label under NDA</Chip>
-                <Chip>You own the code and the runbook</Chip>
-                <Chip live>3 products live in production</Chip>
-              </div>
-            </div>
+        {/* ═══ HERO ═══ */}
+        <section className="on-dark relative overflow-hidden bg-navy text-white" aria-labelledby="hero-title">
+          <div aria-hidden className="gridfield-dark absolute inset-0 [mask-image:radial-gradient(ellipse_at_70%_40%,black,transparent_75%)]" />
+          <div aria-hidden className="absolute -right-40 top-10 h-[560px] w-[560px] rounded-full bg-[radial-gradient(circle,rgba(9,165,76,0.16),transparent_65%)]" />
+          <div aria-hidden className="absolute -bottom-48 left-[-10%] h-[420px] w-[620px] rounded-full bg-[radial-gradient(circle,rgba(31,243,243,0.07),transparent_65%)]" />
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:gap-5">
-              <div className="rise [animation-delay:.3s]"><ExtractionViewer /></div>
-              <div className="rise [animation-delay:.4s]"><SignalStream /></div>
+          <div className="shell relative pb-8 pt-14 md:pt-20 lg:flex lg:min-h-[640px] lg:items-center lg:pb-20 lg:pt-16">
+            <div className="relative z-[1] lg:max-w-[520px]">
+              <p className="rise flex items-center gap-3 font-mono text-[12px] font-semibold uppercase tracking-[0.22em] text-white/80 [animation-delay:.05s]">
+                <span className="brand-rule" aria-hidden /> Automate Your Alpha
+              </p>
+              <h1 id="hero-title" className="rise mt-6 text-balance text-[clamp(40px,5.4vw,64px)] font-extrabold leading-[1.03] tracking-[-0.038em] [animation-delay:.12s]">
+                Intelligence That <span className="text-brand-fill">Automates</span> Business.
+              </h1>
+              <p className="rise mt-6 max-w-[52ch] text-pretty text-lead text-ink-onspec [animation-delay:.2s]">
+                VOVIX engineers intelligent automation, AI-powered document processing, and connected data systems that turn complex business workflows into reliable, scalable operations.
+              </p>
+              <div className="rise mt-9 flex flex-wrap gap-3 [animation-delay:.28s]">
+                <Button href="#products" size="lg">Explore Our Solutions <ArrowRight size={18} aria-hidden /></Button>
+                <Button href="/contact" size="lg" variant="onDark">Discuss Your Project</Button>
+              </div>
+              <ul className="rise mt-9 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[11px] uppercase tracking-[0.14em] text-white/55 [animation-delay:.36s]" aria-label="Capabilities">
+                {["Workflow automation", "Document intelligence", "Data pipelines", "API integration"].map((c) => (
+                  <li key={c} className="flex items-center gap-2"><span className="h-1 w-1 rounded-full bg-brand-fill" aria-hidden />{c}</li>
+                ))}
+              </ul>
             </div>
+          </div>
+          {/* Canvas: in-flow band under the copy on mobile; full-height background on desktop */}
+          <div className="rise relative -mt-2 h-[260px] px-2 pb-6 sm:h-[360px] lg:absolute lg:inset-y-0 lg:left-[48%] lg:right-[1.5%] lg:mt-0 lg:h-auto lg:px-0 lg:pb-0 lg:[mask-image:linear-gradient(to_right,transparent,black_10%)] [animation-delay:.2s]">
+            <HeroCanvas className="h-full w-full" />
           </div>
         </section>
 
-        {/* ── Products ── */}
+        {/* ═══ PROOF STRIP ═══ */}
+        <section aria-label="At a glance" className="border-b border-line bg-white">
+          <div className="shell"><div className="grid grid-cols-2 gap-px bg-line lg:grid-cols-4">
+            {PROOF.map(([k, v]) => (
+              <div key={k} className="bg-white px-4 py-7 sm:px-6">
+                <p className="text-[clamp(20px,2.4vw,28px)] font-extrabold tracking-[-0.02em] text-ink">{k}</p>
+                <p className="mt-1 text-[13px] leading-snug text-ink-muted">{v}</p>
+              </div>
+            ))}
+          </div></div>
+        </section>
+
+        {/* ═══ PRODUCTS ═══ */}
         <Section id="products">
           <SectionHead
-            eyebrow="Engineered by Vovix"
-            title="Three products we built, run and maintain"
-            lead="Not a portfolio of client logos — software of our own, live and in use. It is the fastest way to judge how we engineer before you hand us anything."
+            eyebrow="Products"
+            title="Three products we engineer, run and maintain."
+            lead="Our own software, in production. Each one is a working example of the automation we build for clients — document intelligence, conversational delivery and risk-controlled execution."
           />
-          <div className="grid gap-5 lg:grid-cols-3">
-            {PRODUCTS.map((p, i) => (
-              <Reveal key={p.name} delay={i * 0.06} className={p.span}>
-                <BentoCard className="flex h-full flex-col">
-                  <div className={`mb-5 flex h-12 w-12 items-center justify-center rounded-control ${p.tint}`}>
-                    <p.icon size={22} />
-                  </div>
-                  <p className="eyebrow mb-1.5">{p.kicker}</p>
-                  <h3 className="text-h3 text-ink">{p.name}</h3>
-                  <p className="mt-2.5 text-small leading-relaxed text-ink-secondary">{p.body}</p>
-                  <ul className="mt-4 space-y-2">
-                    {p.bullets.map((b) => (
-                      <li key={b} className="flex gap-2 text-[13px] leading-snug text-ink-secondary">
-                        <Check size={14} className="mt-px shrink-0 text-brand-ink" /> {b}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-auto pt-5">
-                    <Chip className="mb-4">{p.chip}</Chip>
-                    <a href={p.cta.href} {...(p.cta.ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                       className="group/l flex items-center gap-1.5 text-small font-bold text-brand-ink">
-                      {p.cta.l}
-                      <ArrowRight size={15} className="transition-transform group-hover/l:translate-x-1" />
-                    </a>
-                  </div>
-                </BentoCard>
-              </Reveal>
-            ))}
-          </div>
+          <ProductShowcase />
         </Section>
 
-        {/* ── Services ── */}
-        <Section id="services" alt>
+        {/* ═══ SERVICES ═══ */}
+        <Section id="services" tone="sub">
           <SectionHead
-            eyebrow="Client engineering"
-            title="What we build for you"
-            lead="The products above are the proof. This is the work — scoped in writing, built with the checks in, and handed over so your team owns it."
+            eyebrow="Engineering services"
+            title="An engineering partner for the work between your systems."
+            lead="Beyond our products, we design and build automation, AI and data systems for businesses, finance teams and technology partners — scoped in writing and engineered to run unattended."
           />
-          <div className="grid gap-5 md:grid-cols-2">
-            {PILLARS.map((p, i) => (
-              <Reveal key={p.name} delay={i * 0.06}>
-                <BentoCard className="h-full">
-                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-control bg-brand-wash text-brand-ink">
-                    <p.icon size={22} />
-                  </div>
-                  <h3 className="text-[19px] font-bold tracking-[-0.012em] text-ink">{p.name}</h3>
-                  <p className="mt-2.5 text-small leading-relaxed text-ink-secondary">{p.body}</p>
-                  <div className="mt-5 flex flex-wrap gap-1.5">
-                    {p.stack.map((s) => (
-                      <span key={s} className="rounded-chip border border-line bg-ground-sub px-2 py-1 font-mono text-[10.5px] font-semibold text-ink-muted">{s}</span>
-                    ))}
-                  </div>
-                </BentoCard>
-              </Reveal>
-            ))}
-          </div>
+          <ServiceExplorer />
         </Section>
 
-        {/* ── AI agents ── */}
-        <Section id="agents" alt>
+        {/* ═══ AUTOMATION PIPELINE ═══ */}
+        <Section id="automation">
           <SectionHead
-            eyebrow="AI agents"
-            title="Agents that do the work, not just answer questions"
-            lead="A chatbot replies. An agent reads the document, checks it against your ledger, posts the entry, and escalates the one case it isn't sure about. These run on schedules and events, inside your systems — here's four of them working on one job at once."
+            center
+            eyebrow="Automation, shown"
+            title="From Manual Work to Intelligent Workflows."
+            lead="Every pipeline we ship has the same backbone: ingest, normalise, validate with AI and rules, reconcile, route exceptions to a person, deliver — and monitor all of it. Pick an example."
           />
-          <Reveal><AgentOrchestra /></Reveal>
+          <Reveal><PipelineDiagram /></Reveal>
+        </Section>
 
-          <div className="mt-14">
-            <Reveal className="mb-8 text-center">
-              <p className="eyebrow mb-3">What we can build for you</p>
-              <h3 className="text-balance text-[clamp(21px,2.6vw,26px)] font-[750] tracking-[-0.018em] text-ink">Six agents we have patterns for</h3>
-            </Reveal>
-            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {AGENT_TYPES.map((a, i) => (
-                <Reveal key={a.name} delay={i * 0.05}>
-                  <BentoCard className="h-full">
-                    <div className="mb-5 flex items-center justify-between gap-3">
-                      <span className="flex h-11 w-11 items-center justify-center rounded-control bg-brand-wash text-brand-ink"><a.icon size={20} /></span>
-                      <Chip>{a.chip}</Chip>
-                    </div>
-                    <h4 className="text-[17px] font-bold tracking-[-0.01em] text-ink">{a.name}</h4>
-                    <p className="mt-2 text-small leading-relaxed text-ink-secondary">{a.body}</p>
-                  </BentoCard>
-                </Reveal>
+        {/* ═══ PROCESS ═══ */}
+        <Section id="process" tone="sub">
+          <SectionHead
+            eyebrow="How we work"
+            title="Six stages, from first map to steady operation."
+            lead="We work to understand existing systems before proposing new ones. The sequence flexes with the project — a single integration doesn't need the ceremony of a multi-system rollout — but the checks never get skipped."
+          />
+          <ol className="grid gap-px overflow-hidden rounded-panel border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+            {PROCESS.map((s, i) => (
+              <Reveal as="li" key={s.h} delay={i * 0.05} className="group relative bg-white p-5 transition-colors hover:bg-ground-paper sm:p-7">
+                <div className="flex items-center justify-between">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-control bg-brand-wash text-brand-ink transition-colors group-hover:bg-navy group-hover:text-brand-fill"><s.icon size={20} aria-hidden /></span>
+                  <span className="font-mono text-[12px] font-bold text-ink-muted tnum">0{i + 1}</span>
+                </div>
+                <h3 className="mt-5 text-[19px] font-bold tracking-[-0.012em] text-ink">{s.h}</h3>
+                <p className="mt-2 text-small leading-relaxed text-ink-secondary">{s.p}</p>
+              </Reveal>
+            ))}
+          </ol>
+        </Section>
+
+        {/* ═══ WHY VOVIX ═══ */}
+        <Section id="why" tone="navy" className="overflow-hidden">
+          <div aria-hidden className="gridfield-dark pointer-events-none absolute inset-0 -z-0 [mask-image:linear-gradient(to_bottom,black,transparent)]" />
+          <SectionHead
+            dark
+            eyebrow="Why VOVIX"
+            title="An AI demo and automation a business can run on are different things."
+            lead="Most of the engineering in a reliable automation is everything around the model: validation, exception handling, integration and monitoring. That is the part we're built for."
+          />
+          <Reveal>
+            <div className="overflow-hidden rounded-panel border border-white/10">
+              <div className="hidden grid-cols-[0.5fr_1fr_1fr] bg-white/[0.04] font-mono text-[10.5px] font-bold uppercase tracking-[0.14em] text-white/55 sm:grid">
+                <span className="px-6 py-3" />
+                <span className="border-l border-white/10 px-6 py-3">Superficial AI demo</span>
+                <span className="border-l border-white/10 px-6 py-3 text-brand-onspec">VOVIX automation</span>
+              </div>
+              {CONTRAST.map(([k, a, b]) => (
+                <div key={k} className="grid border-t border-white/10 [&:nth-child(2)]:border-t-0 sm:grid-cols-[0.5fr_1fr_1fr] sm:[&:nth-child(2)]:border-t">
+                  <span className="px-4 pb-1 pt-4 text-[13px] font-semibold text-white sm:px-6 sm:py-4">{k}</span>
+                  <span className="flex items-start gap-2 px-4 py-1.5 text-[13px] text-white/55 sm:border-l sm:border-white/10 sm:px-6 sm:py-4"><X size={14} className="mt-0.5 shrink-0 text-white/35" aria-label="Demo:" />{a}</span>
+                  <span className="flex items-start gap-2 px-4 pb-4 pt-1.5 text-[13px] text-white sm:border-l sm:border-white/10 sm:bg-brand-fill/[0.05] sm:px-6 sm:py-4"><Check size={14} className="mt-0.5 shrink-0 text-brand-onspec" aria-label="VOVIX:" />{b}</span>
+                </div>
               ))}
             </div>
-            <Reveal className="mt-9 text-center">
-              <p className="mx-auto max-w-[58ch] text-small text-ink-muted">
-                Every one of these needs a threshold for when it stops and asks a person. Getting that line right is most of the work, and it is the first thing we scope with you.
-              </p>
-            </Reveal>
-          </div>
+          </Reveal>
+          <ul className="mt-12 grid gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
+            {PRINCIPLES.map((p, i) => (
+              <Reveal as="li" key={p} delay={i * 0.04} className="flex gap-3 border-t border-white/10 pt-4">
+                <span className="font-mono text-[11px] font-bold text-brand-onspec tnum">{String(i + 1).padStart(2, "0")}</span>
+                <span className="text-[14px] font-semibold leading-snug text-white/90">{p}</span>
+              </Reveal>
+            ))}
+          </ul>
         </Section>
 
-        {/* ── Process ── */}
-        <Section id="process">
-          <SectionHead eyebrow="How we work" title="Three steps, and one of them is saying no" />
-          <div className="grid gap-5 md:grid-cols-3">
-            {STEPS.map((s, i) => (
-              <Reveal key={s.n} delay={i * 0.08}>
-                <div className="h-full rounded-card border border-line bg-ground-paper p-7 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-fill/40 hover:shadow-lifted">
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border-[1.5px] border-brand-fill/30 bg-gradient-to-br from-brand-wash to-cyan-wash font-mono text-[13px] font-bold text-brand-ink">{s.n}</span>
-                  <h3 className="mt-5 text-[17px] font-bold tracking-[-0.01em] text-ink">{s.h}</h3>
-                  <p className="mt-2 text-small leading-relaxed text-ink-secondary">{s.p}</p>
+        {/* ═══ INDUSTRIES ═══ */}
+        <Section id="industries">
+          <SectionHead
+            eyebrow="Use cases"
+            title="Where our automation fits."
+            lead="The same building blocks — document intelligence, integration, pipelines and monitoring — apply wherever work is repetitive, rule-bound and spread across systems."
+          />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
+            {INDUSTRIES.map((x, i) => (
+              <Reveal key={x.h} delay={i * 0.04} className={i < 2 ? "lg:col-span-3" : i < 5 ? "lg:col-span-2" : "lg:col-span-3"}>
+                <div className="group h-full rounded-card border border-line bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-fill/40 hover:shadow-lifted">
+                  <x.icon size={22} className="text-brand-ink" aria-hidden />
+                  <h3 className="mt-4 text-[17px] font-bold tracking-[-0.01em] text-ink">{x.h}</h3>
+                  <p className="mt-2 text-small leading-relaxed text-ink-secondary">{x.p}</p>
                 </div>
               </Reveal>
             ))}
           </div>
         </Section>
 
-        {/* ── Scope builder ── */}
-        <Section id="estimate">
+        {/* ═══ TECHNICAL CREDIBILITY ═══ */}
+        <Section id="stack" tone="sub">
           <SectionHead
-            eyebrow="Scope builder"
-            title="Roughly what would this take?"
-            lead="Pick what you're building and what it has to connect to. You get a timeline range and a phase breakdown — not a price, because a number nobody can stand behind helps neither of us."
+            eyebrow="Engineering capabilities"
+            title="The stack behind our products and client work."
+            lead="Technologies we run in production today — grouped by the job they do, not listed for the sake of logos."
           />
-          <Reveal><ScopeBuilder /></Reveal>
-        </Section>
-
-        {/* ── CTA ── */}
-        <Section id="start" alt>
-          <Reveal>
-            <div className="relative overflow-hidden rounded-panel border-[1.5px] border-brand-fill/25 bg-gradient-to-br from-brand-wash via-ground-paper to-cyan-wash p-10 md:p-14">
-              <div aria-hidden className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(0,200,83,0.14),transparent_70%)]" />
-              <div className="relative grid items-center gap-9 lg:grid-cols-[1.3fr_1fr]">
-                <div>
-                  <p className="eyebrow mb-3">Let&rsquo;s build it right</p>
-                  <h2 className="text-balance text-[clamp(26px,3.6vw,34px)] font-[750] leading-tight tracking-[-0.025em] text-ink">
-                    Have a project in mind?
-                  </h2>
-                  <p className="mt-4 max-w-[52ch] text-lead text-ink-secondary">
-                    Tell us what you&rsquo;re building and what&rsquo;s in the way. You&rsquo;ll get a straight answer on feasibility, a timeline, and what a first delivery slice looks like — or an honest “not a fit”.
-                  </p>
-                  <div className="mt-7 flex flex-wrap gap-3">
-                    <Button href="mailto:admin@vovix.in?subject=Project%20enquiry%20-%20vovix.in" size="lg">
-                      <Mail size={17} /> Start the conversation
-                    </Button>
-                    <Button href="/services#white-label" size="lg" variant="secondary">I&rsquo;m an agency</Button>
-                  </div>
-                </div>
-                <div className="space-y-3 rounded-card border border-line bg-white/70 p-6 backdrop-blur">
-                  {[
-                    ["Reply time", "One business day · IST Mon–Fri"],
-                    ["First deliverable", "A written scope, before any build"],
-                    ["Engagement", "Direct, or white-label behind your brand"],
-                    ["Where we are", "Guduvancheri, Tamil Nadu · remote worldwide"],
-                  ].map(([k, v], i) => (
-                    <Reveal key={k} delay={0.3 + i * 0.1} className="border-b border-line pb-3 last:border-0 last:pb-0">
-                      <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-muted">{k}</p>
-                      <p className="mt-0.5 text-small font-semibold text-ink">{v}</p>
-                    </Reveal>
-                  ))}
+          <div className="grid gap-px overflow-hidden rounded-panel border border-line bg-line md:grid-cols-2 lg:grid-cols-3">
+            {STACK.map(([h, p, t]) => (
+              <div key={h} className="bg-white p-6">
+                <h3 className="text-[15.5px] font-bold text-ink">{h}</h3>
+                <p className="mt-1 text-[13px] text-ink-muted">{p}</p>
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {t.map((x) => <span key={x} className="rounded-chip bg-ground-sub px-2 py-1 font-mono text-[11px] font-semibold text-ink-secondary">{x}</span>)}
                 </div>
               </div>
-            </div>
-          </Reveal>
+            ))}
+          </div>
         </Section>
 
+        {/* ═══ CONTACT ═══ */}
+        <Section id="contact">
+          <div className="relative overflow-hidden rounded-[28px] bg-navy text-white on-dark">
+            <div aria-hidden className="gridfield-dark absolute inset-0 [mask-image:radial-gradient(ellipse_at_top_left,black,transparent_70%)]" />
+            <div aria-hidden className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-[radial-gradient(circle,rgba(9,165,76,0.22),transparent_70%)]" />
+            <div className="relative grid gap-10 p-6 sm:p-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14 lg:p-14">
+              <div>
+                <p className="flex items-center gap-3 font-mono text-label uppercase text-ink-onspec"><span className="brand-rule" aria-hidden />Start a conversation</p>
+                <h2 className="mt-5 text-balance text-[clamp(30px,4vw,44px)] font-extrabold leading-[1.08] tracking-[-0.03em]">
+                  Let&rsquo;s Automate What&rsquo;s Slowing Your Business Down.
+                </h2>
+                <p className="mt-5 text-pretty text-lead text-ink-onspec">
+                  Tell us about your workflow, data challenges, or integration requirements. We&rsquo;ll explore a practical engineering solution tailored to your business.
+                </p>
+                <ul className="mt-8 space-y-3 text-small">
+                  <li><a href="mailto:admin@vovix.in" className="inline-flex items-center gap-2.5 font-semibold text-white hover:text-brand-onspec"><Mail size={16} className="text-brand-onspec" aria-hidden />admin@vovix.in</a></li>
+                  <li><a href="tel:+919080640562" className="inline-flex items-center gap-2.5 font-semibold text-white hover:text-brand-onspec"><Phone size={16} className="text-brand-onspec" aria-hidden />+91 90806 40562</a></li>
+                  <li className="inline-flex items-center gap-2.5 text-white/70"><MapPin size={16} className="text-brand-onspec" aria-hidden />Guduvancheri, Tamil Nadu · working worldwide</li>
+                </ul>
+                <p className="mt-6 text-[12.5px] text-white/55">Typical first reply within one business day (IST, Mon–Fri).</p>
+              </div>
+              <div className="rounded-panel border border-white/10 bg-white/[0.04] p-5 sm:p-7">
+                <ContactForm dark />
+              </div>
+            </div>
+          </div>
+        </Section>
       </main>
       <Footer />
     </>
