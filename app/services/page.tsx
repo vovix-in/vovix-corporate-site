@@ -1,5 +1,14 @@
 import type { Metadata } from "next";
 import { Lock, ShieldCheck, GitBranch, Tag, Check, X } from "lucide-react";
+
+const CONTRAST = [
+  ["Inputs", "A clean sample file", "Real documents, every format and language"],
+  ["Accuracy", "Looks right, unmeasured", "Confidence per field; low scores routed to a person"],
+  ["Logic", "A prompt", "AI combined with deterministic business rules"],
+  ["Failure", "Fails silently", "Retries, alerts and a runbook"],
+  ["Systems", "Copy-paste the output", "Integrated by API with idempotent, logged writes"],
+  ["Ownership", "Locked to a vendor", "Your repository, your documentation"],
+];
 import { PageShell } from "@/components/page-shell";
 import { Section, Reveal, SectionHead, BentoCard, Button, Chip } from "@/components/ui";
 import { ServiceExplorer } from "@/components/services";
@@ -34,7 +43,7 @@ export default function Services() {
       eyebrow="Engineering services"
       title="Automation, AI and data systems, engineered to run unattended."
       lead="Seven ways we work with businesses, finance teams and technology partners — direct, or white-label behind your brand under NDA. Every engagement starts with a written scope, including the parts we'd advise you not to build yet."
-      actions={<><Button href="/contact" size="lg">Discuss Your Project</Button><Button href="#estimate" size="lg" variant="onDark">Estimate a timeline</Button></>}
+      actions={<><Button href="/contact" size="lg">Discuss Your Project</Button><Button href="#estimate" size="lg" variant="secondary">Estimate a timeline</Button></>}
     >
       <Section id="capabilities">
         <SectionHead eyebrow="What we build" title="Problem, approach, outcome — for each service." lead="Choose a service to see the business problem it addresses, how we engineer it, and what changes once it's running." />
@@ -142,6 +151,25 @@ export default function Services() {
           <p className="mt-4 text-small text-ink-muted">Send the requirement and we&rsquo;ll return the NDA first. Typical first reply within one business day (IST, Mon–Fri).</p>
         </Reveal>
       </Section>
+      <Section id="why" tone="navy">
+        <SectionHead dark eyebrow="Why VOVIX" title="An AI demo and automation a business can run on are different things."
+          lead="Most of the engineering in a reliable automation is everything around the model: validation, exception handling, integration and monitoring." />
+        <Reveal>
+          <div className="overflow-hidden rounded-panel border border-white/10">
+            <div className="hidden grid-cols-[0.5fr_1fr_1fr] bg-white/[0.04] font-mono text-[10.5px] font-bold uppercase tracking-[0.14em] text-white/55 sm:grid">
+              <span className="px-6 py-3" /><span className="border-l border-white/10 px-6 py-3">Superficial AI demo</span><span className="border-l border-white/10 px-6 py-3 text-brand-fill">VOVIX automation</span>
+            </div>
+            {CONTRAST.map(([k, a, b]) => (
+              <div key={k} className="grid border-t border-white/10 [&:nth-child(2)]:border-t-0 sm:grid-cols-[0.5fr_1fr_1fr] sm:[&:nth-child(2)]:border-t">
+                <span className="px-4 pb-1 pt-4 text-[13px] font-semibold text-white sm:px-6 sm:py-4">{k}</span>
+                <span className="flex items-start gap-2 px-4 py-1.5 text-[13px] text-white/55 sm:border-l sm:border-white/10 sm:px-6 sm:py-4"><X size={14} className="mt-0.5 shrink-0 text-white/35" aria-label="Demo:" />{a}</span>
+                <span className="flex items-start gap-2 px-4 pb-4 pt-1.5 text-[13px] text-white sm:border-l sm:border-white/10 sm:bg-brand-fill/[0.05] sm:px-6 sm:py-4"><Check size={14} className="mt-0.5 shrink-0 text-brand-fill" aria-label="VOVIX:" />{b}</span>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </Section>
+
       <Section id="estimate" tone="sub">
         <SectionHead
           eyebrow="Scope builder"

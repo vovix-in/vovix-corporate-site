@@ -7,13 +7,13 @@ export function PageShell({ eyebrow, title, lead, children, actions }: { eyebrow
     <>
       <Navbar />
       <main id="main">
-        <section className="on-dark relative overflow-hidden bg-navy text-white">
-          <div aria-hidden className="gridfield-dark absolute inset-0 [mask-image:radial-gradient(ellipse_at_80%_0%,black,transparent_70%)]" />
-          <div aria-hidden className="pointer-events-none absolute -right-32 -top-48 h-[480px] w-[480px] rounded-full bg-[radial-gradient(circle,rgba(9,165,76,0.18),transparent_68%)]" />
+        <section className="relative overflow-hidden border-b border-line bg-ground-sub">
+          <div aria-hidden className="dotfield absolute inset-0 [mask-image:radial-gradient(ellipse_at_80%_0%,black,transparent_70%)]" />
+          <div aria-hidden className="pointer-events-none absolute -right-32 -top-48 h-[480px] w-[480px] rounded-full bg-[radial-gradient(circle,rgba(9,165,76,0.10),transparent_68%)]" />
           <div className="shell relative py-16 md:py-24">
-            <p className="rise flex items-center gap-3 font-mono text-label uppercase text-ink-onspec"><span className="brand-rule" aria-hidden />{eyebrow}</p>
-            <h1 className="rise mt-5 max-w-[22ch] text-balance text-[clamp(34px,5vw,56px)] font-extrabold leading-[1.05] tracking-[-0.035em] [animation-delay:.08s]">{title}</h1>
-            {lead && <p className="rise mt-6 max-w-[62ch] text-pretty text-lead text-ink-onspec [animation-delay:.16s]">{lead}</p>}
+            <p className="rise flex items-center gap-3"><span className="brand-rule-light" aria-hidden /><span className="eyebrow">{eyebrow}</span></p>
+            <h1 className="rise mt-5 max-w-[22ch] text-balance text-[clamp(34px,4.8vw,56px)] font-semibold leading-[1.06] tracking-[-0.035em] text-ink [animation-delay:.08s]">{title}</h1>
+            {lead && <p className="rise mt-6 max-w-[62ch] text-pretty text-lead font-normal text-ink-secondary [animation-delay:.16s]">{lead}</p>}
             {actions && <div className="rise mt-8 flex flex-wrap gap-3 [animation-delay:.24s]">{actions}</div>}
           </div>
         </section>

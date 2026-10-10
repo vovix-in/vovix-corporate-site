@@ -61,7 +61,7 @@ export function ProductShowcase() {
             <Chip live={p.live}>{p.status}</Chip>
             <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-ink-muted">{p.name}</span>
           </div>
-          <h3 className="text-balance text-[clamp(26px,3.2vw,34px)] font-extrabold leading-[1.12] tracking-[-0.025em] text-ink">{p.title}</h3>
+          <h3 className="text-balance text-[clamp(26px,3.2vw,34px)] font-semibold leading-[1.12] tracking-[-0.025em] text-ink">{p.title}</h3>
           <p className="mt-4 text-pretty text-lead text-ink-secondary">{p.body}</p>
 
           <div className="mt-6 flex flex-wrap items-center gap-1.5" aria-label="Workflow">

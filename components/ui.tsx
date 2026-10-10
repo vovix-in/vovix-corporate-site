@@ -4,16 +4,33 @@ import { useEffect, useRef, useState } from "react";
 import type { ReactNode, RefObject } from "react";
 
 /* ── Logo ──────────────────────────────────────────────────────
-   Always the original artwork from public/assets — never redrawn.
-   The only supplied variant is for light backgrounds (navy alpha +
-   green sweep + silver IX), so it is only ever placed on white or
-   pearl surfaces. On navy bands we use the plate variant, which
-   seats the same file on a white tile rather than recolouring it. */
-export function Logo({ variant = "nav", className = "" }: { variant?: "nav" | "footer"; className?: string }) {
-  const src = variant === "nav" ? "/assets/logo-vovix-navbar.png" : "/assets/logo-vovix-footer.png";
-  const dims = variant === "nav" ? { width: 1272, height: 378 } : { width: 1272, height: 461 };
-  // eslint-disable-next-line @next/next/no-img-element
-  return <img src={src} alt="VOVIX — Automate Your Alpha" {...dims} decoding="async" className={`w-auto object-contain ${className}`} />;
+   The original artwork, trimmed only of the empty transparent margin
+   the source PNG carried (that margin is why the logo used to look
+   tiny or "zoomed" depending on the slot). Never redrawn or recoloured.
+   Sizing is by height only; width follows the artwork's 2.74:1 ratio.
+   Light backgrounds only — the supplied artwork is navy + green.        */
+const LOGO_RATIO = 1272 / 464;
+export function Logo({ height = 44, className = "", priority = false }: { height?: number; className?: string; priority?: boolean }) {
+  const width = Math.round(height * LOGO_RATIO);
+  return (
+    <picture className={`block shrink-0 ${className}`} style={{ width, height }}>
+      <source srcSet="/assets/logo-vovix-lockup.webp" type="image/webp" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/assets/logo-vovix-lockup@web.png" alt="VOVIX — Automate Your Alpha" width={width} height={height}
+           style={{ width, height }} decoding="async" fetchPriority={priority ? "high" : "auto"} className="block h-full w-full object-contain" />
+    </picture>
+  );
+}
+
+/* The alpha mark, cut from the same original lockup with its full pixel trail. */
+export function LogoMark({ size = 32, className = "" }: { size?: number; className?: string }) {
+  return (
+    <picture className={`block shrink-0 ${className}`} style={{ width: size, height: size }}>
+      <source srcSet="/assets/logo-vovix-mark.webp" type="image/webp" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/assets/logo-vovix-mark@web.png" alt="" width={size} height={size} style={{ width: size, height: size }} decoding="async" className="block h-full w-full object-contain" />
+    </picture>
+  );
 }
 
 /* ── Button ─────────────────────────────────────────────────────
@@ -162,7 +179,7 @@ export function Section({ id, tone: toneProp, alt = false, children, className =
   const tone = toneProp ?? (alt ? "sub" : "paper");
   const bg = tone === "navy" ? "on-dark bg-navy text-white" : tone === "sub" ? "bg-ground-sub" : "bg-ground-paper";
   return (
-    <section id={id} aria-label={label} className={`relative py-20 md:py-28 ${bg} ${className}`}>
+    <section id={id} aria-label={label} className={`relative py-20 md:py-32 ${bg} ${className}`}>
       <div className="shell relative">{children}</div>
     </section>
   );
@@ -175,7 +192,7 @@ export function SectionHead({ eyebrow, title, lead, center = false, dark = false
         <span className={dark ? "brand-rule" : "brand-rule-light"} aria-hidden />
         <p className={dark ? "eyebrow-dark" : "eyebrow"}>{eyebrow}</p>
       </div>
-      <h2 className={`text-balance text-[clamp(30px,4.2vw,44px)] font-extrabold leading-[1.08] tracking-[-0.03em] ${dark ? "text-white" : "text-ink"}`}>{title}</h2>
+      <h2 className={`text-balance text-[clamp(30px,3.8vw,42px)] font-semibold leading-[1.1] tracking-[-0.03em] ${dark ? "text-white" : "text-ink"}`}>{title}</h2>
       {lead && <p className={`mt-5 text-pretty text-lead ${dark ? "text-ink-onspec" : "text-ink-secondary"} ${center ? "mx-auto" : ""} max-w-[64ch]`}>{lead}</p>}
     </Reveal>
   );

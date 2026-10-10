@@ -1,7 +1,7 @@
 "use client";
 
 import { AlertTriangle, Check, FileText, Activity, ShieldCheck, Pause, Radio, Send, CheckCheck, Ban, Clock } from "lucide-react";
-import { Illustrative, usePausable, useTicker } from "./ui";
+import { Illustrative, LogoMark, usePausable, useTicker } from "./ui";
 
 /* All three demos are live UI, not screenshots. Each advances a step
    ticker only while on screen and visible; under reduced motion they
@@ -165,8 +165,7 @@ export function OneViewDemo() {
       {/* phone */}
       <div className="w-full max-w-[340px] overflow-hidden rounded-[30px] border-[6px] border-navy bg-navy shadow-floating">
         <div className="flex items-center gap-2.5 bg-navy px-4 pb-3 pt-3">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/favicon-512.png" alt="" width={32} height={32} className="h-8 w-8 rounded-full bg-white p-0.5" />
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white"><LogoMark size={26} /></span>
           <div className="min-w-0">
             <p className="text-[13px] font-bold leading-tight text-white">VOVIX OneView</p>
             <p className="text-[10.5px] leading-tight text-white/60">{step === 1 || step === 4 ? "typing…" : "business account"}</p>

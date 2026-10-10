@@ -18,7 +18,7 @@ const COLS = [
   { h: "Company", links: [
     { l: "About VOVIX", href: "/about" },
     { l: "How we work", href: "/#process" },
-    { l: "Use cases", href: "/#industries" },
+    { l: "Use cases", href: "/#use-cases" },
     { l: "Contact", href: "/contact" },
     { l: "Privacy", href: "/legal/privacy" },
     { l: "Terms", href: "/legal/terms" },
@@ -40,7 +40,7 @@ export function Footer() {
       <div className="shell">
         <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1.2fr_1fr]">
           <div>
-            <a href="/" aria-label="VOVIX home" className="inline-block"><Logo variant="footer" className="h-[76px]" /></a>
+            <a href="/" aria-label="VOVIX home" className="inline-block"><Logo height={60} /></a>
             <p className="mt-4 max-w-[38ch] text-small text-ink-secondary">
               VOVIX Private Limited engineers intelligent automation, AI document processing and connected data systems — and runs three products of its own.
             </p>
