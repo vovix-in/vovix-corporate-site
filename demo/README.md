@@ -46,3 +46,12 @@ This is the same source-grounded extraction Lens does for invoices, bank stateme
 The figures animated in the demo (286 pages, 11.4 seconds) are **illustrative timings written for the animation**. Check them against a real Lens run before quoting them in a post, a deck, or a proposal — the same applies to the copy in `linkedin-post.md`.
 
 The live product is at **lens.vovix.in**. The demo's chrome points there; there is no separate app domain.
+
+---
+
+# Vovix Phonics — interactive demo
+
+- Live file: `public/demo/phonics.html` → served at **https://www.vovix.in/demo/phonics** (rewrite in `next.config.mjs`) and `/demo/phonics.html`.
+- Single self-contained page (teacher portal + child app, embedded audio). No build step; Vercel serves it from `public/`.
+- To update: replace `public/demo/phonics.html` and push to `main`.
+- Not linked from the site navigation and excluded from `sitemap.xml` on purpose — share the URL directly with prospects.

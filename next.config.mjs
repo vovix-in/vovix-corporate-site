@@ -10,6 +10,12 @@ const nextConfig = {
       ]},
     ];
   },
+  // Clean URLs for static product demos kept in /public/demo (e.g. www.vovix.in/demo/phonics)
+  async rewrites() {
+    return [
+      { source: "/demo/phonics", destination: "/demo/phonics.html" },
+    ];
+  },
   // The static site shipped .html URLs that are indexed. Keep them working.
   async redirects() {
     return [
