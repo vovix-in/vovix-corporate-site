@@ -17,7 +17,7 @@ const PRODUCTS = [
 
 export default function About() {
   return (
-    <PageShell eyebrow="Company" title="About VOVIX"
+    <PageShell photo="chennai" eyebrow="Company" title="About VOVIX"
       lead="An engineering-led IT automation company. We build software that removes repetitive work, connects disconnected systems and turns unstructured data into something a business can act on.">
       <Section>
         <div className="grid gap-12 lg:grid-cols-[1.45fr_1fr]">

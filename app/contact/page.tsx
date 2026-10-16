@@ -19,7 +19,7 @@ const DETAILS = [
 
 export default function Contact() {
   return (
-    <PageShell eyebrow="Contact" title="Let's Automate What's Slowing Your Business Down."
+    <PageShell photo="team-cta" eyebrow="Contact" title="Let's Automate What's Slowing Your Business Down."
       lead="Tell us about your workflow, data challenges, or integration requirements. We'll explore a practical engineering solution tailored to your business.">
       <Section>
         <div className="grid gap-12 lg:grid-cols-[1.3fr_0.9fr]">

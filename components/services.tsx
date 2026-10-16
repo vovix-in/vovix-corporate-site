@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Photo, type PhotoName } from "./photo";
 import { Workflow, ScanText, Database, Plug, Radar, LayoutDashboard, Layers, ChevronDown } from "lucide-react";
 
 export const SERVICES = [
   {
-    id: "workflow", icon: Workflow, name: "Business Workflow Automation",
+    id: "workflow", photo: "svc-workflow" as PhotoName, icon: Workflow, name: "Business Workflow Automation",
     short: "Approvals, reconciliation, document handling and scheduled jobs that run themselves.",
     problem: "Skilled people spend their week copying data between systems, chasing approvals and re-running the same reconciliations by hand.",
     approach: "We map the real process first, then automate it as event- and schedule-driven jobs with retries, idempotent writes and explicit approval steps where a person must decide.",
@@ -13,7 +14,7 @@ export const SERVICES = [
     stack: ["Event triggers", "Scheduled jobs", "Approval routing", "Audit trail"],
   },
   {
-    id: "ai-docs", icon: ScanText, name: "AI Engineering & Document Intelligence",
+    id: "ai-docs", photo: "svc-ai-docs" as PhotoName, icon: ScanText, name: "AI Engineering & Document Intelligence",
     short: "Extraction, classification and validation, with human review where it matters.",
     problem: "Invoices, statements, forms and contracts arrive in every format and language, and someone has to key them in and check them.",
     approach: "OCR and AI extraction combined with deterministic business rules, confidence thresholds and a review queue — the same architecture that runs VOVIX Lens.",
@@ -21,7 +22,7 @@ export const SERVICES = [
     stack: ["OCR · 40+ languages", "Field extraction", "Rule validation", "Review queue"],
   },
   {
-    id: "data", icon: Database, name: "Data Engineering & Pipelines",
+    id: "data", photo: "svc-data" as PhotoName, icon: Database, name: "Data Engineering & Pipelines",
     short: "Ingestion, transformation, validation and delivery you can depend on.",
     problem: "Data lands in spreadsheets, exports and APIs that disagree with each other, and reports are only as good as last week's manual clean-up.",
     approach: "Pipelines with schema checks, deduplication, reconciliation steps and lineage, orchestrated and monitored so failures surface instead of silently skipping.",
@@ -29,7 +30,7 @@ export const SERVICES = [
     stack: ["Ingestion", "Transformation", "Reconciliation", "Orchestration"],
   },
   {
-    id: "api", icon: Plug, name: "API Development & System Integration",
+    id: "api", photo: "svc-api" as PhotoName, icon: Plug, name: "API Development & System Integration",
     short: "CRMs, payment gateways, accounting platforms and databases, connected.",
     problem: "The CRM, billing, accounting and internal tools each hold part of the truth, and nobody trusts which one is current.",
     approach: "Well-defined APIs, webhooks and scheduled syncs with authentication, rate-limit handling, retries and a log of every write.",
@@ -37,7 +38,7 @@ export const SERVICES = [
     stack: ["REST APIs", "Webhooks", "Payment gateways", "TallyPrime / ERP"],
   },
   {
-    id: "ingest", icon: Radar, name: "Web Data Ingestion & Monitoring",
+    id: "ingest", photo: "svc-ingest" as PhotoName, icon: Radar, name: "Web Data Ingestion & Monitoring",
     short: "Scoped, rate-limited collection with retries, alerts and observability.",
     problem: "Teams manually check portals, filings and public sources for changes, and miss the one that mattered.",
     approach: "Appropriately scoped, rate-limited ingestion jobs that respect source terms, with retry handling, change detection, exception alerts and run monitoring.",
@@ -45,7 +46,7 @@ export const SERVICES = [
     stack: ["Change detection", "Rate limiting", "Alerting", "Run monitoring"],
   },
   {
-    id: "tools", icon: LayoutDashboard, name: "Custom Software & Internal Tools",
+    id: "tools", photo: "svc-tools" as PhotoName, icon: LayoutDashboard, name: "Custom Software & Internal Tools",
     short: "Dashboards, operational interfaces and purpose-built applications.",
     problem: "Off-the-shelf tools almost fit, so the gaps are filled with spreadsheets, scripts and workarounds only one person understands.",
     approach: "Purpose-built web applications and dashboards designed around your workflow, with roles, audit trails and documentation your team can maintain.",
@@ -53,7 +54,7 @@ export const SERVICES = [
     stack: ["Next.js · React", "Python · FastAPI", "PostgreSQL", "Role-based access"],
   },
   {
-    id: "white-label", icon: Layers, name: "White-Label Automation Infrastructure",
+    id: "white-label", photo: "svc-whitelabel" as PhotoName, icon: Layers, name: "White-Label Automation Infrastructure",
     short: "Headless backends and integrations for agencies and technology partners.",
     problem: "Agencies win automation work they can't staff, and need an engineering partner who stays invisible to their client.",
     approach: "Headless backends, pipelines and integrations delivered unbranded under mutual NDA, with IP assigned to you as it's written.",
@@ -65,6 +66,7 @@ export const SERVICES = [
 function Detail({ s }: { s: (typeof SERVICES)[number] }) {
   return (
     <div className="rise">
+      <div className="mb-7 aspect-[16/8] overflow-hidden rounded-card"><Photo name={s.photo} sizes="(min-width: 1024px) 40vw, 100vw" /></div>
       <ol className="relative space-y-6 border-l border-line pl-6">
         {[
           ["The problem", s.problem, "bg-ground-sunken"],

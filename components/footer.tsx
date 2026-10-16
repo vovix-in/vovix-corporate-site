@@ -26,6 +26,7 @@ const COLS = [
 ];
 
 const DISCLAIMERS = [
+  ["Photography", "Photographs on this site are illustrative scene-setters generated for VOVIX. They do not depict VOVIX employees, clients or premises."],
   ["Engagements", "VOVIX builds software to automate tasks and support operational decisions. Site content is general and not bespoke professional, legal or tax advice unless separately agreed. Outcomes depend on your process, volume and adoption."],
   ["VOVIX Lens", "Outputs are machine-assisted and should be reviewed before operational or financial use. You are responsible for handling personal or regulated data in line with your policies and applicable law."],
   ["VOVIX OneView", "Informational and educational only — not investment advice. VOVIX is not registered with SEBI as an investment adviser or research analyst. Verify data with exchanges and filings before any trading or allocation decision."],
@@ -62,6 +63,21 @@ export function Footer() {
               </ul>
             </nav>
           ))}
+        </div>
+
+        {/* Location — lazy Google Maps embed (no API key; loads only when scrolled near) */}
+        <div className="mt-12 grid overflow-hidden rounded-panel border border-line bg-white md:grid-cols-[1fr_2fr]">
+          <div className="flex flex-col justify-center gap-2 p-6 sm:p-8">
+            <p className="eyebrow">Visit or write to us</p>
+            <p className="text-[17px] font-semibold text-ink">VOVIX Private Limited</p>
+            <p className="text-small text-ink-secondary">S. No 61/8a, Door No: S8, &lsquo;B&rsquo; Block, 2nd Floor, Thanigaivel Flats, Sirpi Nagar, Guduvancheri, Tamil Nadu 603202</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Sirpi+Nagar+Guduvancheri+Tamil+Nadu+603202" target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1.5 text-small font-semibold text-brand-ink hover:underline">
+              Open in Google Maps <MapPin size={14} aria-hidden />
+            </a>
+          </div>
+          <iframe title="Map showing Guduvancheri, Tamil Nadu" loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Sirpi+Nagar,+Guduvancheri,+Tamil+Nadu+603202&z=14&output=embed"
+            className="h-[240px] w-full border-0 grayscale-[30%] md:h-full md:min-h-[240px]" />
         </div>
 
         <div className="my-10 h-px bg-line" />

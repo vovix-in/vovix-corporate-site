@@ -39,11 +39,11 @@ const STAGES = [
 
 export default function Services() {
   return (
-    <PageShell
+    <PageShell photo="svc-workflow"
       eyebrow="Engineering services"
       title="Automation, AI and data systems, engineered to run unattended."
       lead="Seven ways we work with businesses, finance teams and technology partners — direct, or white-label behind your brand under NDA. Every engagement starts with a written scope, including the parts we'd advise you not to build yet."
-      actions={<><Button href="/contact" size="lg">Discuss Your Project</Button><Button href="#estimate" size="lg" variant="secondary">Estimate a timeline</Button></>}
+      actions={<><Button href="/contact" size="lg">Discuss Your Project</Button><Button href="#estimate" size="lg" variant="onDark">Estimate a timeline</Button></>}
     >
       <Section id="capabilities">
         <SectionHead eyebrow="What we build" title="Problem, approach, outcome — for each service." lead="Choose a service to see the business problem it addresses, how we engineer it, and what changes once it's running." />
