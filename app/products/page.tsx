@@ -33,11 +33,11 @@ export default function Products() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
-      <PageShell
+      <PageShell photo="lens-desk"
         eyebrow="Products"
         title="Software we engineer, run and maintain."
         lead="Three products built on the same automation backbone we deliver for clients: document intelligence, conversational delivery and risk-controlled execution."
-        actions={SHOWCASE.map((p) => <Button key={p.id} href={`#${p.id}`} variant="secondary" size="sm">{p.name}</Button>)}
+        actions={SHOWCASE.map((p) => <Button key={p.id} href={`#${p.id}`} variant="onDark" size="sm">{p.name}</Button>)}
       >
         {SHOWCASE.map((p, i) => (
           <Section key={p.id} id={p.id} tone={i % 2 ? "sub" : "paper"}>

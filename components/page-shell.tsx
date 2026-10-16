@@ -1,12 +1,25 @@
 import type { ReactNode } from "react";
 import { Navbar } from "./nav";
 import { Footer } from "./footer";
+import { Photo, type PhotoName } from "./photo";
 
-export function PageShell({ eyebrow, title, lead, children, actions }: { eyebrow: string; title: string; lead?: string; children: ReactNode; actions?: ReactNode }) {
+export function PageShell({ eyebrow, title, lead, children, actions, photo }: { eyebrow: string; title: string; lead?: string; children: ReactNode; actions?: ReactNode; photo?: PhotoName }) {
   return (
     <>
       <Navbar />
       <main id="main">
+        {photo ? (
+          <section className="on-dark relative isolate overflow-hidden bg-navy text-white">
+            <div className="absolute inset-0 -z-20"><Photo name={photo} priority sizes="100vw" /></div>
+            <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(4,27,37,0.95)_0%,rgba(7,40,54,0.8)_50%,rgba(7,40,54,0.35)_100%)]" />
+            <div className="shell relative py-20 md:py-28">
+              <p className="rise flex items-center gap-3"><span className="brand-rule" aria-hidden /><span className="eyebrow-dark">{eyebrow}</span></p>
+              <h1 className="rise mt-5 max-w-[22ch] text-balance text-[clamp(34px,4.8vw,56px)] font-semibold leading-[1.06] tracking-[-0.035em] [animation-delay:.08s]">{title}</h1>
+              {lead && <p className="rise mt-6 max-w-[62ch] text-pretty text-lead font-normal text-white/80 [animation-delay:.16s]">{lead}</p>}
+              {actions && <div className="rise mt-8 flex flex-wrap gap-3 [animation-delay:.24s]">{actions}</div>}
+            </div>
+          </section>
+        ) : (
         <section className="relative overflow-hidden border-b border-line bg-ground-sub">
           <div aria-hidden className="dotfield absolute inset-0 [mask-image:radial-gradient(ellipse_at_80%_0%,black,transparent_70%)]" />
           <div aria-hidden className="pointer-events-none absolute -right-32 -top-48 h-[480px] w-[480px] rounded-full bg-[radial-gradient(circle,rgba(9,165,76,0.10),transparent_68%)]" />
@@ -17,6 +30,7 @@ export function PageShell({ eyebrow, title, lead, children, actions }: { eyebrow
             {actions && <div className="rise mt-8 flex flex-wrap gap-3 [animation-delay:.24s]">{actions}</div>}
           </div>
         </section>
+        )}
         {children}
       </main>
       <Footer />
