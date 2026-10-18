@@ -27,11 +27,11 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: TITLE, description: DESC, images: ["/assets/og-image.png"] },
   icons: {
     icon: [
-      { url: "/assets/favicon-mark-32.png", sizes: "32x32", type: "image/png" },
-      { url: "/assets/favicon-mark-16.png", sizes: "16x16", type: "image/png" },
-      { url: "/assets/favicon-mark-48.png", sizes: "48x48", type: "image/png" },
+      { url: "/assets/favicon-mark-32.png?v=3", sizes: "32x32", type: "image/png" },
+      { url: "/assets/favicon-mark-16.png?v=3", sizes: "16x16", type: "image/png" },
+      { url: "/assets/favicon-mark-48.png?v=3", sizes: "48x48", type: "image/png" },
     ],
-    apple: [{ url: "/assets/apple-touch-icon-mark.png", sizes: "180x180" }],
+    apple: [{ url: "/assets/apple-touch-icon-mark.png?v=3", sizes: "180x180" }],
   },
 };
 
