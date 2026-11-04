@@ -14,6 +14,7 @@ const nextConfig = {
   async rewrites() {
     return [
       { source: "/demo/phonics", destination: "/demo/phonics.html" },
+      { source: "/demo/driving-school", destination: "/demo/driving-school.html" },
     ];
   },
   // The static site shipped .html URLs that are indexed. Keep them working.
