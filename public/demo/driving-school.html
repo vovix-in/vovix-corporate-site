@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Vovix One interactive demo for Sri Sastha Driving School: enrol a student from an Aadhaar scan, issue Form 5 in a tap, fill Sarathi from the computer, send WhatsApp reminders, and run the school website.">
+<link rel="icon" href="/assets/favicon-mark-32.png?v=3" sizes="32x32" type="image/png">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Sri Sastha Driving School Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: dark hero with a 4-chapter journey strip, then a step list beside the stage (phone / desktop / website mock). Mocks are fixed-light by product spec. */
+:root{
+  --bg:#F4EFE7; --card:#FFFFFF; --fg:#1C1714; --muted:#6F655B; --faint:#9A8F82; --line:#E3D9CB;
+  --accent:#EC6A2C; --accent-deep:#D64F16; --accent-tint:#FDEFE4;
+  --ok:#1F9D55; --warn:#C8860B; --bad:#D64545; --wa:#25D366;
+  --hero:#1C1714; --hero-fg:#FBF7F1; --hero-muted:#B9ACA0;
+  --font:"Inter","Noto Sans Tamil",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --display:"Sora","Inter","Noto Sans Tamil",system-ui,sans-serif;
+  --shadow:0 8px 22px rgba(80,55,35,.08); --pop:0 14px 34px rgba(50,35,20,.16);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#15120E; --card:#201B16; --fg:#F3EDE4; --muted:#B4A89A; --faint:#7E736A; --line:#332B23;
+  --accent:#F08A55; --accent-deep:#EC6A2C; --accent-tint:#3A2A1F; --hero:#0F0C0A; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#15120E; --card:#201B16; --fg:#F3EDE4; --muted:#B4A89A; --faint:#7E736A; --line:#332B23;
+  --accent:#F08A55; --accent-deep:#EC6A2C; --accent-tint:#3A2A1F; --hero:#0F0C0A; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:15px;line-height:1.5;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--hero)}
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,h4{margin:0;text-wrap:balance;line-height:1.2}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[hidden]{display:none!important}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+
+/* ---------- hero ---------- */
+.hero-band{background:var(--hero);color:var(--hero-fg);position:relative;overflow:hidden}
+.hero-band::before{content:"";position:absolute;right:-10%;top:-40%;width:60%;height:160%;background:radial-gradient(closest-side,rgba(236,106,44,.28),transparent 70%);pointer-events:none}
+.hero-band .wrap{position:relative;padding-block:22px 30px}
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brandmark{display:flex;align-items:center;gap:12px}
+.logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#EC6A2C,#D64F16);color:#fff;display:grid;place-items:center;font-weight:800;font-size:21px;font-family:var(--display)}
+.brandmark b{font-family:var(--display);font-size:18px;font-weight:700;display:block;line-height:1.1}
+.brandmark > div > span{font-size:12px;color:var(--hero-muted)}
+.for{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);border-radius:999px;padding:6px 14px 6px 8px;font-size:13px;font-weight:600}
+.for i{width:24px;height:24px;border-radius:50%;background:#EC6A2C;display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:800;color:#fff}
+.hero-main{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;align-items:end;margin-top:34px}
+.hero-main h1{font-family:var(--display);font-size:clamp(30px,4.2vw,50px);font-weight:800;letter-spacing:-.02em;line-height:1.08}
+.hero-main h1 em{font-style:normal;color:#F5A071}
+.hero-main .lede{color:var(--hero-muted);font-size:16px;max-width:56ch;margin-top:14px}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.hstat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px 16px}
+.hstat b{display:block;font-family:var(--display);font-size:26px;font-weight:700;letter-spacing:-.01em;line-height:1.1}
+.hstat span{font-size:12.5px;color:var(--hero-muted);display:block;margin-top:4px}
+.journey{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:30px}
+.chap{display:flex;flex-direction:column;gap:6px;text-align:left;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px 16px;color:var(--hero-fg);min-height:96px;transition:background .12s,border-color .12s}
+.chap:hover{background:rgba(255,255,255,.09)}
+.chap[aria-current="true"]{background:rgba(236,106,44,.18);border-color:#EC6A2C}
+.chap .cn{font-family:var(--display);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#F5A071;font-weight:700}
+.chap .ct{font-family:var(--display);font-size:16px;font-weight:700}
+.chap .cd{font-size:12.5px;color:var(--hero-muted)}
+
+/* ---------- toolbar ---------- */
+.toolbar{border-bottom:1px solid var(--line);background:var(--card)}
+.toolbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding-block:10px}
+.toolbar .hint{font-size:13px;color:var(--muted)}
+.controls{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card)}
+.seg button{border:0;background:transparent;padding:7px 12px;font-size:13px;font-weight:600;color:var(--muted);min-height:36px}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.seg.dark{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.06)}
+.seg.dark button{color:var(--hero-muted)}
+.seg.dark button[aria-pressed="true"]{background:#fff;color:#1C1714}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:7px 12px;font-size:13px;font-weight:600;min-height:36px}
+.btn.danger{color:var(--bad)}
+.switch{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;min-height:36px;padding:0 4px}
+.switch input{appearance:none;width:38px;height:22px;border-radius:999px;background:var(--line);position:relative;margin:0;cursor:pointer;transition:background .12s}
+.switch input::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .12s;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.switch input:checked{background:var(--accent)}
+.switch input:checked::after{transform:translateX(16px)}
+
+/* ---------- main layout ---------- */
+.layout{display:grid;grid-template-columns:290px minmax(0,1fr);gap:28px;padding-block:24px 48px;align-items:start}
+.steps{position:sticky;top:calc(16px + env(safe-area-inset-top,0px));display:flex;flex-direction:column;gap:14px;max-height:calc(100vh - 32px);overflow:auto;padding-right:4px}
+.steps .grp{display:flex;flex-direction:column;gap:3px}
+.steps .grp h3{font-family:var(--display);font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:6px 10px 4px}
+.step{display:flex;gap:10px;align-items:flex-start;text-align:left;border:1px solid transparent;background:transparent;border-radius:12px;padding:9px 10px;min-height:44px;width:100%}
+.step:hover{background:var(--card)}
+.step[aria-current="true"]{background:var(--card);border-color:var(--line);box-shadow:var(--shadow)}
+.step .n{flex:none;width:24px;height:24px;border-radius:8px;background:var(--accent-tint);color:var(--accent-deep);font-size:12px;font-weight:700;display:grid;place-items:center;font-variant-numeric:tabular-nums}
+.step[aria-current="true"] .n{background:var(--accent);color:#fff}
+.step .t{font-weight:600;font-size:14px}
+.step .d{font-size:12px;color:var(--muted)}
+
+.stage{min-width:0;display:flex;flex-direction:column;gap:18px}
+.note{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;box-shadow:var(--shadow)}
+.note .kicker{font-family:var(--display);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-deep);font-weight:700;margin-bottom:6px}
+.note h2{font-family:var(--display);font-size:24px;font-weight:700;margin-bottom:8px;letter-spacing:-.01em}
+.note p{color:var(--muted);max-width:70ch}
+.note ul{margin:12px 0 0;padding-left:0;list-style:none;display:grid;gap:7px}
+.note li{position:relative;padding-left:18px;font-size:14px}
+.note li::before{content:"";position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.note .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.tag{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--accent-tint);color:var(--accent-deep)}
+.stage-body{display:flex;flex-direction:column;align-items:center;gap:16px;min-width:0}
+.stage-nav{display:flex;gap:10px;justify-content:space-between;width:100%;max-width:720px}
+.stage-nav .btn{display:inline-flex;align-items:center;gap:6px}
+.caption{font-size:13px;color:var(--muted);text-align:center}
+
+/* ---------- phone mock (fixed light, per product spec) ---------- */
+.phone{
+  --p-brand:#EC6A2C; --p-brand-deep:#D64F16; --p-tint:#FDEFE4; --p-ink:#231F1C; --p-muted:#6F655B; --p-faint:#9A8F82;
+  --p-paper:#FAF8F3; --p-surface:#FFFFFF; --p-line:#ECE3D6; --p-ok:#1F9D55; --p-warn:#C8860B; --p-bad:#D64545; --p-wa:#25D366;
+  width:min(390px,100%); height:812px; max-height:calc(100vh - 40px); min-height:600px; border-radius:44px; background:#17140F; padding:12px;
+  box-shadow:0 30px 60px rgba(30,20,10,.35), inset 0 0 0 2px #3a332c; position:relative; color-scheme:light; flex:none;
+}
+.screen{position:relative;height:100%;border-radius:34px;overflow:hidden;background:var(--p-paper);color:var(--p-ink);display:flex;flex-direction:column;font-size:16px;line-height:1.5;font-family:var(--font)}
+.statusbar{height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;font-size:13px;font-weight:600;background:var(--p-paper);flex:none}
+.statusbar .notch{position:absolute;left:50%;top:8px;transform:translateX(-50%);width:110px;height:28px;border-radius:999px;background:#17140F}
+.offline{background:#3A2A1F;color:#FDEFE4;font-size:13px;font-weight:500;padding:6px 16px;text-align:center;flex:none}
+.appbar{height:56px;display:flex;align-items:center;gap:8px;padding:0 12px 0 16px;flex:none;background:var(--p-paper)}
+.appbar .title{font-size:22px;font-weight:700;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.appbar .icon,.iconbtn{width:44px;height:44px;border-radius:12px;border:0;background:transparent;display:grid;place-items:center;color:var(--p-ink)}
+.appbar .icon:active,.iconbtn:active{background:var(--p-tint)}
+.content{flex:1;min-height:0;overflow:auto;padding:4px 16px 96px;scroll-behavior:smooth}
+.content.noTabs{padding-bottom:24px}
+.content.flush{padding:0}
+.tabbar{position:absolute;left:0;right:0;bottom:0;height:78px;background:var(--p-surface);border-top:1px solid var(--p-line);display:grid;grid-template-columns:repeat(5,1fr);padding:6px 4px 14px}
+.tab{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--p-faint);font-size:11px;font-weight:600;min-height:44px;padding:4px 0}
+.tab svg{width:24px;height:24px}
+.tab[aria-current="page"]{color:var(--p-brand)}
+.fab{position:absolute;right:16px;bottom:94px;width:56px;height:56px;border-radius:999px;border:0;background:var(--p-brand);color:#fff;display:grid;place-items:center;box-shadow:0 14px 34px rgba(50,35,20,.16)}
+.fab:active{background:var(--p-brand-deep);transform:scale(.98)}
+.fab svg{width:26px;height:26px}
+.fab.plus{font-size:30px;font-weight:600}
+.pbtn{height:52px;border-radius:16px;border:1px solid transparent;font-size:16px;font-weight:600;padding:0 18px;display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;transition:transform .12s,background .12s}
+.pbtn:active{transform:scale(.98)}
+.pbtn.primary{background:var(--p-brand);color:#fff}
+.pbtn.primary:active{background:var(--p-brand-deep)}
+.pbtn.secondary{background:var(--p-surface);border-color:var(--p-line);color:var(--p-ink)}
+.pbtn.ghost{background:transparent;color:var(--p-brand)}
+.pbtn.danger{background:transparent;color:var(--p-bad);border-color:var(--p-line)}
+.pbtn.wa{background:var(--p-wa);color:#fff}
+.pbtn:disabled{background:var(--p-line);color:var(--p-faint);border-color:var(--p-line);transform:none;cursor:not-allowed}
+.pbtn.loading{color:transparent;position:relative}
+.pbtn.loading::after{content:"";position:absolute;width:22px;height:22px;border-radius:50%;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;animation:spin .7s linear infinite}
+.pbtn.secondary.loading::after,.pbtn.ghost.loading::after{border-color:rgba(236,106,44,.3);border-top-color:var(--p-brand)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.field{display:flex;flex-direction:column;gap:6px;margin-top:14px}
+.field label{font-size:14px;font-weight:600}
+.field .help{font-size:13px;color:var(--p-muted)}
+.field .err{font-size:13px;color:var(--p-bad);font-weight:500}
+.inp{height:52px;border-radius:10px;border:1px solid var(--p-line);background:var(--p-surface);padding:0 14px;font-size:16px;width:100%;color:var(--p-ink)}
+textarea.inp{height:auto;min-height:88px;padding:12px 14px;resize:vertical}
+.inp:focus{outline:0;border:2px solid var(--p-brand);box-shadow:0 0 0 3px var(--p-tint)}
+.inp.error{border:2px solid var(--p-bad)}
+.inp:disabled{background:var(--p-paper);color:var(--p-faint)}
+.inp-wrap{position:relative}
+.inp-wrap .inp{padding-right:52px}
+.inp-wrap .eye{position:absolute;right:4px;top:4px;width:44px;height:44px;border:0;background:transparent;border-radius:8px;color:var(--p-muted);font-size:13px;font-weight:600}
+.num{font-variant-numeric:tabular-nums;font-weight:600}
+.card{background:var(--p-surface);border-radius:16px;box-shadow:0 8px 22px rgba(80,55,35,.08);padding:16px}
+.h2{font-size:18px;font-weight:700}
+.h1{font-size:22px;font-weight:700}
+.cap{font-size:13px;color:var(--p-muted);font-weight:500}
+.sect{margin-top:24px}
+.sect-h{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.capture{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+.capbtn{height:88px;border-radius:16px;border:1px solid var(--p-line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:16px;font-weight:600;background:var(--p-surface);color:var(--p-ink)}
+.capbtn.brand{background:var(--p-brand);color:#fff;border-color:var(--p-brand)}
+.capbtn:active{transform:scale(.98)}
+.capbtn svg{width:28px;height:28px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.tile{background:var(--p-surface);border-radius:16px;box-shadow:0 8px 22px rgba(80,55,35,.08);padding:14px 16px;text-align:left;border:0;color:var(--p-ink);min-height:88px;display:flex;flex-direction:column;justify-content:space-between;gap:4px}
+.tile .v{font-size:28px;line-height:34px;font-weight:800;font-variant-numeric:tabular-nums}
+.tile .v small{font-size:14px;font-weight:600;color:var(--p-muted)}
+.tile .l{font-size:13px;color:var(--p-muted);font-weight:500}
+.tile:active{background:var(--p-tint)}
+.list{display:flex;flex-direction:column;background:var(--p-surface);border-radius:16px;box-shadow:0 8px 22px rgba(80,55,35,.08);overflow:hidden}
+.lrow{display:flex;align-items:center;gap:12px;min-height:64px;padding:10px 14px;border-top:1px solid var(--p-line);text-align:left;background:transparent;border-left:0;border-right:0;border-bottom:0;width:100%;color:var(--p-ink);position:relative}
+.lrow:first-child{border-top:0}
+.lrow:active{background:var(--p-tint)}
+.lrow.sel{background:var(--p-tint)}
+.lrow.dim{opacity:.55}
+.lrow .main{flex:1;min-width:0}
+.lrow .nm{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lrow .sub{font-size:13px;color:var(--p-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.av{flex:none;width:40px;height:40px;border-radius:999px;background:var(--p-tint);color:var(--p-brand-deep);display:grid;place-items:center;font-weight:700}
+.doc-ic{flex:none;width:40px;height:48px;border-radius:6px;background:#fff;border:1px solid var(--p-line);position:relative;overflow:hidden}
+.doc-ic::before{content:"";position:absolute;left:7px;right:7px;top:9px;height:3px;background:var(--p-line);box-shadow:0 8px 0 var(--p-line),0 16px 0 var(--p-line),0 24px 0 var(--p-line)}
+.doc-ic.shimmer::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(236,106,44,.25),transparent);animation:sh 1.2s infinite}
+@keyframes sh{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.chip.ok{background:rgba(31,157,85,.12);color:var(--p-ok)}
+.chip.warn{background:rgba(200,134,11,.14);color:#8E5F06}
+.chip.bad{background:rgba(214,69,69,.12);color:var(--p-bad)}
+.chip.neutral{background:var(--p-line);color:var(--p-muted)}
+.chip.brand{background:var(--p-tint);color:var(--p-brand-deep)}
+.chip.wa{background:rgba(37,211,102,.15);color:#15803d}
+.empty{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:36px 16px;color:var(--p-muted)}
+.empty svg{width:48px;height:48px;color:var(--p-faint)}
+.empty p{max-width:30ch}
+.skel{height:64px;background:linear-gradient(90deg,var(--p-line),#f5efe6,var(--p-line));background-size:200% 100%;animation:skel 1.2s infinite;border-radius:12px}
+@keyframes skel{from{background-position:200% 0}to{background-position:-200% 0}}
+.sticky-bar{position:absolute;left:0;right:0;bottom:0;padding:12px 16px 20px;background:linear-gradient(to top,var(--p-paper) 70%,transparent);display:flex;gap:10px}
+.sticky-bar.tabs{bottom:78px}
+.review-thumb{height:150px;border-radius:16px;background:#ECE3D6;position:relative;overflow:hidden;display:grid;place-items:center;color:var(--p-muted);font-size:13px;font-weight:500;margin-top:4px}
+.review-thumb img{width:100%;height:100%;object-fit:cover}
+.review-thumb .paper{width:110px;height:130px;background:#fff;border-radius:4px;box-shadow:0 4px 14px rgba(0,0,0,.12);position:absolute;top:10px;transform:rotate(-3deg)}
+.review-thumb .paper::before{content:"";position:absolute;left:12px;right:12px;top:16px;height:4px;background:#e4dccf;box-shadow:0 12px 0 #e4dccf,0 24px 0 #e4dccf,0 36px 0 #e4dccf,0 48px 0 #e4dccf,0 60px 0 #e4dccf}
+.rf{position:relative;margin-top:14px;padding-left:12px}
+.rf::before{content:"";position:absolute;left:0;top:28px;bottom:0;width:4px;border-radius:2px;background:transparent}
+.rf.low::before{background:var(--p-warn)}
+.rf .lab{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;margin-bottom:6px}
+.rf .lab .dot{width:8px;height:8px;border-radius:50%;background:var(--p-brand);display:none}
+.rf.edited .lab .dot{display:block}
+.rf .lab .hint{font-size:12px;color:#8E5F06;font-weight:600;background:rgba(200,134,11,.14);padding:1px 8px;border-radius:999px;display:none}
+.rf.low .lab .hint{display:inline-block}
+.rf .lab .req{color:var(--p-bad)}
+.rf .err{display:none;font-size:13px;color:var(--p-bad);margin-top:4px}
+.rf.invalid .err{display:block}
+.rf.invalid .inp{border:2px solid var(--p-bad)}
+.lock{display:flex;align-items:center;gap:10px;height:52px;border-radius:10px;background:var(--p-paper);border:1px dashed var(--p-line);padding:0 14px;font-weight:600;letter-spacing:.06em}
+.consent{display:flex;gap:12px;align-items:flex-start;margin-top:18px;padding:12px;border-radius:12px;background:var(--p-surface);border:1px solid var(--p-line);font-size:14px}
+.consent input{width:22px;height:22px;margin:2px 0 0;accent-color:var(--p-brand);flex:none}
+.tbl-wrap{overflow:auto;border-radius:16px;background:var(--p-surface);box-shadow:0 8px 22px rgba(80,55,35,.08);max-width:100%}
+table.ptbl{border-collapse:separate;border-spacing:0;min-width:100%;font-size:14px}
+.ptbl th,.ptbl td{padding:12px 12px;text-align:left;white-space:nowrap;max-width:180px;overflow:hidden;text-overflow:ellipsis;border-bottom:1px solid var(--p-line)}
+.ptbl th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--p-muted);background:var(--p-surface);position:sticky;top:0;z-index:2}
+.ptbl th:first-child,.ptbl td:first-child{position:sticky;left:0;background:var(--p-surface);z-index:1;font-weight:600;box-shadow:1px 0 0 var(--p-line)}
+.ptbl th:first-child{z-index:3}
+.ptbl tr[data-act]{cursor:pointer}
+.ptbl tr[data-act]:active td{background:var(--p-tint)}
+.ptbl tr:last-child td{border-bottom:0}
+.tfoot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;font-size:13px;color:var(--p-muted)}
+.search{position:relative;margin-top:8px}
+.search .inp{padding-left:44px;height:48px}
+.search svg{position:absolute;left:14px;top:14px;width:20px;height:20px;color:var(--p-faint)}
+.toggle{appearance:none;width:44px;height:26px;border-radius:999px;background:var(--p-line);position:relative;margin:0;cursor:pointer;flex:none;transition:background .12s}
+.toggle::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .12s}
+.toggle:checked{background:var(--p-ok)}
+.toggle:checked::after{transform:translateX(18px)}
+.cb{width:22px;height:22px;accent-color:var(--p-brand);margin:0;flex:none}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.pchip{border:1px solid var(--p-line);background:var(--p-surface);border-radius:999px;padding:8px 14px;font-size:14px;font-weight:600;min-height:40px;color:var(--p-ink)}
+.pchip[aria-pressed="true"]{background:var(--p-brand);color:#fff;border-color:var(--p-brand)}
+.bubble{background:#E7FFDB;border-radius:14px 14px 14px 4px;padding:10px 12px;font-size:15px;line-height:1.45;position:relative;max-width:300px;box-shadow:0 1px 1px rgba(0,0,0,.08);white-space:pre-wrap;color:#111}
+.bubble .time{display:block;text-align:right;font-size:11px;color:#667781;margin-top:4px}
+.wa-bg{background:#ECE5DD;border-radius:16px;padding:14px;margin-top:10px}
+.progress{height:10px;border-radius:999px;background:var(--p-line);overflow:hidden;margin-top:8px}
+.progress > div{height:100%;background:var(--p-brand);transition:width .3s}
+.rtiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.rtile{background:var(--p-surface);border-radius:12px;padding:10px 8px;text-align:center;box-shadow:0 8px 22px rgba(80,55,35,.08)}
+.rtile .v{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
+.rtile .l{font-size:11px;color:var(--p-muted);font-weight:600;margin-top:2px}
+.rtile.bad .v{color:var(--p-bad)}
+.rtile.ok .v{color:var(--p-ok)}
+.stages{display:flex;gap:6px;overflow:auto;padding-bottom:4px;margin-top:10px}
+.stage-chip{flex:none;font-size:12px;font-weight:600;padding:6px 10px;border-radius:999px;background:var(--p-line);color:var(--p-muted);display:inline-flex;gap:4px;align-items:center}
+.stage-chip.done{background:rgba(31,157,85,.12);color:var(--p-ok)}
+.stage-chip.cur{background:var(--p-brand);color:#fff}
+.kv{display:grid;grid-template-columns:1fr auto;gap:6px 12px;font-size:14px}
+.kv dt{color:var(--p-muted)}
+.kv dd{margin:0;text-align:right;font-weight:600;min-width:0;word-break:break-word}
+.menu{position:absolute;right:12px;top:52px;background:var(--p-surface);border-radius:14px;box-shadow:0 14px 34px rgba(50,35,20,.16);padding:6px;z-index:30;min-width:220px}
+.menu button{display:flex;width:100%;border:0;background:transparent;padding:12px 14px;border-radius:10px;font-size:15px;font-weight:500;text-align:left;color:var(--p-ink);min-height:44px;gap:10px;align-items:center;justify-content:space-between}
+.menu button:active{background:var(--p-tint)}
+.camera{flex:1;background:#111;position:relative;display:flex;flex-direction:column;color:#fff}
+.viewfinder{flex:1;position:relative;overflow:hidden;display:grid;place-items:center;background:radial-gradient(ellipse at center,#2a2622,#0e0c0a)}
+.viewfinder .docp{width:68%;aspect-ratio:3/4;background:#f6f1e8;border-radius:4px;transform:rotate(-4deg);box-shadow:0 20px 50px rgba(0,0,0,.5);position:relative}
+.viewfinder .docp::before{content:"";position:absolute;left:14%;right:14%;top:12%;height:5px;background:#d9d1c4;box-shadow:0 18px 0 #d9d1c4,0 36px 0 #d9d1c4,0 54px 0 #d9d1c4,0 72px 0 #d9d1c4,0 90px 0 #d9d1c4,0 108px 0 #d9d1c4}
+.viewfinder .edge{position:absolute;width:74%;aspect-ratio:3/4;border:3px solid var(--p-brand);border-radius:8px;transform:rotate(-4deg);box-shadow:0 0 0 2000px rgba(0,0,0,.35)}
+.viewfinder .edge::after{content:"";position:absolute;inset:0;border-radius:8px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
+.viewfinder .hintc{position:absolute;top:16px;left:0;right:0;text-align:center;font-size:14px;font-weight:600;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.viewfinder .torch{position:absolute;top:10px;right:12px}
+.camctl{height:150px;display:flex;align-items:center;justify-content:space-between;padding:0 22px 20px;position:relative}
+.shutter{width:72px;height:72px;border-radius:50%;border:4px solid #fff;background:transparent;position:absolute;left:50%;transform:translateX(-50%);top:26px;display:grid;place-items:center}
+.shutter::after{content:"";width:56px;height:56px;border-radius:50%;background:#fff}
+.shutter:active::after{transform:scale(.9)}
+.thumbs{display:flex;gap:6px;position:absolute;left:16px;top:38px}
+.thumbs div{width:34px;height:44px;border-radius:4px;background:#f6f1e8;border:2px solid #fff;font-size:11px;color:#333;display:grid;place-items:center;font-weight:700}
+.camdone{position:absolute;right:16px;top:40px;border:0;background:var(--p-brand);color:#fff;font-weight:600;border-radius:12px;padding:10px 16px;min-height:44px}
+.camdone:disabled{background:#444;color:#999}
+.flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.flash.on{animation:flash .25s}
+@keyframes flash{0%{opacity:.9}100%{opacity:0}}
+.ghostbtn{border:0;background:rgba(255,255,255,.14);color:#fff;border-radius:10px;padding:8px 12px;font-weight:600;font-size:13px;min-height:40px}
+.ghostbtn[aria-pressed="true"]{background:#fff;color:#111}
+.toasts{position:absolute;left:12px;right:12px;bottom:92px;display:flex;flex-direction:column;gap:8px;z-index:40;pointer-events:none}
+.toast{background:#231F1C;color:#fff;border-radius:12px;padding:10px 14px;font-size:14px;font-weight:500;box-shadow:0 14px 34px rgba(50,35,20,.16);animation:tin .12s ease-out;display:flex;gap:8px;align-items:center}
+.toast.ok{border-left:4px solid var(--p-ok)}
+.toast.bad{border-left:4px solid var(--p-bad)}
+.toast.info{border-left:4px solid var(--p-brand)}
+.toast.out{animation:tout .2s forwards}
+@keyframes tin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes tout{to{opacity:0;transform:translateY(8px)}}
+.scrim{position:absolute;inset:0;background:rgba(35,31,28,.45);z-index:35;display:flex;align-items:flex-end;animation:fade .22s}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.sheet{background:var(--p-surface);border-radius:24px 24px 0 0;width:100%;max-height:88%;overflow:auto;padding:12px 16px 28px;animation:up .22s cubic-bezier(.2,.7,.2,1);box-shadow:0 14px 34px rgba(50,35,20,.16)}
+@keyframes up{from{transform:translateY(40px);opacity:.6}to{transform:none;opacity:1}}
+.sheet .grab{width:40px;height:4px;border-radius:2px;background:var(--p-line);margin:0 auto 12px}
+.sheet h3{font-size:18px;font-weight:700;margin-bottom:6px}
+.sheet .opt{display:flex;gap:12px;align-items:center;width:100%;border:1px solid var(--p-line);background:var(--p-surface);border-radius:14px;padding:12px 14px;text-align:left;margin-top:10px;color:var(--p-ink);min-height:56px}
+.sheet .opt:active,.sheet .opt.sel{background:var(--p-tint);border-color:var(--p-brand)}
+.sheet .opt .t{font-weight:600}
+.sheet .opt .d{font-size:13px;color:var(--p-muted)}
+.sheet .acts{display:flex;gap:10px;margin-top:16px}
+.pdf{background:#fff;color:#111;border:1px solid var(--p-line);border-radius:8px;padding:16px;font-family:"Times New Roman",Georgia,serif;font-size:12.5px;line-height:1.45;box-shadow:0 8px 22px rgba(80,55,35,.08)}
+.pdf h4{text-align:center;font-size:14px;font-weight:700;letter-spacing:.04em;margin-bottom:2px;font-family:inherit}
+.pdf .sub{text-align:center;font-size:11px;color:#444;margin-bottom:12px}
+.pdf .ln{display:flex;gap:6px;border-bottom:1px dotted #999;padding:4px 0;flex-wrap:wrap}
+.pdf .ln b{font-weight:600}
+.pdf .photo{float:right;width:64px;height:78px;border:1px solid #999;background:#f3f3f3;font-size:10px;text-align:center;display:grid;place-items:center;margin:0 0 8px 8px;color:#666}
+.pdf .sign{display:flex;justify-content:space-between;margin-top:22px;font-size:11px}
+.pdf .sign div{border-top:1px solid #333;padding-top:4px;width:44%;text-align:center}
+.pdf .warn{margin-top:10px;font-size:11px;background:#FFF6E5;border:1px solid #F3D9A4;padding:6px 8px;border-radius:4px;color:#7a4e00;font-family:var(--font)}
+.copyrow{display:flex;align-items:center;gap:10px;min-height:56px;padding:8px 12px;border-top:1px solid var(--p-line)}
+.copyrow:first-child{border-top:0}
+.copyrow .k{font-size:12px;color:var(--p-muted);font-weight:600}
+.copyrow .v{font-weight:600;word-break:break-word}
+.copyrow .main{flex:1;min-width:0}
+.copyrow button{flex:none;height:40px;border-radius:10px;border:1px solid var(--p-line);background:var(--p-surface);padding:0 12px;font-weight:600;font-size:13px;color:var(--p-brand-deep)}
+.copyrow button.done{background:rgba(31,157,85,.12);color:var(--p-ok);border-color:transparent}
+.banner{display:flex;gap:10px;align-items:flex-start;background:var(--p-tint);border-radius:12px;padding:10px 12px;font-size:13px;color:#7a3a12;margin-top:12px}
+.banner.ok{background:rgba(31,157,85,.1);color:#14532d}
+.banner.bad{background:rgba(214,69,69,.1);color:#7f1d1d}
+.svc-row{display:flex;gap:8px;margin-top:8px}
+.svc-row .inp{flex:1}
+.svc-row button{flex:none;width:52px;height:52px;border-radius:10px;border:1px solid var(--p-line);background:var(--p-surface);color:var(--p-bad);font-weight:700}
+.photo-up{display:flex;gap:12px;align-items:center;margin-top:6px}
+.photo-up .pv{width:88px;height:66px;border-radius:10px;background:var(--p-line);display:grid;place-items:center;overflow:hidden;color:var(--p-muted);font-size:12px}
+.photo-up .pv img{width:100%;height:100%;object-fit:cover}
+.urlbox{display:flex;align-items:center;gap:8px;background:var(--p-surface);border:1px solid var(--p-line);border-radius:12px;padding:8px 8px 8px 14px;margin-top:10px}
+.urlbox .u{flex:1;min-width:0;font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--p-brand-deep)}
+.urlbox button{height:40px;border-radius:10px;border:1px solid var(--p-line);background:var(--p-surface);padding:0 12px;font-weight:600;font-size:13px;flex:none}
+.login-logo{width:72px;height:72px;border-radius:20px;margin:40px auto 12px;background:linear-gradient(135deg,var(--p-brand),var(--p-brand-deep));color:#fff;display:grid;place-items:center;font-size:34px;font-weight:800}
+.login-title{text-align:center;font-size:28px;line-height:34px;font-weight:800;margin-bottom:4px}
+.login-sub{text-align:center;font-size:14px;color:var(--p-muted);margin-bottom:24px;font-weight:500}
+.lang-sm{display:flex;justify-content:center;gap:6px;margin-top:18px}
+.lang-sm button{border:1px solid var(--p-line);background:var(--p-surface);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;min-height:36px;color:var(--p-ink)}
+.lang-sm button[aria-pressed="true"]{background:var(--p-ink);color:#fff;border-color:var(--p-ink)}
+.fieldrow{display:flex;align-items:center;gap:10px;min-height:60px;padding:8px 14px;border-top:1px solid var(--p-line)}
+.fieldrow:first-child{border-top:0}
+.fieldrow .main{flex:1;min-width:0}
+.fieldrow .nm{font-weight:600}
+.fieldrow .sub{font-size:12px;color:var(--p-muted)}
+.selbar{position:absolute;left:0;right:0;bottom:78px;background:var(--p-ink);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 16px;z-index:20}
+.selbar button{border:0;background:rgba(255,255,255,.15);color:#fff;border-radius:10px;padding:8px 12px;font-weight:600;min-height:40px}
+.selbar .cnt{flex:1;font-weight:600}
+
+/* ---------- desktop mock ---------- */
+.desk{width:100%;max-width:1040px;border-radius:14px;background:#2b2622;padding:8px;box-shadow:0 30px 60px rgba(30,20,10,.3);color-scheme:light;color:#231F1C}
+.desk-chrome{background:#3a342f;border-radius:10px 10px 0 0;padding:8px 10px 0}
+.dtabs{display:flex;gap:4px;align-items:flex-end}
+.dtab{background:#56504a;color:#ddd;font-size:12.5px;font-weight:500;padding:8px 14px;border-radius:8px 8px 0 0;display:flex;gap:8px;align-items:center;max-width:60%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.dtab.active{background:#F3F0EB;color:#231F1C}
+.addr{background:#F3F0EB;display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:0 8px 0 0}
+.addr .url{flex:1;background:#fff;border-radius:999px;padding:6px 14px;font-size:13px;color:#555;border:1px solid #ddd;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.extbtn{width:34px;height:34px;border-radius:8px;border:0;background:linear-gradient(135deg,#EC6A2C,#D64F16);color:#fff;font-weight:800;font-size:16px;flex:none;position:relative}
+.extbtn .badge{position:absolute;top:-4px;right:-4px;background:#1F9D55;color:#fff;font-size:10px;border-radius:999px;padding:1px 5px;font-weight:700}
+.desk-body{background:#F6F6F4;border-radius:0 0 8px 8px;display:grid;grid-template-columns:minmax(0,1fr) 360px;min-height:560px;position:relative}
+.portal{padding:0;min-width:0;font-family:Arial,Helvetica,sans-serif;color:#222;font-size:14px}
+.portal-head{background:#1d3f6e;color:#fff;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.portal-head b{font-size:16px}
+.portal-head .mock{font-size:11px;background:rgba(255,255,255,.18);padding:3px 8px;border-radius:4px}
+.portal-sub{background:#e7edf5;padding:6px 18px;font-size:12px;color:#355}
+.portal-main{padding:18px}
+.pform{background:#fff;border:1px solid #ccd;border-radius:4px;padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+.pform .f{display:flex;flex-direction:column;gap:4px;min-width:0;position:relative}
+.pform .f.full{grid-column:1/-1}
+.pform label{font-size:12px;color:#444;font-weight:700}
+.pform input,.pform select,.pform textarea{border:1px solid #aab;border-radius:3px;padding:8px 10px;font-size:14px;background:#fff;color:#222;width:100%;min-height:38px}
+.pform textarea{min-height:64px;resize:vertical}
+.pform .f.filled input,.pform .f.filled select,.pform .f.filled textarea{border-color:#1F9D55;background:#f2fbf5}
+.pform .f .tick{position:absolute;right:8px;top:26px;color:#1F9D55;font-weight:700;font-size:13px;display:none;background:#f2fbf5;padding:0 4px}
+.pform .f.filled .tick{display:block}
+.pform .f.typing input,.pform .f.typing textarea{border-color:#EC6A2C;box-shadow:0 0 0 3px rgba(236,106,44,.2)}
+.gate{background:#fff;border:1px solid #ccd;border-radius:4px;padding:14px 16px;margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.gate .gh{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.gate .gh b{font-size:14px}
+.you{font-size:11px;font-weight:700;background:#FDEFE4;color:#B4400D;padding:3px 8px;border-radius:999px;letter-spacing:.04em;text-transform:uppercase}
+.you.done{background:#e3f6ea;color:#166534}
+.gate .gr{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.gate input{border:1px solid #aab;border-radius:3px;padding:8px 10px;font-size:14px;min-height:38px}
+.gbtn{border:1px solid #1d3f6e;background:#1d3f6e;color:#fff;border-radius:3px;padding:8px 14px;font-size:13px;font-weight:600;min-height:38px}
+.gbtn.alt{background:#fff;color:#1d3f6e}
+.gbtn:disabled{background:#ccc;border-color:#ccc;color:#777;cursor:not-allowed}
+.captcha{font-family:Georgia,serif;font-size:22px;letter-spacing:6px;font-style:italic;background:repeating-linear-gradient(135deg,#eee 0 4px,#ddd 4px 8px);padding:6px 14px;border-radius:3px;color:#334;text-decoration:line-through;user-select:none;display:inline-block}
+.portal .success{background:#e9f8ee;border:1px solid #9fd6b3;border-radius:4px;padding:16px;margin-top:14px}
+.portal .login-panel{background:#fff;border:1px solid #ccd;border-radius:4px;padding:22px;max-width:520px;margin:24px auto;text-align:center}
+.portal .login-panel p{font-size:13px;color:#555;margin:8px 0 14px}
+.ext{background:#FAF8F3;border-left:1px solid #ECE3D6;display:flex;flex-direction:column;min-width:0;font-family:var(--font)}
+.ext-h{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid #ECE3D6;background:#fff}
+.ext-h .lg{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#EC6A2C,#D64F16);color:#fff;font-weight:800;display:grid;place-items:center}
+.ext-h b{font-size:14px}
+.ext-h .sub{font-size:11px;color:#6F655B}
+.ext-body{padding:12px 14px;display:flex;flex-direction:column;gap:12px;overflow:auto;max-height:640px}
+.ext .seg2{display:grid;grid-template-columns:1fr 1fr;border:1px solid #ECE3D6;border-radius:10px;overflow:hidden;background:#fff}
+.ext .seg2 button{border:0;background:transparent;padding:9px 6px;font-size:12.5px;font-weight:600;color:#6F655B;min-height:40px}
+.ext .seg2 button[aria-pressed="true"]{background:#EC6A2C;color:#fff}
+.ext .sec{background:#fff;border:1px solid #ECE3D6;border-radius:12px;padding:10px 12px}
+.ext .sec h4{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#6F655B;margin-bottom:8px;font-weight:700}
+.prof{display:flex;align-items:center;gap:10px;width:100%;border:1px solid transparent;background:transparent;border-radius:10px;padding:8px;text-align:left;color:#231F1C;min-height:48px}
+.prof:hover{background:#FDEFE4}
+.prof.sel{background:#FDEFE4;border-color:#EC6A2C}
+.prof .av{width:32px;height:32px;font-size:13px}
+.prof .nm{font-weight:600;font-size:14px}
+.prof .sub{font-size:12px;color:#6F655B}
+.ebtn{height:44px;border-radius:12px;border:1px solid transparent;font-weight:600;font-size:14px;width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.ebtn.primary{background:#EC6A2C;color:#fff}
+.ebtn.primary:active{background:#D64F16}
+.ebtn.sec{background:#fff;border-color:#ECE3D6;color:#231F1C}
+.ebtn:disabled{background:#ECE3D6;color:#9A8F82;cursor:not-allowed}
+.flist{display:flex;flex-direction:column;gap:4px;font-size:13px}
+.flist div{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:4px 0;border-top:1px dashed #ECE3D6}
+.flist div:first-child{border-top:0}
+.flist .st{font-size:11px;font-weight:700;padding:2px 7px;border-radius:999px;background:#ECE3D6;color:#6F655B}
+.flist .st.ok{background:#e3f6ea;color:#166534}
+.flist .st.run{background:#FDEFE4;color:#B4400D}
+.flist .st.bad{background:#fde2e2;color:#991b1b}
+.steplog{display:flex;flex-direction:column;gap:6px;font-size:13px}
+.steplog div{display:flex;gap:8px;align-items:flex-start;padding:6px 8px;border-radius:8px;background:#fff;border:1px solid #ECE3D6}
+.steplog div.cur{border-color:#EC6A2C;background:#FDEFE4}
+.steplog div.done{color:#6F655B}
+.steplog div.pause{border-color:#C8860B;background:#FFF6E5}
+.steplog .ic{flex:none;width:18px;text-align:center;font-weight:700}
+.ext .msg{font-size:13px;padding:10px 12px;border-radius:10px;background:#FDEFE4;color:#7a3a12}
+.ext .msg.bad{background:#fde2e2;color:#7f1d1d}
+.ext .msg.ok{background:#e3f6ea;color:#14532d}
+.hand{background:#231F1C;color:#fff;font-size:13px;padding:8px 12px;border-radius:10px;display:flex;gap:8px;align-items:center}
+.gates{display:grid;grid-template-columns:1fr;gap:4px;font-size:13px}
+.gates div{display:flex;justify-content:space-between;align-items:center;padding:4px 0}
+.ext .sw{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px;font-weight:500}
+.ext .sw input{appearance:none;width:38px;height:22px;border-radius:999px;background:#ECE3D6;position:relative;margin:0;cursor:pointer;flex:none}
+.ext .sw input::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:transform .12s}
+.ext .sw input:checked{background:#C8860B}
+.ext .sw input:checked::after{transform:translateX(16px)}
+
+/* ---------- public site frame ---------- */
+.pub{width:100%;max-width:1040px;border-radius:14px;background:#2b2622;padding:8px;box-shadow:0 30px 60px rgba(30,20,10,.3);color-scheme:light;color:#231F1C}
+.pub .site{background:#fff;border-radius:0 0 8px 8px;overflow:hidden;font-family:var(--font)}
+.hero{background:linear-gradient(135deg,#EC6A2C,#D64F16);color:#fff;padding:40px 24px;display:grid;grid-template-columns:1fr 280px;gap:24px;align-items:center}
+.hero h2{font-size:32px;font-weight:800;line-height:1.1}
+.hero p{font-size:17px;opacity:.95;margin-top:8px}
+.hero .ph{aspect-ratio:4/3;border-radius:16px;background:rgba(255,255,255,.2);display:grid;place-items:center;overflow:hidden;font-size:13px}
+.hero .ph img{width:100%;height:100%;object-fit:cover}
+.site section{padding:28px 24px;border-top:1px solid #ECE3D6}
+.site h3{font-size:20px;font-weight:700;margin-bottom:10px}
+.site .svcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.site .svcs div{background:#FAF8F3;border:1px solid #ECE3D6;border-radius:12px;padding:12px 14px;font-weight:600}
+.site .contact{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.site .enq{background:#FAF8F3;border:1px solid #ECE3D6;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.site .enq input{height:48px;border-radius:10px;border:1px solid #ECE3D6;padding:0 12px;font-size:16px;background:#fff}
+.site .enq button{height:48px;border-radius:10px;border:0;background:#EC6A2C;color:#fff;font-weight:600;font-size:16px}
+.site .wabtn{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-weight:700;border-radius:999px;padding:12px 18px;margin-top:10px;font-size:15px}
+.site footer{padding:14px 24px;font-size:12px;color:#6F655B;background:#FAF8F3;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.site .draft-banner{background:#FFF6E5;color:#7a4e00;font-size:13px;padding:8px 24px;border-bottom:1px solid #F3D9A4}
+
+.foot{padding-block:18px 40px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+
+@media (max-width: 980px){
+  .layout{grid-template-columns:1fr}
+  .steps{position:static;max-height:none;flex-direction:row;overflow-x:auto;gap:8px;padding-bottom:6px}
+  .steps .grp{flex-direction:row;gap:6px}
+  .steps .grp h3{display:none}
+  .step{width:auto;flex:none;align-items:center;max-width:240px}
+  .step .d{display:none}
+  .hero-main{grid-template-columns:1fr;gap:18px}
+  .journey{grid-template-columns:1fr 1fr}
+  .desk-body{grid-template-columns:1fr}
+  .ext{border-left:0;border-top:1px solid #ECE3D6}
+  .hero{grid-template-columns:1fr}
+  .site .contact{grid-template-columns:1fr}
+  .pform{grid-template-columns:1fr}
+}
+@media (max-width: 520px){
+  .phone{height:min(812px,calc(100vh - 24px));border-radius:36px;padding:8px}
+  .screen{border-radius:28px}
+  .journey{grid-template-columns:1fr}
+  .hero-stats{grid-template-columns:1fr 1fr 1fr;gap:6px}
+  .hstat{padding:10px 10px}
+  .hstat b{font-size:20px}
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+
+<header class="hero-band">
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="brandmark"><div class="logo">V</div><div><b>Vovix One</b><span>Interactive demo</span></div></div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <span class="for"><i>SS</i>Prepared for Sri Sastha Driving School</span>
+        <div class="seg dark" role="group" aria-label="Language" id="heroLang"></div>
+      </div>
+    </div>
+    <div class="hero-main">
+      <div>
+        <h1>Scan once. <em>Form 5 in a tap.</em> Sarathi filled for you.</h1>
+        <p class="lede">One app on your phone for the whole school: enrol a student from their Aadhaar, issue Form 5 instantly, fill the Sarathi portal without retyping, remind every student on WhatsApp, and run your own website. Tap through the real screens below. Nothing here sends anything anywhere.</p>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><b>0</b><span>fields typed twice</span></div>
+        <div class="hstat"><b>1 tap</b><span>to issue Form 5</span></div>
+        <div class="hstat"><b>தமிழ்</b><span>and English</span></div>
+      </div>
+    </div>
+    <div class="journey" id="journey"></div>
+  </div>
+</header>
+
+<div class="toolbar"><div class="wrap">
+  <div class="hint">Demo switches: try the app offline, as a brand-new account, or as an accredited centre.</div>
+  <div class="controls" id="controls"></div>
+</div></div>
+
+<main class="wrap layout">
+  <nav class="steps" id="steps" aria-label="Demo steps"></nav>
+  <section class="stage">
+    <div class="note" id="note"></div>
+    <div class="stage-body">
+      <div class="stage-nav">
+        <button class="btn" id="prevStep" data-act="step.prev">← Previous</button>
+        <button class="btn" id="nextStep" data-act="step.next">Next step →</button>
+      </div>
+      <div class="phone" id="phoneWrap">
+        <div class="screen" id="screen"></div>
+      </div>
+      <div class="desk" id="deskWrap" hidden></div>
+      <div class="pub" id="pubWrap" hidden></div>
+      <p class="caption" id="stageCaption"></p>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap foot"><span>Vovix One · demo for Sri Sastha Driving School · all data shown is sample data</span><span>Vovix Private Limited, Chennai</span></footer>
+
+<script>
+(function () {
+'use strict';
+/* =====================================================================
+   Vovix One — interactive demo. Everything is simulated in the browser.
+   ===================================================================== */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const uid = () => Math.random().toString(36).slice(2, 9);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const inr = n => '₹' + Number(n).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const fmtPhone = p => { const d = String(p).replace(/\D/g, '').slice(-10); return d.length === 10 ? `+91 ${d.slice(0, 5)} ${d.slice(5)}` : p; };
+const today = () => new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+
+/* ---------------- i18n (demo covers the main labels; production translates every string) ---------------- */
+const I18N = {
+  en: {
+    home: 'Home', records: 'Records', students: 'Students', contacts: 'Contacts', broadcast: 'Broadcast', site: 'Site',
+    scan: 'Scan', upload: 'Upload / Import', login: 'Login', email: 'Email', password: 'Password', forgot: 'Forgot password?',
+    recent: 'Recent documents', firstDoc: 'Upload your first document to begin.', offline: "You're offline — uploads will send when you reconnect",
+    saveRecord: 'Save record', saveStudent: 'Save student', discard: 'Discard', export: 'Export to Excel', search: 'Search',
+    publish: 'Publish', preview: 'Preview', live: 'Live', draft: 'Draft', needsReview: 'Needs review', captured: 'Captured',
+    processing: 'Processing', failed: 'Failed', pending: 'Pending', importCsv: 'Import CSV', optIn: 'WhatsApp opt-in',
+    sendTo: 'Send to {n} contacts', sendSarathi: 'Send to Sarathi', form5: 'Form 5 PDF', documents: 'Documents',
+    lastBroadcast: 'Last broadcast', settings: 'Settings', language: 'Language', fieldSetup: 'Field setup',
+    noRecords: 'No records yet — scan or upload a document.', noContacts: 'Contacts build automatically from documents — or import a CSV.',
+    selectTemplate: 'Choose a template', audience: 'Audience', all: 'All', recipients: '{n} recipients (opt-in only)',
+    cantRead: "Couldn't read this one — enter manually or rescan.", savedRecords: 'Saved to Records', addedContacts: 'Added to Contacts',
+    savedStudents: 'Saved to Students', positionDoc: 'Position document in frame', done: 'Done', logout: 'Log out',
+    businessName: 'Business name', tagline: 'Tagline', about: 'About', services: 'Services', photo: 'Photo', phone: 'Phone',
+    whatsapp: 'WhatsApp number', address: 'Address', mapLink: 'Map link', customDomain: 'Custom domain (optional)',
+    stage: 'Licence stage', verifyStudent: 'Verify student', reviewDoc: 'Review document', copyFields: 'Copy fields for Sarathi',
+  },
+  ta: {
+    home: 'முகப்பு', records: 'பதிவுகள்', students: 'மாணவர்கள்', contacts: 'தொடர்புகள்', broadcast: 'ஒளிபரப்பு', site: 'இணையதளம்',
+    scan: 'ஸ்கேன்', upload: 'பதிவேற்று / இறக்கு', login: 'உள்நுழை', email: 'மின்னஞ்சல்', password: 'கடவுச்சொல்', forgot: 'கடவுச்சொல் மறந்துவிட்டதா?',
+    recent: 'சமீபத்திய ஆவணங்கள்', firstDoc: 'தொடங்க உங்கள் முதல் ஆவணத்தைப் பதிவேற்றவும்.', offline: 'நீங்கள் ஆஃப்லைனில் உள்ளீர்கள் — இணைப்பு வந்தவுடன் பதிவேற்றங்கள் அனுப்பப்படும்',
+    saveRecord: 'பதிவைச் சேமி', saveStudent: 'மாணவரைச் சேமி', discard: 'நிராகரி', export: 'எக்செல்லுக்கு ஏற்றுமதி', search: 'தேடு',
+    publish: 'வெளியிடு', preview: 'முன்னோட்டம்', live: 'நேரலை', draft: 'வரைவு', needsReview: 'சரிபார்க்க வேண்டும்', captured: 'பிடிக்கப்பட்டது',
+    processing: 'செயலாக்கத்தில்', failed: 'தோல்வி', pending: 'நிலுவையில்', importCsv: 'CSV இறக்குமதி', optIn: 'வாட்ஸ்அப் ஒப்புதல்',
+    sendTo: '{n} தொடர்புகளுக்கு அனுப்பு', sendSarathi: 'சாரதிக்கு அனுப்பு', form5: 'படிவம் 5 PDF', documents: 'ஆவணங்கள்',
+    lastBroadcast: 'கடைசி ஒளிபரப்பு', settings: 'அமைப்புகள்', language: 'மொழி', fieldSetup: 'புல அமைப்பு',
+    noRecords: 'இன்னும் பதிவுகள் இல்லை — ஒரு ஆவணத்தை ஸ்கேன் செய்யவும் அல்லது பதிவேற்றவும்.', noContacts: 'ஆவணங்களிலிருந்து தொடர்புகள் தானாக உருவாகும் — அல்லது CSV இறக்குமதி செய்யவும்.',
+    selectTemplate: 'டெம்ப்ளேட்டைத் தேர்வு செய்க', audience: 'பார்வையாளர்கள்', all: 'அனைவரும்', recipients: '{n} பெறுநர்கள் (ஒப்புதல் உள்ளவர்கள் மட்டும்)',
+    cantRead: 'இதைப் படிக்க முடியவில்லை — கைமுறையாக உள்ளிடவும் அல்லது மீண்டும் ஸ்கேன் செய்யவும்.', savedRecords: 'பதிவுகளில் சேமிக்கப்பட்டது', addedContacts: 'தொடர்புகளில் சேர்க்கப்பட்டது',
+    savedStudents: 'மாணவர்களில் சேமிக்கப்பட்டது', positionDoc: 'ஆவணத்தை சட்டகத்தில் வைக்கவும்', done: 'முடிந்தது', logout: 'வெளியேறு',
+    businessName: 'வணிகப் பெயர்', tagline: 'முழக்கம்', about: 'எங்களைப் பற்றி', services: 'சேவைகள்', photo: 'புகைப்படம்', phone: 'தொலைபேசி',
+    whatsapp: 'வாட்ஸ்அப் எண்', address: 'முகவரி', mapLink: 'வரைபட இணைப்பு', customDomain: 'சொந்த டொமைன் (விருப்பம்)',
+    stage: 'உரிம நிலை', verifyStudent: 'மாணவரைச் சரிபார்', reviewDoc: 'ஆவணத்தைச் சரிபார்', copyFields: 'சாரதிக்காக புலங்களை நகலெடு',
+  }
+};
+const t = (k, vars) => { let s = (I18N[S.lang] && I18N[S.lang][k]) || I18N.en[k] || k; if (vars) for (const v in vars) s = s.replace('{' + v + '}', vars[v]); return s; };
+
+/* ---------------- sample content ---------------- */
+const NAMES = ['Karthik Raja', 'Priya Lakshmi', 'Mohammed Irfan', 'Anitha Selvam', 'Suresh Kumar', 'Divya Bharathi', 'Arun Prakash', 'Meena Sundari', 'Vignesh R', 'Kavitha Murugan', 'Rajesh Kannan', 'Sowmya Devi', 'Hari Prasad', 'Nandhini S'];
+const FATHERS = ['Raja Gopal', 'Lakshmanan', 'Abdul Rahim', 'Selvam P', 'Kumaresan', 'Bharathi Raja', 'Prakash V', 'Sundaram', 'Ravi', 'Murugan K', 'Kannan', 'Devaraj', 'Prasad', 'Sakthivel'];
+const AREAS = ['12, 3rd Street, Anna Nagar West, Chennai 600040', '45 Bazaar Road, Velachery, Chennai 600042', '7/2 Kamarajar Salai, Tambaram, Chennai 600045', '23 Usman Road, T. Nagar, Chennai 600017', '5 Gandhi Street, Porur, Chennai 600116', '18 Lake View Road, Ambattur, Chennai 600053', '31 Mount Road, Guindy, Chennai 600032', '9 Beach Road, Besant Nagar, Chennai 600090'];
+const COURSES = ['LMV', 'MCWG', 'LMV + MCWG'];
+const BLOOD = ['O+', 'A+', 'B+', 'AB+', 'O-'];
+const QUAL = ['10th', '12th', 'Diploma', 'UG', 'PG'];
+const phoneOf = i => '98' + String(41000000 + i * 73219).slice(0, 8);
+const dobOf = i => `${String(3 + (i * 7) % 25).padStart(2, '0')}-${String(1 + (i * 5) % 12).padStart(2, '0')}-${1992 + (i * 3) % 14}`;
+
+const FIELDS_GENERIC = [
+  { key: 'name', label: 'Name', type: 'text', required: true },
+  { key: 'phone', label: 'Phone', type: 'phone', required: true },
+  { key: 'address', label: 'Address', type: 'text' },
+  { key: 'id_number', label: 'ID number', type: 'text' },
+  { key: 'course', label: 'Course', type: 'text' },
+  { key: 'date', label: 'Date', type: 'date' },
+];
+const FIELDS_STUDENT = [
+  { key: 'full_name', label: 'Full name', type: 'text', required: true, src: 'Aadhaar' },
+  { key: 'relation_name', label: 'S/W/D of', type: 'text', src: 'Aadhaar' },
+  { key: 'dob', label: 'Date of birth', type: 'date', required: true, src: 'Aadhaar' },
+  { key: 'gender', label: 'Gender', type: 'text', src: 'Aadhaar' },
+  { key: 'present_address', label: 'Present address', type: 'text', required: true, src: 'Aadhaar' },
+  { key: 'permanent_address', label: 'Permanent address', type: 'text' },
+  { key: 'mobile', label: "Mobile (student's own)", type: 'phone', required: true, help: 'Drives the Aadhaar OTP. Must be the student’s number.' },
+  { key: 'aadhaar', label: 'Aadhaar', type: 'secure', src: 'Aadhaar' },
+  { key: 'blood_group', label: 'Blood group', type: 'text' },
+  { key: 'qualification', label: 'Qualification', type: 'text' },
+  { key: 'vehicle_class', label: 'Class of vehicle', type: 'text', required: true },
+];
+const STAGES = ['Enrolled', 'Verified', 'LL applied', 'LL issued', 'Training', 'DL applied', 'DL issued'];
+const TEMPLATES = [
+  { id: 'class_reminder', name: 'Class reminder', cat: 'utility', body: 'Hi {{name}}, your {{1}} class is on {{2}} at {{3}}. Reply STOP to opt out.', vars: ['Course', 'Date', 'Time'], defaults: ['LMV driving', 'Mon 10 Nov', '7:00 AM'] },
+  { id: 'fee_due', name: 'Fee due', cat: 'utility', body: 'Hi {{name}}, a payment of ₹{{1}} is due by {{2}}. Pay at the office or reply for UPI details.', vars: ['Amount', 'Due date'], defaults: ['2,500', '15 Nov'] },
+  { id: 'festival_offer', name: 'Festival offer', cat: 'marketing', body: 'Hi {{name}}! Enrol before {{1}} and get {{2}} off. Reply STOP to opt out.', vars: ['Last date', 'Discount'], defaults: ['30 Nov', '₹500'] },
+];
+const COST = { utility: 0.115, marketing: 0.863, gst: 0.18 };
+const FIELD_MAP = [
+  { canonical: 'full_name', selector: '#applicantName', type: 'text', label: 'Applicant name' },
+  { canonical: 'dob', selector: '#dob', type: 'date', format: 'DD-MM-YYYY', label: 'Date of birth' },
+  { canonical: 'relation_name', selector: '#relationName', type: 'text', label: 'Relation name' },
+  { canonical: 'gender', selector: '#gender', type: 'select', label: 'Gender' },
+  { canonical: 'present_address', selector: '#presentAddress', type: 'textarea', label: 'Present address' },
+  { canonical: 'permanent_address', selector: '#permanentAddress', type: 'textarea', label: 'Permanent address' },
+  { canonical: 'mobile', selector: '#mobileNo', type: 'text', label: 'Mobile' },
+  { canonical: 'blood_group', selector: '#bloodGroup', type: 'select', label: 'Blood group' },
+  { canonical: 'qualification', selector: '#qualification', type: 'select', label: 'Qualification' },
+  { canonical: 'vehicle_class', selector: '#cov', type: 'select', label: 'Class of vehicle' },
+];
+
+/* ---------------- state ---------------- */
+const S = {
+  lang: 'en', mode: 'driving', offline: false, fresh: false, loggedIn: false, screen: 'login', view: 'phone',
+  step: 0, menu: false, db: {}, draft: null, sel: null, selectMode: false, bc: null, sheet: null, rec: null, doc: null,
+  sar: null, ta: 'Tamil Nadu', adtc: false,
+};
+const D = () => S.db[S.mode];
+
+function seed(mode) {
+  const fields = mode === 'driving' ? FIELDS_STUDENT.map(f => ({ ...f })) : FIELDS_GENERIC.map(f => ({ ...f }));
+  const docs = [], records = [], contacts = [];
+  const n = mode === 'driving' ? 5 : 7;
+  for (let i = 0; i < n; i++) {
+    const docId = 'd' + i, recId = 'r' + i;
+    const f = extractFor(mode, i);
+    const doc = { id: docId, name: (mode === 'driving' ? 'aadhaar_' : 'admission_') + String(i + 1).padStart(3, '0') + '.jpg', pages: 1, status: 'captured', fields: f, createdAt: Date.now() - (n - i) * 36e5 * 7, recordId: recId };
+    const rec = { id: recId, docId, fields: Object.fromEntries(Object.entries(f).map(([k, v]) => [k, v.v])), createdAt: doc.createdAt, stage: ['Verified', 'LL applied', 'Training', 'Verified', 'DL issued'][i % 5], enrollment: 'SSDS-2026-' + String(417 + i), consent: true, sarathi: null };
+    docs.push(doc); records.push(rec);
+    const ph = rec.fields.phone || rec.fields.mobile;
+    contacts.push({ id: 'c' + i, name: rec.fields.name || rec.fields.full_name, phone: ph, source: 'record', optIn: i !== 3, tags: i % 2 ? ['batch-nov'] : ['batch-oct'], recordId: recId });
+  }
+  // one doc that needs review (low confidence), one that OCR couldn't read
+  const low = extractFor(mode, n, true);
+  docs.unshift({ id: 'd_low', name: (mode === 'driving' ? 'aadhaar_' : 'admission_') + String(n + 1).padStart(3, '0') + '.jpg', pages: 2, status: 'needs_review', fields: low, createdAt: Date.now() - 20 * 60e3, recordId: null });
+  docs.unshift({ id: 'd_blur', name: 'blurry-scan.jpg', pages: 1, status: 'needs_review', fields: {}, createdAt: Date.now() - 5 * 60e3, recordId: null });
+  contacts.push({ id: 'c_csv1', name: 'Lakshmi Narayanan', phone: '9941000777', source: 'csv', optIn: true, tags: ['batch-oct'] });
+  contacts.push({ id: 'c_csv2', name: 'Bala Murugan', phone: '9500012345', source: 'csv', optIn: true, tags: [] });
+  contacts.push({ id: 'c_web', name: 'Deepa R', phone: '9876501234', source: 'website', optIn: true, tags: ['enquiry'] });
+  const site = mode === 'driving'
+    ? { business_name: 'Sri Sastha Driving School', tagline: 'Learn to drive with confidence in Tambaram', about: 'Family-run driving school since 2009. LMV and two-wheeler training, licence assistance, flexible morning and evening batches.', services: ['LMV car training (30 days)', 'Two-wheeler (MCWG) training', 'Learner licence assistance', 'Refresher classes'], photo: '', phone: '9841012345', whatsapp: '9841012345', address: '7/2 Kamarajar Salai, Tambaram, Chennai 600045', map_url: 'https://maps.google.com/?q=Sri+Sastha+Driving+School+Tambaram', published: false, domain: '', slug: 'srisastha', dirty: false, domainState: '' }
+    : { business_name: 'Bright Minds Tuition Centre', tagline: 'Classes 6 to 12 · Maths, Science, English', about: 'Small-batch coaching in Anna Nagar for CBSE and State Board students. Weekly tests, parent updates on WhatsApp.', services: ['Class 10 Board coaching', 'Class 12 Maths & Physics', 'Spoken English (weekends)'], photo: '', phone: '9840011223', whatsapp: '9840011223', address: '12, 3rd Street, Anna Nagar West, Chennai 600040', map_url: 'https://maps.google.com/?q=Bright+Minds+Anna+Nagar', published: false, domain: '', slug: 'brightminds', dirty: false, domainState: '' };
+  const broadcasts = [{ id: 'b0', template: 'class_reminder', cat: 'utility', audience: 'All', total: 118, sent: 118, delivered: 112, read: 97, failed: 6, cost: 118 * COST.utility * (1 + COST.gst), at: Date.now() - 2 * 864e5, failedList: ['Bala Murugan (number not on WhatsApp)', 'Ravi K (number not on WhatsApp)'] }];
+  S.db[mode] = { fields, docs, records, contacts, site, broadcasts, nextEnroll: 417 + n };
+}
+function extractFor(mode, i, low) {
+  const conf = (k) => low && k === (mode === 'driving' ? 'present_address' : 'phone') ? 0.52 : (low && k === 'relation_name' ? 0.66 : 0.92 + ((i * 7 + k.length) % 7) / 100);
+  if (mode === 'driving') {
+    const o = {
+      full_name: NAMES[i % NAMES.length], relation_name: FATHERS[i % FATHERS.length], dob: dobOf(i), gender: i % 3 === 1 ? 'Female' : 'Male',
+      present_address: AREAS[i % AREAS.length], permanent_address: AREAS[i % AREAS.length], mobile: phoneOf(i), aadhaar: '4821' + String(10000000 + i * 9137).slice(0, 8),
+      blood_group: BLOOD[i % BLOOD.length], qualification: QUAL[i % QUAL.length], vehicle_class: COURSES[i % COURSES.length],
+    };
+    return Object.fromEntries(Object.entries(o).map(([k, v]) => [k, { v, conf: conf(k) }]));
+  }
+  const o = { name: NAMES[i % NAMES.length], phone: phoneOf(i), address: AREAS[i % AREAS.length], id_number: 'TN-' + String(30211 + i * 17), course: ['Class 10 Maths', 'Class 12 Physics', 'Spoken English'][i % 3], date: dobOf(i).slice(0, 6) + '2026' };
+  return Object.fromEntries(Object.entries(o).map(([k, v]) => [k, { v, conf: conf(k) }]));
+}
+seed('driving');
+
+/* ---------------- demo steps ---------------- */
+const STEPS = [
+  { g: 'Enrol a student', id: 'login', title: 'Login', d: 'One login for the owner', view: 'phone', screen: 'login', note: `<h2>Log in once, on your own phone</h2><p>One account for the school owner. Email and password, no OTP every time. Staff logins can be added later.</p><ul><li>Tap <b>Login</b> with the prefilled account. Try a wrong password first to see what happens.</li><li>Tap <b>Forgot password?</b> to see the reset flow.</li><li>Switch தமிழ் / English at the bottom.</li></ul>`, tags: ['Works on any phone', 'Tamil and English'], setup() { S.loggedIn = false; } },
+  { g: 'Enrol a student', id: 'home', title: 'Home', d: 'Scan and Upload up front', view: 'phone', screen: 'home', note: `<h2>Home</h2><p>Scan and Upload sit right at the top because that is the daily job. Below them: how many students, contacts, your last WhatsApp reminder, and whether your website is live.</p><ul><li>Tap a tile to jump to that section. Tap a recent document to open it.</li><li>Use the <b>Offline</b> switch above to see what happens when the signal drops.</li><li>Use <b>Fresh account</b> to see the app on day one.</li></ul>`, tags: ['One-thumb use', 'Works offline'] },
+  { g: 'Enrol a student', id: 'scan', title: 'Scan the Aadhaar', d: 'Camera, auto-crop, many pages', view: 'phone', screen: 'scan', note: `<h2>Scan the student's Aadhaar</h2><p>Point the camera, the app finds the edges and straightens the page. Several pages become one document. Reading happens in the background so you can keep scanning.</p><ul><li>Press the shutter two or three times, then <b>Done</b>.</li><li>Watch the document appear as <b>Processing</b>, then become ready to verify.</li></ul>`, tags: ['No typing', 'Keep scanning while it reads'] },
+  { g: 'Enrol a student', id: 'upload', title: 'Upload documents', d: 'Photos or PDFs, many at once', view: 'phone', screen: 'upload', note: `<h2>Upload documents you already have</h2><p>Photos from WhatsApp or PDFs from a scanner. Pick several at once and they queue up.</p><ul><li><b>Pick files</b> opens your real file picker, or tap <b>Add 3 sample files</b>.</li><li>Try the wrong-file and large-file buttons to see how the app explains itself.</li></ul>`, tags: ['Bulk upload'] },
+  { g: 'Enrol a student', id: 'review', title: 'Verify the student', d: 'Check, correct, confirm', view: 'phone', screen: 'review', note: `<h2>Verify before anything is saved</h2><p>The app never saves on its own. Every document comes to you first: each detail is filled in, anything it was unsure about is marked amber, and the Aadhaar number is shown only by its last four digits. The student's consent is ticked before saving.</p><ul><li>Fix the amber field. Clear a required field to see Save switch off.</li><li>Tick consent and tap <b>Save student</b>. A WhatsApp contact is created automatically.</li><li>From Documents, open <b>blurry-scan.jpg</b> to see what a bad scan looks like.</li></ul>`, tags: ['You confirm every student', 'Aadhaar kept private'], setup() { const d = D().docs.find(x => x.id === 'd_low'); if (d && !d.recordId) openReview(d.id); else { const any = D().docs.find(x => x.status === 'needs_review'); if (any) openReview(any.id); else S.screen = 'documents'; } } },
+  { g: 'Enrol a student', id: 'records', title: 'Students', d: 'Everyone, with licence stage', view: 'phone', screen: 'records', note: `<h2>All your students in one place</h2><p>One row per student with their licence stage, mobile, vehicle class and enrollment number. Search by name or number.</p><ul><li>Search, scroll the table sideways, tap a row to open the student.</li></ul>`, tags: ['Search', 'Licence stage at a glance'] },
+  { g: 'Licence paperwork', id: 'student', title: 'Student profile', d: 'Stage tracker, actions', view: 'phone', screen: 'record', note: `<h2>The student's profile</h2><p>Everything verified from the scan, the licence stage from enrolment to DL, and the two actions you do most: Form 5 and Sarathi.</p><ul><li>Tap <b>Update</b> next to the stage to move a student along.</li><li>Open <b>Form 5 PDF</b> and <b>Send to Sarathi</b> from here (next steps).</li></ul>`, tags: ['Enrolled → LL → DL'], setup() { const r = D().records.find(x => x.stage === 'Verified'); S.rec = r ? r.id : D().records[0].id; } },
+  { g: 'Licence paperwork', id: 'form5', title: 'Form 5 in one tap', d: 'Ready to print or share', view: 'phone', screen: 'record', note: `<h2>Form 5 in one tap</h2><p>The driving certificate is filled from the verified profile and ready to print or send to the student on WhatsApp. No retyping, no blank forms.</p><ul><li>Tap <b>Form 5 PDF</b> on the profile.</li><li>Turn on <b>Our school is ADTC-accredited</b> above to see Form 5B instead. For a regular school the form carries a note that it does not exempt the test.</li></ul>`, tags: ['Print or WhatsApp'], setup() { const r = D().records.find(x => x.stage === 'Verified'); S.rec = r ? r.id : D().records[0].id; } },
+  { g: 'Licence paperwork', id: 'send', title: 'Send to Sarathi', d: 'Choose how it gets filled', view: 'phone', screen: 'record', note: `<h2>Send to Sarathi from the phone</h2><p>A phone app cannot type into the government website, so the phone hands the student over to your computer, where the Vovix helper fills the Sarathi screen for you.</p><ul><li>Tap <b>Send to Sarathi</b> and pick <b>Assisted fill</b>. The demo switches to the computer view.</li><li>The third option is for days with no computer nearby.</li></ul>`, tags: ['Phone → computer handoff'], setup() { const r = D().records.find(x => x.stage === 'Verified' && !x.sarathi); S.rec = r ? r.id : D().records[0].id; } },
+  { g: 'Licence paperwork', id: 'tier1', title: 'Sarathi on your computer', d: 'One click fills the form', view: 'desktop', screen: 'record', note: `<h2>Sarathi on your computer</h2><p>You log in to Sarathi as usual. The Vovix helper in Chrome shows the students sent from the phone. Pick one, click <b>Fill</b>, and every field is typed in and checked. Login, captcha, the student's OTP, payment and the final Submit always stay in your hands.</p><ul><li>Click <b>I've logged in</b>, pick a student, click <b>Fill</b>.</li><li>Type the captcha (K7P4), confirm the student's OTP, mark payment, Submit.</li><li>Click <b>Mark done</b>: the student's stage moves to “LL applied” on the phone.</li><li>Try <b>Simulate: portal changed a field</b> to see it stop safely instead of guessing.</li></ul>`, tags: ['You stay in control', 'Nothing guessed'], setup() { sarState().tier = 1; } },
+  { g: 'Licence paperwork', id: 'tier2', title: 'Auto-fill, attended', d: 'Types everything, waits for you', view: 'desktop', screen: 'record', note: `<h2>Auto-fill while you watch</h2><p>An optional extra: the helper moves through the Sarathi screens and types everything itself, visibly, and pauses whenever a step needs a human. It never logs in, never enters an OTP, never solves a captcha, never submits.</p><ul><li>Switch to <b>Auto-fill attended</b>, pick a student, click <b>Start</b>.</li><li>At each pause, do the step on the page and click <b>Resume</b>.</li><li>Turn on <b>Simulate: portal changed a field</b> first to see it hand back to you.</li></ul>`, tags: ['Optional, later', 'Pauses for every human step'], setup() { sarState().tier = 2; } },
+  { g: 'Licence paperwork', id: 'fallback', title: 'No computer nearby', d: 'Copy each field', view: 'phone', screen: 'copyfields', note: `<h2>No computer nearby?</h2><p>Open Sarathi in the phone browser and copy each detail with one tap. Not automatic, but no retyping either.</p><ul><li>Tap <b>Copy</b> on any field.</li></ul>`, tags: ['Backup option'], setup() { if (!S.rec) S.rec = D().records[0].id; } },
+  { g: 'Keep students informed', id: 'contacts', title: 'Contacts', d: 'Built automatically', view: 'phone', screen: 'contacts', note: `<h2>Contacts build themselves</h2><p>Every saved student with a mobile becomes a contact. Website enquiries and your old Excel list (as CSV) join the same list. Only people who agreed get messages.</p><ul><li>Switch WhatsApp opt-in off on a row: they drop out of the count.</li><li><b>Import CSV</b> with the sample, including two bad rows the app rejects.</li><li>Long-press a row to select several and tag them as a batch. The <b>+</b> button adds someone by hand.</li></ul>`, tags: ['No duplicates', 'Batches by tag'] },
+  { g: 'Keep students informed', id: 'broadcast', title: 'WhatsApp reminders', d: 'One message, private to each', view: 'phone', screen: 'broadcast', note: `<h2>One message to every student, privately</h2><p>Class reminders, fee reminders, offers. Each student gets a private message from your own school number, never a group, never a shared list. You see the count and the cost before you confirm, and a delivery report after.</p><ul><li>Pick the audience and a message, fill in the blanks, check the preview.</li><li>Tap Send, read the cost, Confirm. Watch delivery come in.</li><li>Tap <b>Simulate a STOP reply</b> in the report to see a student opt out.</li></ul>`, tags: ['About ₹0.14 per reminder', 'Delivery report'] },
+  { g: 'Your website', id: 'site', title: 'Website editor', d: 'Edit on the phone, publish', view: 'phone', screen: 'site', note: `<h2>Your website, edited from the phone</h2><p>Name, tagline, about, services, a photo, phone, WhatsApp, address and map. Tap Publish and it is live at your own address.</p><ul><li>Change a field and watch the Draft chip appear. Clear the phone: Publish switches off.</li><li><b>Preview</b> shows the page as visitors see it. <b>Publish</b> makes it live and gives you the link to share.</li></ul>`, tags: ['Live in seconds', 'Your own domain possible'] },
+  { g: 'Your website', id: 'public', title: 'Your public page', d: 'Enquiries come to you', view: 'public', screen: 'site', note: `<h2>What a visitor sees</h2><p>A clean one-page site with a WhatsApp button and an enquiry form. Every enquiry lands straight in your Contacts, ready for the next reminder.</p><ul><li>Fill the enquiry form and send it. Then open <b>Contacts</b> on the phone: the person is there, marked “website”.</li></ul>`, tags: ['Enquiry → contact'] },
+];
+
+/* ---------------- UI plumbing: toasts, sheets ---------------- */
+function toast(msg, kind = 'info', ms = 3000) {
+  const host = $('#toasts'); if (!host) return;
+  const el = document.createElement('div'); el.className = 'toast ' + kind; el.setAttribute('role', 'status'); el.textContent = msg;
+  host.appendChild(el);
+  setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 220); }, ms);
+}
+function openSheet(html, after) { S.sheet = { html, after }; renderSheet(); }
+function closeSheet() { S.sheet = null; renderSheet(); }
+function renderSheet() {
+  const old = $('#sheetHost'); if (old) old.remove();
+  if (!S.sheet) return;
+  const wrap = document.createElement('div'); wrap.id = 'sheetHost'; wrap.className = 'scrim'; wrap.dataset.act = 'sheet.close';
+  wrap.innerHTML = `<div class="sheet" role="dialog" aria-modal="true" data-stop="1"><div class="grab"></div>${S.sheet.html}</div>`;
+  $('#screen').appendChild(wrap);
+  if (S.sheet.after) S.sheet.after(wrap);
+}
+
+/* ---------------- icons ---------------- */
+const IC = {
+  home: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8v9a2 2 0 0 1-2 2h-4v-7H9v7H5a2 2 0 0 1-2-2z"/></svg>',
+  table: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></svg>',
+  people: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 15.5c3 0 5.5 2 5.5 4.5"/></svg>',
+  mega: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M15 9a4 4 0 0 1 0 6M18 6a8 8 0 0 1 0 12"/></svg>',
+  globe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>',
+  camera: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/></svg>',
+  file: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 11v6M9 14l3 3 3-3"/></svg>',
+  download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M4 19h16"/></svg>',
+  back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
+  more: '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>',
+  search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>',
+  lock: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+  doc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M8 13h8M8 17h5"/></svg>',
+  csv: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>',
+  check: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>',
+  pdf: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>',
+  monitor: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>',
+};
+
+/* ---------------- phone renderer ---------------- */
+function render() {
+  renderControls(); renderSteps(); renderNote();
+  $('#phoneWrap').hidden = S.view !== 'phone';
+  $('#deskWrap').hidden = S.view !== 'desktop';
+  $('#pubWrap').hidden = S.view !== 'public';
+  if (S.view === 'phone') renderPhone();
+  if (S.view === 'desktop') renderDesk();
+  if (S.view === 'public') renderPublic();
+  $('#stageCaption').textContent = S.view === 'phone' ? 'The owner app on your phone' : S.view === 'desktop' ? 'Your computer: Chrome with the Vovix helper beside a simplified mock of the Sarathi screen' : 'Your public website, as a visitor sees it';
+}
+const TABS = () => [
+  { id: 'home', l: t('home'), ic: IC.home },
+  { id: 'records', l: S.mode === 'driving' ? t('students') : t('records'), ic: S.mode === 'driving' ? IC.people : IC.table },
+  { id: 'contacts', l: t('contacts'), ic: IC.people },
+  { id: 'broadcast', l: t('broadcast'), ic: IC.mega },
+  { id: 'site', l: t('site'), ic: IC.globe },
+];
+const TAB_OF = { home: 'home', records: 'records', record: 'records', review: 'records', documents: 'home', contacts: 'contacts', broadcast: 'broadcast', site: 'site', fields: 'home', copyfields: 'records' };
+const NO_TABS = new Set(['login', 'reset', 'scan', 'upload', 'review', 'record', 'copyfields', 'fields']);
+
+function renderPhone() {
+  const sc = $('#screen');
+  const noTabs = NO_TABS.has(S.screen) || !S.loggedIn;
+  let body = '', appbar = '', fab = '';
+  const bar = (title, right = '', back = null) => `<div class="appbar">${back ? `<button class="icon" data-act="${back}" aria-label="Back">${IC.back}</button>` : ''}<div class="title">${title}</div>${right}</div>`;
+  const more = `<button class="icon" data-act="menu.toggle" aria-label="More" aria-expanded="${S.menu}">${IC.more}</button>`;
+  if (!S.loggedIn) { S.screen = S.screen === 'reset' ? 'reset' : 'login'; }
+  switch (S.screen) {
+    case 'login': body = viewLogin(); break;
+    case 'reset': body = viewReset(); appbar = bar('', '', 'nav.login'); break;
+    case 'home': appbar = `<div class="appbar"><div class="logo" style="width:32px;height:32px;border-radius:9px;font-size:16px;margin-right:6px">V</div><div class="title">Vovix One</div>${more}</div>`; body = viewHome(); fab = `<button class="fab" data-act="nav.scan" aria-label="${t('scan')}">${IC.camera}</button>`; break;
+    case 'scan': body = viewScan(); break;
+    case 'upload': appbar = bar(t('upload'), '', 'nav.home'); body = viewUpload(); break;
+    case 'documents': appbar = bar(t('documents'), '', 'nav.home'); body = viewDocuments(); fab = `<button class="fab" data-act="nav.scan" aria-label="${t('scan')}">${IC.camera}</button>`; break;
+    case 'review': appbar = bar(S.mode === 'driving' ? t('verifyStudent') : t('reviewDoc'), '', 'nav.documents'); body = viewReview(); break;
+    case 'records': appbar = bar(S.mode === 'driving' ? t('students') : t('records'), S.mode === 'driving' ? '' : `<button class="icon" data-act="records.export" aria-label="${t('export')}" id="exportBtn">${IC.download}</button>`); body = viewRecords(); fab = `<button class="fab" data-act="nav.scan" aria-label="${t('scan')}">${IC.camera}</button>`; break;
+    case 'record': appbar = bar(S.mode === 'driving' ? 'Student' : 'Record', '', 'nav.records'); body = viewRecord(); break;
+    case 'contacts': appbar = bar(t('contacts'), `<button class="icon" data-act="contacts.select" aria-label="Select" style="width:auto;padding:0 10px;font-size:14px;font-weight:600;color:var(--p-brand)">${S.selectMode ? 'Cancel' : 'Select'}</button><button class="icon" data-act="contacts.import" aria-label="${t('importCsv')}">${IC.csv}</button>`); body = viewContacts(); fab = S.selectMode ? '' : `<button class="fab plus" data-act="contacts.add" aria-label="Add contact">+</button>`; break;
+    case 'broadcast': appbar = bar(t('broadcast')); body = viewBroadcast(); break;
+    case 'site': appbar = bar(t('site'), `<span class="chip ${D().site.published ? 'ok' : 'neutral'}" style="margin-right:8px">${D().site.published ? t('live') : t('draft')}</span>`); body = viewSite(); break;
+    case 'fields': appbar = bar(t('fieldSetup'), '', 'nav.home'); body = viewFields(); break;
+    case 'copyfields': appbar = bar(t('copyFields'), '', 'nav.record'); body = viewCopyFields(); break;
+  }
+  const tabs = noTabs ? '' : `<nav class="tabbar" aria-label="Tabs">${TABS().map(tb => `<button class="tab" data-act="nav.${tb.id}" ${TAB_OF[S.screen] === tb.id ? 'aria-current="page"' : ''}>${tb.ic}<span>${tb.l}</span></button>`).join('')}</nav>`;
+  const menu = S.menu ? `<div class="menu" role="menu"><button role="menuitem" data-act="lang.toggle">${t('language')}<span class="cap">${S.lang === 'ta' ? 'தமிழ்' : 'English'}</span></button><button role="menuitem" data-act="nav.fields">${t('fieldSetup')}<span class="cap">${D().fields.length} fields</span></button><button role="menuitem" data-act="nav.documents">${t('documents')}<span class="cap">${D().docs.length}</span></button><button role="menuitem" data-act="auth.logout">${t('logout')}</button></div>` : '';
+  sc.innerHTML = `<div class="statusbar"><span>9:41</span><div class="notch"></div><span>${S.offline ? '✈︎' : '▲'} ▮▮▮ 86%</span></div>
+    ${S.offline && S.loggedIn ? `<div class="offline" role="status">${t('offline')}</div>` : ''}
+    ${appbar}${menu}
+    <div class="content ${noTabs ? 'noTabs' : ''} ${S.screen === 'scan' ? 'flush' : ''}" id="pc">${body}</div>
+    ${fab}${tabs}
+    <div class="toasts" id="toasts" aria-live="polite"></div>`;
+  afterRender();
+  renderSheet();
+}
+
+/* ---- Login ---- */
+function viewLogin() {
+  return `<div class="login-logo">V</div><div class="login-title">Vovix One</div><div class="login-sub">${esc(D().site.business_name)}</div>
+  <form data-form="login" novalidate>
+    <div class="field"><label for="lg_email">${t('email')}</label><input class="inp" id="lg_email" type="email" inputmode="email" autocomplete="username" value="owner@${D().site.slug}.in"><div class="err" id="lg_email_err" hidden>Enter a valid email</div></div>
+    <div class="field"><label for="lg_pw">${t('password')}</label><div class="inp-wrap"><input class="inp" id="lg_pw" type="password" autocomplete="current-password" value="demo1234"><button type="button" class="eye" data-act="login.eye" aria-pressed="false" aria-label="Show password">Show</button></div><div class="err" id="lg_pw_err" hidden>Email or password is incorrect</div><div class="help">Demo password: <b>demo1234</b></div></div>
+    <div style="margin-top:22px"><button class="pbtn primary" type="submit" id="loginBtn">${t('login')}</button></div>
+    <div style="margin-top:8px"><button class="pbtn ghost" type="button" data-act="nav.reset">${t('forgot')}</button></div>
+  </form>
+  <div class="lang-sm" role="group" aria-label="Language"><button data-act="lang.set" data-v="ta" aria-pressed="${S.lang === 'ta'}">தமிழ்</button><button data-act="lang.set" data-v="en" aria-pressed="${S.lang === 'en'}">English</button></div>
+  <p class="cap" style="text-align:center;margin-top:20px">No OTP needed to log in.</p>`;
+}
+function viewReset() {
+  return `<div class="h1" style="margin-top:12px">Reset password</div><p class="cap" style="margin-top:6px">We email a reset link. No SMS involved.</p>
+  <form data-form="reset" novalidate><div class="field"><label for="rs_email">${t('email')}</label><input class="inp" id="rs_email" type="email" value="owner@${D().site.slug}.in"></div>
+  <div style="margin-top:22px"><button class="pbtn primary" type="submit" id="resetBtn">Send reset link</button></div></form>
+  <div id="resetNote" hidden class="banner ok" style="margin-top:16px">Check your email for the reset link. It expires in 30 minutes.</div>`;
+}
+
+/* ---- Home ---- */
+function viewHome() {
+  const d = D(); const fresh = S.fresh;
+  const recs = fresh ? [] : d.records, cons = fresh ? [] : d.contacts, docs = fresh ? [] : d.docs, bcs = fresh ? [] : d.broadcasts;
+  const lb = bcs[0];
+  const recent = [...docs].sort((a, b) => b.createdAt - a.createdAt).slice(0, 5);
+  return `<div class="capture"><button class="capbtn brand" data-act="nav.scan">${IC.camera}<span>${t('scan')}</span></button><button class="capbtn" data-act="nav.upload">${IC.file}<span>${t('upload')}</span></button></div>
+  <div class="tiles">
+    <button class="tile" data-act="nav.records" aria-label="${S.mode === 'driving' ? t('students') : t('records')}, ${recs.length}, open"><div class="v">${recs.length}</div><div class="l">${S.mode === 'driving' ? t('students') : t('records')}</div></button>
+    <button class="tile" data-act="nav.contacts" aria-label="${t('contacts')}, ${cons.length}, open"><div class="v">${cons.length}</div><div class="l">${t('contacts')}</div></button>
+    <button class="tile" data-act="nav.broadcast"><div class="v">${lb ? `${lb.delivered}<small>/${lb.total}</small>` : '—'}</div><div class="l">${t('lastBroadcast')}${lb ? ' · delivered' : ''}</div></button>
+    <button class="tile" data-act="nav.site"><div class="v" style="font-size:20px;line-height:34px"><span class="chip ${d.site.published ? 'ok' : 'neutral'}">${d.site.published ? t('live') : t('draft')}</span></div><div class="l">${t('site')}</div></button>
+  </div>
+  <div class="sect"><div class="sect-h"><div class="h2">${t('recent')}</div>${docs.length ? `<button class="pbtn ghost" style="width:auto;height:36px;padding:0 10px;font-size:14px" data-act="nav.documents">All ${docs.length}</button>` : ''}</div>
+  ${recent.length ? `<div class="list">${recent.map(docRow).join('')}</div>` : `<div class="empty">${IC.doc}<p>${t('firstDoc')}</p><button class="pbtn primary" style="width:auto;padding:0 22px" data-act="nav.upload">${t('upload')}</button></div>`}</div>
+  ${S.offline && docs.some(x => x.status === 'pending') ? '' : ''}`;
+}
+function statusChip(st) {
+  const m = { processing: ['neutral', t('processing')], captured: ['ok', t('captured')], needs_review: ['warn', t('needsReview')], failed: ['bad', t('failed')], pending: ['neutral', t('pending') + ' · offline'] };
+  const [c, l] = m[st] || ['neutral', st];
+  return `<span class="chip ${c}">${l}</span>`;
+}
+function docRow(doc) {
+  const act = doc.status === 'processing' || doc.status === 'pending' ? '' : `data-act="doc.open" data-id="${doc.id}"`;
+  const primary = doc.recordId ? (D().records.find(r => r.id === doc.recordId) || {}).fields : null;
+  const nm = primary ? (primary.name || primary.full_name) : doc.name;
+  return `<button class="lrow" ${act}><div class="doc-ic ${doc.status === 'processing' ? 'shimmer' : ''}"></div><div class="main"><div class="nm">${esc(nm)}</div><div class="sub">${esc(doc.name)} · ${doc.pages} page${doc.pages > 1 ? 's' : ''}</div></div>${statusChip(doc.status)}</button>`;
+}
+
+/* ---- Scan ---- */
+function viewScan() {
+  const pages = S.scanPages || 0;
+  return `<div class="camera">
+    <div class="viewfinder"><div class="docp"></div><div class="edge"></div><div class="hintc" role="status">${t('positionDoc')}</div>
+      <button class="ghostbtn torch" data-act="scan.torch" aria-pressed="${!!S.torch}" aria-label="Torch">${S.torch ? 'Torch on' : 'Torch'}</button>
+      <button class="ghostbtn" style="position:absolute;top:10px;left:12px" data-act="nav.home">Close</button>
+      <div class="flash" id="flash"></div></div>
+    <div class="camctl"><div class="thumbs" aria-label="${pages} pages">${Array.from({ length: pages }, (_, i) => `<div>${i + 1}</div>`).join('')}</div>
+      <button class="shutter" data-act="scan.shutter" aria-label="Capture page"></button>
+      <button class="camdone" data-act="scan.done" ${pages ? '' : 'disabled'}>${t('done')}${pages ? ` (${pages})` : ''}</button></div></div>`;
+}
+
+/* ---- Upload ---- */
+function viewUpload() {
+  return `<p class="cap" style="margin-top:8px">PDF, JPG or PNG. Select several files to capture in bulk. Each one goes to the queue and appears as it finishes.</p>
+  <input type="file" id="fileInput" multiple accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/*" hidden>
+  <div style="margin-top:16px;display:grid;gap:10px">
+    <button class="pbtn primary" data-act="upload.pick">${IC.file} Pick files from phone</button>
+    <button class="pbtn secondary" data-act="upload.sample">Add 3 sample files</button>
+    <button class="pbtn secondary" data-act="upload.bad">Try an unsupported file (.docx)</button>
+    <button class="pbtn secondary" data-act="upload.large">Try a very large PDF (48 MB)</button>
+  </div>
+  <div class="sect"><div class="sect-h"><div class="h2">Queue</div><button class="pbtn ghost" style="width:auto;height:36px;padding:0 10px;font-size:14px" data-act="nav.documents">${t('documents')}</button></div>
+  <div class="list" id="uploadQueue">${[...D().docs].sort((a, b) => b.createdAt - a.createdAt).slice(0, 6).map(docRow).join('') || `<div class="empty"><p>No uploads yet.</p></div>`}</div></div>`;
+}
+
+/* ---- Documents ---- */
+function viewDocuments() {
+  const docs = [...D().docs].sort((a, b) => b.createdAt - a.createdAt);
+  if (!docs.length) return `<div class="empty">${IC.doc}<p>${t('firstDoc')}</p><button class="pbtn primary" style="width:auto;padding:0 22px" data-act="nav.upload">${t('upload')}</button></div>`;
+  return `<p class="cap" style="margin:8px 0 10px">${docs.filter(d => d.status === 'needs_review').length} need review · ${docs.filter(d => d.status === 'captured').length} captured</p><div class="list">${docs.map(docRow).join('')}</div>`;
+}
+
+/* ---- Review card ---- */
+function openReview(docId) {
+  const doc = D().docs.find(d => d.id === docId); if (!doc) return;
+  S.doc = docId; S.screen = 'review';
+  const rec = doc.recordId ? D().records.find(r => r.id === doc.recordId) : null;
+  S.draft = { values: {}, edited: {}, consent: rec ? !!rec.consent : false, recId: rec ? rec.id : null, img: doc.img || null };
+  D().fields.forEach(f => { S.draft.values[f.key] = rec ? (rec.fields[f.key] ?? '') : (doc.fields[f.key] ? doc.fields[f.key].v : ''); });
+}
+function viewReview() {
+  const doc = D().docs.find(d => d.id === S.doc); if (!doc) return '';
+  const empty = !Object.keys(doc.fields).length && !S.draft.recId;
+  const fields = D().fields.map(f => {
+    const ex = doc.fields[f.key]; const low = ex && ex.conf < 0.8 && !S.draft.edited[f.key]; const v = S.draft.values[f.key] ?? '';
+    if (f.type === 'secure') return `<div class="rf" data-key="${f.key}"><div class="lab">${esc(f.label)} <span class="chip neutral">${IC.lock} encrypted</span></div><div class="lock">${IC.lock}<span>•••• •••• ${esc(String(v).slice(-4) || '____')}</span></div><div class="help cap" style="margin-top:4px">Stored securely. Only the last four digits are ever shown.</div></div>`;
+    return `<div class="rf ${low ? 'low' : ''} ${S.draft.edited[f.key] ? 'edited' : ''}" data-key="${f.key}"><div class="lab"><span>${esc(f.label)}${f.required ? ' <span class="req">*</span>' : ''}</span><span class="dot" aria-hidden="true"></span><span class="hint">check</span>${f.src ? `<span class="cap" style="margin-left:auto;font-size:11px">from ${f.src}</span>` : ''}</div>
+      ${f.type === 'text' && f.key.includes('address') ? `<textarea class="inp" id="rv_${f.key}" data-bind="${f.key}" rows="2" aria-label="${esc(f.label)}">${esc(v)}</textarea>` : `<input class="inp" id="rv_${f.key}" data-bind="${f.key}" type="${f.type === 'phone' ? 'tel' : 'text'}" inputmode="${f.type === 'phone' ? 'numeric' : 'text'}" value="${esc(v)}" aria-label="${esc(f.label)}${low ? ', check, low confidence' : ''}">`}
+      ${f.help ? `<div class="help cap" style="margin-top:4px">${esc(f.help)}</div>` : ''}<div class="err">${esc(f.label)} is required</div></div>`;
+  }).join('');
+  const consent = S.mode === 'driving' ? `<label class="consent"><input type="checkbox" id="rv_consent" ${S.draft.consent ? 'checked' : ''}><span><b>Student consent captured</b><br><span class="cap">The student agreed to Vovix processing these documents for licence work (DPDP). Required before saving.</span></span></label>` : '';
+  return `<div class="review-thumb" data-act="review.zoom">${S.draft.img ? `<img src="${S.draft.img}" alt="Scanned document">` : `<div class="paper"></div><span style="position:absolute;bottom:8px">${esc(doc.name)} · tap to zoom</span>`}</div>
+  ${empty ? `<div class="banner" role="status">${t('cantRead')}</div>` : ''}
+  ${doc.pages > 1 ? `<p class="cap" style="margin-top:8px">${doc.pages} pages merged into one document</p>` : ''}
+  <form data-form="review" novalidate>${fields}${consent}<div style="height:88px"></div></form>
+  <div class="sticky-bar"><button class="pbtn ghost" style="flex:1" data-act="review.discard">${t('discard')}</button><button class="pbtn primary" style="flex:1.4" id="saveBtn" data-act="review.save">${S.mode === 'driving' ? t('saveStudent') : t('saveRecord')}</button></div>`;
+}
+function validateReview() {
+  let ok = true;
+  D().fields.forEach(f => {
+    const row = $(`.rf[data-key="${f.key}"]`); if (!row) return;
+    const v = (S.draft.values[f.key] ?? '').toString().trim();
+    const bad = f.required && !v;
+    row.classList.toggle('invalid', bad); if (bad) ok = false;
+  });
+  if (S.mode === 'driving' && !S.draft.consent) ok = false;
+  const b = $('#saveBtn'); if (b) b.disabled = !ok;
+  return ok;
+}
+
+/* ---- Records / Students ---- */
+function viewRecords() {
+  const d = D(); const q = (S.q || '').toLowerCase();
+  const recs = S.fresh ? [] : d.records.filter(r => !q || Object.values(r.fields).join(' ').toLowerCase().includes(q) || (r.enrollment || '').toLowerCase().includes(q));
+  if (S.loadingRecords) return `<div style="display:grid;gap:10px;margin-top:10px">${'<div class="skel"></div>'.repeat(6)}</div>`;
+  if (!d.records.length || S.fresh) return `<div class="empty">${IC.table}<p>${t('noRecords')}</p><button class="pbtn primary" style="width:auto;padding:0 22px" data-act="nav.scan">${t('scan')}</button></div>`;
+  const cols = S.mode === 'driving' ? [{ key: 'full_name', label: 'Name' }, { key: '_stage', label: t('stage') }, { key: 'mobile', label: 'Mobile' }, { key: 'vehicle_class', label: 'Class' }, { key: '_enroll', label: 'Enrollment no' }, { key: 'dob', label: 'DOB' }, { key: 'present_address', label: 'Address' }] : d.fields.map(f => ({ key: f.key, label: f.label }));
+  const cell = (r, c) => c.key === '_stage' ? `<span class="chip ${r.stage === 'DL issued' ? 'ok' : 'brand'}">${r.stage}</span>` : c.key === '_enroll' ? `<span class="num">${esc(r.enrollment)}</span>` : (c.key === 'phone' || c.key === 'mobile') ? `<span class="num">${fmtPhone(r.fields[c.key])}</span>` : esc(r.fields[c.key] ?? '');
+  return `<div class="search">${IC.search}<input class="inp" id="recSearch" placeholder="${t('search')}" value="${esc(S.q || '')}" aria-label="${t('search')}"></div>
+  <div class="tbl-wrap" style="margin-top:12px" tabindex="0" aria-label="Records table, scroll sideways"><table class="ptbl"><thead><tr>${cols.map(c => `<th scope="col">${esc(c.label)}</th>`).join('')}</tr></thead><tbody>
+  ${recs.map(r => `<tr data-act="record.open" data-id="${r.id}" tabindex="0">${cols.map(c => `<td>${cell(r, c)}</td>`).join('')}</tr>`).join('') || `<tr><td colspan="${cols.length}" style="color:var(--p-muted)">No matches for “${esc(S.q)}”</td></tr>`}</tbody></table></div>
+  <div class="tfoot"><span>${recs.length} of ${d.records.length} rows${S.mode === 'driving' ? '' : ` · ${cols.length} columns`}</span>${S.mode === 'driving' ? `<span>Scan → verify → Sarathi</span>` : `<button class="pbtn ghost" style="width:auto;height:40px;padding:0 10px;font-size:14px" data-act="records.export">${IC.download} ${t('export')}</button>`}</div>`;
+}
+
+/* ---- Record / Student detail ---- */
+function viewRecord() {
+  const r = D().records.find(x => x.id === S.rec); if (!r) return `<div class="empty"><p>Record not found.</p></div>`;
+  const doc = D().docs.find(d => d.id === r.docId);
+  if (S.mode !== 'driving') {
+    return `<div class="card" style="margin-top:8px"><div class="h2">${esc(r.fields.name)}</div><div class="cap">Saved ${new Date(r.createdAt).toLocaleDateString('en-IN')} from ${esc(doc ? doc.name : 'manual entry')}</div>
+    <dl class="kv" style="margin-top:12px">${D().fields.map(f => `<dt>${esc(f.label)}</dt><dd>${f.type === 'phone' ? fmtPhone(r.fields[f.key]) : esc(r.fields[f.key] || '—')}</dd>`).join('')}</dl></div>
+    <div style="display:grid;gap:10px;margin-top:16px"><button class="pbtn secondary" data-act="record.edit">Edit fields</button><button class="pbtn danger" data-act="record.delete">Delete record</button></div>`;
+  }
+  const si = STAGES.indexOf(r.stage);
+  return `<div class="card" style="margin-top:8px;display:flex;gap:14px;align-items:center"><div class="av" style="width:56px;height:56px;font-size:20px">${esc(r.fields.full_name.split(' ').map(w => w[0]).slice(0, 2).join(''))}</div><div style="min-width:0"><div class="h2">${esc(r.fields.full_name)}</div><div class="cap">Enrollment <span class="num">${esc(r.enrollment)}</span> · ${esc(r.fields.vehicle_class)}</div></div></div>
+  <div class="sect" style="margin-top:16px"><div class="sect-h"><div class="h2">${t('stage')}</div><button class="pbtn ghost" style="width:auto;height:36px;padding:0 10px;font-size:14px" data-act="record.stage">Update</button></div>
+  <div class="stages" aria-label="Licence stages">${STAGES.map((s, i) => `<span class="stage-chip ${i < si ? 'done' : i === si ? 'cur' : ''}">${i < si ? '✓ ' : ''}${s}</span>`).join('')}</div>
+  ${r.sarathi ? `<div class="banner ok" style="margin-top:10px">${IC.check} Sarathi application ${esc(r.sarathi.ref)} submitted on ${esc(r.sarathi.at)} by the operator.</div>` : ''}</div>
+  <div class="sect" style="margin-top:16px;display:grid;gap:10px">
+    <button class="pbtn primary" data-act="student.sarathi">${IC.monitor} ${t('sendSarathi')}</button>
+    <button class="pbtn secondary" data-act="student.form5">${IC.pdf} ${t('form5')}</button>
+  </div>
+  <div class="sect"><div class="h2" style="margin-bottom:10px">Profile</div><div class="card"><dl class="kv">${D().fields.map(f => `<dt>${esc(f.label)}</dt><dd>${f.type === 'secure' ? `<span class="num">•••• •••• ${esc(String(r.fields[f.key] || '').slice(-4))}</span>` : f.type === 'phone' ? `<span class="num">${fmtPhone(r.fields[f.key])}</span>` : esc(r.fields[f.key] || '—')}</dd>`).join('')}</dl></div></div>
+  <div style="display:grid;gap:10px;margin-top:16px"><button class="pbtn secondary" data-act="record.edit">Edit profile</button><button class="pbtn danger" data-act="record.delete">Delete student</button></div>`;
+}
+function form5Html(r) {
+  const label = S.adtc ? 'FORM 5B' : 'FORM 5';
+  const sub = S.adtc ? 'Driving certificate issued by an Accredited Driver Training Centre (Rule 15, test exemption applies)' : 'Driving certificate issued by a Driving School or Establishment';
+  const site = D().site;
+  return `<div class="pdf" aria-label="${label} preview"><h4>${label}</h4><div class="sub">${sub}<br>Central Motor Vehicles Rules, 1989</div>
+  <div class="photo">Photo</div>
+  <div class="ln"><b>Enrollment no:</b> ${esc(r.enrollment)}</div>
+  <div class="ln"><b>Name of trainee:</b> ${esc(r.fields.full_name)}</div>
+  <div class="ln"><b>S/W/D of:</b> ${esc(r.fields.relation_name || '—')}</div>
+  <div class="ln"><b>Date of birth:</b> ${esc(r.fields.dob)}</div>
+  <div class="ln"><b>Address:</b> ${esc(r.fields.present_address)}</div>
+  <div class="ln"><b>Class of vehicle:</b> ${esc(r.fields.vehicle_class)}</div>
+  <div class="ln"><b>Period of training:</b> 06-10-2026 to 05-11-2026</div>
+  <div class="ln"><b>Issued by:</b> ${esc(site.business_name)}, ${esc(site.address)}</div>
+  <div class="ln"><b>Date of issue:</b> ${today()}</div>
+  <div class="sign"><div>Signature of trainee</div><div>Signature of instructor / seal</div></div>
+  <div class="warn">${S.adtc ? 'Form 5B is issued only because this client is an ADTC. The accreditation certificate number is printed here in production.' : 'Form 5 does not exempt the driving test. Only an Accredited Driver Training Centre may issue Form 5B. The app never states otherwise.'}</div></div>`;
+}
+
+/* ---- Copy fields fallback ---- */
+function viewCopyFields() {
+  const r = D().records.find(x => x.id === S.rec); if (!r) return '';
+  return `<div class="banner" style="margin-top:8px">Open Sarathi in your phone browser, then come back and copy each field. The phone cannot fill another website, so there is no auto-fill here.</div>
+  <div class="list" style="margin-top:12px">${FIELD_MAP.map(m => `<div class="copyrow"><div class="main"><div class="k">${esc(m.label)}</div><div class="v">${esc(r.fields[m.canonical] || '—')}</div></div><button data-act="copy" data-v="${esc(r.fields[m.canonical] || '')}">Copy</button></div>`).join('')}</div>
+  <p class="cap" style="margin-top:12px">Aadhaar is not listed: the student enters it on the portal and receives the OTP on their own phone.</p>`;
+}
+
+/* ---- Contacts ---- */
+function viewContacts() {
+  const d = D(); const q = (S.cq || '').toLowerCase();
+  const list = S.fresh ? [] : d.contacts.filter(c => !q || c.name.toLowerCase().includes(q) || c.phone.includes(q));
+  if (!d.contacts.length || S.fresh) return `<div class="empty">${IC.people}<p>${t('noContacts')}</p><button class="pbtn secondary" style="width:auto;padding:0 22px" data-act="contacts.import">${t('importCsv')}</button></div>`;
+  const src = { record: 'from document', csv: 'CSV', manual: 'manual', website: 'website' };
+  const sel = S.sel || new Set();
+  return `<div class="search">${IC.search}<input class="inp" id="conSearch" placeholder="${t('search')}" value="${esc(S.cq || '')}" aria-label="${t('search')}"></div>
+  <p class="cap" style="margin:10px 0">${d.contacts.filter(c => c.optIn).length} opted in of ${d.contacts.length}${S.selectMode ? ' · tap rows to select' : ' · long-press a row to select'}</p>
+  <div class="list">${list.map(c => `<div class="lrow ${c.optIn ? '' : 'dim'} ${sel.has(c.id) ? 'sel' : ''}" data-act="contact.row" data-id="${c.id}" data-press="1" role="button" tabindex="0">
+    ${S.selectMode ? `<input type="checkbox" class="cb" ${sel.has(c.id) ? 'checked' : ''} tabindex="-1" aria-label="Select ${esc(c.name)}">` : `<div class="av">${esc(c.name[0])}</div>`}
+    <div class="main"><div class="nm">${esc(c.name)}</div><div class="sub"><span class="num">${fmtPhone(c.phone)}</span> · ${src[c.source]}${c.tags.length ? ' · ' + c.tags.map(esc).join(', ') : ''}</div></div>
+    ${S.selectMode ? '' : `<input type="checkbox" class="toggle" data-act="contact.opt" data-id="${c.id}" ${c.optIn ? 'checked' : ''} aria-label="${t('optIn')}, ${c.optIn ? 'on' : 'off'}">`}</div>`).join('') || `<div class="empty"><p>No matches.</p></div>`}</div>
+  ${S.selectMode ? `<div class="selbar"><span class="cnt">${sel.size} selected</span><button data-act="contacts.tag" ${sel.size ? '' : 'disabled'}>Tag</button><button data-act="contacts.optoff" ${sel.size ? '' : 'disabled'}>Opt out</button></div>` : ''}`;
+}
+
+/* ---- Broadcast ---- */
+function bcState() { if (!S.bc) S.bc = { audience: 'All', tpl: null, vars: [], phase: 'compose', sent: 0, total: 0, paused: false, report: null, failedOpen: false }; return S.bc; }
+function recipients(b) { return D().contacts.filter(c => c.optIn && (b.audience === 'All' || c.tags.includes(b.audience))); }
+function renderMsg(tpl, vars, name) { let s = tpl.body.replace('{{name}}', name); tpl.vars.forEach((_, i) => { s = s.replace(`{{${i + 1}}}`, vars[i] || '…'); }); return s; }
+function viewBroadcast() {
+  const b = bcState(); const d = D();
+  if (S.fresh || !d.contacts.length) return `<div class="empty">${IC.mega}<p>Add contacts first. Broadcasts go only to people who opted in.</p><button class="pbtn secondary" style="width:auto;padding:0 22px" data-act="nav.contacts">${t('contacts')}</button></div>`;
+  if (b.phase === 'sending' || b.phase === 'report') return viewBroadcastRun(b);
+  const tags = [...new Set(d.contacts.flatMap(c => c.tags))];
+  const rec = recipients(b); const tpl = TEMPLATES.find(x => x.id === b.tpl);
+  const sample = rec[0] || d.contacts[0];
+  const cost = tpl ? rec.length * COST[tpl.cat] : 0;
+  return `<div class="sect" style="margin-top:8px"><div class="h2">${t('audience')}</div><div class="chips">${['All', ...tags].map(a => `<button class="pchip" data-act="bc.aud" data-v="${esc(a)}" aria-pressed="${b.audience === a}">${a === 'All' ? t('all') : esc(a)}</button>`).join('')}</div>
+  <p class="cap" style="margin-top:8px" aria-live="polite">${t('recipients', { n: rec.length })}${d.contacts.length - d.contacts.filter(c => c.optIn).length ? ` · ${d.contacts.length - d.contacts.filter(c => c.optIn).length} excluded (opted out)` : ''}</p></div>
+  <div class="sect"><div class="h2">Template</div><button class="lrow" style="border:1px solid var(--p-line);border-radius:14px;margin-top:8px;background:var(--p-surface)" data-act="bc.pick"><div class="main"><div class="nm">${tpl ? esc(tpl.name) : t('selectTemplate')}</div><div class="sub">${tpl ? `${tpl.cat} template · approved` : 'Approved templates only'}</div></div>${tpl ? `<span class="chip ${tpl.cat === 'marketing' ? 'warn' : 'ok'}">${tpl.cat}</span>` : '<span class="cap">›</span>'}</button>
+  ${tpl ? tpl.vars.map((v, i) => `<div class="field"><label for="bv_${i}">${esc(v)}</label><input class="inp" id="bv_${i}" data-bvar="${i}" value="${esc(b.vars[i] ?? '')}"></div>`).join('') : ''}
+  ${tpl && tpl.cat === 'marketing' ? `<div class="banner">Marketing template: ~7.5× the cost of a utility message and stricter consent. Only contacts who agreed to promotions should be in this audience.</div>` : ''}</div>
+  ${tpl ? `<div class="sect"><div class="h2">Preview</div><div class="wa-bg"><div class="bubble">${esc(renderMsg(tpl, b.vars, sample ? sample.name.split(' ')[0] : 'Priya'))}<span class="time">10:42 ✓✓</span></div></div><p class="cap" style="margin-top:6px">Shown with ${sample ? esc(sample.name) : 'a sample contact'}. Each person gets a private 1:1 message.</p></div>` : ''}
+  <div class="sect" style="margin-bottom:80px"><div class="h2">Previous</div><div class="list" style="margin-top:8px">${d.broadcasts.map(x => `<button class="lrow" data-act="bc.hist" data-id="${x.id}"><div class="av">${IC.mega}</div><div class="main"><div class="nm">${esc(TEMPLATES.find(tt => tt.id === x.template)?.name || x.template)}</div><div class="sub">${new Date(x.at).toLocaleDateString('en-IN')} · ${x.delivered}/${x.total} delivered · ${inr(x.cost)}</div></div><span class="chip ${x.failed ? 'warn' : 'ok'}">${x.failed ? x.failed + ' failed' : 'all delivered'}</span></button>`).join('') || '<div class="empty"><p>No broadcasts yet.</p></div>'}</div></div>
+  <div class="sticky-bar tabs"><button class="pbtn primary" data-act="bc.send" ${rec.length && tpl ? '' : 'disabled'}>${t('sendTo', { n: rec.length })}</button></div>
+  ${!rec.length ? `<p class="cap" style="position:absolute;bottom:140px;left:16px;right:16px;text-align:center">No opted-in contacts in this audience.</p>` : ''}`;
+}
+function viewBroadcastRun(b) {
+  const tpl = TEMPLATES.find(x => x.id === b.tpl); const pct = b.total ? Math.round(b.sent / b.total * 100) : 0;
+  if (b.phase === 'sending') return `<div class="card" style="margin-top:12px"><div class="h2">Sending ${esc(tpl.name)}</div><p class="cap">${b.paused ? 'Paused: offline. Will resume when you reconnect.' : 'One private message per contact via the BSP.'}</p><div class="progress" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><div style="width:${pct}%"></div></div><p class="cap num" style="margin-top:6px" aria-live="polite">${b.sent} / ${b.total} sent</p></div>`;
+  const r = b.report;
+  return `<div class="card" style="margin-top:12px"><div class="h2">Report · ${esc(tpl.name)}</div><div class="cap">${r.audience === 'All' ? 'All opted-in contacts' : 'Tag: ' + esc(r.audience)} · cost ${inr(r.cost)} incl. GST</div>
+  <div class="rtiles"><div class="rtile"><div class="v">${r.sent}</div><div class="l">Sent</div></div><div class="rtile ok"><div class="v">${r.delivered}</div><div class="l">Delivered</div></div><div class="rtile"><div class="v">${r.read}</div><div class="l">Read</div></div><div class="rtile ${r.failed ? 'bad' : ''}"><div class="v">${r.failed}</div><div class="l">Failed</div></div></div>
+  ${r.failed ? `<button class="pbtn ghost" style="margin-top:10px;height:44px" data-act="bc.failed">${b.failedOpen ? 'Hide' : 'Show'} failed (${r.failed})</button>${b.failedOpen ? `<ul style="margin:4px 0 0;padding-left:18px;font-size:14px;color:var(--p-muted)">${r.failedList.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}` : ''}
+  <p class="cap" style="margin-top:10px">Delivery and read counts arrive from the BSP status webhook over the next minutes.</p></div>
+  <div style="display:grid;gap:10px;margin-top:14px"><button class="pbtn secondary" data-act="bc.stop">Simulate a STOP reply from ${esc((recipients(b)[1] || recipients(b)[0] || { name: 'a contact' }).name)}</button><button class="pbtn primary" data-act="bc.new">New broadcast</button></div>`;
+}
+
+/* ---- Site editor ---- */
+function viewSite() {
+  const s = D().site;
+  const canPublish = s.business_name.trim() && s.phone.trim();
+  return `<form data-form="site" novalidate>
+  ${s.published ? `<div class="urlbox"><span class="u">https://${esc(s.domain || s.slug + '.sites.vovix.in')}</span><button type="button" data-act="copy" data-v="https://${esc(s.domain || s.slug + '.sites.vovix.in')}">Copy</button></div>` : `<div class="banner" style="margin-top:8px">Not published yet. Fill the details and tap ${t('publish')}.</div>`}
+  ${s.dirty ? `<p class="cap" style="margin-top:8px;color:#8E5F06">Unsaved changes · ${t('publish')} to update the live page</p>` : ''}
+  <fieldset style="border:0;padding:0;margin:0"><legend class="h2" style="margin-top:16px">Business</legend>
+  <div class="field"><label for="st_name">${t('businessName')} <span style="color:var(--p-bad)">*</span></label><input class="inp ${s.business_name.trim() ? '' : 'error'}" id="st_name" data-site="business_name" value="${esc(s.business_name)}"></div>
+  <div class="field"><label for="st_tag">${t('tagline')}</label><input class="inp" id="st_tag" data-site="tagline" value="${esc(s.tagline)}"></div>
+  <div class="field"><label for="st_about">${t('about')}</label><textarea class="inp" id="st_about" data-site="about" rows="3">${esc(s.about)}</textarea></div></fieldset>
+  <fieldset style="border:0;padding:0;margin:0"><legend class="h2" style="margin-top:20px">${t('services')}</legend>
+  ${s.services.map((sv, i) => `<div class="svc-row"><input class="inp" data-svc="${i}" value="${esc(sv)}" aria-label="Service ${i + 1}"><button type="button" data-act="site.rmsvc" data-i="${i}" aria-label="Remove service">×</button></div>`).join('')}
+  <button type="button" class="pbtn ghost" style="height:44px;justify-content:flex-start;padding:0" data-act="site.addsvc">+ Add a service</button></fieldset>
+  <fieldset style="border:0;padding:0;margin:0"><legend class="h2" style="margin-top:20px">${t('photo')}</legend>
+  <div class="photo-up"><div class="pv">${s.photo ? `<img src="${s.photo}" alt="Business photo">` : 'No photo'}</div><input type="file" id="sitePhoto" accept="image/*" hidden><button type="button" class="pbtn secondary" style="width:auto;height:44px" data-act="site.photo">Upload + crop</button></div>
+  <p class="cap" id="photoNote" style="margin-top:6px">${s.photoNote || 'Large photos are compressed automatically.'}</p></fieldset>
+  <fieldset style="border:0;padding:0;margin:0"><legend class="h2" style="margin-top:20px">Contact</legend>
+  <div class="field"><label for="st_phone">${t('phone')} <span style="color:var(--p-bad)">*</span></label><input class="inp ${s.phone.trim() ? '' : 'error'}" id="st_phone" data-site="phone" type="tel" inputmode="numeric" value="${esc(s.phone)}">${s.phone.trim() ? '' : '<div class="err">Phone is required to publish</div>'}</div>
+  <div class="field"><label for="st_wa">${t('whatsapp')}</label><input class="inp" id="st_wa" data-site="whatsapp" type="tel" inputmode="numeric" value="${esc(s.whatsapp)}"></div>
+  <div class="field"><label for="st_addr">${t('address')}</label><textarea class="inp" id="st_addr" data-site="address" rows="2">${esc(s.address)}</textarea></div>
+  <div class="field"><label for="st_map">${t('mapLink')}</label><input class="inp" id="st_map" data-site="map_url" value="${esc(s.map_url)}"></div>
+  <div class="field"><label for="st_dom">${t('customDomain')}</label><input class="inp" id="st_dom" data-site="domain" placeholder="www.yourschool.in" value="${esc(s.domain)}"><div class="help">${s.domainState === 'verifying' ? 'Verifying domain… point a CNAME at sites.vovix.in' : s.domainState === 'ok' ? 'Domain verified · certificate issued' : `Default: ${esc(s.slug)}.sites.vovix.in`}</div></div></fieldset>
+  <div style="height:90px"></div></form>
+  <div class="sticky-bar tabs"><button class="pbtn ghost" style="flex:1" data-act="site.preview">${t('preview')}</button><button class="pbtn primary" style="flex:1.4" id="publishBtn" data-act="site.publish" ${canPublish ? '' : 'disabled'}>${t('publish')}${s.dirty && s.published ? ' changes' : ''}</button></div>`;
+}
+
+/* ---- Field setup ---- */
+function viewFields() {
+  const f = D().fields;
+  return `<p class="cap" style="margin-top:8px">The details the app reads from each document. Set up once with Vovix; you can add more later.</p>
+  <div class="list" style="margin-top:12px">${f.map((x, i) => `<div class="fieldrow"><div class="main"><div class="nm">${esc(x.label)}</div><div class="sub">${x.src ? 'Read from ' + x.src : 'Entered by you'}</div></div><label class="cap" style="display:flex;gap:6px;align-items:center">Required <input type="checkbox" class="cb" data-act="fields.req" data-i="${i}" ${x.required ? 'checked' : ''}></label></div>`).join('')}</div>
+  <div style="margin-top:14px;display:grid;gap:10px"><button class="pbtn secondary" data-act="fields.add">+ Add a field</button></div>
+  `;
+}
+
+/* ---------------- desktop (Sarathi) renderer ---------------- */
+function sarState() {
+  if (!S.sar) S.sar = { tier: 1, loggedIn: false, student: null, filled: {}, running: false, halted: null, captcha: 'K7P4', captchaIn: '', captchaOk: false, otpOk: false, paid: false, submitted: null, portalChanged: false, extOpen: true, t2: null, handoff: null };
+  return S.sar;
+}
+function renderDesk() {
+  const sar = sarState(); const d = S.db.driving;
+  const students = d.records.filter(r => !r.sarathi);
+  const st = students.find(r => r.id === sar.student) || null;
+  const stTxt = (k) => st ? (st.fields[k] || '') : '';
+  const fld = (m, i) => {
+    const id = m.selector.slice(1); const realId = sar.portalChanged && id === 'dob' ? 'dateOfBirth' : id;
+    const filled = sar.filled[m.canonical]; const typing = sar.typing === m.canonical;
+    let ctl;
+    if (m.type === 'select') { const opts = m.canonical === 'gender' ? ['', 'Male', 'Female', 'Transgender'] : m.canonical === 'blood_group' ? ['', ...BLOOD] : m.canonical === 'qualification' ? ['', ...QUAL] : ['', ...COURSES]; ctl = `<select id="${realId}" aria-label="${esc(m.label)}">${opts.map(o => `<option ${filled && filled === o ? 'selected' : ''}>${o}</option>`).join('')}</select>`; }
+    else if (m.type === 'textarea') ctl = `<textarea id="${realId}" aria-label="${esc(m.label)}">${esc(filled || '')}</textarea>`;
+    else ctl = `<input id="${realId}" value="${esc(filled || '')}" aria-label="${esc(m.label)}" ${m.format ? `placeholder="${m.format}"` : ''}>`;
+    return `<div class="f ${m.type === 'textarea' ? 'full' : ''} ${filled ? 'filled' : ''} ${typing ? 'typing' : ''}" data-f="${m.canonical}"><label for="${realId}">${esc(m.label)}</label>${ctl}<span class="tick">✓ read-back ok</span></div>`;
+  };
+  const gate = (key, title, desc, body, done) => `<div class="gate"><div class="gh"><b>${title}</b><span class="you ${done ? 'done' : ''}">${done ? 'done' : 'you do this'}</span></div><p style="font-size:12.5px;color:#555;margin:0">${desc}</p>${done ? '' : body}</div>`;
+  const allFilled = FIELD_MAP.every(m => sar.filled[m.canonical]);
+  const portal = !sar.loggedIn
+    ? `<div class="login-panel"><b style="font-size:16px">Driving School Login</b><p>You log in here with the school's own Sarathi credentials. Vovix never sees or stores them, and the extension works only inside your live session.</p><button class="gbtn" data-act="sar.login">Simulate: I've logged in</button></div>`
+    : sar.submitted
+      ? `<div class="portal-main"><div class="success"><b>Application saved on the portal (mock)</b><br>Reference <b>${esc(sar.submitted.ref)}</b> · ${esc(sar.submitted.name)} · ${esc(sar.submitted.at)}<br><span style="font-size:12.5px;color:#555">The real portal continues to the learner licence steps the student completes themselves: Aadhaar e-KYC OTP and the proctored online test.</span></div><button class="gbtn alt" style="margin-top:12px" data-act="sar.reset">Start another application</button></div>`
+      : `<div class="portal-main"><h3 style="font-size:15px;margin:0 0 10px">New enrollment · Driving school services · ${esc(S.ta)}</h3>
+        <div class="pform" id="pform">${FIELD_MAP.map(fld).join('')}</div>
+        ${gate('captcha', 'Captcha', 'Type the characters. Vovix never uses a captcha-solving service.', `<div class="gr"><span class="captcha" aria-label="captcha image">${sar.captcha}</span><input id="capIn" placeholder="Enter captcha" value="${esc(sar.captchaIn)}" aria-label="Captcha"><button class="gbtn alt" data-act="sar.captcha">Verify</button>${sar.captchaIn && !sar.captchaOk && sar.capTried ? '<span style="color:#b91c1c;font-size:12.5px">Wrong, try again</span>' : ''}</div>`, sar.captchaOk)}
+        ${gate('otp', 'Aadhaar OTP', `One-time password sent to the student's own mobile ${st ? fmtPhone(stTxt('mobile')) : ''}. The student enters it. Vovix never sees or stores it.`, `<div class="gr"><input id="otpIn" inputmode="numeric" maxlength="6" placeholder="6-digit OTP (student)" aria-label="OTP"><button class="gbtn alt" data-act="sar.otp">Student entered OTP</button></div>`, sar.otpOk)}
+        ${gate('pay', 'Fee payment', 'Completed by you on the portal payment gateway.', `<div class="gr"><button class="gbtn alt" data-act="sar.pay">Payment done</button></div>`, sar.paid)}
+        <div style="display:flex;justify-content:flex-end;margin-top:14px;gap:8px;align-items:center"><span style="font-size:12.5px;color:#555">${allFilled && sar.captchaOk && sar.otpOk && sar.paid ? 'Everything is in place. The submit is yours.' : 'Submit unlocks when all fields, captcha, OTP and payment are done.'}</span><button class="gbtn" data-act="sar.submit" ${allFilled && sar.captchaOk && sar.otpOk && sar.paid ? '' : 'disabled'}>Submit application</button></div></div>`;
+  const ext = renderExt(sar, students, st);
+  $('#deskWrap').innerHTML = `<div class="desk-chrome"><div class="dtabs"><div class="dtab active">🛈 Sarathi driving-school services (mock)</div><div class="dtab">Vovix One</div></div>
+  <div class="addr"><span style="font-size:12px;color:#777">‹ ›</span><div class="url">sarathi (demo stand-in) · driving school services · new enrollment</div><button class="extbtn" data-act="sar.ext" aria-label="Vovix extension" aria-expanded="${sar.extOpen}">V${students.length ? `<span class="badge">${students.length}</span>` : ''}</button></div></div>
+  <div class="desk-body"><div class="portal"><div class="portal-head"><b>Sarathi Parivahan · Driving School (mock screen)</b><span class="mock">${sar.loggedIn ? 'Logged in: ' + esc(d.site.business_name) : 'Not logged in'} · demo stand-in</span></div><div class="portal-sub">Simplified stand-in for the Sarathi screen. The real screen is used once you share a screenshot of yours.</div>${portal}</div>${sar.extOpen ? ext : ''}</div>`;
+}
+function renderExt(sar, students, st) {
+  const tierTabs = `<div class="seg2" role="tablist"><button role="tab" data-act="sar.tier" data-v="1" aria-pressed="${sar.tier === 1}">Assisted fill · Tier 1</button><button role="tab" data-act="sar.tier" data-v="2" aria-pressed="${sar.tier === 2}">Auto-fill attended · Tier 2</button></div>`;
+  const profiles = `<div class="sec"><h4>Students synced from phone</h4>${students.length ? students.map(r => `<button class="prof ${sar.student === r.id ? 'sel' : ''}" data-act="sar.pick" data-id="${r.id}"><div class="av">${esc(r.fields.full_name.split(' ').map(w => w[0]).slice(0, 2).join(''))}</div><div><div class="nm">${esc(r.fields.full_name)}</div><div class="sub">${esc(r.enrollment)} · ${esc(r.stage)} · ${esc(r.fields.vehicle_class)}</div></div></button>`).join('') : '<p class="cap">No verified students waiting. Verify one on the phone.</p>'}</div>`;
+  const map = `<div class="sec"><h4>Fields the helper fills</h4><label class="sw"><span>Simulate: portal changed a field</span><input type="checkbox" data-act="sar.change" ${sar.portalChanged ? 'checked' : ''}></label><div class="flist" style="margin-top:8px">${FIELD_MAP.map(m => `<div><span>${esc(m.label)}</span><span class="st ${sar.filled[m.canonical] ? 'ok' : sar.typing === m.canonical ? 'run' : sar.halted && sar.halted.sel === m.selector ? 'bad' : ''}">${sar.filled[m.canonical] ? 'ok' : sar.typing === m.canonical ? 'typing' : sar.halted && sar.halted.sel === m.selector ? 'not found' : '—'}</span></div>`).join('')}</div></div>`;
+  const gates = `<div class="sec"><h4>Human-only steps</h4><div class="gates">${[['School login', sar.loggedIn], ['Captcha', sar.captchaOk], ['Aadhaar OTP (student)', sar.otpOk], ['Payment', sar.paid], ['Final submit', !!sar.submitted]].map(([l, ok]) => `<div><span>${l}</span><span class="you ${ok ? 'done' : ''}">${ok ? 'done' : 'you'}</span></div>`).join('')}</div></div>`;
+  let action = '';
+  if (sar.tier === 1) {
+    action = `<div class="sec"><h4>Tier 1 · one click</h4>${sar.halted ? `<div class="msg bad"><b>Stopped safely.</b> ${esc(sar.halted.msg)}</div>` : ''}${!sar.loggedIn ? `<div class="msg">Log in to Sarathi on the page first. The extension never logs in for you.</div>` : !st ? `<div class="msg">Pick a student above.</div>` : ''}
+    <button class="ebtn primary" style="margin-top:8px" data-act="sar.fill" ${sar.loggedIn && st && !sar.running && !sar.submitted ? '' : 'disabled'}>${sar.running ? 'Filling…' : Object.keys(sar.filled).length ? 'Fill again' : 'Fill the open form'}</button>
+    ${sar.submitted ? `<button class="ebtn primary" style="margin-top:8px" data-act="sar.markdone">${IC.check} Mark done → stage “LL applied”</button>` : ''}
+    <p class="cap" style="margin-top:8px;font-size:12px">Types each field and checks it. Login, captcha, OTP, payment and Submit stay with you.</p></div>`;
+  } else {
+    const t2 = sar.t2;
+    action = `<div class="sec"><h4>Tier 2 · attended helper</h4>${sar.halted ? `<div class="msg bad"><b>Page doesn't match the field map.</b> ${esc(sar.halted.msg)}<br><button class="ebtn sec" style="margin-top:8px;height:38px" data-act="sar.failsafe">Fail safe to Tier 1</button></div>` : ''}
+    ${t2 ? `<div class="steplog">${t2.steps.map((s, i) => `<div class="${i < t2.i ? 'done' : i === t2.i ? (t2.paused ? 'pause' : 'cur') : ''}"><span class="ic">${i < t2.i ? '✓' : i === t2.i ? (t2.paused ? '⏸' : '›') : '·'}</span><span>${esc(s.label)}${s.human ? ' <span class="you">you</span>' : ''}</span></div>`).join('')}</div>` : ''}
+    ${t2 && t2.paused ? `<div class="msg" style="margin-top:8px">${esc(t2.steps[t2.i].prompt)}</div><button class="ebtn primary" style="margin-top:8px" data-act="sar.resume" ${t2.steps[t2.i].ready() ? '' : 'disabled'}>${t2.steps[t2.i].ready() ? 'Resume' : 'Do the step on the page, then Resume'}</button>` : ''}
+    ${!t2 || t2.done ? `<button class="ebtn primary" style="margin-top:8px" data-act="sar.t2start" ${st && !sar.running && !sar.submitted ? '' : 'disabled'}>Start attended auto-fill</button>` : ''}
+    ${sar.submitted ? `<button class="ebtn primary" style="margin-top:8px" data-act="sar.markdone">${IC.check} Mark done → stage “LL applied”</button>` : ''}
+    ${!st ? `<div class="msg" style="margin-top:8px">Pick a student above.</div>` : ''}
+    <p class="cap" style="margin-top:8px;font-size:12px">Runs on your computer while you watch, one student at a time, and pauses at every step that needs you.</p></div>`;
+  }
+  return `<aside class="ext" aria-label="Vovix extension"><div class="ext-h"><div class="lg">V</div><div><b>Vovix Sarathi Assist</b><div class="sub">Same login as the phone · ${esc(S.db.driving.site.business_name)}</div></div></div>
+  <div class="ext-body">${sar.handoff ? `<div class="hand">📲 Handed off from phone: <b>${esc(sar.handoff)}</b></div>` : ''}${tierTabs}${profiles}${action}${gates}${map}</div></aside>`;
+}
+
+/* ---------------- public site renderer ---------------- */
+function renderPublic() {
+  const s = D().site; const url = `https://${s.domain || s.slug + '.sites.vovix.in'}`;
+  $('#pubWrap').innerHTML = `<div class="desk-chrome"><div class="dtabs"><div class="dtab active">${esc(s.business_name)}</div></div><div class="addr"><span style="font-size:12px;color:#777">‹ ›</span><div class="url">${esc(url)}</div></div></div>
+  <div class="site">${s.published ? '' : `<div class="draft-banner">Draft: this page is not published yet. Visitors would see “Site not found” until the owner taps Publish.</div>`}
+  <div class="hero"><div><h2>${esc(s.business_name)}</h2><p>${esc(s.tagline)}</p><a class="wabtn" href="https://wa.me/91${esc(s.whatsapp)}" target="_blank" rel="noopener">💬 WhatsApp us</a></div><div class="ph">${s.photo ? `<img src="${s.photo}" alt="">` : 'Photo'}</div></div>
+  <section><h3>About</h3><p style="max-width:65ch">${esc(s.about)}</p></section>
+  <section><h3>Services</h3><div class="svcs">${s.services.filter(Boolean).map(x => `<div>${esc(x)}</div>`).join('')}</div></section>
+  <section><h3>Contact</h3><div class="contact"><div><p><b>Phone:</b> <span class="num">${fmtPhone(s.phone)}</span></p><p style="margin-top:6px"><b>Address:</b> ${esc(s.address)}</p><p style="margin-top:6px"><a href="${esc(s.map_url)}" target="_blank" rel="noopener" style="color:#D64F16;font-weight:600">Open in Maps ↗</a></p><p class="cap" style="margin-top:10px">WhatsApp: wa.me/91${esc(s.whatsapp)}</p></div>
+  <form class="enq" data-form="enquiry" novalidate><b>Enquire now</b><input id="enq_name" placeholder="Your name" aria-label="Your name"><input id="enq_phone" type="tel" inputmode="numeric" placeholder="Your mobile number" aria-label="Your mobile number"><button type="submit" id="enqBtn">Send enquiry</button><span class="cap" id="enqMsg" style="font-size:12px">You agree to receive WhatsApp updates from ${esc(s.business_name)}. Reply STOP any time.</span></form></div></section>
+  <footer><span>© ${new Date().getFullYear()} ${esc(s.business_name)}</span><span>Built with Vovix One</span></footer></div>`;
+}
+
+/* ---------------- controls, steps, note ---------------- */
+function renderControls() {
+  $('#controls').innerHTML = `
+  <label class="switch"><input type="checkbox" data-act="offline.toggle" ${S.offline ? 'checked' : ''}>Offline</label>
+  <label class="switch"><input type="checkbox" data-act="fresh.toggle" ${S.fresh ? 'checked' : ''}>Fresh account</label>
+  <label class="switch"><input type="checkbox" data-act="adtc.toggle" ${S.adtc ? 'checked' : ''}>Our school is ADTC-accredited</label>
+  <button class="btn danger" data-act="demo.reset">Reset demo</button>`;
+  $('#heroLang').innerHTML = `<button data-act="lang.set" data-v="en" aria-pressed="${S.lang === 'en'}">English</button><button data-act="lang.set" data-v="ta" aria-pressed="${S.lang === 'ta'}">தமிழ்</button>`;
+  const groups = [...new Set(STEPS.map(x => x.g))]; const cur = STEPS[S.step].g;
+  const desc = { 'Enrol a student': 'Scan the Aadhaar, verify, done.', 'Licence paperwork': 'Form 5 in a tap, Sarathi filled for you.', 'Keep students informed': 'WhatsApp reminders to everyone, privately.', 'Your website': 'Edit on the phone, enquiries become contacts.' };
+  $('#journey').innerHTML = groups.map((g, i) => `<button class="chap" data-act="chap.go" data-g="${esc(g)}" aria-current="${g === cur}"><span class="cn">Part ${i + 1}</span><span class="ct">${esc(g)}</span><span class="cd">${esc(desc[g] || '')}</span></button>`).join('');
+}
+function renderSteps() {
+  const groups = [...new Set(STEPS.map(s => s.g))];
+  $('#steps').innerHTML = groups.map(g => `<div class="grp"><h3>${esc(g)}</h3>${STEPS.map((s, i) => s.g === g ? `<button class="step" data-act="step.go" data-i="${i}" aria-current="${S.step === i}"><span class="n">${i + 1}</span><span><span class="t">${esc(s.title)}</span><br><span class="d">${esc(s.d)}</span></span></button>` : '').join('')}</div>`).join('');
+  $('#prevStep').disabled = S.step === 0; $('#nextStep').disabled = S.step === STEPS.length - 1;
+}
+function renderNote() { const s = STEPS[S.step]; const i = STEPS.filter(x => x.g === s.g).indexOf(s) + 1; const n = STEPS.filter(x => x.g === s.g).length; $('#note').innerHTML = `<div class="kicker">${esc(s.g)} · ${i} of ${n}</div>${s.note}<div class="tags">${(s.tags || []).map(x => `<span class="tag ${x.startsWith('Guardrail') ? 'ok' : ''}">${esc(x)}</span>`).join('')}</div>`; }
+function goStep(i) {
+  S.step = Math.max(0, Math.min(STEPS.length - 1, i)); const s = STEPS[S.step];
+  S.menu = false; S.sheet = null; S.selectMode = false; S.sel = null;
+  if (s.g.startsWith('Driving') && S.mode !== 'driving') S.mode = 'driving';
+  if (s.id !== 'login' && !S.loggedIn) S.loggedIn = true;
+  if (s.id === 'login') S.loggedIn = false;
+  S.view = s.view; S.screen = s.screen;
+  if (s.setup) s.setup();
+  if (s.id === 'tier1' || s.id === 'tier2') { sarState(); if (!S.sar.student) { const v = S.db.driving.records.find(r => !r.sarathi); if (v) S.sar.student = v.id; } }
+  render();
+  window.scrollTo({ top: Math.max(0, $('#note').getBoundingClientRect().top + window.scrollY - 90), behavior: 'smooth' });
+}
+
+/* ---------------- after-render wiring (inputs that must not re-render on each key) ---------------- */
+function afterRender() {
+  const sc = $('#screen');
+  $$('[data-bind]', sc).forEach(el => el.addEventListener('input', () => { S.draft.values[el.dataset.bind] = el.value; S.draft.edited[el.dataset.bind] = true; const row = el.closest('.rf'); row.classList.add('edited'); row.classList.remove('low'); validateReview(); }));
+  const cons = $('#rv_consent', sc); if (cons) cons.addEventListener('change', () => { S.draft.consent = cons.checked; validateReview(); });
+  if (S.screen === 'review') validateReview();
+  const rs = $('#recSearch', sc); if (rs) rs.addEventListener('input', () => { S.q = rs.value; const pos = rs.selectionStart; renderPhone(); const el = $('#recSearch'); el.focus(); el.setSelectionRange(pos, pos); });
+  const cs = $('#conSearch', sc); if (cs) cs.addEventListener('input', () => { S.cq = cs.value; const pos = cs.selectionStart; renderPhone(); const el = $('#conSearch'); el.focus(); el.setSelectionRange(pos, pos); });
+  $$('[data-bvar]', sc).forEach(el => el.addEventListener('input', () => { bcState().vars[+el.dataset.bvar] = el.value; const pv = $('.bubble', sc); if (pv) { const tpl = TEMPLATES.find(x => x.id === S.bc.tpl); const rec = recipients(S.bc); const sample = rec[0] || D().contacts[0]; pv.innerHTML = esc(renderMsg(tpl, S.bc.vars, sample ? sample.name.split(' ')[0] : 'Priya')) + '<span class="time">10:42 ✓✓</span>'; } }));
+  $$('[data-site]', sc).forEach(el => el.addEventListener('input', () => { const s = D().site; s[el.dataset.site] = el.value; s.dirty = true; if (el.dataset.site === 'domain') { s.domainState = el.value.trim() ? 'verifying' : ''; clearTimeout(S.domT); if (el.value.trim()) S.domT = setTimeout(() => { s.domainState = 'ok'; if (S.screen === 'site') renderPhone(); }, 4000); }
+    const pb = $('#publishBtn'); if (pb) pb.disabled = !(s.business_name.trim() && s.phone.trim());
+    if (el.dataset.site === 'business_name' || el.dataset.site === 'phone') el.classList.toggle('error', !el.value.trim());
+    if (!$('#siteDirty')) { const hint = document.createElement('p'); hint.id = 'siteDirty'; hint.className = 'cap'; hint.style.cssText = 'margin-top:8px;color:#8E5F06'; hint.textContent = 'Unsaved changes · Publish to update the live page'; const first = sc.querySelector('form[data-form="site"] > :first-child'); first.after(hint); }
+    const chip = sc.querySelector('.appbar .chip'); if (chip) { chip.className = 'chip neutral'; chip.textContent = t('draft'); }
+  }));
+  $$('[data-svc]', sc).forEach(el => el.addEventListener('input', () => { D().site.services[+el.dataset.svc] = el.value; D().site.dirty = true; }));
+  const fi = $('#fileInput', sc); if (fi) fi.addEventListener('change', () => { const files = [...fi.files]; if (!files.length) return; const bad = files.filter(f => !/\.(pdf|jpe?g|png)$/i.test(f.name)); if (bad.length) toast(`Unsupported file: ${bad[0].name}. Use PDF, JPG or PNG.`, 'bad'); const ok = files.filter(f => /\.(pdf|jpe?g|png)$/i.test(f.name)); ok.forEach((f, i) => { const img = /image\//.test(f.type) && f.size < 4e6 ? f : null; addDocument(f.name, 1, img, f.size > 20e6); }); if (ok.length) toast(`${ok.length} file${ok.length > 1 ? 's' : ''} queued`, 'ok'); fi.value = ''; });
+  const sp = $('#sitePhoto', sc); if (sp) sp.addEventListener('change', () => { const f = sp.files[0]; if (!f) return; const rd = new FileReader(); rd.onload = () => { D().site.photo = rd.result; D().site.photoNote = f.size > 1e6 ? `Compressed from ${(f.size / 1e6).toFixed(1)} MB to about 0.4 MB` : 'Photo added'; D().site.dirty = true; renderPhone(); }; rd.readAsDataURL(f); });
+  // long-press on contact rows
+  $$('[data-press]', sc).forEach(el => { let tmr; const start = () => { tmr = setTimeout(() => { if (!S.selectMode) { S.selectMode = true; S.sel = new Set([el.dataset.id]); renderPhone(); } }, 500); }; const end = () => clearTimeout(tmr); el.addEventListener('pointerdown', start); el.addEventListener('pointerup', end); el.addEventListener('pointerleave', end); el.addEventListener('pointercancel', end); });
+}
+const FORMS = {
+  async login(f) {
+    const em = $('#lg_email', f), pw = $('#lg_pw', f), b = $('#loginBtn', f);
+    const emOk = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em.value); $('#lg_email_err').hidden = emOk; em.classList.toggle('error', !emOk); if (!emOk) return;
+    b.classList.add('loading'); b.disabled = true; await sleep(900);
+    if (pw.value !== 'demo1234') { b.classList.remove('loading'); b.disabled = false; pw.classList.add('error'); $('#lg_pw_err').hidden = false; toast('Email or password is incorrect', 'bad'); return; }
+    S.loggedIn = true; S.screen = 'home'; renderPhone(); toast('Welcome back', 'ok');
+  },
+  async reset(f) { const b = $('#resetBtn', f); b.classList.add('loading'); await sleep(900); b.classList.remove('loading'); $('#resetNote').hidden = false; toast('Reset link sent', 'ok'); },
+  review() { ACT['review.save'](); },
+  site() { ACT['site.publish'](); },
+  enquiry(f) {
+    const nm = $('#enq_name', f).value.trim(), ph = $('#enq_phone', f).value.replace(/\D/g, '');
+    const msg = $('#enqMsg', f);
+    if (!nm || !/^[6-9]\d{9}$/.test(ph.slice(-10))) { msg.textContent = 'Enter your name and a valid 10-digit Indian mobile number.'; msg.style.color = '#D64545'; return; }
+    const res = upsertContact(nm, ph.slice(-10), 'website', ['enquiry']);
+    msg.style.color = '#1F9D55'; msg.textContent = res === 'dup' ? `Thanks ${nm}, we already have your number and will call you back.` : `Thanks ${nm}! We’ll call you back on ${fmtPhone(ph)}. (Added to the owner’s Contacts as “website”.)`;
+    $('#enq_name', f).value = ''; $('#enq_phone', f).value = '';
+  },
+};
+
+/* ---------------- domain actions ---------------- */
+function upsertContact(name, phone, source, tags = []) {
+  const d = D(); const ex = d.contacts.find(c => c.phone.slice(-10) === phone.slice(-10));
+  if (ex) { ex.name = ex.name || name; tags.forEach(t => { if (!ex.tags.includes(t)) ex.tags.push(t); }); return 'dup'; }
+  d.contacts.unshift({ id: uid(), name, phone, source, optIn: true, tags }); return 'new';
+}
+async function addDocument(name, pages, imgFile, large) {
+  const d = D(); const doc = { id: uid(), name, pages, status: S.offline ? 'pending' : 'processing', fields: {}, createdAt: Date.now(), recordId: null };
+  if (imgFile) { const rd = new FileReader(); rd.onload = () => { doc.img = rd.result; }; rd.readAsDataURL(imgFile); }
+  d.docs.unshift(doc); renderPhone();
+  if (large) toast('Large file, this may take a minute.', 'info', 3500);
+  while (S.offline) await sleep(400);
+  doc.status = 'processing'; renderPhone();
+  await sleep(large ? 3500 : 1800);
+  const idx = d.docs.length; const low = /blur|low|dark/i.test(name) || idx % 3 === 0;
+  doc.fields = /blur/i.test(name) ? {} : extractFor(S.mode, idx + 11, low);
+  doc.status = (low || !Object.keys(doc.fields).length) ? 'needs_review' : 'needs_review';
+  renderPhone(); toast(`${name} ready to review`, 'ok');
+}
+let capturedToastShown = false;
+
+const ACT = {
+  'step.go': (a) => goStep(+a.dataset.i), 'chap.go': (a) => { const i = STEPS.findIndex(x => x.g === a.dataset.g); goStep(i); history.replaceState(null, '', '#' + STEPS[S.step].id); }, 'step.prev': () => goStep(S.step - 1), 'step.next': () => goStep(S.step + 1),
+  'mode.set': (a) => { S.mode = a.dataset.v; S.rec = null; S.doc = null; S.bc = null; S.sel = null; S.selectMode = false; S.menu = false; if (S.screen === 'record' || S.screen === 'review' || S.screen === 'copyfields') S.screen = 'records'; if (S.view === 'desktop' && S.mode !== 'driving') S.view = 'phone'; render(); },
+  'lang.set': (a) => { S.lang = a.dataset.v; document.documentElement.lang = S.lang; render(); },
+  'lang.toggle': () => { S.lang = S.lang === 'en' ? 'ta' : 'en'; document.documentElement.lang = S.lang; S.menu = false; render(); },
+  'offline.toggle': (a) => { S.offline = a.checked; render(); if (S.offline) toast(t('offline'), 'info'); else toast('Back online. Queued items are sending.', 'ok'); },
+  'fresh.toggle': (a) => { S.fresh = a.checked; render(); },
+  'adtc.toggle': (a) => { S.adtc = a.checked; render(); },
+  'demo.reset': () => { seed('driving'); S.sar = null; S.bc = null; S.rec = null; S.doc = null; S.fresh = false; S.offline = false; S.sel = null; S.selectMode = false; S.q = ''; S.cq = ''; S.scanPages = 0; goStep(0); toast('Demo reset', 'ok'); },
+  'menu.toggle': () => { S.menu = !S.menu; renderPhone(); },
+  'sheet.close': (a, e) => { if (a.id === 'sheetHost' && e.target.closest('[data-stop]')) return; closeSheet(); },
+  'auth.logout': () => { S.loggedIn = false; S.menu = false; S.screen = 'login'; renderPhone(); },
+  'login.eye': (a) => { const pw = $('#lg_pw'); const show = pw.type === 'password'; pw.type = show ? 'text' : 'password'; a.textContent = show ? 'Hide' : 'Show'; a.setAttribute('aria-pressed', show); },
+  'nav.login': () => { S.screen = 'login'; renderPhone(); }, 'nav.reset': () => { S.screen = 'reset'; renderPhone(); },
+  'nav.home': () => { S.screen = 'home'; S.menu = false; renderPhone(); }, 'nav.records': () => { S.screen = 'records'; S.menu = false; S.loadingRecords = true; renderPhone(); setTimeout(() => { S.loadingRecords = false; if (S.screen === 'records') renderPhone(); }, 500); },
+  'nav.contacts': () => { S.screen = 'contacts'; S.menu = false; renderPhone(); }, 'nav.broadcast': () => { S.screen = 'broadcast'; S.menu = false; renderPhone(); }, 'nav.site': () => { S.screen = 'site'; S.menu = false; renderPhone(); },
+  'nav.scan': () => { S.screen = 'scan'; S.scanPages = 0; S.menu = false; renderPhone(); }, 'nav.upload': () => { S.screen = 'upload'; S.menu = false; renderPhone(); }, 'nav.documents': () => { S.screen = 'documents'; S.menu = false; renderPhone(); },
+  'nav.fields': () => { S.screen = 'fields'; S.menu = false; renderPhone(); }, 'nav.record': () => { S.screen = 'record'; renderPhone(); },
+  // scan
+  'scan.torch': () => { S.torch = !S.torch; renderPhone(); },
+  'scan.shutter': () => { S.scanPages = (S.scanPages || 0) + 1; const f = $('#flash'); if (f) { f.classList.remove('on'); void f.offsetWidth; f.classList.add('on'); } setTimeout(renderPhone, 150); },
+  'scan.done': () => { const n = S.scanPages || 0; if (!n) return; const name = `scan_${new Date().toISOString().slice(11, 19).replace(/:/g, '')}.jpg`; S.screen = 'documents'; renderPhone(); toast(`${n} page${n > 1 ? 's' : ''} captured`, 'ok'); addDocument(name, n, null, false); },
+  // upload
+  'upload.pick': () => $('#fileInput').click(),
+  'upload.sample': () => { ['admission_form_021.pdf', 'id_proof_022.jpg', 'admission_form_023.pdf'].forEach((n, i) => setTimeout(() => addDocument(S.mode === 'driving' ? n.replace('admission_form', 'aadhaar').replace('id_proof', 'address_proof') : n, 1, null, false), i * 250)); toast('3 files queued', 'ok'); },
+  'upload.bad': () => toast('Unsupported file: notes.docx. Use PDF, JPG or PNG.', 'bad'),
+  'upload.large': () => addDocument('prospectus_scan.pdf', 12, null, true),
+  // documents & review
+  'doc.open': (a) => { openReview(a.dataset.id); renderPhone(); },
+  'review.zoom': () => toast('Zoom: pinch or double-tap on device', 'info', 1500),
+  'review.discard': () => { openSheet(`<h3>Discard this document?</h3><p class="cap">The scan and its extracted fields will be removed. This cannot be undone.</p><div class="acts"><button class="pbtn secondary" data-act="sheet.close" style="flex:1">Keep</button><button class="pbtn primary" style="flex:1;background:var(--p-bad)" data-act="review.discard2">Discard</button></div>`); },
+  'review.discard2': () => { const d = D(); const doc = d.docs.find(x => x.id === S.doc); if (doc && !doc.recordId) d.docs = d.docs.filter(x => x.id !== S.doc); closeSheet(); S.screen = 'documents'; renderPhone(); toast('Discarded', 'info'); },
+  'review.save': () => {
+    if (!validateReview()) { toast(S.mode === 'driving' && !S.draft.consent ? 'Tick the consent box before saving' : 'Fill the required fields', 'bad'); return; }
+    const d = D(); const doc = d.docs.find(x => x.id === S.doc); const vals = { ...S.draft.values };
+    let rec;
+    if (S.draft.recId) { rec = d.records.find(r => r.id === S.draft.recId); rec.fields = vals; rec.consent = S.draft.consent; }
+    else { rec = { id: uid(), docId: doc.id, fields: vals, createdAt: Date.now(), stage: 'Verified', enrollment: 'SSDS-2026-' + (d.nextEnroll++), consent: S.draft.consent, sarathi: null }; d.records.unshift(rec); doc.recordId = rec.id; doc.status = 'captured'; }
+    const ph = vals.phone || vals.mobile; const nm = vals.name || vals.full_name;
+    toast(S.mode === 'driving' ? t('savedStudents') : t('savedRecords'), 'ok');
+    if (ph && /\d{10}/.test(ph.replace(/\D/g, ''))) { const r = upsertContact(nm, ph.replace(/\D/g, '').slice(-10), 'record'); if (r === 'new') setTimeout(() => toast(t('addedContacts'), 'info', 2200), 500); }
+    if (S.mode === 'driving') { S.rec = rec.id; S.screen = 'record'; } else S.screen = 'records';
+    renderPhone();
+  },
+  // records
+  'records.export': async () => { const b = $('#exportBtn') || $('[data-act="records.export"]'); if (b) { b.style.opacity = .5; b.disabled = true; } toast('Building records.xlsx…', 'info', 1200); await sleep(1300); if (b) { b.style.opacity = 1; b.disabled = false; } openSheet(`<h3>records.xlsx</h3><p class="cap">${D().records.length} rows · ${D().fields.length} columns · ${(D().records.length * 0.9 + 12).toFixed(0)} KB</p><div class="tbl-wrap" style="margin-top:10px;box-shadow:none;border:1px solid var(--p-line)"><table class="ptbl" style="font-size:12px"><thead><tr>${D().fields.map(f => `<th>${esc(f.label)}</th>`).join('')}</tr></thead><tbody>${D().records.slice(0, 3).map(r => `<tr>${D().fields.map(f => `<td>${esc(r.fields[f.key] || '')}</td>`).join('')}</tr>`).join('')}<tr><td colspan="${D().fields.length}" style="color:var(--p-muted)">… ${Math.max(0, D().records.length - 3)} more rows</td></tr></tbody></table></div><p class="cap" style="margin-top:10px">On the real app this downloads to the phone. The demo sandbox blocks downloads, so this preview stands in.</p><div class="acts"><button class="pbtn primary" data-act="sheet.close">Done</button></div>`); toast('records.xlsx ready', 'ok'); },
+  'record.open': (a) => { S.rec = a.dataset.id; S.screen = 'record'; renderPhone(); },
+  'record.edit': () => { const r = D().records.find(x => x.id === S.rec); if (!r) return; const doc = D().docs.find(d => d.id === r.docId); if (doc) { openReview(doc.id); renderPhone(); } else toast('Original scan not available', 'bad'); },
+  'record.delete': () => openSheet(`<h3>Delete ${S.mode === 'driving' ? 'student' : 'record'}?</h3><p class="cap">The row is removed from the table. The contact stays unless you remove it in Contacts.</p><div class="acts"><button class="pbtn secondary" style="flex:1" data-act="sheet.close">Keep</button><button class="pbtn primary" style="flex:1;background:var(--p-bad)" data-act="record.delete2">Delete</button></div>`),
+  'record.delete2': () => { const d = D(); const r = d.records.find(x => x.id === S.rec); if (r) { d.records = d.records.filter(x => x.id !== S.rec); const doc = d.docs.find(x => x.id === r.docId); if (doc) { doc.recordId = null; doc.status = 'needs_review'; } } closeSheet(); S.screen = 'records'; renderPhone(); toast('Deleted', 'info'); },
+  'record.stage': () => { const r = D().records.find(x => x.id === S.rec); openSheet(`<h3>${t('stage')}</h3>${STAGES.map(s => `<button class="opt ${r.stage === s ? 'sel' : ''}" data-act="record.stage2" data-v="${s}"><div class="t">${s}</div>${s === 'LL applied' ? '<span class="cap" style="margin-left:auto">set by Sarathi mark-done</span>' : ''}</button>`).join('')}`); },
+  'record.stage2': (a) => { const r = D().records.find(x => x.id === S.rec); r.stage = a.dataset.v; closeSheet(); renderPhone(); toast(`Stage: ${r.stage}`, 'ok'); },
+  'student.form5': () => { const r = D().records.find(x => x.id === S.rec); openSheet(`<h3>${S.adtc ? 'Form 5B' : 'Form 5 / 5A'} · ready to print</h3><p class="cap">Generated from the verified profile in one tap. Hand it to the student or print it.</p><div style="margin-top:10px">${form5Html(r)}</div><div class="acts"><button class="pbtn secondary" style="flex:1" data-act="sheet.close">Close</button><button class="pbtn primary" style="flex:1" data-act="student.form5share">Share PDF</button></div>`); },
+  'student.form5share': () => { closeSheet(); toast('PDF shared via WhatsApp to the student (simulated)', 'ok'); },
+  'student.sarathi': () => { const r = D().records.find(x => x.id === S.rec); openSheet(`<h3>${t('sendSarathi')}</h3><p class="cap">The phone cannot fill another website. Choose how the filling happens.</p>
+    <button class="opt" data-act="student.handoff" data-tier="1"><div class="av">1</div><div><div class="t">Assisted fill · Tier 1 (default)</div><div class="d">Open the Vovix extension in Chrome on the computer. Pick this student, click Fill. You do login, captcha, OTP, payment, submit.</div></div></button>
+    <button class="opt" data-act="student.handoff" data-tier="2"><div class="av">2</div><div><div class="t">Auto-fill attended · Tier 2</div><div class="d">The desktop helper types every screen and pauses at each human step. Falls back to Tier 1 if the page changed.</div></div></button>
+    <button class="opt" data-act="student.copy"><div class="av">📋</div><div><div class="t">No computer: copy fields</div><div class="d">Open Sarathi in this phone's browser and paste field by field.</div></div></button>
+    ${r.sarathi ? `<div class="banner ok" style="margin-top:10px">Already submitted: ${esc(r.sarathi.ref)}</div>` : ''}`); },
+  'student.handoff': (a) => { const r = D().records.find(x => x.id === S.rec); const sar = sarState(); sar.student = r.id; sar.tier = +a.dataset.tier; sar.handoff = r.fields.full_name; sar.extOpen = true; sar.filled = {}; sar.halted = null; sar.t2 = null; closeSheet(); toast('Sent to your computer. Open the Vovix extension in Chrome.', 'ok'); setTimeout(() => { S.step = STEPS.findIndex(s => s.id === (sar.tier === 1 ? 'tier1' : 'tier2')); S.view = 'desktop'; render(); }, 900); },
+  'student.copy': () => { closeSheet(); S.screen = 'copyfields'; renderPhone(); },
+  'copy': async (a) => { const v = a.dataset.v; let ok = false; try { await navigator.clipboard.writeText(v); ok = true; } catch (e) { try { const ta = document.createElement('textarea'); ta.value = v; ta.style.position = 'fixed'; ta.style.opacity = 0; document.body.appendChild(ta); ta.select(); ok = document.execCommand('copy'); ta.remove(); } catch (e2) { } } if (ok) { a.textContent = 'Copied'; a.classList.add('done'); setTimeout(() => { a.textContent = 'Copy'; a.classList.remove('done'); }, 1600); } else toast('Copy blocked by the browser. Select the text and copy.', 'bad'); },
+  // contacts
+  'contact.opt': (a) => { const c = D().contacts.find(x => x.id === a.dataset.id); c.optIn = a.checked; renderPhone(); toast(c.optIn ? `${c.name} opted in` : `${c.name} opted out · excluded from broadcasts`, 'info', 2000); },
+  'contact.row': (a, e) => { if (e.target.closest('.toggle')) return; if (S.selectMode) { const id = a.dataset.id; S.sel = S.sel || new Set(); S.sel.has(id) ? S.sel.delete(id) : S.sel.add(id); renderPhone(); } else { const c = D().contacts.find(x => x.id === a.dataset.id); openSheet(`<h3>${esc(c.name)}</h3><p class="num" style="font-size:18px">${fmtPhone(c.phone)}</p><p class="cap">Source: ${c.source} · Tags: ${c.tags.join(', ') || 'none'} · Opt-in ${c.optIn ? 'on' : 'off'}</p>${c.recordId ? `<button class="opt" data-act="contact.record" data-id="${c.recordId}"><div class="t">Open ${S.mode === 'driving' ? 'student' : 'record'}</div></button>` : ''}<button class="opt" data-act="contact.delete" data-id="${c.id}"><div class="t" style="color:var(--p-bad)">Remove contact</div></button>`); } },
+  'contact.record': (a) => { closeSheet(); S.rec = a.dataset.id; S.screen = 'record'; renderPhone(); },
+  'contact.delete': (a) => { D().contacts = D().contacts.filter(c => c.id !== a.dataset.id); closeSheet(); renderPhone(); toast('Contact removed', 'info'); },
+  'contacts.select': () => { S.selectMode = !S.selectMode; S.sel = new Set(); renderPhone(); },
+  'contacts.tag': () => openSheet(`<h3>Tag ${S.sel.size} contacts</h3><div class="field"><label for="tagIn">Tag</label><input class="inp" id="tagIn" value="batch-dec" list="tagList"><datalist id="tagList">${[...new Set(D().contacts.flatMap(c => c.tags))].map(t => `<option value="${esc(t)}">`).join('')}</datalist></div><div class="acts"><button class="pbtn secondary" style="flex:1" data-act="sheet.close">Cancel</button><button class="pbtn primary" style="flex:1" data-act="contacts.tag2">Apply</button></div>`),
+  'contacts.tag2': () => { const tg = $('#tagIn').value.trim(); if (!tg) return; D().contacts.forEach(c => { if (S.sel.has(c.id) && !c.tags.includes(tg)) c.tags.push(tg); }); const n = S.sel.size; closeSheet(); S.selectMode = false; S.sel = null; renderPhone(); toast(`Tagged ${n} contacts “${tg}”`, 'ok'); },
+  'contacts.optoff': () => { D().contacts.forEach(c => { if (S.sel.has(c.id)) c.optIn = false; }); const n = S.sel.size; S.selectMode = false; S.sel = null; renderPhone(); toast(`${n} contacts opted out`, 'info'); },
+  'contacts.import': () => openSheet(`<h3>${t('importCsv')}</h3><p class="cap">Columns: name, phone, tag. Sample below has one malformed row and one short number.</p><textarea class="inp" id="csvIn" rows="7" style="font-family:ui-monospace,monospace;font-size:13px;margin-top:8px">name,phone,tag
+Ramesh Babu,9884012001,batch-dec
+Fathima Begum,9962012002,batch-dec
+Gokul Krishnan,9003012003,
+Senthil,98840,batch-dec
+this row is broken
+Yamuna Devi,9941012005,batch-dec</textarea><div class="acts"><button class="pbtn secondary" style="flex:1" data-act="sheet.close">Cancel</button><button class="pbtn primary" style="flex:1" data-act="contacts.import2">Import</button></div>`),
+  'contacts.import2': () => { const lines = $('#csvIn').value.split('\n').slice(1).filter(l => l.trim()); let ok = 0, bad = 0, dup = 0; lines.forEach(l => { const [name, phone, tag] = l.split(',').map(x => (x || '').trim()); const ph = (phone || '').replace(/\D/g, ''); if (!name || !/^[6-9]\d{9}$/.test(ph)) { bad++; return; } const r = upsertContact(name, ph, 'csv', tag ? [tag] : []); r === 'dup' ? dup++ : ok++; }); closeSheet(); renderPhone(); toast(`${ok} imported${dup ? `, ${dup} already existed` : ''}`, 'ok'); if (bad) setTimeout(() => toast(`${bad} rows failed: malformed or short number. Not saved.`, 'bad', 3500), 400); },
+  'contacts.add': () => openSheet(`<h3>Add contact</h3><div class="field"><label for="ac_name">Name</label><input class="inp" id="ac_name" value="Gopal Krishnan"></div><div class="field"><label for="ac_phone">Phone</label><input class="inp" id="ac_phone" type="tel" inputmode="numeric" value="${D().contacts[0] ? D().contacts[0].phone : '9841000000'}"><div class="err" id="ac_err" hidden></div><div class="help">Prefilled with an existing number to show duplicate detection.</div></div><div class="acts"><button class="pbtn secondary" style="flex:1" data-act="sheet.close">Cancel</button><button class="pbtn primary" style="flex:1" data-act="contacts.add2">Save</button></div>`),
+  'contacts.add2': () => { const nm = $('#ac_name').value.trim(), ph = $('#ac_phone').value.replace(/\D/g, ''); const err = $('#ac_err'); if (!/^[6-9]\d{9}$/.test(ph)) { err.hidden = false; err.textContent = 'Not a valid Indian mobile number. Not saved.'; $('#ac_phone').classList.add('error'); return; } if (D().contacts.some(c => c.phone.slice(-10) === ph)) { err.hidden = false; err.textContent = 'Already in contacts.'; $('#ac_phone').classList.add('error'); return; } upsertContact(nm, ph, 'manual'); closeSheet(); renderPhone(); toast('Contact added', 'ok'); },
+  // broadcast
+  'bc.aud': (a) => { bcState().audience = a.dataset.v; renderPhone(); },
+  'bc.pick': () => openSheet(`<h3>${t('selectTemplate')}</h3><p class="cap">Approved templates only. 1 template (“new_batch”) is pending approval and hidden.</p>${TEMPLATES.map(x => `<button class="opt ${S.bc.tpl === x.id ? 'sel' : ''}" data-act="bc.tpl" data-id="${x.id}"><div style="flex:1"><div class="t">${esc(x.name)}</div><div class="d">${esc(x.body)}</div></div><span class="chip ${x.cat === 'marketing' ? 'warn' : 'ok'}">${x.cat} · ₹${COST[x.cat]}</span></button>`).join('')}`),
+  'bc.tpl': (a) => { const b = bcState(); b.tpl = a.dataset.id; b.vars = [...TEMPLATES.find(x => x.id === b.tpl).defaults]; closeSheet(); renderPhone(); },
+  'bc.send': () => { const b = bcState(); const rec = recipients(b); const tpl = TEMPLATES.find(x => x.id === b.tpl); const base = rec.length * COST[tpl.cat]; const gst = base * COST.gst; openSheet(`<h3>Send to ${rec.length} contacts?</h3><p style="font-size:16px">Approx <b>${inr(base)}</b> + GST ${inr(gst)} = <b>${inr(base + gst)}</b></p><p class="cap" style="margin-top:6px">${tpl.cat === 'marketing' ? 'Marketing message. Only contacts who consented to promotions should receive it.' : 'Utility message at ₹0.115 each.'} Sent 1:1 from your own WhatsApp number.</p><div class="acts"><button class="pbtn secondary" style="flex:1" data-act="sheet.close">Cancel</button><button class="pbtn primary" style="flex:1" data-act="bc.confirm">Confirm</button></div>`); },
+  'bc.confirm': async () => {
+    const b = bcState(); const rec = recipients(b); const tpl = TEMPLATES.find(x => x.id === b.tpl); closeSheet();
+    b.phase = 'sending'; b.sent = 0; b.total = rec.length; b.paused = false; renderPhone();
+    const perTick = Math.max(1, Math.ceil(rec.length / 24));
+    while (b.sent < b.total) { if (S.offline) { b.paused = true; renderPhone(); while (S.offline) await sleep(300); b.paused = false; } await sleep(120); b.sent = Math.min(b.total, b.sent + perTick); renderPhone(); }
+    const failed = Math.min(b.total, Math.round(b.total * 0.05)); const delivered = b.total - failed; const read = Math.round(delivered * 0.7);
+    const failedList = rec.slice(0, failed).map(c => `${c.name} (number not on WhatsApp)`);
+    const cost = b.total * COST[tpl.cat] * (1 + COST.gst);
+    b.report = { audience: b.audience, sent: b.total, delivered, read, failed, failedList, cost };
+    D().broadcasts.unshift({ id: uid(), template: tpl.id, cat: tpl.cat, audience: b.audience, total: b.total, sent: b.total, delivered, read, failed, cost, at: Date.now(), failedList });
+    b.phase = 'report'; renderPhone(); toast(`Sent to ${b.total}`, 'ok');
+  },
+  'bc.failed': () => { S.bc.failedOpen = !S.bc.failedOpen; renderPhone(); },
+  'bc.stop': () => { const b = bcState(); const c = recipients(b)[1] || recipients(b)[0]; if (!c) return; c.optIn = false; renderPhone(); toast(`“STOP” from ${c.name}: opt-in turned off, excluded from future sends`, 'info', 3500); },
+  'bc.new': () => { const b = bcState(); b.phase = 'compose'; b.report = null; renderPhone(); },
+  'bc.hist': (a) => { const x = D().broadcasts.find(b => b.id === a.dataset.id); openSheet(`<h3>${esc(TEMPLATES.find(tt => tt.id === x.template)?.name || x.template)}</h3><p class="cap">${new Date(x.at).toLocaleString('en-IN')} · ${x.audience}</p><div class="rtiles"><div class="rtile"><div class="v">${x.sent}</div><div class="l">Sent</div></div><div class="rtile ok"><div class="v">${x.delivered}</div><div class="l">Delivered</div></div><div class="rtile"><div class="v">${x.read}</div><div class="l">Read</div></div><div class="rtile ${x.failed ? 'bad' : ''}"><div class="v">${x.failed}</div><div class="l">Failed</div></div></div><p class="cap" style="margin-top:10px">Cost ${inr(x.cost)} incl. GST</p>${x.failedList && x.failedList.length ? `<ul style="margin:6px 0 0;padding-left:18px;font-size:14px;color:var(--p-muted)">${x.failedList.map(f => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}`); },
+  // site
+  'site.addsvc': () => { D().site.services.push(''); D().site.dirty = true; renderPhone(); setTimeout(() => { const els = $$('[data-svc]'); els[els.length - 1] && els[els.length - 1].focus(); }, 30); },
+  'site.rmsvc': (a) => { D().site.services.splice(+a.dataset.i, 1); D().site.dirty = true; renderPhone(); },
+  'site.photo': () => $('#sitePhoto').click(),
+  'site.preview': () => { S.view = 'public'; S.step = STEPS.findIndex(s => s.id === 'public'); render(); },
+  'site.publish': async () => { const s = D().site; if (!(s.business_name.trim() && s.phone.trim())) { toast('Business name and phone are required', 'bad'); return; } const b = $('#publishBtn'); if (b) { b.classList.add('loading'); b.disabled = true; } await sleep(1400); s.published = true; s.dirty = false; renderPhone(); toast(`Live at ${s.domain || s.slug + '.sites.vovix.in'}`, 'ok', 3500); },
+  // fields
+  'fields.req': (a) => { D().fields[+a.dataset.i].required = a.checked; },
+  'fields.add': () => openSheet(`<h3>Add a field</h3><div class="field"><label for="nf_label">Label</label><input class="inp" id="nf_label" value="Batch"></div><div class="field"><label for="nf_type">Type</label><select class="inp" id="nf_type"><option>text</option><option>phone</option><option>date</option><option>number</option></select></div><div class="acts"><button class="pbtn secondary" style="flex:1" data-act="sheet.close">Cancel</button><button class="pbtn primary" style="flex:1" data-act="fields.add2">Add</button></div>`),
+  'fields.add2': () => { const l = $('#nf_label').value.trim(); if (!l) return; D().fields.push({ key: l.toLowerCase().replace(/[^a-z0-9]+/g, '_'), label: l, type: $('#nf_type').value }); closeSheet(); renderPhone(); toast(`“${l}” will now be read from every document`, 'ok', 3200); },
+  // sarathi
+  'sar.ext': () => { sarState().extOpen = !sarState().extOpen; renderDesk(); },
+  'sar.login': () => { sarState().loggedIn = true; renderDesk(); },
+  'sar.tier': (a) => { sarState().tier = +a.dataset.v; sarState().halted = null; renderDesk(); },
+  'sar.pick': (a) => { const sar = sarState(); sar.student = a.dataset.id; sar.filled = {}; sar.halted = null; sar.t2 = null; sar.captchaOk = false; sar.otpOk = false; sar.paid = false; sar.capTried = false; renderDesk(); },
+  'sar.change': (a) => { const sar = sarState(); sar.portalChanged = a.checked; sar.filled = {}; sar.halted = null; renderDesk(); },
+  'sar.captcha': () => { const sar = sarState(); sar.captchaIn = $('#capIn').value.trim(); sar.capTried = true; sar.captchaOk = sar.captchaIn.toUpperCase() === sar.captcha; renderDesk(); if (sar.captchaOk && sar.t2 && sar.t2.paused) {/* resume button enables */ } },
+  'sar.otp': () => { const v = ($('#otpIn').value || '').replace(/\D/g, ''); if (v.length !== 6) { $('#otpIn').style.borderColor = '#b91c1c'; return; } sarState().otpOk = true; renderDesk(); },
+  'sar.pay': () => { sarState().paid = true; renderDesk(); },
+  'sar.submit': () => { const sar = sarState(); const r = S.db.driving.records.find(x => x.id === sar.student); sar.submitted = { ref: 'TN-DS-2026-' + String(100000 + Math.floor(Math.random() * 899999)), name: r.fields.full_name, at: new Date().toLocaleString('en-IN') }; if (sar.t2 && !sar.t2.done) { sar.t2.i = sar.t2.steps.length; sar.t2.done = true; sar.t2.paused = false; } renderDesk(); },
+  'sar.markdone': () => { const sar = sarState(); const r = S.db.driving.records.find(x => x.id === sar.student); r.sarathi = { ref: sar.submitted.ref, at: sar.submitted.at }; if (STAGES.indexOf(r.stage) < STAGES.indexOf('LL applied')) r.stage = 'LL applied'; const nm = r.fields.full_name; sar.submitted = null; sar.student = null; sar.filled = {}; sar.loggedIn = true; sar.captchaOk = false; sar.otpOk = false; sar.paid = false; sar.handoff = null; sar.t2 = null; renderDesk(); S.rec = r.id; S.mode = 'driving'; S.screen = 'record'; setTimeout(() => { S.view = 'phone'; S.step = STEPS.findIndex(s => s.id === 'student'); render(); toast(`${nm}: stage → LL applied`, 'ok', 3500); }, 700); },
+  'sar.reset': () => { const sar = sarState(); sar.submitted = null; sar.filled = {}; sar.captchaOk = false; sar.otpOk = false; sar.paid = false; sar.t2 = null; renderDesk(); },
+  'sar.fill': () => runFill(1),
+  'sar.t2start': () => startT2(),
+  'sar.resume': () => resumeT2(),
+  'sar.failsafe': () => { const sar = sarState(); sar.tier = 1; sar.t2 = null; sar.halted = { ...sar.halted, msg: sar.halted.msg + ' Finish the rest with one-click fill or by hand.' }; renderDesk(); },
+};
+
+async function runFill(tier) {
+  const sar = sarState(); const r = S.db.driving.records.find(x => x.id === sar.student); if (!r || sar.running) return;
+  sar.running = true; sar.halted = null;
+  for (const m of FIELD_MAP) {
+    if (sar.filled[m.canonical]) continue;
+    sar.typing = m.canonical; renderDesk();
+    const el = $('#deskWrap').querySelector(m.selector);
+    if (!el) { sar.halted = { sel: m.selector, msg: `The “${m.label}” field is not where it used to be on the portal. Nothing was guessed. ${tier === 1 ? 'The fields already filled are kept; finish this one by hand.' : ''}` }; sar.typing = null; sar.running = false; renderDesk(); return false; }
+    const val = r.fields[m.canonical] || '';
+    if (el.tagName === 'SELECT') { await sleep(260); el.value = val; }
+    else { el.value = ''; for (let i = 1; i <= val.length; i++) { el.value = val.slice(0, i); await sleep(val.length > 30 ? 8 : 22); } }
+    await sleep(120);
+    if (el.value === val) sar.filled[m.canonical] = val; else { sar.halted = { sel: m.selector, msg: `“${m.label}” did not read back correctly. Stopped.` }; sar.typing = null; sar.running = false; renderDesk(); return false; }
+    sar.typing = null; renderDesk();
+  }
+  sar.running = false; renderDesk(); return true;
+}
+function startT2() {
+  const sar = sarState(); const r = S.db.driving.records.find(x => x.id === sar.student); if (!r) return;
+  sar.filled = {}; sar.halted = null;
+  sar.t2 = { i: 0, paused: false, done: false, steps: [
+    { label: 'Open Sarathi driving-school enrollment', run: async () => { await sleep(500); } },
+    { label: 'School login', human: true, prompt: 'Log in to Sarathi on the page with the school credentials. The helper never does this.', ready: () => sarState().loggedIn },
+    { label: `Type ${FIELD_MAP.length} fields from the profile (read-back checked)`, run: async () => { const ok = await runFill(2); if (!ok) throw new Error('halt'); } },
+    { label: 'Captcha', human: true, prompt: 'Solve the captcha on the page, then Resume.', ready: () => sarState().captchaOk },
+    { label: 'Aadhaar OTP (student)', human: true, prompt: "The student enters the OTP sent to their own mobile. Confirm on the page, then Resume.", ready: () => sarState().otpOk },
+    { label: 'Fee payment', human: true, prompt: 'Complete the payment on the portal gateway, then Resume.', ready: () => sarState().paid },
+    { label: 'Review the filled form', run: async () => { await sleep(600); } },
+    { label: 'Submit (yours)', human: true, prompt: 'Review and press Submit on the page. The helper never submits.', ready: () => !!sarState().submitted },
+  ] };
+  renderDesk(); advanceT2();
+}
+async function advanceT2() {
+  const sar = sarState(); const t2 = sar.t2; if (!t2) return;
+  while (t2.i < t2.steps.length) {
+    const s = t2.steps[t2.i];
+    if (s.human) { if (s.ready()) { t2.i++; renderDesk(); continue; } t2.paused = true; renderDesk(); return; }
+    renderDesk();
+    try { await s.run(); } catch (e) { renderDesk(); return; }
+    t2.i++; renderDesk();
+  }
+  t2.done = true; renderDesk();
+}
+function resumeT2() { const t2 = sarState().t2; if (!t2) return; const s = t2.steps[t2.i]; if (s.human && s.ready()) { t2.paused = false; t2.i++; advanceT2(); } }
+
+/* ---------------- global event delegation ---------------- */
+document.addEventListener('click', e => {
+  const a = e.target.closest('[data-act]'); if (!a) return;
+  if (a.matches('input[type="checkbox"]')) return; // handled on change
+  if (a.tagName === 'TR' && e.target.closest('a')) return;
+  const fn = ACT[a.dataset.act]; if (fn) { fn(a, e); }
+});
+document.addEventListener('submit', e => { const f = e.target.closest('form[data-form]'); if (!f) return; e.preventDefault(); FORMS[f.dataset.form] && FORMS[f.dataset.form](f); });
+document.addEventListener('change', e => {
+  const a = e.target.closest('input[type="checkbox"][data-act]'); if (!a) return;
+  const fn = ACT[a.dataset.act]; if (fn) fn(a, e);
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && e.target.matches('tr[data-act], .lrow[role="button"]')) { e.preventDefault(); e.target.click(); }
+  if (e.key === 'Escape' && S.sheet) closeSheet();
+});
+// close phone overflow menu when clicking elsewhere
+document.addEventListener('click', e => { if (S.menu && !e.target.closest('.menu') && !e.target.closest('[data-act="menu.toggle"]')) { S.menu = false; renderPhone(); } }, true);
+
+/* ---------------- boot ---------------- */
+document.documentElement.lang = S.lang;
+const hash = (location.hash || '').replace('#', ''); const startIdx = STEPS.findIndex(s => s.id === hash);
+goStep(startIdx >= 0 ? startIdx : 0);
+window.addEventListener('hashchange', () => { const i = STEPS.findIndex(s => s.id === (location.hash || '').replace('#', '')); if (i >= 0 && i !== S.step) goStep(i); });
+const _go = goStep; // keep hash in sync
+ACT['step.go'] = (a) => { _go(+a.dataset.i); history.replaceState(null, '', '#' + STEPS[S.step].id); };
+ACT['step.prev'] = () => { _go(S.step - 1); history.replaceState(null, '', '#' + STEPS[S.step].id); };
+ACT['step.next'] = () => { _go(S.step + 1); history.replaceState(null, '', '#' + STEPS[S.step].id); };
+window.VovixDemo = { S, goStep, STEPS };
+})();
+
+</script>
+
+</body>
+</html>
