@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Vovix One interactive demo for Sri Sastha Driving School: enrol a student from an Aadhaar scan, issue Form 5 in a tap, fill Sarathi from the computer, send WhatsApp reminders, and run the school website.">
+<meta name="description" content="Vovix One interactive demo for Sri Sastha Driving School, in Tamil and English: enrol a student from an Aadhaar scan, issue Form 5 in a tap, fill Sarathi from the computer, send WhatsApp reminders, and run the school website.">
 <link rel="icon" href="/assets/favicon-mark-32.png?v=3" sizes="32x32" type="image/png">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
@@ -726,10 +726,168 @@ const STEPS = [
   { g: 'Your website', id: 'public', title: 'Your public page', d: 'Enquiries come to you', view: 'public', screen: 'site', note: `<h2>What a visitor sees</h2><p>A clean one-page site with a WhatsApp button and an enquiry form. Every enquiry lands straight in your Contacts, ready for the next reminder.</p><ul><li>Fill the enquiry form and send it. Then open <b>Contacts</b> on the phone: the person is there, marked “website”.</li></ul>`, tags: ['Enquiry → contact'] },
 ];
 
+/* ---------------- Full Tamil translation layer ----------------
+   Exact strings, pattern rules for strings with numbers/names, and partial substitutions.
+   Applied as a post-render pass over text nodes; English originals are kept so the toggle restores them. */
+const GROUP_TA = { 'Enrol a student': 'மாணவரைச் சேர்க்க', 'Licence paperwork': 'உரிம ஆவணங்கள்', 'Keep students informed': 'மாணவர்களுக்குத் தெரிவிக்க', 'Your website': 'உங்கள் இணையதளம்' };
+const STEPS_TA = {
+  login: { title: 'உள்நுழைவு', d: 'உரிமையாளருக்கு ஒரே உள்நுழைவு', tags: ['எந்த போனிலும் இயங்கும்', 'தமிழ் மற்றும் ஆங்கிலம்'], note: `<h2>உங்கள் போனில் ஒருமுறை உள்நுழையுங்கள்</h2><p>பள்ளி உரிமையாளருக்கு ஒரே கணக்கு. மின்னஞ்சலும் கடவுச்சொல்லும் மட்டும், ஒவ்வொரு முறையும் OTP இல்லை. ஊழியர் உள்நுழைவுகளைப் பின்னர் சேர்க்கலாம்.</p><ul><li>முன்பே நிரப்பிய கணக்குடன் <b>உள்நுழை</b> என்பதைத் தட்டவும். முதலில் தவறான கடவுச்சொல்லை முயற்சித்து என்ன நடக்கிறது என்று பாருங்கள்.</li><li>மீட்டமைப்பு ஓட்டத்தைக் காண <b>கடவுச்சொல் மறந்துவிட்டதா?</b> என்பதைத் தட்டவும்.</li><li>கீழே தமிழ் / English மாற்றவும்.</li></ul>` },
+  home: { title: 'முகப்பு', d: 'ஸ்கேன், பதிவேற்றம் முன்னால்', tags: ['ஒரு கட்டைவிரலில் பயன்பாடு', 'ஆஃப்லைனிலும் வேலை செய்யும்'], note: `<h2>முகப்பு</h2><p>ஸ்கேன், பதிவேற்றம் இரண்டும் மேலே இருக்கின்றன; அதுதான் தினசரி வேலை. கீழே: எத்தனை மாணவர்கள், தொடர்புகள், கடைசி வாட்ஸ்அப் நினைவூட்டல், இணையதளம் நேரலையில் உள்ளதா.</p><ul><li>ஒரு டைலைத் தட்டி அந்தப் பகுதிக்குச் செல்லவும். சமீபத்திய ஆவணத்தைத் தட்டித் திறக்கவும்.</li><li>சிக்னல் போனால் என்ன நடக்கும் என்று பார்க்க மேலே உள்ள <b>ஆஃப்லைன்</b> சுவிட்சைப் பயன்படுத்தவும்.</li><li>முதல் நாளில் ஆப் எப்படி இருக்கும் என்று பார்க்க <b>புதிய கணக்கு</b> பயன்படுத்தவும்.</li></ul>` },
+  scan: { title: 'ஆதாரை ஸ்கேன் செய்', d: 'கேமரா, தானாக வெட்டு, பல பக்கங்கள்', tags: ['தட்டச்சு இல்லை', 'படிக்கும்போதே ஸ்கேன் தொடரலாம்'], note: `<h2>மாணவரின் ஆதாரை ஸ்கேன் செய்யுங்கள்</h2><p>கேமராவைக் காட்டினால் போதும்; ஆப் விளிம்புகளைக் கண்டறிந்து பக்கத்தை நேராக்கும். பல பக்கங்கள் ஒரே ஆவணமாகும். படிப்பது பின்னணியில் நடக்கும், நீங்கள் தொடர்ந்து ஸ்கேன் செய்யலாம்.</p><ul><li>ஷட்டரை இரண்டு மூன்று முறை அழுத்தி, பிறகு <b>முடிந்தது</b> தட்டவும்.</li><li>ஆவணம் <b>செயலாக்கத்தில்</b> என்று தோன்றி, பிறகு சரிபார்க்கத் தயாராவதைப் பாருங்கள்.</li></ul>` },
+  upload: { title: 'ஆவணங்களைப் பதிவேற்று', d: 'புகைப்படங்கள் அல்லது PDF, ஒரே நேரத்தில் பல', tags: ['மொத்தப் பதிவேற்றம்'], note: `<h2>ஏற்கனவே உள்ள ஆவணங்களைப் பதிவேற்றுங்கள்</h2><p>வாட்ஸ்அப்பில் வந்த புகைப்படங்கள் அல்லது ஸ்கேனரிலிருந்து PDF. ஒரே நேரத்தில் பலவற்றைத் தேர்ந்தெடுத்தால் அவை வரிசையில் நிற்கும்.</p><ul><li><b>போனிலிருந்து கோப்புகளைத் தேர்ந்தெடு</b> உங்கள் உண்மையான கோப்புத் தேர்வியைத் திறக்கும்; அல்லது <b>3 மாதிரிக் கோப்புகளைச் சேர்</b> தட்டவும்.</li><li>தவறான கோப்பு, பெரிய கோப்பு பொத்தான்களை முயற்சித்து ஆப் எப்படி விளக்குகிறது என்று பாருங்கள்.</li></ul>` },
+  review: { title: 'மாணவரைச் சரிபார்', d: 'சரிபார், திருத்து, உறுதிசெய்', tags: ['ஒவ்வொரு மாணவரையும் நீங்களே உறுதிசெய்கிறீர்கள்', 'ஆதார் தனிப்பட்டதாகவே'], note: `<h2>சேமிப்பதற்கு முன் சரிபார்ப்பு</h2><p>ஆப் தானாக எதையும் சேமிக்காது. ஒவ்வொரு ஆவணமும் முதலில் உங்களிடம் வரும்: ஒவ்வொரு விவரமும் நிரப்பப்பட்டிருக்கும், சந்தேகமானவை மஞ்சள் நிறத்தில் குறிக்கப்படும், ஆதார் எண்ணின் கடைசி நான்கு இலக்கங்கள் மட்டுமே காட்டப்படும். சேமிப்பதற்கு முன் மாணவரின் ஒப்புதல் டிக் செய்யப்படும்.</p><ul><li>மஞ்சள் புலத்தைத் திருத்தவும். கட்டாயப் புலத்தைக் காலியாக்கினால் சேமி பொத்தான் அணைவதைப் பாருங்கள்.</li><li>ஒப்புதலை டிக் செய்து <b>மாணவரைச் சேமி</b> தட்டவும். வாட்ஸ்அப் தொடர்பு தானாக உருவாகும்.</li><li>ஆவணங்களில் <b>blurry-scan.jpg</b> திறந்து மோசமான ஸ்கேன் எப்படி இருக்கும் என்று பாருங்கள்.</li></ul>` },
+  records: { title: 'மாணவர்கள்', d: 'அனைவரும், உரிம நிலையுடன்', tags: ['தேடல்', 'உரிம நிலை ஒரே பார்வையில்'], note: `<h2>உங்கள் மாணவர்கள் அனைவரும் ஒரே இடத்தில்</h2><p>ஒவ்வொரு மாணவருக்கும் ஒரு வரிசை: உரிம நிலை, மொபைல், வாகன வகை, பதிவு எண். பெயர் அல்லது எண்ணால் தேடலாம்.</p><ul><li>தேடவும், அட்டவணையைப் பக்கவாட்டில் உருட்டவும், ஒரு வரிசையைத் தட்டி மாணவரைத் திறக்கவும்.</li></ul>` },
+  student: { title: 'மாணவர் சுயவிவரம்', d: 'நிலை கண்காணிப்பு, செயல்கள்', tags: ['சேர்க்கை → LL → DL'], note: `<h2>மாணவரின் சுயவிவரம்</h2><p>ஸ்கேனிலிருந்து சரிபார்க்கப்பட்ட அனைத்தும், சேர்க்கையிலிருந்து DL வரை உரிம நிலை, மற்றும் நீங்கள் அதிகம் செய்யும் இரண்டு செயல்கள்: படிவம் 5, சாரதி.</p><ul><li>மாணவரை அடுத்த நிலைக்கு நகர்த்த நிலைக்கு அருகில் உள்ள <b>புதுப்பி</b> தட்டவும்.</li><li>இங்கிருந்து <b>படிவம் 5 PDF</b> மற்றும் <b>சாரதிக்கு அனுப்பு</b> திறக்கவும் (அடுத்த படிகள்).</li><li>கட்டணப் பதிவு ஒரு விருப்பத் தொகுதி, <b>இயல்பாக அணைந்திருக்கும்</b>. முகப்பில் ⋮ மெனுவிலிருந்து இயக்கினால் இங்கே கட்டண அட்டை தோன்றும். நீங்கள் உள்ளிடுவது உங்கள் கணக்கிலேயே இருக்கும்; Vovix உங்கள் கணக்குப் புத்தகம் அல்ல, எங்கும் எதையும் அறிக்கையிடாது.</li></ul>` },
+  form5: { title: 'ஒரே தட்டலில் படிவம் 5', d: 'அச்சிட அல்லது பகிரத் தயார்', tags: ['அச்சிடு அல்லது வாட்ஸ்அப்'], note: `<h2>ஒரே தட்டலில் படிவம் 5</h2><p>ஓட்டுநர் சான்றிதழ் சரிபார்க்கப்பட்ட சுயவிவரத்திலிருந்து நிரப்பப்பட்டு, அச்சிடவோ மாணவருக்கு வாட்ஸ்அப்பில் அனுப்பவோ தயாராக இருக்கும். மீண்டும் தட்டச்சு இல்லை, வெற்றுப் படிவங்கள் இல்லை.</p><ul><li>சுயவிவரத்தில் <b>படிவம் 5 PDF</b> தட்டவும்.</li><li>படிவம் 5B-ஐப் பார்க்க மேலே <b>எங்கள் பள்ளி ADTC அங்கீகாரம் பெற்றது</b> சுவிட்சை இயக்கவும். சாதாரண பள்ளிக்கு, இந்தப் படிவம் தேர்வுக்கு விலக்கு அளிக்காது என்ற குறிப்பு இருக்கும்.</li></ul>` },
+  send: { title: 'சாரதிக்கு அனுப்பு', d: 'எப்படி நிரப்புவது என்பதைத் தேர்வுசெய்', tags: ['போன் → கணினி ஒப்படைப்பு'], note: `<h2>போனிலிருந்து சாரதிக்கு அனுப்புங்கள்</h2><p>போன் ஆப் அரசு இணையதளத்தில் தட்டச்சு செய்ய முடியாது; எனவே போன் மாணவரை உங்கள் கணினிக்கு ஒப்படைக்கிறது, அங்கே Vovix உதவி சாரதி திரையை உங்களுக்காக நிரப்பும்.</p><ul><li><b>சாரதிக்கு அனுப்பு</b> தட்டி <b>உதவியுடன் நிரப்பு</b> தேர்வுசெய்யவும். டெமோ கணினிக் காட்சிக்கு மாறும்.</li><li>மூன்றாவது விருப்பம் கணினி அருகில் இல்லாத நாட்களுக்கு.</li></ul>` },
+  tier1: { title: 'உங்கள் கணினியில் சாரதி', d: 'ஒரே கிளிக்கில் படிவம் நிரம்பும்', tags: ['கட்டுப்பாடு உங்களிடமே', 'யூகம் இல்லை'], note: `<h2>உங்கள் கணினியில் சாரதி</h2><p>வழக்கம் போல சாரதியில் உள்நுழைகிறீர்கள். Chrome-இல் உள்ள Vovix உதவி போனிலிருந்து அனுப்பிய மாணவர்களைக் காட்டும். ஒருவரைத் தேர்ந்தெடுத்து <b>நிரப்பு</b> கிளிக் செய்தால், ஒவ்வொரு புலமும் தட்டச்சு செய்யப்பட்டு சரிபார்க்கப்படும். உள்நுழைவு, கேப்ட்சா, மாணவரின் OTP, கட்டணம், இறுதி சமர்ப்பிப்பு எப்போதும் உங்கள் கையில்.</p><ul><li><b>Simulate: I've logged in</b> கிளிக் செய்து, மாணவரைத் தேர்ந்தெடுத்து, <b>திறந்த படிவத்தை நிரப்பு</b> கிளிக் செய்யவும்.</li><li>கேப்ட்சாவை (K7P4) தட்டச்சு செய்து, மாணவரின் OTP-ஐ உறுதிசெய்து, கட்டணத்தைக் குறித்து, Submit செய்யவும்.</li><li><b>முடிந்தது</b> கிளிக் செய்யவும்: போனில் மாணவரின் நிலை “LL விண்ணப்பித்தது” ஆகும்.</li><li>புலம் கிடைக்காதபோது யூகிக்காமல் பாதுகாப்பாக நிற்பதைப் பார்க்க <b>உருவகம்: போர்ட்டலில் ஒரு புலம் மாறியது</b> முயற்சிக்கவும்.</li></ul>` },
+  tier2: { title: 'தானியங்கி நிரப்பல், கண்காணிப்புடன்', d: 'எல்லாம் தட்டச்சு செய்து, உங்களுக்காகக் காத்திருக்கும்', tags: ['விருப்பம், பின்னர்', 'ஒவ்வொரு மனிதப் படியிலும் இடைநிறுத்தம்'], note: `<h2>நீங்கள் பார்த்துக்கொண்டிருக்கும்போதே தானியங்கி நிரப்பல்</h2><p>விருப்பக் கூடுதல்: உதவி சாரதி திரைகள் வழியாகச் சென்று எல்லாவற்றையும் தானாகத் தட்டச்சு செய்யும், கண்ணுக்குத் தெரியும்படி, மனிதர் தேவைப்படும் ஒவ்வொரு படியிலும் நின்று காத்திருக்கும். அது ஒருபோதும் உள்நுழையாது, OTP உள்ளிடாது, கேப்ட்சா தீர்க்காது, சமர்ப்பிக்காது.</p><ul><li><b>தானியங்கி, கண்காணிப்புடன் · அடுக்கு 2</b>-க்கு மாறி, மாணவரைத் தேர்ந்தெடுத்து, <b>தொடங்கு</b> கிளிக் செய்யவும்.</li><li>ஒவ்வொரு இடைநிறுத்தத்திலும் பக்கத்தில் அந்தப் படியைச் செய்து <b>தொடர்</b> கிளிக் செய்யவும்.</li><li>முதலில் <b>உருவகம்: போர்ட்டலில் ஒரு புலம் மாறியது</b> இயக்கி, அது உங்களிடம் ஒப்படைப்பதைப் பாருங்கள்.</li></ul>` },
+  fallback: { title: 'கணினி அருகில் இல்லையா', d: 'ஒவ்வொரு புலத்தையும் நகலெடு', tags: ['மாற்று வழி'], note: `<h2>கணினி அருகில் இல்லையா?</h2><p>போன் உலாவியில் சாரதியைத் திறந்து, ஒவ்வொரு விவரத்தையும் ஒரே தட்டலில் நகலெடுக்கவும். தானியங்கி அல்ல, ஆனால் மீண்டும் தட்டச்சும் இல்லை.</p><ul><li>எந்தப் புலத்திலும் <b>நகலெடு</b> தட்டவும்.</li></ul>` },
+  contacts: { title: 'தொடர்புகள்', d: 'தானாக உருவாகும்', tags: ['நகல் இல்லை', 'குறிச்சொல்லால் பேட்ச்கள்'], note: `<h2>தொடர்புகள் தாமாகவே உருவாகும்</h2><p>மொபைல் எண்ணுடன் சேமிக்கப்பட்ட ஒவ்வொரு மாணவரும் தொடர்பாகிறார். இணையதள விசாரணைகளும் உங்கள் பழைய எக்செல் பட்டியலும் (CSV ஆக) அதே பட்டியலில் சேரும். ஒப்புதல் அளித்தவர்களுக்கு மட்டுமே செய்திகள்.</p><ul><li>ஒரு வரிசையில் வாட்ஸ்அப் ஒப்புதலை அணைக்கவும்: அவர்கள் எண்ணிக்கையிலிருந்து விலகுவார்கள்.</li><li>மாதிரியுடன் <b>CSV இறக்குமதி</b> செய்யவும்; ஆப் நிராகரிக்கும் இரண்டு தவறான வரிசைகள் உட்பட.</li><li>பலரைத் தேர்ந்தெடுத்து பேட்ச்சாகக் குறிக்க ஒரு வரிசையை நீண்ட நேரம் அழுத்தவும். <b>+</b> பொத்தான் ஒருவரைக் கைமுறையாகச் சேர்க்கும்.</li></ul>` },
+  broadcast: { title: 'வாட்ஸ்அப் நினைவூட்டல்கள்', d: 'ஒரே செய்தி, ஒவ்வொருவருக்கும் தனியாக', tags: ['ஒரு நினைவூட்டலுக்கு சுமார் ₹0.14', 'டெலிவரி அறிக்கை'], note: `<h2>ஒவ்வொரு மாணவருக்கும் ஒரே செய்தி, தனித்தனியாக</h2><p>வகுப்பு நினைவூட்டல்கள், கட்டண நினைவூட்டல்கள், சலுகைகள். ஒவ்வொரு மாணவருக்கும் உங்கள் பள்ளி எண்ணிலிருந்து தனிப்பட்ட செய்தி; குழு இல்லை, பகிரப்பட்ட பட்டியல் இல்லை. உறுதிசெய்வதற்கு முன் எண்ணிக்கையும் செலவும் தெரியும், பிறகு டெலிவரி அறிக்கை.</p><ul><li>பார்வையாளர்களையும் ஒரு செய்தியையும் தேர்ந்தெடுத்து, வெற்றிடங்களை நிரப்பி, முன்னோட்டத்தைச் சரிபார்க்கவும்.</li><li>அனுப்பு தட்டி, செலவைப் படித்து, உறுதிசெய்யவும். டெலிவரி வருவதைப் பாருங்கள்.</li><li>மாணவர் விலகுவதைப் பார்க்க அறிக்கையில் <b>STOP பதிலை உருவகப்படுத்து</b> தட்டவும்.</li></ul>` },
+  site: { title: 'இணையதள எடிட்டர்', d: 'போனில் திருத்து, வெளியிடு', tags: ['நொடிகளில் நேரலை', 'சொந்த டொமைன் சாத்தியம்'], note: `<h2>உங்கள் இணையதளம், போனிலிருந்தே திருத்தலாம்</h2><p>பெயர், முழக்கம், எங்களைப் பற்றி, சேவைகள், புகைப்படம், தொலைபேசி, வாட்ஸ்அப், முகவரி, வரைபடம். வெளியிடு தட்டினால் உங்கள் சொந்த முகவரியில் நேரலையாகும்.</p><ul><li>ஒரு புலத்தை மாற்றி வரைவு சிப் தோன்றுவதைப் பாருங்கள். தொலைபேசியை அழித்தால் வெளியிடு அணையும்.</li><li><b>முன்னோட்டம்</b> பார்வையாளர்கள் காணும் பக்கத்தைக் காட்டும். <b>வெளியிடு</b> நேரலையாக்கி பகிரும் இணைப்பைத் தரும்.</li></ul>` },
+  public: { title: 'உங்கள் பொதுப் பக்கம்', d: 'விசாரணைகள் உங்களிடம் வரும்', tags: ['விசாரணை → தொடர்பு'], note: `<h2>பார்வையாளர் காண்பது</h2><p>வாட்ஸ்அப் பொத்தானும் விசாரணைப் படிவமும் கொண்ட சுத்தமான ஒரு பக்க தளம். ஒவ்வொரு விசாரணையும் நேரடியாக உங்கள் தொடர்புகளில் சேரும், அடுத்த நினைவூட்டலுக்குத் தயாராக.</p><ul><li>விசாரணைப் படிவத்தை நிரப்பி அனுப்பவும். பிறகு போனில் <b>தொடர்புகள்</b> திறக்கவும்: அந்த நபர் “website” என்று குறிக்கப்பட்டு இருப்பார்.</li></ul>` },
+};
+const TA_EXACT = {
+  // hero / chrome
+  'Interactive demo': 'ஊடாடும் டெமோ', 'Prepared for Sri Sastha Driving School': 'ஸ்ரீ சாஸ்தா டிரைவிங் ஸ்கூலுக்காகத் தயாரிக்கப்பட்டது',
+  'Scan once.': 'ஒருமுறை ஸ்கேன்.', 'Form 5 in a tap.': 'ஒரே தட்டலில் படிவம் 5.', 'Sarathi filled for you.': 'சாரதி உங்களுக்காக நிரப்பப்படும்.',
+  'One app on your phone for the whole school: enrol a student from their Aadhaar, issue Form 5 instantly, fill the Sarathi portal without retyping, remind every student on WhatsApp, and run your own website. Tap through the real screens below. Nothing here sends anything anywhere.': 'பள்ளி முழுவதற்கும் உங்கள் போனில் ஒரே ஆப்: ஆதாரிலிருந்து மாணவரைச் சேர்க்கவும், படிவம் 5-ஐ உடனே வழங்கவும், மீண்டும் தட்டச்சு செய்யாமல் சாரதி போர்ட்டலை நிரப்பவும், ஒவ்வொரு மாணவருக்கும் வாட்ஸ்அப்பில் நினைவூட்டவும், உங்கள் சொந்த இணையதளத்தை நடத்தவும். கீழே உள்ள உண்மையான திரைகளைத் தட்டிப் பாருங்கள். இங்கே எதுவும் எங்கும் அனுப்பப்படாது.',
+  'fields typed twice': 'இருமுறை தட்டச்சு செய்யும் புலங்கள்', '1 tap': '1 தட்டல்', 'to issue Form 5': 'படிவம் 5 வழங்க', 'and English': 'மற்றும் ஆங்கிலம்',
+  'Part 1': 'பகுதி 1', 'Part 2': 'பகுதி 2', 'Part 3': 'பகுதி 3', 'Part 4': 'பகுதி 4',
+  'Enrol a student': 'மாணவரைச் சேர்க்க', 'Licence paperwork': 'உரிம ஆவணங்கள்', 'Keep students informed': 'மாணவர்களுக்குத் தெரிவிக்க', 'Your website': 'உங்கள் இணையதளம்',
+  'Scan the Aadhaar, verify, done.': 'ஆதாரை ஸ்கேன் செய், சரிபார், முடிந்தது.', 'Form 5 in a tap, Sarathi filled for you.': 'ஒரே தட்டலில் படிவம் 5, சாரதி உங்களுக்காக நிரப்பப்படும்.', 'WhatsApp reminders to everyone, privately.': 'அனைவருக்கும் தனித்தனியாக வாட்ஸ்அப் நினைவூட்டல்கள்.', 'Edit on the phone, enquiries become contacts.': 'போனிலேயே திருத்துங்கள், விசாரணைகள் தொடர்புகளாகும்.',
+  'Demo switches: try the app offline, as a brand-new account, or as an accredited centre.': 'டெமோ சுவிட்சுகள்: ஆஃப்லைனில், புதிய கணக்காக, அல்லது அங்கீகாரம் பெற்ற மையமாக ஆப்பை முயற்சிக்கவும்.',
+  'Offline': 'ஆஃப்லைன்', 'Fresh account': 'புதிய கணக்கு', 'Our school is ADTC-accredited': 'எங்கள் பள்ளி ADTC அங்கீகாரம் பெற்றது', 'Reset demo': 'டெமோவை மீட்டமை',
+  '← Previous': '← முந்தையது', 'Next step →': 'அடுத்த படி →',
+  'The owner app on your phone': 'உங்கள் போனில் உரிமையாளர் ஆப்', 'Your computer: Chrome with the Vovix helper beside a simplified mock of the Sarathi screen': 'உங்கள் கணினி: சாரதி திரையின் எளிய மாதிரிக்கு அருகில் Vovix உதவியுடன் Chrome', 'Your public website, as a visitor sees it': 'பார்வையாளர் காணும் உங்கள் பொது இணையதளம்',
+  'Your data is yours.': 'உங்கள் தரவு உங்களுடையது.',
+  'Vovix stores what your school enters. It is not your book of accounts, and we never file, report or share anything with any authority. Fee tracking is an optional module, off unless you switch it on. How you bill and account for fees is between you and your auditor.': 'Vovix உங்கள் பள்ளி உள்ளிடுவதை மட்டுமே சேமிக்கிறது. இது உங்கள் கணக்குப் புத்தகம் அல்ல; எந்த அதிகாரத்திடமும் நாங்கள் எதையும் தாக்கல் செய்வதோ, அறிக்கையிடுவதோ, பகிர்வதோ இல்லை. கட்டணப் பதிவு ஒரு விருப்பத் தொகுதி, நீங்கள் இயக்கும் வரை அணைந்திருக்கும். கட்டணம் எப்படி விதிப்பது, கணக்கு வைப்பது என்பது உங்களுக்கும் உங்கள் தணிக்கையாளருக்கும் இடையிலானது.',
+  'Vovix One · demo for Sri Sastha Driving School · all data shown is sample data': 'Vovix One · ஸ்ரீ சாஸ்தா டிரைவிங் ஸ்கூலுக்கான டெமோ · காட்டப்படும் அனைத்தும் மாதிரித் தரவு', 'Vovix Private Limited, Chennai': 'Vovix பிரைவேட் லிமிடெட், சென்னை',
+  // login
+  'Demo password:': 'டெமோ கடவுச்சொல்:', 'Show': 'காட்டு', 'Hide': 'மறை', 'Enter a valid email': 'சரியான மின்னஞ்சலை உள்ளிடவும்', 'Email or password is incorrect': 'மின்னஞ்சல் அல்லது கடவுச்சொல் தவறு', 'No OTP needed to log in.': 'உள்நுழைய OTP தேவையில்லை.',
+  'Reset password': 'கடவுச்சொல்லை மீட்டமை', 'We email a reset link. No SMS involved.': 'மீட்டமைப்பு இணைப்பை மின்னஞ்சலில் அனுப்புகிறோம். SMS இல்லை.', 'Send reset link': 'மீட்டமைப்பு இணைப்பை அனுப்பு', 'Check your email for the reset link. It expires in 30 minutes.': 'மீட்டமைப்பு இணைப்புக்கு உங்கள் மின்னஞ்சலைப் பாருங்கள். 30 நிமிடங்களில் காலாவதியாகும்.', 'Welcome back': 'மீண்டும் வருக', 'Reset link sent': 'மீட்டமைப்பு இணைப்பு அனுப்பப்பட்டது',
+  // scan / upload / documents
+  'Close': 'மூடு', 'Torch': 'டார்ச்', 'Torch on': 'டார்ச் இயக்கத்தில்', 'PDF, JPG or PNG. Select several files to capture in bulk. Each one goes to the queue and appears as it finishes.': 'PDF, JPG அல்லது PNG. மொத்தமாகப் பிடிக்க பல கோப்புகளைத் தேர்ந்தெடுக்கவும். ஒவ்வொன்றும் வரிசையில் சேர்ந்து முடிந்ததும் தோன்றும்.',
+  'Pick files from phone': 'போனிலிருந்து கோப்புகளைத் தேர்ந்தெடு', 'Add 3 sample files': '3 மாதிரிக் கோப்புகளைச் சேர்', 'Try an unsupported file (.docx)': 'ஆதரிக்கப்படாத கோப்பை முயற்சி (.docx)', 'Try a very large PDF (48 MB)': 'மிகப் பெரிய PDF-ஐ முயற்சி (48 MB)', 'Queue': 'வரிசை', 'No uploads yet.': 'இன்னும் பதிவேற்றங்கள் இல்லை.', 'Large file, this may take a minute.': 'பெரிய கோப்பு, ஒரு நிமிடம் ஆகலாம்.',
+  // review
+  'from Aadhaar': 'ஆதாரிலிருந்து', 'check': 'சரிபார்', 'encrypted': 'குறியாக்கம்', 'Stored securely. Only the last four digits are ever shown.': 'பாதுகாப்பாகச் சேமிக்கப்படுகிறது. கடைசி நான்கு இலக்கங்கள் மட்டுமே காட்டப்படும்.',
+  'Student consent captured': 'மாணவர் ஒப்புதல் பெறப்பட்டது', 'The student agreed to Vovix processing these documents for licence work (DPDP). Required before saving.': 'உரிமப் பணிக்காக இந்த ஆவணங்களை Vovix செயலாக்க மாணவர் ஒப்புக்கொண்டார் (DPDP). சேமிப்பதற்கு முன் கட்டாயம்.',
+  'Full name': 'முழுப் பெயர்', 'S/W/D of': 'தந்தை/கணவர் பெயர்', 'Date of birth': 'பிறந்த தேதி', 'Gender': 'பாலினம்', 'Present address': 'தற்போதைய முகவரி', 'Permanent address': 'நிரந்தர முகவரி', "Mobile (student's own)": 'மொபைல் (மாணவரின் சொந்த எண்)', 'Aadhaar': 'ஆதார்', 'Blood group': 'இரத்த வகை', 'Qualification': 'கல்வித் தகுதி', 'Class of vehicle': 'வாகன வகை',
+  'Drives the Aadhaar OTP. Must be the student’s number.': 'ஆதார் OTP இதற்கே வரும். மாணவரின் எண்ணாக இருக்க வேண்டும்.', 'Tick the consent box before saving': 'சேமிப்பதற்கு முன் ஒப்புதல் பெட்டியை டிக் செய்யவும்', 'Fill the required fields': 'கட்டாயப் புலங்களை நிரப்பவும்',
+  'Discard this document?': 'இந்த ஆவணத்தை நிராகரிக்கவா?', 'The scan and its extracted fields will be removed. This cannot be undone.': 'ஸ்கேனும் அதன் விவரங்களும் நீக்கப்படும். இதைத் திரும்பப் பெற முடியாது.', 'Keep': 'வைத்திரு', 'Discarded': 'நிராகரிக்கப்பட்டது', 'Zoom: pinch or double-tap on device': 'பெரிதாக்க: சாதனத்தில் பின்ச் அல்லது இருமுறை தட்டவும்',
+  // students / profile
+  'Name': 'பெயர்', 'Mobile': 'மொபைல்', 'Class': 'வகை', 'Enrollment no': 'பதிவு எண்', 'DOB': 'பிறந்த தேதி', 'Address': 'முகவரி', 'Scan → verify → Sarathi': 'ஸ்கேன் → சரிபார் → சாரதி',
+  'Enrolled': 'சேர்க்கப்பட்டது', 'Verified': 'சரிபார்க்கப்பட்டது', 'LL applied': 'LL விண்ணப்பித்தது', 'LL issued': 'LL வழங்கப்பட்டது', 'Training': 'பயிற்சி', 'DL applied': 'DL விண்ணப்பித்தது', 'DL issued': 'DL வழங்கப்பட்டது',
+  'Student': 'மாணவர்', 'Update': 'புதுப்பி', 'Profile': 'சுயவிவரம்', 'Edit profile': 'சுயவிவரத்தைத் திருத்து', 'Delete student': 'மாணவரை நீக்கு', 'Delete student?': 'மாணவரை நீக்கவா?', 'The row is removed from the table. The contact stays unless you remove it in Contacts.': 'வரிசை அட்டவணையிலிருந்து நீக்கப்படும். தொடர்புகளில் நீக்கும் வரை தொடர்பு இருக்கும்.', 'Delete': 'நீக்கு', 'Deleted': 'நீக்கப்பட்டது', 'set by Sarathi mark-done': 'சாரதி “முடிந்தது” குறிப்பால் அமையும்',
+  'Fees': 'கட்டணம்', 'optional module': 'விருப்பத் தொகுதி', 'Record a payment': 'கட்டணத்தைப் பதிவுசெய்', 'Received so far': 'இதுவரை பெற்றது', 'Payments': 'கட்டணங்கள்', 'No payments recorded yet.': 'இன்னும் கட்டணம் பதிவு செய்யப்படவில்லை.',
+  'Entered by you, kept in your account. Not a book of accounts; Vovix reports nothing anywhere.': 'நீங்கள் உள்ளிட்டது, உங்கள் கணக்கிலேயே. கணக்குப் புத்தகம் அல்ல; Vovix எங்கும் எதையும் அறிக்கையிடாது.',
+  'Amount (₹)': 'தொகை (₹)', 'Date': 'தேதி', 'Note (optional)': 'குறிப்பு (விருப்பம்)', 'e.g. Receipt no. 118': 'உதா. ரசீது எண் 118', 'You decide what to enter. This is your record, not Vovix’s.': 'எதை உள்ளிடுவது என்பது உங்கள் முடிவு. இது உங்கள் பதிவு, Vovix-இன் அல்ல.', 'Save': 'சேமி', 'Cancel': 'ரத்து',
+  'Off': 'அணைப்பு', 'On': 'இயக்கம்', 'Optional. Off unless you switch it on. Use it only if you want a simple record of what each student has paid.': 'விருப்பம். நீங்கள் இயக்கும் வரை அணைந்திருக்கும். ஒவ்வொரு மாணவரும் செலுத்தியதன் எளிய பதிவு வேண்டுமானால் மட்டும் பயன்படுத்தவும்.',
+  'Whatever you record stays private in your account. Vovix stores what your school enters; it is not your book of accounts, and we never file, report or share anything with any authority. How you bill and account for fees is between you and your auditor.': 'நீங்கள் பதிவு செய்வது உங்கள் கணக்கில் தனிப்பட்டதாகவே இருக்கும். Vovix உங்கள் பள்ளி உள்ளிடுவதைச் சேமிக்கிறது; இது உங்கள் கணக்குப் புத்தகம் அல்ல, எந்த அதிகாரத்திடமும் நாங்கள் எதையும் தாக்கல் செய்வதோ, அறிக்கையிடுவதோ, பகிர்வதோ இல்லை. கட்டணம் எப்படி விதிப்பது, கணக்கு வைப்பது என்பது உங்களுக்கும் உங்கள் தணிக்கையாளருக்கும் இடையிலானது.',
+  'Turn on': 'இயக்கு', 'Turn off': 'அணை', 'Fee tracking on for this school': 'இந்தப் பள்ளிக்கு கட்டணப் பதிவு இயக்கப்பட்டது', 'Fee tracking off. Existing entries are kept, hidden.': 'கட்டணப் பதிவு அணைக்கப்பட்டது. உள்ள பதிவுகள் மறைக்கப்பட்டு வைக்கப்படும்.',
+  // form 5 / sarathi sheet / copy
+  'Form 5 / 5A · ready to print': 'படிவம் 5 / 5A · அச்சிடத் தயார்', 'Form 5B · ready to print': 'படிவம் 5B · அச்சிடத் தயார்', 'Generated from the verified profile in one tap. Hand it to the student or print it.': 'சரிபார்க்கப்பட்ட சுயவிவரத்திலிருந்து ஒரே தட்டலில் உருவாக்கப்பட்டது. மாணவரிடம் கொடுக்கவும் அல்லது அச்சிடவும்.', 'Share PDF': 'PDF-ஐப் பகிர்', 'PDF shared via WhatsApp to the student (simulated)': 'மாணவருக்கு வாட்ஸ்அப் வழியாக PDF பகிரப்பட்டது (உருவகம்)',
+  'The phone cannot fill another website. Choose how the filling happens.': 'போன் வேறு இணையதளத்தை நிரப்ப முடியாது. எப்படி நிரப்புவது என்பதைத் தேர்வுசெய்யுங்கள்.',
+  'Assisted fill · Tier 1 (default)': 'உதவியுடன் நிரப்பு · அடுக்கு 1 (இயல்பு)', 'Open the Vovix helper in Chrome on the computer. Pick this student, click Fill. You do login, captcha, OTP, payment, submit.': 'கணினியில் Chrome-இல் Vovix உதவியைத் திறக்கவும். இந்த மாணவரைத் தேர்ந்தெடுத்து நிரப்பு கிளிக் செய்யவும். உள்நுழைவு, கேப்ட்சா, OTP, கட்டணம், சமர்ப்பிப்பு நீங்கள் செய்வீர்கள்.',
+  'Auto-fill attended · Tier 2': 'தானியங்கி, கண்காணிப்புடன் · அடுக்கு 2', 'The desktop helper types every screen and pauses at each human step. Falls back to Tier 1 if the page changed.': 'கணினி உதவி ஒவ்வொரு திரையையும் தட்டச்சு செய்து, மனிதப் படி ஒவ்வொன்றிலும் நிற்கும். பக்கம் மாறியிருந்தால் அடுக்கு 1-க்குத் திரும்பும்.',
+  'No computer: copy fields': 'கணினி இல்லை: புலங்களை நகலெடு', "Open Sarathi in this phone's browser and paste field by field.": 'இந்த போனின் உலாவியில் சாரதியைத் திறந்து புலம் புலமாக ஒட்டவும்.', 'Sent to your computer. Open the Vovix extension in Chrome.': 'உங்கள் கணினிக்கு அனுப்பப்பட்டது. Chrome-இல் Vovix நீட்டிப்பைத் திறக்கவும்.',
+  'Open Sarathi in your phone browser, then come back and copy each field. The phone cannot fill another website, so there is no auto-fill here.': 'உங்கள் போன் உலாவியில் சாரதியைத் திறந்து, திரும்பி வந்து ஒவ்வொரு புலத்தையும் நகலெடுக்கவும். போன் வேறு இணையதளத்தை நிரப்ப முடியாது, எனவே இங்கே தானியங்கி நிரப்பல் இல்லை.',
+  'Copy': 'நகலெடு', 'Copied': 'நகலெடுக்கப்பட்டது', 'Applicant name': 'விண்ணப்பதாரர் பெயர்', 'Relation name': 'உறவினர் பெயர்', 'Aadhaar is not listed: the student enters it on the portal and receives the OTP on their own phone.': 'ஆதார் பட்டியலில் இல்லை: மாணவர் போர்ட்டலில் அதை உள்ளிட்டு, தம் போனில் OTP பெறுவார்.', 'Copy blocked by the browser. Select the text and copy.': 'உலாவி நகலெடுப்பைத் தடுத்தது. உரையைத் தேர்ந்தெடுத்து நகலெடுக்கவும்.',
+  // contacts
+  'Select': 'தேர்ந்தெடு', 'Tag': 'குறிச்சொல்', 'Opt out': 'விலக்கு', 'Open student': 'மாணவரைத் திற', 'Remove contact': 'தொடர்பை நீக்கு', 'Contact removed': 'தொடர்பு நீக்கப்பட்டது', 'Apply': 'பயன்படுத்து', 'No matches.': 'பொருத்தம் இல்லை.',
+  'Columns: name, phone, tag. Sample below has one malformed row and one short number.': 'நெடுவரிசைகள்: name, phone, tag. கீழே உள்ள மாதிரியில் ஒரு தவறான வரிசையும் ஒரு குறுகிய எண்ணும் உள்ளன.', 'Import': 'இறக்குமதி',
+  'Add contact': 'தொடர்பைச் சேர்', 'Phone': 'தொலைபேசி', 'Prefilled with an existing number to show duplicate detection.': 'நகல் கண்டறிதலைக் காட்ட ஏற்கனவே உள்ள எண் முன்நிரப்பப்பட்டுள்ளது.', 'Already in contacts.': 'ஏற்கனவே தொடர்புகளில் உள்ளது.', 'Not a valid Indian mobile number. Not saved.': 'சரியான இந்திய மொபைல் எண் அல்ல. சேமிக்கப்படவில்லை.', 'Contact added': 'தொடர்பு சேர்க்கப்பட்டது',
+  // broadcast
+  'Template': 'செய்தி வார்ப்புரு', 'Approved templates only': 'அங்கீகரிக்கப்பட்ட வார்ப்புருக்கள் மட்டும்', 'utility template · approved': 'பயன்பாட்டு வார்ப்புரு · அங்கீகரிக்கப்பட்டது', 'marketing template · approved': 'சந்தைப்படுத்தல் வார்ப்புரு · அங்கீகரிக்கப்பட்டது', 'utility': 'பயன்பாடு', 'marketing': 'சந்தைப்படுத்தல்',
+  'Class reminder': 'வகுப்பு நினைவூட்டல்', 'Fee due': 'கட்டணம் நிலுவை', 'Festival offer': 'பண்டிகை சலுகை', 'Course': 'பாடம்', 'Time': 'நேரம்', 'Amount': 'தொகை', 'Due date': 'கடைசி தேதி', 'Last date': 'கடைசி நாள்', 'Discount': 'தள்ளுபடி', 'Preview': 'முன்னோட்டம்', 'Previous': 'முந்தையவை',
+  'Marketing template: ~7.5× the cost of a utility message and stricter consent. Only contacts who agreed to promotions should be in this audience.': 'சந்தைப்படுத்தல் வார்ப்புரு: பயன்பாட்டுச் செய்தியை விட சுமார் 7.5 மடங்கு செலவு, கடுமையான ஒப்புதல். விளம்பரங்களுக்கு ஒப்புக்கொண்ட தொடர்புகள் மட்டுமே இதில் இருக்க வேண்டும்.',
+  'all delivered': 'அனைத்தும் டெலிவரி', 'No opted-in contacts in this audience.': 'இந்தப் பார்வையாளர்களில் ஒப்புதல் அளித்த தொடர்புகள் இல்லை.', 'Approx': 'தோராயமாக', '+ GST': '+ ஜிஎஸ்டி', 'Confirm': 'உறுதிசெய்',
+  'Utility message at ₹0.115 each. Sent 1:1 from your own WhatsApp number.': 'ஒவ்வொன்றும் ₹0.115 பயன்பாட்டுச் செய்தி. உங்கள் சொந்த வாட்ஸ்அப் எண்ணிலிருந்து தனித்தனியாக அனுப்பப்படும்.', 'Marketing message. Only contacts who consented to promotions should receive it. Sent 1:1 from your own WhatsApp number.': 'சந்தைப்படுத்தல் செய்தி. விளம்பரங்களுக்கு ஒப்புக்கொண்ட தொடர்புகள் மட்டுமே பெற வேண்டும். உங்கள் சொந்த வாட்ஸ்அப் எண்ணிலிருந்து தனித்தனியாக அனுப்பப்படும்.',
+  'One private message per contact via the BSP.': 'ஒவ்வொரு தொடர்புக்கும் ஒரு தனிப்பட்ட செய்தி.', 'Paused: offline. Will resume when you reconnect.': 'இடைநிறுத்தம்: ஆஃப்லைன். இணைப்பு வந்ததும் தொடரும்.', 'Sent': 'அனுப்பியது', 'Delivered': 'டெலிவரி', 'Read': 'படித்தது', 'All opted-in contacts': 'ஒப்புதல் அளித்த அனைவரும்',
+  'Delivery and read counts arrive from the BSP status webhook over the next minutes.': 'டெலிவரி, படித்த எண்ணிக்கைகள் அடுத்த சில நிமிடங்களில் வந்து சேரும்.', 'New broadcast': 'புதிய ஒளிபரப்பு', 'Add contacts first. Broadcasts go only to people who opted in.': 'முதலில் தொடர்புகளைச் சேர்க்கவும். ஒப்புதல் அளித்தவர்களுக்கு மட்டுமே ஒளிபரப்பு.',
+  // site editor
+  'Business': 'வணிகம்', 'Contact': 'தொடர்பு', '+ Add a service': '+ சேவையைச் சேர்', 'Upload + crop': 'பதிவேற்று + வெட்டு', 'No photo': 'புகைப்படம் இல்லை', 'Photo added': 'புகைப்படம் சேர்க்கப்பட்டது', 'Large photos are compressed automatically.': 'பெரிய புகைப்படங்கள் தானாகச் சுருக்கப்படும்.', 'Phone is required to publish': 'வெளியிட தொலைபேசி கட்டாயம்',
+  'Unsaved changes · Publish to update the live page': 'சேமிக்கப்படாத மாற்றங்கள் · நேரலைப் பக்கத்தைப் புதுப்பிக்க வெளியிடு', 'Verifying domain… point a CNAME at sites.vovix.in': 'டொமைன் சரிபார்க்கப்படுகிறது… sites.vovix.in-க்கு CNAME வையுங்கள்', 'Domain verified · certificate issued': 'டொமைன் சரிபார்க்கப்பட்டது · சான்றிதழ் வழங்கப்பட்டது', 'Business name and phone are required': 'வணிகப் பெயரும் தொலைபேசியும் கட்டாயம்', 'www.yourschool.in': 'www.yourschool.in',
+  // field setup
+  'The details the app reads from each document. Set up once with Vovix; you can add more later.': 'ஒவ்வொரு ஆவணத்திலிருந்தும் ஆப் படிக்கும் விவரங்கள். Vovix-உடன் ஒருமுறை அமைக்கப்படும்; பின்னர் மேலும் சேர்க்கலாம்.', 'Read from Aadhaar': 'ஆதாரிலிருந்து படிக்கப்படும்', 'Entered by you': 'நீங்கள் உள்ளிடுவது', 'Required': 'கட்டாயம்', '+ Add a field': '+ புலத்தைச் சேர்', 'Add a field': 'புலத்தைச் சேர்', 'Label': 'பெயர்', 'Type': 'வகை', 'Add': 'சேர்',
+  // misc toasts
+  'Demo reset': 'டெமோ மீட்டமைக்கப்பட்டது', 'Back online. Queued items are sending.': 'மீண்டும் ஆன்லைன். வரிசையில் உள்ளவை அனுப்பப்படுகின்றன.', 'Original scan not available': 'அசல் ஸ்கேன் கிடைக்கவில்லை',
+  // extension panel
+  'Assisted fill · Tier 1': 'உதவியுடன் நிரப்பு · அடுக்கு 1', 'Students synced from phone': 'போனிலிருந்து ஒத்திசைந்த மாணவர்கள்', 'No verified students waiting. Verify one on the phone.': 'சரிபார்க்கப்பட்ட மாணவர்கள் காத்திருக்கவில்லை. போனில் ஒருவரைச் சரிபார்க்கவும்.',
+  'Tier 1 · one click': 'அடுக்கு 1 · ஒரே கிளிக்', 'Tier 2 · attended helper': 'அடுக்கு 2 · கண்காணிப்பு உதவி', 'Fill the open form': 'திறந்த படிவத்தை நிரப்பு', 'Fill again': 'மீண்டும் நிரப்பு', 'Filling…': 'நிரப்புகிறது…',
+  'Log in to Sarathi on the page first. The extension never logs in for you.': 'முதலில் பக்கத்தில் சாரதியில் உள்நுழையவும். நீட்டிப்பு உங்களுக்காக ஒருபோதும் உள்நுழையாது.', 'Pick a student above.': 'மேலே ஒரு மாணவரைத் தேர்ந்தெடுக்கவும்.',
+  'Types each field and checks it. Login, captcha, OTP, payment and Submit stay with you.': 'ஒவ்வொரு புலத்தையும் தட்டச்சு செய்து சரிபார்க்கும். உள்நுழைவு, கேப்ட்சா, OTP, கட்டணம், Submit உங்களிடமே.',
+  'Human-only steps': 'மனிதர் மட்டும் செய்யும் படிகள்', 'School login': 'பள்ளி உள்நுழைவு', 'Captcha': 'கேப்ட்சா', 'Aadhaar OTP (student)': 'ஆதார் OTP (மாணவர்)', 'Payment': 'கட்டணம்', 'Final submit': 'இறுதி சமர்ப்பிப்பு', 'you': 'நீங்கள்', 'done': 'முடிந்தது',
+  'Fields the helper fills': 'உதவி நிரப்பும் புலங்கள்', 'Simulate: portal changed a field': 'உருவகம்: போர்ட்டலில் ஒரு புலம் மாறியது', 'ok': 'சரி', 'typing': 'தட்டச்சு', 'not found': 'கிடைக்கவில்லை', '—': '—',
+  'Mark done → stage “LL applied”': 'முடிந்தது → நிலை “LL விண்ணப்பித்தது”', 'Start attended auto-fill': 'கண்காணிப்பு தானியங்கி நிரப்பலைத் தொடங்கு', 'Resume': 'தொடர்', 'Do the step on the page, then Resume': 'பக்கத்தில் படியைச் செய்து, பிறகு தொடர்', 'Fail safe to Tier 1': 'பாதுகாப்பாக அடுக்கு 1-க்கு',
+  'Runs on your computer while you watch, one student at a time, and pauses at every step that needs you.': 'நீங்கள் பார்த்துக்கொண்டிருக்கும்போது உங்கள் கணினியில் ஒவ்வொரு மாணவராக இயங்கி, உங்களைத் தேவைப்படும் ஒவ்வொரு படியிலும் நிற்கும்.',
+  'Open Sarathi driving-school enrollment': 'சாரதி ஓட்டுநர் பள்ளி சேர்க்கையைத் திற', 'Fee payment': 'கட்டணச் செலுத்தல்', 'Review the filled form': 'நிரப்பிய படிவத்தைச் சரிபார்', 'Submit (yours)': 'சமர்ப்பிப்பு (உங்களுடையது)',
+  'Log in to Sarathi on the page with the school credentials. The helper never does this.': 'பள்ளியின் சான்றுகளுடன் பக்கத்தில் சாரதியில் உள்நுழையவும். உதவி இதை ஒருபோதும் செய்யாது.', 'Solve the captcha on the page, then Resume.': 'பக்கத்தில் கேப்ட்சாவைத் தீர்த்து, பிறகு தொடர்.', 'The student enters the OTP sent to their own mobile. Confirm on the page, then Resume.': 'மாணவர் தம் மொபைலுக்கு வந்த OTP-ஐ உள்ளிடுவார். பக்கத்தில் உறுதிசெய்து, பிறகு தொடர்.', 'Complete the payment on the portal gateway, then Resume.': 'போர்ட்டல் கேட்வேயில் கட்டணத்தை முடித்து, பிறகு தொடர்.', 'Review and press Submit on the page. The helper never submits.': 'பக்கத்தில் சரிபார்த்து Submit அழுத்தவும். உதவி ஒருபோதும் சமர்ப்பிக்காது.',
+  'Stopped safely.': 'பாதுகாப்பாக நிறுத்தப்பட்டது.', "Page doesn't match the field map.": 'பக்கம் புல வரைபடத்துடன் பொருந்தவில்லை.',
+};
+const TA_RULES = [
+  [/^(\d+) of (\d+) rows$/, '$2 இல் $1 வரிசைகள்'],
+  [/^No matches for “(.+)”$/, '“$1” க்குப் பொருத்தம் இல்லை'],
+  [/^(\d+) fields$/, '$1 புலங்கள்'], [/^All (\d+)$/, 'அனைத்தும் $1'],
+  [/^(.+) · delivered$/, '$1 · டெலிவரி'],
+  [/^(.+) · (\d+) pages?$/, '$1 · $2 பக்கம்'], [/^(.+) · tap to zoom$/, '$1 · பெரிதாக்கத் தட்டவும்'],
+  [/^(\d+) pages merged into one document$/, '$1 பக்கங்கள் ஒரே ஆவணமாக இணைக்கப்பட்டன'],
+  [/^(\d+) need review · (\d+) captured$/, '$1 சரிபார்க்க வேண்டும் · $2 பிடிக்கப்பட்டது'],
+  [/^(\d+) pages? captured$/, '$1 பக்கம் பிடிக்கப்பட்டது'], [/^(\d+) files? queued$/, '$1 கோப்பு வரிசையில்'], [/^(.+) ready to review$/, '$1 சரிபார்க்கத் தயார்'],
+  [/^Unsupported file: (.+)\. Use PDF, JPG or PNG\.$/, 'ஆதரிக்கப்படாத கோப்பு: $1. PDF, JPG அல்லது PNG பயன்படுத்தவும்.'],
+  [/^(.+) is required$/, (m, a) => (TA_EXACT[a] || a) + ' கட்டாயம்'],
+  [/^Enrollment (\S+) · (.+)$/, 'பதிவு எண் $1 · $2'], [/^✓ (.+)$/, (m, a) => '✓ ' + (TA_EXACT[a] || a)],
+  [/^Stage: (.+)$/, (m, a) => 'நிலை: ' + (TA_EXACT[a] || a)], [/^(.+): stage → LL applied$/, '$1: நிலை → LL விண்ணப்பித்தது'],
+  [/^Sarathi application (\S+) submitted on (.+) by the operator\.$/, 'சாரதி விண்ணப்பம் $1 $2 அன்று ஆபரேட்டரால் சமர்ப்பிக்கப்பட்டது.'],
+  [/^Already submitted: (.+)$/, 'ஏற்கனவே சமர்ப்பிக்கப்பட்டது: $1'],
+  [/^Record a payment · (.+)$/, 'கட்டணத்தைப் பதிவுசெய் · $1'], [/^Recorded (.+)$/, '$1 பதிவு செய்யப்பட்டது'],
+  [/^(\d+) opted in of (\d+) · long-press a row to select$/, '$2 இல் $1 பேர் ஒப்புதல் · தேர்ந்தெடுக்க வரிசையை நீண்ட நேரம் அழுத்தவும்'], [/^(\d+) opted in of (\d+) · tap rows to select$/, '$2 இல் $1 பேர் ஒப்புதல் · தேர்ந்தெடுக்க வரிசைகளைத் தட்டவும்'],
+  [/^(\d+) selected$/, '$1 தேர்ந்தெடுக்கப்பட்டது'], [/^Tag (\d+) contacts$/, '$1 தொடர்புகளைக் குறி'], [/^Tagged (\d+) contacts “(.+)”$/, '$1 தொடர்புகள் “$2” எனக் குறிக்கப்பட்டன'], [/^(\d+) contacts opted out$/, '$1 தொடர்புகள் விலக்கப்பட்டன'],
+  [/^Source: (.+) · Tags: (.+) · Opt-in (on|off)$/, (m, a, b, c) => `மூலம்: ${({ record: 'ஆவணம்', csv: 'CSV', manual: 'கைமுறை', website: 'இணையதளம்' })[a] || a} · குறிச்சொற்கள்: ${b === 'none' ? 'இல்லை' : b} · ஒப்புதல் ${c === 'on' ? 'இயக்கம்' : 'அணைப்பு'}`],
+  [/^(.+) opted in$/, '$1 ஒப்புதல் அளித்தார்'], [/^(.+) opted out · excluded from broadcasts$/, '$1 விலகினார் · ஒளிபரப்புகளிலிருந்து விலக்கப்பட்டார்'],
+  [/^(\d+) imported(, (\d+) already existed)?$/, (m, a, b, c) => `${a} இறக்குமதி செய்யப்பட்டது${c ? `, ${c} ஏற்கனவே இருந்தன` : ''}`], [/^(\d+) rows failed: malformed or short number\. Not saved\.$/, '$1 வரிசைகள் தோல்வி: தவறான அல்லது குறுகிய எண். சேமிக்கப்படவில்லை.'],
+  [/^(\d+) recipients \(opt-in only\)( · (\d+) excluded \(opted out\))?$/, (m, a, b, c) => `${a} பெறுநர்கள் (ஒப்புதல் உள்ளவர்கள் மட்டும்)${c ? ` · ${c} விலக்கப்பட்டவர்கள்` : ''}`],
+  [/^(.+) · (\d+) excluded \(opted out\)$/, '$1 · $2 விலக்கப்பட்டவர்கள்'],
+  [/^Shown with (.+)\. Each person gets a private 1:1 message\.$/, '$1 உடன் காட்டப்படுகிறது. ஒவ்வொருவருக்கும் தனிப்பட்ட செய்தி.'],
+  [/^Send to (\d+) contacts\?$/, '$1 தொடர்புகளுக்கு அனுப்பவா?'], [/^Sending (.+)$/, (m, a) => (TA_EXACT[a] || a) + ' அனுப்பப்படுகிறது'], [/^(\d+) \/ (\d+) sent$/, '$2 இல் $1 அனுப்பப்பட்டது'],
+  [/^Report · (.+)$/, (m, a) => 'அறிக்கை · ' + (TA_EXACT[a] || a)], [/^(.+) · cost (.+) incl\. GST$/, (m, a, b) => (TA_EXACT[a] || a.replace(/^Tag: /, 'குறிச்சொல்: ')) + ' · செலவு ' + b + ' ஜிஎஸ்டி உட்பட'],
+  [/^(Show|Hide) failed \((\d+)\)$/, (m, a, b) => (a === 'Show' ? 'தோல்விகளைக் காட்டு' : 'தோல்விகளை மறை') + ` (${b})`], [/^(\d+) failed$/, '$1 தோல்வி'],
+  [/^Simulate a STOP reply from (.+)$/, '$1 இடமிருந்து STOP பதிலை உருவகப்படுத்து'], [/^“STOP” from (.+): opt-in turned off, excluded from future sends$/, '$1 இடமிருந்து “STOP”: ஒப்புதல் அணைக்கப்பட்டது, இனி அனுப்பப்படாது'], [/^Sent to (\d+)$/, '$1 பேருக்கு அனுப்பப்பட்டது'],
+  [/^(.+) · (\d+)\/(\d+) delivered · (.+)$/, '$1 · $2/$3 டெலிவரி · $4'], [/^(.+) · (\d+)\/(\d+) delivered$/, '$1 · $2/$3 டெலிவரி'],
+  [/^Not published yet\. Fill the details and tap (.+)\.$/, 'இன்னும் வெளியிடப்படவில்லை. விவரங்களை நிரப்பி $1 தட்டவும்.'], [/^Default: (.+)$/, 'இயல்பு: $1'], [/^Live at (.+)$/, '$1 இல் நேரலை'], [/^Compressed from (.+) to about (.+)$/, '$1 இலிருந்து சுமார் $2 ஆகச் சுருக்கப்பட்டது'],
+  [/^“(.+)” will now be read from every document$/, '“$1” இனி ஒவ்வொரு ஆவணத்திலிருந்தும் படிக்கப்படும்'],
+  [/^Same login as the phone · (.+)$/, 'போனின் அதே உள்நுழைவு · $1'], [/^Handed off from phone: (.+)$/, 'போனிலிருந்து ஒப்படைக்கப்பட்டது: $1'],
+  [/^(\S+) · (Verified|LL applied|Training|Enrolled|DL issued|LL issued|DL applied) · (.+)$/, (m, a, b, c) => `${a} · ${TA_EXACT[b] || b} · ${c}`],
+  [/^Type (\d+) fields from the profile \(read-back checked\)$/, 'சுயவிவரத்திலிருந்து $1 புலங்களைத் தட்டச்சு செய் (திரும்பப் படித்துச் சரிபார்க்கப்படும்)'],
+  [/^The “(.+)” field is not where it used to be on the portal\. Nothing was guessed\.(.*)$/, (m, a, b) => `“${TA_EXACT[a] || a}” புலம் போர்ட்டலில் முன்பிருந்த இடத்தில் இல்லை. எதுவும் யூகிக்கப்படவில்லை.${b ? ' ஏற்கனவே நிரப்பியவை வைக்கப்படும்; இதை கைமுறையாக முடிக்கவும்.' : ''}`],
+  [/^“(.+)” did not read back correctly\. Stopped\.$/, '“$1” சரியாகத் திரும்பப் படிக்கப்படவில்லை. நிறுத்தப்பட்டது.'],
+  [/^Fee tracking (On|Off)$/, (m, a) => 'கட்டணப் பதிவு ' + (a === 'On' ? 'இயக்கம்' : 'அணைப்பு')],
+];
+const TA_PARTS = [[' · from document', ' · ஆவணத்திலிருந்து'], [' · manual', ' · கைமுறை'], [' · website', ' · இணையதளம்'], ['(number not on WhatsApp)', '(எண் வாட்ஸ்அப்பில் இல்லை)'], [' changes', ' மாற்றங்கள்'], [' Finish the rest with one-click fill or by hand.', ' மீதியை ஒரே கிளிக் நிரப்பல் அல்லது கைமுறையாக முடிக்கவும்.']];
+function trText(s) {
+  const lead = s.match(/^\s*/)[0], trail = s.match(/\s*$/)[0]; const core = s.trim(); if (!core) return s;
+  if (TA_EXACT[core] !== undefined) return lead + TA_EXACT[core] + trail;
+  for (const [re, rep] of TA_RULES) { const m = core.match(re); if (m) return lead + (typeof rep === 'function' ? rep(...m) : core.replace(re, rep)) + trail; }
+  let out = core, hit = false; for (const [a, b] of TA_PARTS) if (out.includes(a)) { out = out.split(a).join(b); hit = true; }
+  return hit ? lead + out + trail : s;
+}
+function tr(s) { return S.lang === 'ta' ? trText(String(s)) : s; }
+function i18nPass(root, skip = []) {
+  if (!root) return;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); const nodes = []; let n; while ((n = walker.nextNode())) nodes.push(n);
+  for (const node of nodes) {
+    const p = node.parentElement; if (!p || p.closest('script,style') || skip.some(sel => p.closest(sel))) continue;
+    if (S.lang === 'ta') { if (node.__en === undefined) { const t2 = trText(node.nodeValue); if (t2 !== node.nodeValue) { node.__en = node.nodeValue; node.nodeValue = t2; } } }
+    else if (node.__en !== undefined) { node.nodeValue = node.__en; delete node.__en; }
+  }
+  root.querySelectorAll('[placeholder]').forEach(el => { if (skip.some(sel => el.closest(sel))) return; if (S.lang === 'ta') { if (el.__enph === undefined) { const t2 = trText(el.placeholder); if (t2 !== el.placeholder) { el.__enph = el.placeholder; el.placeholder = t2; } } } else if (el.__enph !== undefined) { el.placeholder = el.__enph; delete el.__enph; } });
+}
+
 /* ---------------- UI plumbing: toasts, sheets ---------------- */
 function toast(msg, kind = 'info', ms = 3000) {
   const host = $('#toasts'); if (!host) return;
-  const el = document.createElement('div'); el.className = 'toast ' + kind; el.setAttribute('role', 'status'); el.textContent = msg;
+  const el = document.createElement('div'); el.className = 'toast ' + kind; el.setAttribute('role', 'status'); el.textContent = tr(msg);
   host.appendChild(el);
   setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 220); }, ms);
 }
@@ -742,6 +900,7 @@ function renderSheet() {
   wrap.innerHTML = `<div class="sheet" role="dialog" aria-modal="true" data-stop="1"><div class="grab"></div>${S.sheet.html}</div>`;
   $('#screen').appendChild(wrap);
   if (S.sheet.after) S.sheet.after(wrap);
+  i18nPass(wrap);
 }
 
 /* ---------------- icons ---------------- */
@@ -775,6 +934,7 @@ function render() {
   if (S.view === 'desktop') renderDesk();
   if (S.view === 'public') renderPublic();
   $('#stageCaption').textContent = S.view === 'phone' ? 'The owner app on your phone' : S.view === 'desktop' ? 'Your computer: Chrome with the Vovix helper beside a simplified mock of the Sarathi screen' : 'Your public website, as a visitor sees it';
+  i18nPass(document.body, ['#screen', '#deskWrap', '#pubWrap', '#note', '#steps']);
 }
 const TABS = () => [
   { id: 'home', l: t('home'), ic: IC.home },
@@ -819,6 +979,7 @@ function renderPhone() {
     <div class="toasts" id="toasts" aria-live="polite"></div>`;
   afterRender();
   renderSheet();
+  i18nPass(sc);
 }
 
 /* ---- Login ---- */
@@ -1131,6 +1292,7 @@ function renderDesk() {
   $('#deskWrap').innerHTML = `<div class="desk-chrome"><div class="dtabs"><div class="dtab active">🛈 Sarathi driving-school services (mock)</div><div class="dtab">Vovix One</div></div>
   <div class="addr"><span style="font-size:12px;color:#777">‹ ›</span><div class="url">sarathi (demo stand-in) · driving school services · new enrollment</div><button class="extbtn" data-act="sar.ext" aria-label="Vovix extension" aria-expanded="${sar.extOpen}">V${students.length ? `<span class="badge">${students.length}</span>` : ''}</button></div></div>
   <div class="desk-body"><div class="portal"><div class="portal-head"><b>Sarathi Parivahan · Driving School (mock screen)</b><span class="mock">${sar.loggedIn ? 'Logged in: ' + esc(d.site.business_name) : 'Not logged in'} · demo stand-in</span></div><div class="portal-sub">Simplified stand-in for the Sarathi screen. The real screen is used once you share a screenshot of yours.</div>${portal}</div>${sar.extOpen ? ext : ''}</div>`;
+  i18nPass($('#deskWrap'), ['.portal']);
 }
 function renderExt(sar, students, st) {
   const tierTabs = `<div class="seg2" role="tablist"><button role="tab" data-act="sar.tier" data-v="1" aria-pressed="${sar.tier === 1}">Assisted fill · Tier 1</button><button role="tab" data-act="sar.tier" data-v="2" aria-pressed="${sar.tier === 2}">Auto-fill attended · Tier 2</button></div>`;
@@ -1184,10 +1346,11 @@ function renderControls() {
 }
 function renderSteps() {
   const groups = [...new Set(STEPS.map(s => s.g))];
-  $('#steps').innerHTML = groups.map(g => `<div class="grp"><h3>${esc(g)}</h3>${STEPS.map((s, i) => s.g === g ? `<button class="step" data-act="step.go" data-i="${i}" aria-current="${S.step === i}"><span class="n">${i + 1}</span><span><span class="t">${esc(s.title)}</span><br><span class="d">${esc(s.d)}</span></span></button>` : '').join('')}</div>`).join('');
+  const L = (st, k) => S.lang === 'ta' && STEPS_TA[st.id] && STEPS_TA[st.id][k] ? STEPS_TA[st.id][k] : st[k]; const G = g => S.lang === 'ta' ? (GROUP_TA[g] || g) : g;
+  $('#steps').innerHTML = groups.map(g => `<div class="grp"><h3>${esc(G(g))}</h3>${STEPS.map((s, i) => s.g === g ? `<button class="step" data-act="step.go" data-i="${i}" aria-current="${S.step === i}"><span class="n">${i + 1}</span><span><span class="t">${esc(L(s, 'title'))}</span><br><span class="d">${esc(L(s, 'd'))}</span></span></button>` : '').join('')}</div>`).join('');
   $('#prevStep').disabled = S.step === 0; $('#nextStep').disabled = S.step === STEPS.length - 1;
 }
-function renderNote() { const s = STEPS[S.step]; const i = STEPS.filter(x => x.g === s.g).indexOf(s) + 1; const n = STEPS.filter(x => x.g === s.g).length; $('#note').innerHTML = `<div class="kicker">${esc(s.g)} · ${i} of ${n}</div>${s.note}<div class="tags">${(s.tags || []).map(x => `<span class="tag ${x.startsWith('Guardrail') ? 'ok' : ''}">${esc(x)}</span>`).join('')}</div>`; }
+function renderNote() { const s = STEPS[S.step]; const i = STEPS.filter(x => x.g === s.g).indexOf(s) + 1; const n = STEPS.filter(x => x.g === s.g).length; const ta = S.lang === 'ta' && STEPS_TA[s.id]; const g = S.lang === 'ta' ? (GROUP_TA[s.g] || s.g) : s.g; $('#note').innerHTML = `<div class="kicker">${esc(g)} · ${S.lang === 'ta' ? `${n} இல் ${i}` : `${i} of ${n}`}</div>${ta ? ta.note : s.note}<div class="tags">${((ta && ta.tags) || s.tags || []).map(x => `<span class="tag">${esc(x)}</span>`).join('')}</div>`; }
 function goStep(i) {
   S.step = Math.max(0, Math.min(STEPS.length - 1, i)); const s = STEPS[S.step];
   S.menu = false; S.sheet = null; S.selectMode = false; S.sel = null;
