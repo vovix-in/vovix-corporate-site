@@ -91,6 +91,9 @@ input,select,textarea{font:inherit;color:inherit}
 .switch input:checked::after{transform:translateX(16px)}
 
 /* ---------- main layout ---------- */
+.promise{background:var(--accent-tint);color:var(--fg);font-size:14px}
+.promise .wrap{padding-block:10px;max-width:1280px}
+.promise b{color:var(--accent-deep)}
 .layout{display:grid;grid-template-columns:290px minmax(0,1fr);gap:28px;padding-block:24px 48px;align-items:start}
 .steps{position:sticky;top:calc(16px + env(safe-area-inset-top,0px));display:flex;flex-direction:column;gap:14px;max-height:calc(100vh - 32px);overflow:auto;padding-right:4px}
 .steps .grp{display:flex;flex-direction:column;gap:3px}
@@ -526,6 +529,8 @@ table.ptbl{border-collapse:separate;border-spacing:0;min-width:100%;font-size:14
   <div class="controls" id="controls"></div>
 </div></div>
 
+<div class="promise"><div class="wrap"><b>Your data is yours.</b> Vovix stores what your school enters. It is not your book of accounts, and we never file, report or share anything with any authority. Fee tracking is an optional module, off unless you switch it on. How you bill and account for fees is between you and your auditor.</div></div>
+
 <main class="wrap layout">
   <nav class="steps" id="steps" aria-label="Demo steps"></nav>
   <section class="stage">
@@ -576,7 +581,7 @@ const I18N = {
     noRecords: 'No records yet — scan or upload a document.', noContacts: 'Contacts build automatically from documents — or import a CSV.',
     selectTemplate: 'Choose a template', audience: 'Audience', all: 'All', recipients: '{n} recipients (opt-in only)',
     cantRead: "Couldn't read this one — enter manually or rescan.", savedRecords: 'Saved to Records', addedContacts: 'Added to Contacts',
-    savedStudents: 'Saved to Students', positionDoc: 'Position document in frame', done: 'Done', logout: 'Log out',
+    savedStudents: 'Saved to Students', positionDoc: 'Position document in frame', done: 'Done', logout: 'Log out', fees: 'Fee tracking', feesOff: 'Off · optional', feesOn: 'On',
     businessName: 'Business name', tagline: 'Tagline', about: 'About', services: 'Services', photo: 'Photo', phone: 'Phone',
     whatsapp: 'WhatsApp number', address: 'Address', mapLink: 'Map link', customDomain: 'Custom domain (optional)',
     stage: 'Licence stage', verifyStudent: 'Verify student', reviewDoc: 'Review document', copyFields: 'Copy fields for Sarathi',
@@ -593,7 +598,7 @@ const I18N = {
     noRecords: 'இன்னும் பதிவுகள் இல்லை — ஒரு ஆவணத்தை ஸ்கேன் செய்யவும் அல்லது பதிவேற்றவும்.', noContacts: 'ஆவணங்களிலிருந்து தொடர்புகள் தானாக உருவாகும் — அல்லது CSV இறக்குமதி செய்யவும்.',
     selectTemplate: 'டெம்ப்ளேட்டைத் தேர்வு செய்க', audience: 'பார்வையாளர்கள்', all: 'அனைவரும்', recipients: '{n} பெறுநர்கள் (ஒப்புதல் உள்ளவர்கள் மட்டும்)',
     cantRead: 'இதைப் படிக்க முடியவில்லை — கைமுறையாக உள்ளிடவும் அல்லது மீண்டும் ஸ்கேன் செய்யவும்.', savedRecords: 'பதிவுகளில் சேமிக்கப்பட்டது', addedContacts: 'தொடர்புகளில் சேர்க்கப்பட்டது',
-    savedStudents: 'மாணவர்களில் சேமிக்கப்பட்டது', positionDoc: 'ஆவணத்தை சட்டகத்தில் வைக்கவும்', done: 'முடிந்தது', logout: 'வெளியேறு',
+    savedStudents: 'மாணவர்களில் சேமிக்கப்பட்டது', positionDoc: 'ஆவணத்தை சட்டகத்தில் வைக்கவும்', done: 'முடிந்தது', logout: 'வெளியேறு', fees: 'கட்டணப் பதிவு', feesOff: 'அணைந்துள்ளது · விருப்பம்', feesOn: 'இயக்கத்தில்',
     businessName: 'வணிகப் பெயர்', tagline: 'முழக்கம்', about: 'எங்களைப் பற்றி', services: 'சேவைகள்', photo: 'புகைப்படம்', phone: 'தொலைபேசி',
     whatsapp: 'வாட்ஸ்அப் எண்', address: 'முகவரி', mapLink: 'வரைபட இணைப்பு', customDomain: 'சொந்த டொமைன் (விருப்பம்)',
     stage: 'உரிம நிலை', verifyStudent: 'மாணவரைச் சரிபார்', reviewDoc: 'ஆவணத்தைச் சரிபார்', copyFields: 'சாரதிக்காக புலங்களை நகலெடு',
@@ -656,7 +661,7 @@ const FIELD_MAP = [
 const S = {
   lang: 'en', mode: 'driving', offline: false, fresh: false, loggedIn: false, screen: 'login', view: 'phone',
   step: 0, menu: false, db: {}, draft: null, sel: null, selectMode: false, bc: null, sheet: null, rec: null, doc: null,
-  sar: null, ta: 'Tamil Nadu', adtc: false,
+  sar: null, ta: 'Tamil Nadu', adtc: false, fees: false,
 };
 const D = () => S.db[S.mode];
 
@@ -709,7 +714,7 @@ const STEPS = [
   { g: 'Enrol a student', id: 'upload', title: 'Upload documents', d: 'Photos or PDFs, many at once', view: 'phone', screen: 'upload', note: `<h2>Upload documents you already have</h2><p>Photos from WhatsApp or PDFs from a scanner. Pick several at once and they queue up.</p><ul><li><b>Pick files</b> opens your real file picker, or tap <b>Add 3 sample files</b>.</li><li>Try the wrong-file and large-file buttons to see how the app explains itself.</li></ul>`, tags: ['Bulk upload'] },
   { g: 'Enrol a student', id: 'review', title: 'Verify the student', d: 'Check, correct, confirm', view: 'phone', screen: 'review', note: `<h2>Verify before anything is saved</h2><p>The app never saves on its own. Every document comes to you first: each detail is filled in, anything it was unsure about is marked amber, and the Aadhaar number is shown only by its last four digits. The student's consent is ticked before saving.</p><ul><li>Fix the amber field. Clear a required field to see Save switch off.</li><li>Tick consent and tap <b>Save student</b>. A WhatsApp contact is created automatically.</li><li>From Documents, open <b>blurry-scan.jpg</b> to see what a bad scan looks like.</li></ul>`, tags: ['You confirm every student', 'Aadhaar kept private'], setup() { const d = D().docs.find(x => x.id === 'd_low'); if (d && !d.recordId) openReview(d.id); else { const any = D().docs.find(x => x.status === 'needs_review'); if (any) openReview(any.id); else S.screen = 'documents'; } } },
   { g: 'Enrol a student', id: 'records', title: 'Students', d: 'Everyone, with licence stage', view: 'phone', screen: 'records', note: `<h2>All your students in one place</h2><p>One row per student with their licence stage, mobile, vehicle class and enrollment number. Search by name or number.</p><ul><li>Search, scroll the table sideways, tap a row to open the student.</li></ul>`, tags: ['Search', 'Licence stage at a glance'] },
-  { g: 'Licence paperwork', id: 'student', title: 'Student profile', d: 'Stage tracker, actions', view: 'phone', screen: 'record', note: `<h2>The student's profile</h2><p>Everything verified from the scan, the licence stage from enrolment to DL, and the two actions you do most: Form 5 and Sarathi.</p><ul><li>Tap <b>Update</b> next to the stage to move a student along.</li><li>Open <b>Form 5 PDF</b> and <b>Send to Sarathi</b> from here (next steps).</li></ul>`, tags: ['Enrolled → LL → DL'], setup() { const r = D().records.find(x => x.stage === 'Verified'); S.rec = r ? r.id : D().records[0].id; } },
+  { g: 'Licence paperwork', id: 'student', title: 'Student profile', d: 'Stage tracker, actions', view: 'phone', screen: 'record', note: `<h2>The student's profile</h2><p>Everything verified from the scan, the licence stage from enrolment to DL, and the two actions you do most: Form 5 and Sarathi.</p><ul><li>Tap <b>Update</b> next to the stage to move a student along.</li><li>Open <b>Form 5 PDF</b> and <b>Send to Sarathi</b> from here (next steps).</li><li>Fee tracking is an optional module and is <b>off by default</b>. Turn it on from the ⋮ menu on Home to see a Fees card here. Whatever you enter stays in your account; Vovix is not your book of accounts and reports nothing anywhere.</li></ul>`, tags: ['Enrolled → LL → DL'], setup() { const r = D().records.find(x => x.stage === 'Verified'); S.rec = r ? r.id : D().records[0].id; } },
   { g: 'Licence paperwork', id: 'form5', title: 'Form 5 in one tap', d: 'Ready to print or share', view: 'phone', screen: 'record', note: `<h2>Form 5 in one tap</h2><p>The driving certificate is filled from the verified profile and ready to print or send to the student on WhatsApp. No retyping, no blank forms.</p><ul><li>Tap <b>Form 5 PDF</b> on the profile.</li><li>Turn on <b>Our school is ADTC-accredited</b> above to see Form 5B instead. For a regular school the form carries a note that it does not exempt the test.</li></ul>`, tags: ['Print or WhatsApp'], setup() { const r = D().records.find(x => x.stage === 'Verified'); S.rec = r ? r.id : D().records[0].id; } },
   { g: 'Licence paperwork', id: 'send', title: 'Send to Sarathi', d: 'Choose how it gets filled', view: 'phone', screen: 'record', note: `<h2>Send to Sarathi from the phone</h2><p>A phone app cannot type into the government website, so the phone hands the student over to your computer, where the Vovix helper fills the Sarathi screen for you.</p><ul><li>Tap <b>Send to Sarathi</b> and pick <b>Assisted fill</b>. The demo switches to the computer view.</li><li>The third option is for days with no computer nearby.</li></ul>`, tags: ['Phone → computer handoff'], setup() { const r = D().records.find(x => x.stage === 'Verified' && !x.sarathi); S.rec = r ? r.id : D().records[0].id; } },
   { g: 'Licence paperwork', id: 'tier1', title: 'Sarathi on your computer', d: 'One click fills the form', view: 'desktop', screen: 'record', note: `<h2>Sarathi on your computer</h2><p>You log in to Sarathi as usual. The Vovix helper in Chrome shows the students sent from the phone. Pick one, click <b>Fill</b>, and every field is typed in and checked. Login, captcha, the student's OTP, payment and the final Submit always stay in your hands.</p><ul><li>Click <b>I've logged in</b>, pick a student, click <b>Fill</b>.</li><li>Type the captcha (K7P4), confirm the student's OTP, mark payment, Submit.</li><li>Click <b>Mark done</b>: the student's stage moves to “LL applied” on the phone.</li><li>Try <b>Simulate: portal changed a field</b> to see it stop safely instead of guessing.</li></ul>`, tags: ['You stay in control', 'Nothing guessed'], setup() { sarState().tier = 1; } },
@@ -805,7 +810,7 @@ function renderPhone() {
     case 'copyfields': appbar = bar(t('copyFields'), '', 'nav.record'); body = viewCopyFields(); break;
   }
   const tabs = noTabs ? '' : `<nav class="tabbar" aria-label="Tabs">${TABS().map(tb => `<button class="tab" data-act="nav.${tb.id}" ${TAB_OF[S.screen] === tb.id ? 'aria-current="page"' : ''}>${tb.ic}<span>${tb.l}</span></button>`).join('')}</nav>`;
-  const menu = S.menu ? `<div class="menu" role="menu"><button role="menuitem" data-act="lang.toggle">${t('language')}<span class="cap">${S.lang === 'ta' ? 'தமிழ்' : 'English'}</span></button><button role="menuitem" data-act="nav.fields">${t('fieldSetup')}<span class="cap">${D().fields.length} fields</span></button><button role="menuitem" data-act="nav.documents">${t('documents')}<span class="cap">${D().docs.length}</span></button><button role="menuitem" data-act="auth.logout">${t('logout')}</button></div>` : '';
+  const menu = S.menu ? `<div class="menu" role="menu"><button role="menuitem" data-act="lang.toggle">${t('language')}<span class="cap">${S.lang === 'ta' ? 'தமிழ்' : 'English'}</span></button><button role="menuitem" data-act="fees.open">${t('fees')}<span class="cap">${S.fees ? t('feesOn') : t('feesOff')}</span></button><button role="menuitem" data-act="nav.fields">${t('fieldSetup')}<span class="cap">${D().fields.length} fields</span></button><button role="menuitem" data-act="nav.documents">${t('documents')}<span class="cap">${D().docs.length}</span></button><button role="menuitem" data-act="auth.logout">${t('logout')}</button></div>` : '';
   sc.innerHTML = `<div class="statusbar"><span>9:41</span><div class="notch"></div><span>${S.offline ? '✈︎' : '▲'} ▮▮▮ 86%</span></div>
     ${S.offline && S.loggedIn ? `<div class="offline" role="status">${t('offline')}</div>` : ''}
     ${appbar}${menu}
@@ -969,7 +974,15 @@ function viewRecord() {
     <button class="pbtn secondary" data-act="student.form5">${IC.pdf} ${t('form5')}</button>
   </div>
   <div class="sect"><div class="h2" style="margin-bottom:10px">Profile</div><div class="card"><dl class="kv">${D().fields.map(f => `<dt>${esc(f.label)}</dt><dd>${f.type === 'secure' ? `<span class="num">•••• •••• ${esc(String(r.fields[f.key] || '').slice(-4))}</span>` : f.type === 'phone' ? `<span class="num">${fmtPhone(r.fields[f.key])}</span>` : esc(r.fields[f.key] || '—')}</dd>`).join('')}</dl></div></div>
+  ${S.fees ? feesCard(r) : ''}
   <div style="display:grid;gap:10px;margin-top:16px"><button class="pbtn secondary" data-act="record.edit">Edit profile</button><button class="pbtn danger" data-act="record.delete">Delete student</button></div>`;
+}
+function feesCard(r) {
+  const pays = r.payments || []; const total = pays.reduce((a, p) => a + p.amount, 0);
+  return `<div class="sect"><div class="sect-h"><div class="h2">Fees <span class="chip neutral" style="margin-left:6px">optional module</span></div><button class="pbtn ghost" style="width:auto;height:36px;padding:0 10px;font-size:14px" data-act="fees.record">Record a payment</button></div>
+  <div class="card"><dl class="kv"><dt>Received so far</dt><dd class="num">${inr(total)}</dd><dt>Payments</dt><dd class="num">${pays.length}</dd></dl>
+  ${pays.length ? `<div class="list" style="margin-top:12px;box-shadow:none;border:1px solid var(--p-line)">${pays.map(p => `<div class="copyrow"><div class="main"><div class="v num">${inr(p.amount)}</div><div class="k">${esc(p.date)}${p.note ? ' · ' + esc(p.note) : ''}</div></div></div>`).join('')}</div>` : `<p class="cap" style="margin-top:10px">No payments recorded yet.</p>`}
+  <p class="cap" style="margin-top:10px">Entered by you, kept in your account. Not a book of accounts; Vovix reports nothing anywhere.</p></div></div>`;
 }
 function form5Html(r) {
   const label = S.adtc ? 'FORM 5B' : 'FORM 5';
@@ -1255,11 +1268,17 @@ const ACT = {
   'step.go': (a) => goStep(+a.dataset.i), 'chap.go': (a) => { const i = STEPS.findIndex(x => x.g === a.dataset.g); goStep(i); history.replaceState(null, '', '#' + STEPS[S.step].id); }, 'step.prev': () => goStep(S.step - 1), 'step.next': () => goStep(S.step + 1),
   'mode.set': (a) => { S.mode = a.dataset.v; S.rec = null; S.doc = null; S.bc = null; S.sel = null; S.selectMode = false; S.menu = false; if (S.screen === 'record' || S.screen === 'review' || S.screen === 'copyfields') S.screen = 'records'; if (S.view === 'desktop' && S.mode !== 'driving') S.view = 'phone'; render(); },
   'lang.set': (a) => { S.lang = a.dataset.v; document.documentElement.lang = S.lang; render(); },
+  'fees.open': () => { S.menu = false; renderPhone(); openSheet(`<h3>${t('fees')} <span class="chip ${S.fees ? 'ok' : 'neutral'}">${S.fees ? 'On' : 'Off'}</span></h3><p class="cap">Optional. Off unless you switch it on. Use it only if you want a simple record of what each student has paid.</p>
+    <div class="banner" style="margin-top:12px"><span>Whatever you record stays private in your account. Vovix stores what your school enters; it is not your book of accounts, and we never file, report or share anything with any authority. How you bill and account for fees is between you and your auditor.</span></div>
+    <div class="acts"><button class="pbtn secondary" style="flex:1" data-act="sheet.close">Close</button><button class="pbtn primary" style="flex:1" data-act="fees.toggle">${S.fees ? 'Turn off' : 'Turn on'}</button></div>`); },
+  'fees.toggle': () => { S.fees = !S.fees; closeSheet(); renderPhone(); toast(S.fees ? 'Fee tracking on for this school' : 'Fee tracking off. Existing entries are kept, hidden.', 'info', 3000); },
+  'fees.record': () => { const r = D().records.find(x => x.id === S.rec); openSheet(`<h3>Record a payment · ${esc(r.fields.full_name)}</h3><div class="field"><label for="pay_amt">Amount (₹)</label><input class="inp num" id="pay_amt" type="tel" inputmode="numeric" value="2500"></div><div class="field"><label for="pay_date">Date</label><input class="inp" id="pay_date" value="${today()}"></div><div class="field"><label for="pay_note">Note (optional)</label><input class="inp" id="pay_note" placeholder="e.g. Receipt no. 118"></div><p class="cap" style="margin-top:10px">You decide what to enter. This is your record, not Vovix’s.</p><div class="acts"><button class="pbtn secondary" style="flex:1" data-act="sheet.close">Cancel</button><button class="pbtn primary" style="flex:1" data-act="fees.record2">Save</button></div>`); },
+  'fees.record2': () => { const r = D().records.find(x => x.id === S.rec); const amt = Number(($('#pay_amt').value || '').replace(/[^\d.]/g, '')); if (!amt) { $('#pay_amt').classList.add('error'); return; } (r.payments = r.payments || []).push({ amount: amt, date: $('#pay_date').value.trim() || today(), note: $('#pay_note').value.trim() }); closeSheet(); renderPhone(); toast(`Recorded ${inr(amt)}`, 'ok'); },
   'lang.toggle': () => { S.lang = S.lang === 'en' ? 'ta' : 'en'; document.documentElement.lang = S.lang; S.menu = false; render(); },
   'offline.toggle': (a) => { S.offline = a.checked; render(); if (S.offline) toast(t('offline'), 'info'); else toast('Back online. Queued items are sending.', 'ok'); },
   'fresh.toggle': (a) => { S.fresh = a.checked; render(); },
   'adtc.toggle': (a) => { S.adtc = a.checked; render(); },
-  'demo.reset': () => { seed('driving'); S.sar = null; S.bc = null; S.rec = null; S.doc = null; S.fresh = false; S.offline = false; S.sel = null; S.selectMode = false; S.q = ''; S.cq = ''; S.scanPages = 0; goStep(0); toast('Demo reset', 'ok'); },
+  'demo.reset': () => { seed('driving'); S.fees = false; S.sar = null; S.bc = null; S.rec = null; S.doc = null; S.fresh = false; S.offline = false; S.sel = null; S.selectMode = false; S.q = ''; S.cq = ''; S.scanPages = 0; goStep(0); toast('Demo reset', 'ok'); },
   'menu.toggle': () => { S.menu = !S.menu; renderPhone(); },
   'sheet.close': (a, e) => { if (a.id === 'sheetHost' && e.target.closest('[data-stop]')) return; closeSheet(); },
   'auth.logout': () => { S.loggedIn = false; S.menu = false; S.screen = 'login'; renderPhone(); },
