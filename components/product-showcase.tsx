@@ -2,13 +2,13 @@
 
 import { useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
-import { ScanLine, MessageSquare, Activity, Check, ArrowRight } from "lucide-react";
+import { Factory, MessageSquare, Activity, Check, ArrowRight } from "lucide-react";
 import { Button, Chip } from "./ui";
-import { LensDemo, OneViewDemo, EdgeDemo } from "./product-demos";
+import { PayrollDemo, OneViewDemo, EdgeDemo } from "./product-demos";
 import { SHOWCASE } from "./product-data";
 
-const ICONS = { lens: ScanLine, oneview: MessageSquare, edge: Activity } as const;
-const DEMOS = { lens: LensDemo, oneview: OneViewDemo, edge: EdgeDemo } as const;
+const ICONS = { payroll: Factory, oneview: MessageSquare, edge: Activity } as const;
+const DEMOS = { payroll: PayrollDemo, oneview: OneViewDemo, edge: EdgeDemo } as const;
 
 export function ProductShowcase() {
   const [active, setActive] = useState(0);

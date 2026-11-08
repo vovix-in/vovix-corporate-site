@@ -15,7 +15,7 @@ const TO = "admin@vovix.in";
 const TOPICS = [
   "Workflow automation", "AI document processing", "Data pipelines", "API & system integration",
   "Web data ingestion", "Custom software / internal tools", "White-label partnership",
-  "VOVIX Lens", "VOVIX OneView", "VOVIX Edge", "Something else",
+  "VOVIX Payroll", "VOVIX OneView", "VOVIX Edge", "Something else",
 ];
 
 type Errors = Partial<Record<"name" | "email" | "message", string>>;

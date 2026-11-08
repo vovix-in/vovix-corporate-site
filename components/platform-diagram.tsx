@@ -1,4 +1,4 @@
-import { FileText, MessageCircle, LineChart, Database, ScanLine, MessageSquare, Activity, Workflow } from "lucide-react";
+import { FileText, MessageCircle, LineChart, Database, Factory, MessageSquare, Activity, Workflow } from "lucide-react";
 
 /* Platform diagram (Figma: "Platform diagram").
    Inputs → one engine (5 stages) → what runs on it. The dashed
@@ -6,7 +6,7 @@ import { FileText, MessageCircle, LineChart, Database, ScanLine, MessageSquare, 
    CSS only, and still under prefers-reduced-motion.                  */
 
 const INPUTS = [
-  { i: FileText, h: "Documents", s: "Invoices · statements · KYC" },
+  { i: FileText, h: "Documents", s: "Punch logs · statements · forms" },
   { i: MessageCircle, h: "Messages", s: "WhatsApp · email" },
   { i: LineChart, h: "Market data", s: "Prices · economic events" },
   { i: Database, h: "Systems", s: "APIs · databases · files" },
@@ -15,11 +15,11 @@ const STAGES = [
   ["01", "Ingest", "Inbox, upload, API, schedule"],
   ["02", "Understand", "OCR, AI extraction, classification"],
   ["03", "Validate", "Business rules, confidence, human review"],
-  ["04", "Deliver", "Tally, ERP, WhatsApp, MT5, webhooks"],
+  ["04", "Deliver", "Bank files, challans, WhatsApp, MT5, webhooks"],
   ["05", "Monitor", "Logs, retries, alerts, audit trail"],
 ];
 const OUTPUTS = [
-  { i: ScanLine, h: "VOVIX Lens", s: "Documents → TallyPrime", href: "https://lens.vovix.in/" },
+  { i: Factory, h: "VOVIX Payroll", s: "Payroll → proven compliance", href: "/products#payroll" },
   { i: MessageSquare, h: "VOVIX OneView", s: "Research on WhatsApp", href: "/products#oneview" },
   { i: Activity, h: "VOVIX Edge", s: "Risk-controlled forex on MT5", href: "https://edge.vovix.in/" },
   { i: Workflow, h: "Your workflow", s: "Custom & white-label builds", href: "/services" },

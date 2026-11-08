@@ -18,10 +18,10 @@ const SLIDES: { photo: PhotoName; eyebrow: string; title: [string, string, strin
     cta: { l: "Explore Our Solutions", href: "#products" }, thumb: "Intelligence that automates business",
   },
   {
-    photo: "lens-desk", eyebrow: "VOVIX Lens · Live",
-    title: ["From a pile of invoices to ", "balanced", " TallyPrime vouchers."],
-    body: "Lens reads invoices, statements and KYC in 40+ languages, checks GSTIN, HSN and tax math, and exports TallyPrime XML, Excel or JSON.",
-    cta: { l: "Explore VOVIX Lens", href: "https://lens.vovix.in/" }, thumb: "From invoice to TallyPrime",
+    photo: "payroll-desk", eyebrow: "VOVIX Payroll · Early access",
+    title: ["Your factory's payroll, ", "run", " and proven every month."],
+    body: "Vovix runs the month and you approve it. PF, ESI, PT, LWF and TDS each carry their evidence, workers get Tamil payslips, and the inspector gets a proof pack.",
+    cta: { l: "Discover VOVIX Payroll", href: "/products#payroll" }, thumb: "Payroll, run and proven",
   },
   {
     photo: "chennai", eyebrow: "Engineering services",

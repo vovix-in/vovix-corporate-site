@@ -100,7 +100,7 @@ export function AgentOrchestra() {
 
 /* ── What we can build ────────────────────────────────────────── */
 export const AGENT_TYPES = [
-  { icon: FileText, name: "Document agents", body: "Read invoices, statements and contracts; extract, validate and post them into Tally or your ERP without manual keying.", chip: "Lens engine" },
+  { icon: FileText, name: "Document agents", body: "Read invoices, statements and contracts; extract, validate and post them into Tally or your ERP without manual keying.", chip: "Document pipeline" },
   { icon: Scale, name: "Reconciliation agents", body: "Match ledgers, bank feeds and vendor statements overnight. They surface only the exceptions that need a person.", chip: "Scheduled" },
   { icon: Radar, name: "Monitoring agents", body: "Watch portals, filings and price feeds. They tell you when something changed and what changed — not that a job ran.", chip: "Event-driven" },
   { icon: Headphones, name: "Support agents", body: "Answer on WhatsApp, email or web with context from your own systems, and hand off to a human with the thread intact.", chip: "OneView pattern" },

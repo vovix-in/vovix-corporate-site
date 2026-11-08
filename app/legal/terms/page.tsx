@@ -16,7 +16,7 @@ export default function Page() {
       <Section>
         <Prose>
           <div className="mb-8 rounded-card border border-line bg-ground-sub p-5 text-small text-ink-secondary">
-            <strong className="font-semibold text-ink">Updates:</strong> We may revise these terms from time to time. The version on this page is the one that applies when you use the site. Product or subscription terms for specific applications may be published separately (for example on <a className="font-semibold text-brand-ink hover:underline" href="https://lens.vovix.in/" target="_blank" rel="noopener noreferrer">lens.vovix.in</a>) where they apply.
+            <strong className="font-semibold text-ink">Updates:</strong> We may revise these terms from time to time. The version on this page is the one that applies when you use the site. Product or subscription terms for specific applications may be published separately (for example on <a className="font-semibold text-brand-ink hover:underline" href="https://payroll.vovix.in/" target="_blank" rel="noopener noreferrer">payroll.vovix.in</a>) where they apply.
           </div>
           <h2>No Professional Advice</h2>
           <p>VOVIX builds software tools to automate tasks and support operational decisions for businesses. Corporate-site content is general in nature and does not constitute legal, tax, accounting, or other professional advice tailored to your situation unless you have a separate written agreement with us.</p>

@@ -2,13 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
-  ArrowRight, ArrowUpRight, ChevronDown, Menu, X, ScanLine, MessageSquare, Activity,
+  ArrowRight, ArrowUpRight, ChevronDown, Menu, X, Factory, MessageSquare, Activity,
   Workflow, ScanText, Database, Plug, Radar, LayoutDashboard, Layers,
 } from "lucide-react";
 import { Button, Logo } from "./ui";
 
 export const PRODUCTS = [
-  { name: "VOVIX Lens", desc: "Invoices and documents to TallyPrime, ERP or Excel", href: "https://lens.vovix.in/", icon: ScanLine },
+  { name: "VOVIX Payroll", desc: "Managed payroll and statutory compliance for Tamil Nadu factories", href: "/products#payroll", icon: Factory },
   { name: "VOVIX OneView", desc: "Company research inside WhatsApp", href: "/products#oneview", icon: MessageSquare },
   { name: "VOVIX Edge", desc: "Risk-controlled forex automation on MT5", href: "https://edge.vovix.in/", icon: Activity },
 ];
@@ -87,11 +87,11 @@ export function Navbar() {
     <>
       {/* Announcement — a real, current product fact, not a promo */}
       <div className="on-dark bg-navy text-white">
-        <a href="https://lens.vovix.in/" target="_blank" rel="noopener noreferrer"
+        <a href="/products#payroll"
            className="shell flex items-center justify-center gap-3 py-2.5 text-[13px] sm:text-small">
           <span className="rounded bg-brand-fill px-1.5 py-px font-mono text-[10.5px] font-bold text-navy">NEW</span>
-          <span className="truncate text-white/90">VOVIX Lens exports TallyPrime XML with GSTIN, HSN and ITC checks built in</span>
-          <span className="hidden shrink-0 font-semibold text-brand-fill sm:inline">Try it →</span>
+          <span className="truncate text-white/90">VOVIX Payroll runs your factory&rsquo;s payroll every month, with PF, ESI, PT, LWF and TDS proven</span>
+          <span className="hidden shrink-0 font-semibold text-brand-fill sm:inline">Learn more →</span>
         </a>
       </div>
 
@@ -112,7 +112,7 @@ export function Navbar() {
             </div>
 
             <div className="hidden items-center gap-5 lg:flex">
-              <a href="https://lens.vovix.in/" target="_blank" rel="noopener noreferrer" className="text-[15px] font-semibold text-ink hover:text-brand-ink">Try VOVIX Lens</a>
+              <a href="/products#payroll" className="text-[15px] font-semibold text-ink hover:text-brand-ink">VOVIX Payroll</a>
               <Button href="/contact" size="sm" className="!px-4 !py-2.5">Discuss Your Project</Button>
             </div>
 
@@ -147,10 +147,10 @@ export function Navbar() {
                   ))}
                 </ul>
               </div>
-              <a href="https://lens.vovix.in/" target="_blank" rel="noopener noreferrer" className="on-dark group flex flex-col justify-between rounded-card bg-navy p-6 text-white">
+              <a href="/products#payroll" className="on-dark group flex flex-col justify-between rounded-card bg-navy p-6 text-white">
                 <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-brand-fill">Featured</span>
-                <span className="mt-6 text-[19px] font-semibold leading-snug">From a purchase invoice to a balanced TallyPrime voucher.</span>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-small font-semibold text-brand-fill">Open VOVIX Lens <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" aria-hidden /></span>
+                <span className="mt-6 text-[19px] font-semibold leading-snug">Payroll run by Vovix, approved by you, every filing with its evidence.</span>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-small font-semibold text-brand-fill">See VOVIX Payroll <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" aria-hidden /></span>
               </a>
             </div>
           </div>
@@ -194,7 +194,7 @@ export function Navbar() {
               <a key={l} href={h} onClick={() => setSheet(false)} className="py-3 text-body font-semibold text-ink">{l}</a>
             ))}
             <Button href="/contact" size="lg" className="mt-4 w-full">Discuss Your Project</Button>
-            <Button href="https://lens.vovix.in/" size="lg" variant="secondary" className="mt-3 w-full">Try VOVIX Lens</Button>
+            <Button href="/products#payroll" size="lg" variant="secondary" className="mt-3 w-full">See VOVIX Payroll</Button>
           </div>
         </div>
       </header>

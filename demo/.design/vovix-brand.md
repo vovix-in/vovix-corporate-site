@@ -8,8 +8,8 @@
 ## 1. Company
 
 - **Name:** Vovix Pvt Ltd
-- **Domain:** vovix.in · app domain `lens.vovix.in`
-- **Primary product:** **Vovix Lens** — enterprise document intelligence platform.
+- **Domain:** vovix.in · app domains `payroll.vovix.in` (admin) and `my.vovix.in` (employee)
+- **Primary product:** **Vovix Payroll** — managed payroll, compliance and workforce operations for Tamil Nadu factories.
   Crawls public sources (NSE, BSE, SEC EDGAR, company IR sites), downloads PDFs,
   parses + OCRs them, and exports structured rows to Sheets / Excel / API.
 - **Buyer:** Equity research analysts, financial data ops teams, compliance teams,

@@ -16,7 +16,7 @@ export default function Page() {
       <Section>
         <Prose>
           <div className="mb-8 rounded-card border border-line bg-ground-sub p-5 text-small text-ink-secondary">
-            Product-specific privacy terms may apply on <a className="font-semibold text-brand-ink hover:underline" href="https://lens.vovix.in/" target="_blank" rel="noopener noreferrer">lens.vovix.in</a> where relevant.
+            Product-specific privacy terms may apply on <a className="font-semibold text-brand-ink hover:underline" href="https://payroll.vovix.in/" target="_blank" rel="noopener noreferrer">payroll.vovix.in</a> where relevant.
           </div>
           <h2>Data we may collect</h2>
           <ul>

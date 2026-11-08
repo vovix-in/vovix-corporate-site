@@ -1,21 +1,22 @@
 /* Shared product copy — server-safe (no "use client"), used by the
    homepage showcase and the /products page. Claims here are checked
-   against lens.vovix.in and edge.vovix.in; keep them in sync. */
+   against payroll.vovix.in and edge.vovix.in; keep them in sync. */
 export const SHOWCASE = [
   {
-    id: "lens", name: "VOVIX Lens", tag: "Document intelligence",
-    status: "Live", live: true,
-    title: "Turn business documents into verified accounting data.",
-    body: "AI-powered document intelligence and financial data extraction for CA firms, finance and accounting teams, and back-office operations that process documents at volume.",
-    flow: ["Capture", "Read", "Extract", "Validate", "Export"],
+    id: "payroll", name: "VOVIX Payroll", tag: "Payroll & compliance",
+    status: "Early access", live: false,
+    title: "Your factory's payroll, run every month, with every statutory filing proven.",
+    body: "Managed payroll, compliance and workforce operations for Tamil Nadu factories with 20 to 150 employees. Vovix runs the month, the owner approves, and PF, ESI, PT, LWF and TDS each carry their own evidence.",
+    flow: ["Attendance", "Calculate", "Approve", "Pay", "Prove"],
     points: [
-      "Invoices, receipts, bank statements and KYC — printed, scanned or handwritten",
-      "Reads 40+ languages, including Indic scripts",
-      "GSTIN, HSN/SAC, tax-math and ITC (Sec 17(5)) checks before anything exports",
-      "Every field linked to its place on the source page, with a confidence score",
-      "Export to TallyPrime XML, Excel, JSON or CSV",
+      "Biometric punches reconciled to shifts, overtime at 2x, every exception queued for a person with an owner and a deadline",
+      "Maker–checker by design: Vovix prepares, the owner approves, nothing is paid without sign-off",
+      "A seven-state proof ledger per filing: a challan counts as done only when the bank debit matches it",
+      "Tamil Nadu Factories Rules registers and an inspector-ready proof pack generated from payroll data",
+      "Tamil-first employee app with offline payslips; bank files and challans are yours to pay and upload",
     ],
-    cta: { l: "Explore VOVIX Lens", href: "https://lens.vovix.in/" },
+    cta: { l: "Talk to us about VOVIX Payroll", href: "/contact" },
+    note: "Vovix does not hold or move funds and does not file on government portals by API. Statutory files are prepared for your business to pay and upload; your DSC stays with you.",
   },
   {
     id: "oneview", name: "VOVIX OneView", tag: "Conversational research",
