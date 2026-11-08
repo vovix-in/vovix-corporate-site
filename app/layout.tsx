@@ -7,7 +7,7 @@ import "./globals.css";
 const SITE = "https://www.vovix.in";
 const TITLE = "VOVIX | IT Automation, AI Document Processing & Data Engineering";
 const DESC =
-  "VOVIX Private Limited engineers business process automation, AI document processing, data pipelines and API integrations — and runs its own products: VOVIX Lens, OneView and Edge.";
+  "VOVIX Private Limited engineers business process automation, AI document processing, data pipelines and API integrations — and runs its own products: VOVIX Payroll, OneView and Edge.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
@@ -50,7 +50,7 @@ const orgLd = {
   email: "admin@vovix.in",
   telephone: "+91-90806-40562",
   description:
-    "IT automation and AI engineering: business process automation, AI document processing, data pipelines, API integration and white-label engineering. Products: VOVIX Lens, VOVIX OneView, VOVIX Edge.",
+    "IT automation and AI engineering: business process automation, AI document processing, data pipelines, API integration and white-label engineering. Products: VOVIX Payroll, VOVIX OneView, VOVIX Edge.",
   address: {
     "@type": "PostalAddress",
     streetAddress:

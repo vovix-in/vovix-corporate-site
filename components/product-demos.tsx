@@ -8,36 +8,39 @@ import { Illustrative, LogoMark, usePausable, useTicker } from "./ui";
    render their final, complete state. Data is illustrative and is
    labelled as such inside every frame.                                */
 
-/* ════════════════════════════ LENS ════════════════════════════ */
+/* ═══════════════════════════ PAYROLL ═══════════════════════════ */
 
-const LENS_STEPS = ["Capture", "Read", "Extract", "Validate", "Export"];
-const FIELDS = [
-  { k: "Supplier", v: "Sundaram Traders", c: 0.98 },
-  { k: "GSTIN", v: "33AAGCS4321F1Z8", c: 0.99 },
-  { k: "Invoice no.", v: "INV-2026-0914", c: 0.99 },
-  { k: "HSN / SAC", v: "8471", c: 0.97 },
-  { k: "Taxable value", v: "₹49,500.00", c: 0.99 },
-  { k: "CGST + SGST", v: "₹8,910.00", c: 0.96 },
-  { k: "Place of supply", v: "Tamil Nadu", c: 0.84 },
+const PAYROLL_STEPS = ["Attendance", "Calculate", "Approve", "Pay", "Prove"];
+const RUN_STATE = ["DRAFT", "DRAFT", "CHECKED", "APPROVED", "PAID"];
+const BLOCKERS = [
+  { k: "2 employees without a UAN", owner: "HR", clearAt: 2 },
+  { k: "14 overtime hours awaiting approval", owner: "Owner", clearAt: 2 },
+  { k: "1 unmatched punch · Shift B · 18 Oct", owner: "Vovix", clearAt: 1 },
 ];
-const CHECKS = [
-  { k: "GSTIN format & checksum", ok: true },
-  { k: "HSN/SAC present on every line", ok: true },
-  { k: "Tax math: 49,500 + 8,910 = 58,410", ok: true },
-  { k: "ITC · Sec 17(5) blocked-credit scan", ok: true },
-  { k: "Place of supply below 0.90 confidence", ok: false },
+const LINES = [
+  { k: "Employees paid", v: "86" },
+  { k: "Gross earnings", v: "₹36,04,900" },
+  { k: "Net pay", v: "₹31,84,600" },
+  { k: "Employer PF + ESI", v: "₹4,12,300" },
+];
+const FILINGS = [
+  { k: "PF ECR", due: "15 Nov", state: "VERIFIED" },
+  { k: "ESI contribution", due: "15 Nov", state: "PAID" },
+  { k: "Professional tax", due: "30 Nov", state: "APPROVED" },
+  { k: "TDS · 24Q", due: "7 Nov", state: "PREPARED" },
 ];
 
-function confTone(c: number) {
-  if (c >= 0.95) return "text-state-ok bg-brand-wash";
-  if (c >= 0.8) return "text-state-warn bg-state-warnwash";
-  return "text-state-crit bg-state-critwash";
+function stateTone(st: string) {
+  if (st === "VERIFIED") return "text-state-ok bg-brand-wash";
+  if (st === "PAID" || st === "APPROVED") return "text-brand-ink bg-brand-wash";
+  return "text-state-warn bg-state-warnwash";
 }
 
-export function LensDemo() {
+export function PayrollDemo() {
   const [ref, active] = usePausable<HTMLDivElement>();
-  const step = useTicker(LENS_STEPS.length + 1, 1900, active); // last tick holds the finished state
-  const s = Math.min(step, LENS_STEPS.length - 1);
+  const step = useTicker(PAYROLL_STEPS.length + 1, 1900, active); // last tick holds the finished state
+  const s = Math.min(step, PAYROLL_STEPS.length - 1);
+  const open = BLOCKERS.filter((x) => s < x.clearAt).length;
 
   return (
     <div ref={ref} className="overflow-hidden rounded-panel border border-line bg-white shadow-floating">
@@ -45,14 +48,14 @@ export function LensDemo() {
       <div className="flex items-center justify-between gap-3 border-b border-line bg-ground-sub px-4 py-2.5">
         <span className="flex min-w-0 items-center gap-2 font-mono text-[11px] font-semibold text-ink-muted">
           <FileText size={13} className="shrink-0 text-brand-ink" aria-hidden />
-          <span className="truncate">lens.vovix.in · Batch 0914 · purchase invoices</span>
+          <span className="truncate">payroll.vovix.in · Chennai Precision Components · October 2026</span>
         </span>
         <Illustrative />
       </div>
 
       {/* stepper */}
-      <ol className="flex border-b border-line" aria-label="Lens pipeline stage">
-        {LENS_STEPS.map((l, i) => (
+      <ol className="flex border-b border-line" aria-label="Payroll month stage">
+        {PAYROLL_STEPS.map((l, i) => (
           <li key={l} aria-current={i === s ? "step" : undefined}
               className={`relative flex-1 px-1 py-2.5 text-center font-mono text-[10px] font-bold uppercase tracking-[0.08em] transition-colors sm:text-[10.5px] ${
                 i < s ? "text-brand-ink" : i === s ? "text-ink" : "text-ink-muted/70"}`}>
@@ -63,83 +66,83 @@ export function LensDemo() {
       </ol>
 
       <div className="grid gap-0 md:grid-cols-[0.82fr_1fr]">
-        {/* source document */}
-        <div className="relative hidden border-r border-line bg-ground-sub/60 p-4 md:block">
-          <div className="relative h-full overflow-hidden rounded-control border border-line bg-white p-4 shadow-raised">
-            <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-muted">Tax invoice</p>
-            <p className="mt-1 text-[12px] font-bold text-ink">Sundaram Traders</p>
-            <p className="font-mono text-[9.5px] text-ink-muted">GSTIN 33AAGCS4321F1Z8</p>
-            <div className="mt-3 space-y-1.5">
-              {[70, 92, 56, 84, 64].map((w, i) => <div key={i} className="h-[5px] rounded-full bg-ground-sunken" style={{ width: `${w}%` }} />)}
+        {/* Today — the owner's one screen */}
+        <div className="border-r border-line bg-ground-sub/60 p-4">
+          <div className="h-full rounded-control border border-line bg-white p-4 shadow-raised">
+            <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-muted">Today · owner view</p>
+            <p className="mt-1 text-[13px] font-bold leading-snug text-ink">
+              {open ? `${open} thing${open > 1 ? "s" : ""} stand${open > 1 ? "" : "s"} between your team and payday` : "Ready for payday on the 7th"}
+            </p>
+            <ul className="mt-3 space-y-1.5">
+              {BLOCKERS.map((x) => {
+                const done = s >= x.clearAt;
+                return (
+                  <li key={x.k} className="flex items-start gap-2 text-[11.5px] leading-snug">
+                    {done ? <Check size={13} className="mt-px shrink-0 text-brand-ink" aria-label="resolved" />
+                          : <AlertTriangle size={13} className="mt-px shrink-0 text-state-warn" aria-label="open" />}
+                    <span className={`min-w-0 ${done ? "text-ink-muted line-through" : "text-ink"}`}>{x.k}</span>
+                    <span className="ml-auto shrink-0 rounded bg-ground-sub px-1.5 py-px font-mono text-[9px] font-bold uppercase text-ink-muted">{x.owner}</span>
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="mt-4 border-t border-line pt-3">
+              <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-muted">Cash-out this month</p>
+              <p className="mt-1 text-[15px] font-bold text-ink tnum">{s >= 1 ? "₹35,96,900" : "—"}</p>
+              <p className="font-mono text-[9.5px] text-ink-muted">net pay on the 7th · PF, ESI by the 15th · PT by the 30th</p>
             </div>
-            <div className="mt-4 grid grid-cols-[1fr_auto] gap-y-1 border-t border-line pt-2 font-mono text-[9.5px] text-ink-secondary">
-              <span>HSN 8471 · 10 nos</span><span className="text-right tnum">49,500.00</span>
-              <span>CGST 9%</span><span className="text-right tnum">4,455.00</span>
-              <span>SGST 9%</span><span className="text-right tnum">4,455.00</span>
-              <span className="font-bold text-ink">Total</span><span className="text-right font-bold text-ink tnum">58,410.00</span>
-            </div>
-            {/* field highlight boxes track the stage */}
-            {s >= 2 && <span className="fade-in pointer-events-none absolute left-3 top-[26px] h-[34px] w-[70%] rounded border-[1.5px] border-brand-fill/70 bg-brand-fill/5" />}
-            {s >= 3 && <span className="fade-in pointer-events-none absolute bottom-3 left-3 right-3 h-[62px] rounded border-[1.5px] border-cyan-ink/60 bg-cyan-fill/5" />}
-            {s === 1 && <span aria-hidden className="pointer-events-none absolute inset-x-0 h-[28px] animate-[scanline_1.8s_linear_infinite] bg-gradient-to-b from-transparent via-brand-fill/20 to-transparent" />}
           </div>
         </div>
 
-        {/* extraction + validation + export */}
+        {/* run state, approval, payment, proof */}
         <div className="min-h-[330px] p-4 sm:min-h-[380px] sm:p-5">
-          {s < 2 ? (
-            <div className="flex h-full min-h-[290px] flex-col items-center justify-center gap-3 text-center sm:min-h-[340px]">
+          <div className="flex items-center justify-between">
+            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-muted">Payroll run · October 2026</p>
+            <span className={`rounded px-1.5 py-px font-mono text-[9.5px] font-bold ${stateTone(RUN_STATE[s] === "PAID" ? "VERIFIED" : RUN_STATE[s] === "DRAFT" ? "PREPARED" : RUN_STATE[s])}`}>{RUN_STATE[s]}</span>
+          </div>
+
+          {s === 0 ? (
+            <div className="flex min-h-[290px] flex-col items-center justify-center gap-3 text-center sm:min-h-[340px]">
               <span className="relative flex h-12 w-12 items-center justify-center rounded-full bg-brand-wash text-brand-ink">
                 <span className="absolute inset-0 animate-ping rounded-full bg-brand-fill/20" aria-hidden />
-                <FileText size={20} aria-hidden />
+                <Clock size={20} aria-hidden />
               </span>
-              <p className="text-small font-semibold text-ink">{s === 0 ? "14 documents received from shared inbox" : "Reading page 1 of 1 · English, printed"}</p>
-              <p className="font-mono text-[11px] text-ink-muted">{s === 0 ? "PDF · JPG · scanned · photographed" : "layout, tables and handwriting detected"}</p>
+              <p className="text-small font-semibold text-ink">Reconciling 2,236 biometric punches to shifts</p>
+              <p className="font-mono text-[11px] text-ink-muted">General · A · B · C shifts · overtime at 2x · exceptions queued</p>
             </div>
           ) : (
             <>
-              <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-muted">Extracted fields</p>
-              <div className="divide-y divide-line/80">
-                {FIELDS.map((f, i) => (
+              <div className="mt-3 divide-y divide-line/80">
+                {LINES.map((f, i) => (
                   <div key={f.k} style={{ animationDelay: `${i * 60}ms` }} className="slide-in flex items-baseline justify-between gap-3 py-[6px]">
                     <span className="shrink-0 font-mono text-[10px] uppercase tracking-wider text-ink-muted">{f.k}</span>
-                    <span className="flex min-w-0 items-baseline gap-1.5">
-                      <span className="truncate text-[12.5px] font-semibold text-ink tnum">{f.v}</span>
-                      <span className={`shrink-0 rounded px-1 py-px font-mono text-[9.5px] font-bold tnum ${confTone(f.c)}`}>{f.c.toFixed(2)}</span>
-                    </span>
+                    <span className="text-[12.5px] font-semibold text-ink tnum">{f.v}</span>
                   </div>
                 ))}
               </div>
 
-              {s >= 3 && (
-                <div className="fade-in mt-4">
-                  <p className="mb-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-muted">Validation</p>
-                  <ul className="space-y-1">
-                    {CHECKS.map((c, i) => (
-                      <li key={c.k} style={{ animationDelay: `${i * 90}ms` }} className="slide-in flex items-center gap-2 text-[12px] text-ink-secondary">
-                        {c.ok ? <Check size={13} className="shrink-0 text-brand-ink" aria-label="passed" />
-                              : <AlertTriangle size={13} className="shrink-0 text-state-warn" aria-label="flagged" />}
-                        <span className={c.ok ? "" : "font-semibold text-ink"}>{c.k}{!c.ok && " → review"}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              {s >= 2 && (
+                <ul className="fade-in mt-4 space-y-1 text-[12px] text-ink-secondary">
+                  <li className="flex items-center gap-2"><Check size={13} className="shrink-0 text-brand-ink" aria-hidden />Prepared by Vovix operator · checked against last month, 3 variances explained</li>
+                  <li className="flex items-center gap-2"><ShieldCheck size={13} className="shrink-0 text-brand-ink" aria-hidden />Approved by the owner · maker–checker enforced</li>
+                  {s >= 3 && <li className="slide-in flex items-center gap-2"><CheckCheck size={13} className="shrink-0 text-brand-ink" aria-hidden />Bank file generated for your upload · Vovix never holds money</li>}
+                </ul>
               )}
 
               {s >= 4 && (
                 <div className="fade-in mt-4 overflow-hidden rounded-control border border-navy/10 bg-navy">
                   <div className="flex items-center justify-between border-b border-white/10 px-3 py-1.5">
-                    <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-brand-onspec">TallyPrime XML · balanced</span>
-                    <span className="flex gap-1">
-                      {["XLSX", "JSON", "CSV"].map((f) => <span key={f} className="rounded bg-white/10 px-1.5 py-px font-mono text-[9px] text-white/70">{f}</span>)}
-                    </span>
+                    <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-brand-onspec">Compliance proof ledger</span>
+                    <span className="font-mono text-[9px] text-white/70">Calculated → … → Verified</span>
                   </div>
-                  <pre className="overflow-x-auto px-3 py-2 font-mono text-[10.5px] leading-[1.55] text-ink-onspec">
-{`<VOUCHER VCHTYPE="Purchase">
-  <PARTYLEDGERNAME>Sundaram Traders</PARTYLEDGERNAME>
-  <AMOUNT>-58410.00</AMOUNT>  `}<span className="text-brand-onspec">{`<!-- 13 posted · 1 held -->`}</span>{`
-</VOUCHER>`}
-                  </pre>
+                  <ul className="divide-y divide-white/10">
+                    {FILINGS.map((f, i) => (
+                      <li key={f.k} style={{ animationDelay: `${i * 90}ms` }} className="slide-in flex items-center justify-between gap-3 px-3 py-1.5 text-[11px] text-ink-onspec">
+                        <span className="min-w-0 truncate">{f.k} <span className="text-white/50">· due {f.due}</span></span>
+                        <span className={`shrink-0 rounded px-1.5 py-px font-mono text-[9px] font-bold ${stateTone(f.state)}`}>{f.state}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               )}
             </>

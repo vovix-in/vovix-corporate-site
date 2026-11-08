@@ -17,7 +17,7 @@ export const SERVICES = [
     id: "ai-docs", photo: "svc-ai-docs" as PhotoName, icon: ScanText, name: "AI Engineering & Document Intelligence",
     short: "Extraction, classification and validation, with human review where it matters.",
     problem: "Invoices, statements, forms and contracts arrive in every format and language, and someone has to key them in and check them.",
-    approach: "OCR and AI extraction combined with deterministic business rules, confidence thresholds and a review queue — the same architecture that runs VOVIX Lens.",
+    approach: "OCR and AI extraction combined with deterministic business rules, confidence thresholds and a review queue — the same review-queue architecture we use in every client build.",
     outcome: "Structured, validated data with every value traceable to its source, and low-confidence fields routed to a person before they post.",
     stack: ["OCR · 40+ languages", "Field extraction", "Rule validation", "Review queue"],
   },

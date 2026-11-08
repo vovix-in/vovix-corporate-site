@@ -3,7 +3,7 @@ import { Logo } from "./ui";
 
 const COLS = [
   { h: "Products", links: [
-    { l: "VOVIX Lens", href: "https://lens.vovix.in/" },
+    { l: "VOVIX Payroll", href: "/products#payroll" },
     { l: "VOVIX OneView", href: "/products#oneview" },
     { l: "VOVIX Edge", href: "https://edge.vovix.in/" },
     { l: "All products", href: "/products" },
@@ -28,7 +28,7 @@ const COLS = [
 const DISCLAIMERS = [
   ["Photography", "Photographs on this site are illustrative scene-setters generated for VOVIX. They do not depict VOVIX employees, clients or premises."],
   ["Engagements", "VOVIX builds software to automate tasks and support operational decisions. Site content is general and not bespoke professional, legal or tax advice unless separately agreed. Outcomes depend on your process, volume and adoption."],
-  ["VOVIX Lens", "Outputs are machine-assisted and should be reviewed before operational or financial use. You are responsible for handling personal or regulated data in line with your policies and applicable law."],
+  ["VOVIX Payroll", "Vovix prepares payroll and statutory workings from the data your business provides and does not hold or move funds. Amounts should be reviewed and approved by you before payment or filing. Statutory workings are not a substitute for advice from your auditor or labour consultant."],
   ["VOVIX OneView", "Informational and educational only — not investment advice. VOVIX is not registered with SEBI as an investment adviser or research analyst. Verify data with exchanges and filings before any trading or allocation decision."],
   ["VOVIX Edge", "Trading foreign exchange carries a high level of risk and may not be suitable for all investors. Past performance is not indicative of future results. VOVIX Edge does not guarantee profits or protect against losses. You are solely responsible for your trading decisions."],
 ];

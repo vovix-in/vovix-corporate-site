@@ -23,7 +23,7 @@ const WORKS_WITH = ["TallyPrime", "Excel", "WhatsApp Business", "MetaTrader 5", 
 
 const BENTO = [
   { n: "01", id: "workflow", photo: "svc-workflow" as PhotoName, h: "Business Workflow Automation", p: "Approvals, reconciliation, document handling and scheduled jobs that run themselves — with retries, idempotent writes and explicit approval steps where a person must decide.", t: ["Event triggers", "Scheduled jobs", "Approval routing", "Audit trail"], span: "lg:col-span-3" },
-  { n: "02", id: "ai-docs", photo: "svc-ai-docs" as PhotoName, h: "AI Engineering & Document Intelligence", p: "Extraction, classification and validation with confidence thresholds and a human review queue — the architecture behind VOVIX Lens.", t: ["OCR · 40+ languages", "Rule validation", "Review queue"], span: "lg:col-span-3" },
+  { n: "02", id: "ai-docs", photo: "svc-ai-docs" as PhotoName, h: "AI Engineering & Document Intelligence", p: "Extraction, classification and validation with confidence thresholds and a human review queue — the same review-queue architecture we use in every client build.", t: ["OCR · 40+ languages", "Rule validation", "Review queue"], span: "lg:col-span-3" },
   { n: "03", id: "data", photo: "svc-data" as PhotoName, h: "Data Engineering & Pipelines", p: "Ingestion, transformation, reconciliation and delivery with schema checks and lineage.", t: ["Orchestration", "Reconciliation"], span: "lg:col-span-2" },
   { n: "04", id: "api", photo: "svc-api" as PhotoName, h: "API Development & Integration", p: "CRMs, payment gateways, accounting platforms and databases kept in agreement.", t: ["REST", "Webhooks", "TallyPrime"], span: "lg:col-span-2" },
   { n: "05", id: "ingest", photo: "svc-ingest" as PhotoName, h: "Web Data Ingestion & Monitoring", p: "Scoped, rate-limited collection with change detection, retries and alerts.", t: ["Change detection", "Alerting"], span: "lg:col-span-2" },
@@ -32,7 +32,7 @@ const BENTO = [
 ];
 
 const PRODUCT_CARDS: { photo: PhotoName; name: string; tag: string; status: string; live: boolean; desc: string; href: string; cta: string }[] = [
-  { photo: "lens-desk", name: "VOVIX Lens", tag: "Document intelligence", status: "Live", live: true, desc: "Invoices, statements and KYC read, validated and exported to TallyPrime XML, Excel or JSON.", href: "https://lens.vovix.in/", cta: "Explore VOVIX Lens" },
+  { photo: "payroll-desk", name: "VOVIX Payroll", tag: "Payroll & compliance", status: "Early access", live: false, desc: "Managed payroll for Tamil Nadu factories: attendance to payslips, PF, ESI, PT, LWF and TDS, each filing with its proof.", href: "/products#payroll", cta: "Discover VOVIX Payroll" },
   { photo: "oneview-phone", name: "VOVIX OneView", tag: "Conversational research", status: "Live", live: true, desc: "Structured research on NSE and BSE-listed companies, delivered inside WhatsApp.", href: "/products#oneview", cta: "Discover VOVIX OneView" },
   { photo: "edge-desk", name: "VOVIX Edge", tag: "Quantitative technology", status: "Early access", live: false, desc: "Catalyst-driven forex decision support with risk controls on MetaTrader 5.", href: "https://edge.vovix.in/", cta: "Explore VOVIX Edge" },
 ];
@@ -47,14 +47,14 @@ const PROCESS = [
 ];
 
 const SECURITY = [
-  { i: Server, h: "Hosted in India", p: "VOVIX Lens runs on AWS in the Mumbai region, isolated per firm." },
+  { i: Server, h: "Hosted in India", p: "VOVIX Payroll runs on AWS in the Mumbai region, one isolated tenant per factory." },
   { i: Lock, h: "Encrypted", p: "AES-256 at rest and TLS in transit." },
   { i: UserCheck, h: "Human in the loop", p: "Low-confidence fields go to review; every action lands in an audit trail." },
   { i: GitBranch, h: "Your code, your repo", p: "Client builds land in your repository under NDA, IP assigned as it's written." },
 ];
 
 const USE_CASES = [
-  { i: Calculator, photo: "lens-desk" as PhotoName, h: "Accounting & finance operations", p: "Purchase invoice and bank statement processing, TallyPrime posting, GST checks and ledger reconciliation." },
+  { i: Calculator, photo: "payroll-desk" as PhotoName, h: "Factories & payroll operations", p: "Attendance reconciliation, monthly payroll, PF, ESI, PT, LWF and TDS filings, and Factories Rules registers for Tamil Nadu plants." },
   { i: Briefcase, photo: "uc-professional" as PhotoName, h: "Professional services", p: "Client document intake, KYC collection, engagement trackers and report assembly." },
   { i: FileStack, photo: "uc-backoffice" as PhotoName, h: "Back-office & document-heavy teams", p: "Classification, extraction and validation of forms, contracts and statements, with a review queue." },
   { i: Landmark, photo: "edge-desk" as PhotoName, h: "Financial technology", p: "Filings and market-data pipelines, research delivery, rule-based decision support and audit trails." },
@@ -137,7 +137,7 @@ export default function Home() {
                   ))}
                 </ul>
                 <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-4">
-                  {[["3", "Products in operation"], ["7", "Engineering services"], ["40+", "Languages read by Lens"], ["2026", "Incorporated"]].map(([n, l]) => (
+                  {[["3", "Products in operation"], ["7", "Engineering services"], ["5", "Statutory filings proven monthly"], ["2026", "Incorporated"]].map(([n, l]) => (
                     <div key={l} className="border-t-2 border-line-strong pt-3">
                       <dt className="sr-only">{l}</dt>
                       <dd className="text-[32px] font-semibold leading-none tracking-[-0.03em] text-ink">{n}</dd>
@@ -227,17 +227,22 @@ export default function Home() {
           <div className="grid gap-5 lg:grid-cols-2 [&>*]:min-w-0">
             <Reveal className="on-dark flex flex-col rounded-[24px] bg-navy p-7 text-white sm:p-10">
               <div className="flex items-center gap-3"><span className="brand-rule" aria-hidden /><p className="eyebrow-dark">For engineers</p></div>
-              <h2 className="mt-5 text-[clamp(24px,2.6vw,30px)] font-semibold leading-tight tracking-[-0.025em]">Structured output your systems can trust.</h2>
-              <p className="mt-3 text-small text-ink-onspec">Every field carries its value, confidence and source. Anything below threshold is held — never silently posted.</p>
+              <h2 className="mt-5 text-[clamp(24px,2.6vw,30px)] font-semibold leading-tight tracking-[-0.025em]">Every payroll month is a state your systems can read.</h2>
+              <p className="mt-3 text-small text-ink-onspec">Each run and each statutory filing carries its state, who moved it there and the evidence attached. Nothing is reported as done without proof.</p>
               <pre className="mt-6 overflow-x-auto rounded-card bg-navy-raised p-5 font-mono text-[12px] leading-[1.7] text-ink-onspec"><code>
-<span className="text-brand-fill">POST</span>{` /webhooks/lens  · document.extracted
+<span className="text-brand-fill">POST</span>{` /webhooks/payroll  · payroll_run.approved
 {
-  "document_id": "inv_0914",
-  "supplier": { "value": "Sundaram Traders", "confidence": 0.98 },
-  "gstin":    { "value": "33AAGCS4321F1Z8", "valid": true },
-  "totals":   { "taxable": 49500.00, "tax": 8910.00 },
-  "review":   [{ "field": "place_of_supply", "confidence": 0.84 }],
-  "export":   { "tally_xml": "ready", "balanced": true }
+  "tenant": "chennai-precision",
+  "period": "2026-10",
+  "state": "APPROVED",
+  "employees": 86,
+  "net_pay": 3184600.00,
+  "employer_statutory": 412300.00,
+  "approved_by": { "role": "owner", "maker_checker": true },
+  "compliance": [
+    { "filing": "PF_ECR", "state": "VERIFIED", "evidence": ["challan", "bank_debit"] },
+    { "filing": "ESI",    "state": "PAID",     "evidence": ["challan"] }
+  ]
 }`}</code></pre>
               <p className="mt-3 font-mono text-[10.5px] uppercase tracking-[0.12em] text-white/50">Illustrative payload</p>
             </Reveal>

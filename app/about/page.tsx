@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 const PRODUCTS = [
-  ["VOVIX Lens", "Document intelligence for CA firms and finance teams: extraction, GST validation and TallyPrime export."],
+  ["VOVIX Payroll", "Managed payroll and statutory compliance for Tamil Nadu factories: attendance, payslips, PF, ESI, PT, LWF and TDS with a proof ledger."],
   ["VOVIX OneView", "Conversational research on listed Indian companies, delivered through WhatsApp."],
   ["VOVIX Edge", "Forex decision support and optional MT5 execution with pre-event blackouts and exit management."],
 ];
@@ -58,7 +58,7 @@ export default function About() {
         <SectionHead eyebrow="Timeline" title="Our journey so far." lead="A short, factual timeline." />
         <div className="grid gap-5 md:grid-cols-3">
           {[["2026", "Company formed", "VOVIX is incorporated with a focus on automation and data tooling for operations-heavy teams."],
-            ["2026", "Lens, OneView & Edge", "Three products in operation: document extraction for finance teams, company research inside WhatsApp, and decision support for MetaTrader 5."],
+            ["2026", "Payroll, OneView & Edge", "Three products in operation: managed payroll and compliance for factories, company research inside WhatsApp, and decision support for MetaTrader 5."],
             ["Now", "Client engineering", "Automation, AI and integration builds — direct, and white-label behind agency partners. Each with upfront, written scoping."]].map(([n, h, p], i) => (
             <Reveal key={h} delay={i * 0.08}>
               <div className="h-full rounded-card border border-line bg-white p-7">

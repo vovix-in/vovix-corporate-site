@@ -9,7 +9,7 @@
 
 export const PHOTOS = {
   "hero-office":     { w: 1376, h: 768, alt: "Engineers at multi-monitor workstations in a glass-walled office at sunset" },
-  "lens-desk":       { w: 1200, h: 896, alt: "An accountant's desk with printed tax invoices, a calculator and a laptop spreadsheet" },
+  "payroll-desk":    { w: 1200, h: 896, alt: "An office desk with printed statements, a calculator and a laptop spreadsheet" },
   "oneview-phone":   { w: 1200, h: 896, alt: "A hand holding a phone with a chat conversation beside a cup of filter coffee" },
   "edge-desk":       { w: 1200, h: 896, alt: "A trading workstation with currency charts and risk panels on three monitors" },
   "svc-workflow":    { w: 1200, h: 896, alt: "Three colleagues mapping a business process with sticky notes on a glass wall" },
