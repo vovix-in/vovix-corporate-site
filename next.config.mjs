@@ -15,6 +15,7 @@ const nextConfig = {
     return [
       { source: "/demo/phonics", destination: "/demo/phonics.html" },
       { source: "/demo/driving-school", destination: "/demo/driving-school.html" },
+      { source: "/demo/centre-management", destination: "/demo/centre-management.html" },
     ];
   },
   // The static site shipped .html URLs that are indexed. Keep them working.
