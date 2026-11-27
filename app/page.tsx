@@ -5,7 +5,7 @@ import {
 import { Navbar } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { Button, Reveal, Section, SectionHead } from "@/components/ui";
-import { HeroSlider } from "@/components/hero-slider";
+import { HeroPayroll } from "@/components/hero-payroll";
 import { Photo, type PhotoName } from "@/components/photo";
 import { PlatformDiagram } from "@/components/platform-diagram";
 import { ProductShowcase } from "@/components/product-showcase";
@@ -13,8 +13,8 @@ import { PipelineDiagram } from "@/components/pipeline";
 import { ContactForm } from "@/components/contact-form";
 import { Faq, FAQ } from "@/components/faq";
 
-/* Homepage — built from the Figma file "VOVIX Website — v4 Redesign"
-   (page 01 Homepage — Desktop 1440 / 02 Mobile 390).
+/* Homepage — v6. Payroll-first hero (see docs/rocketlane-benchmark-and-v6-plan.md);
+   the sections below still follow the Figma file "VOVIX Website — v4 Redesign".
    Section order follows the category research: product-led hero,
    ecosystem strip, platform framing, products, services, process,
    engineering + security proof, use cases, FAQ, closing CTA.          */
@@ -74,8 +74,8 @@ export default function Home() {
       <Navbar />
       <main id="main">
 
-        {/* ═══ HERO — photo slider ═══ */}
-        <HeroSlider />
+        {/* ═══ HERO — payroll-first (v6) ═══ */}
+        <HeroPayroll />
 
         {/* ═══ WORKS WITH ═══ */}
         <section id="works-with" aria-label="Works with" className="border-y border-line bg-white">
