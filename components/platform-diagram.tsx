@@ -19,7 +19,7 @@ const STAGES = [
   ["05", "Monitor", "Logs, retries, alerts, audit trail"],
 ];
 const OUTPUTS = [
-  { i: Factory, h: "VOVIX Payroll", s: "Payroll → proven compliance", href: "/products#payroll" },
+  { i: Factory, h: "VOVIX Payroll", s: "Payroll → proven compliance", href: "/payroll" },
   { i: MessageSquare, h: "VOVIX OneView", s: "Research on WhatsApp", href: "/products#oneview" },
   { i: Activity, h: "VOVIX Edge", s: "Risk-controlled forex on MT5", href: "https://edge.vovix.in/" },
   { i: Workflow, h: "Your workflow", s: "Custom & white-label builds", href: "/services" },

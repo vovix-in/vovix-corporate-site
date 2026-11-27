@@ -32,7 +32,7 @@ const BENTO = [
 ];
 
 const PRODUCT_CARDS: { photo: PhotoName; name: string; tag: string; status: string; live: boolean; desc: string; href: string; cta: string }[] = [
-  { photo: "payroll-desk", name: "VOVIX Payroll", tag: "Payroll & compliance", status: "Early access", live: false, desc: "Managed payroll for Tamil Nadu factories: attendance to payslips, PF, ESI, PT, LWF and TDS, each filing with its proof.", href: "/products#payroll", cta: "Discover VOVIX Payroll" },
+  { photo: "payroll-desk", name: "VOVIX Payroll", tag: "Payroll & compliance", status: "Early access", live: false, desc: "Managed payroll for Tamil Nadu factories: attendance to payslips, PF, ESI, PT, LWF and TDS, each filing with its proof.", href: "/payroll", cta: "Discover VOVIX Payroll" },
   { photo: "oneview-phone", name: "VOVIX OneView", tag: "Conversational research", status: "Live", live: true, desc: "Structured research on NSE and BSE-listed companies, delivered inside WhatsApp.", href: "/products#oneview", cta: "Discover VOVIX OneView" },
   { photo: "edge-desk", name: "VOVIX Edge", tag: "Quantitative technology", status: "Early access", live: false, desc: "Catalyst-driven forex decision support with risk controls on MetaTrader 5.", href: "https://edge.vovix.in/", cta: "Explore VOVIX Edge" },
 ];

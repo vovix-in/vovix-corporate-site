@@ -8,7 +8,7 @@ import {
 import { Button, Logo } from "./ui";
 
 export const PRODUCTS = [
-  { name: "VOVIX Payroll", desc: "Managed payroll and statutory compliance for Tamil Nadu factories", href: "/products#payroll", icon: Factory },
+  { name: "VOVIX Payroll", desc: "Managed payroll and statutory compliance for Tamil Nadu factories", href: "/payroll", icon: Factory },
   { name: "VOVIX OneView", desc: "Company research inside WhatsApp", href: "/products#oneview", icon: MessageSquare },
   { name: "VOVIX Edge", desc: "Risk-controlled forex automation on MT5", href: "https://edge.vovix.in/", icon: Activity },
 ];
@@ -24,7 +24,7 @@ const SERVICES = [
 ];
 
 const LINKS: [string, string][] = [["Platform", "/#platform"], ["Company", "/about"]];
-const PAYROLL = "/products#payroll";
+const PAYROLL = "/payroll";
 const WALKTHROUGH = "/contact?topic=VOVIX+Payroll";
 const isExt = (h: string) => /^https?:\/\//.test(h);
 const ext = (h: string) => (isExt(h) ? { target: "_blank", rel: "noopener noreferrer" } : {});
@@ -89,7 +89,7 @@ export function Navbar() {
     <>
       {/* Announcement — a real, current product fact, not a promo */}
       <div className="on-dark bg-navy text-white">
-        <a href="/products#payroll"
+        <a href={PAYROLL}
            className="shell flex items-center justify-center gap-3 py-2.5 text-[13px] sm:text-small">
           <span className="rounded bg-brand-fill px-1.5 py-px font-mono text-[10.5px] font-bold text-navy">NEW</span>
           <span className="truncate text-white/90">VOVIX Payroll runs your factory&rsquo;s payroll every month, with PF, ESI, PT, LWF and TDS proven</span>
@@ -150,7 +150,7 @@ export function Navbar() {
                   ))}
                 </ul>
               </div>
-              <a href="/products#payroll" className="on-dark group flex flex-col justify-between rounded-card bg-navy p-6 text-white">
+              <a href={PAYROLL} className="on-dark group flex flex-col justify-between rounded-card bg-navy p-6 text-white">
                 <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-brand-fill">Featured</span>
                 <span className="mt-6 text-[19px] font-semibold leading-snug">Payroll run by Vovix, approved by you, every filing with its evidence.</span>
                 <span className="mt-4 inline-flex items-center gap-1.5 text-small font-semibold text-brand-fill">See VOVIX Payroll <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" aria-hidden /></span>

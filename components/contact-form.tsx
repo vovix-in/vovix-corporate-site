@@ -20,11 +20,11 @@ const TOPICS = [
 
 type Errors = Partial<Record<"name" | "email" | "message", string>>;
 
-export function ContactForm({ dark = false }: { dark?: boolean }) {
+export function ContactForm({ dark = false, defaultTopic }: { dark?: boolean; defaultTopic?: string }) {
   const [errors, setErrors] = useState<Errors>({});
   const [state, setState] = useState<"idle" | "sending" | "sent" | "handed" | "copied">("idle");
   const [draft, setDraft] = useState("");
-  const [topic, setTopic] = useState<string>(TOPICS[0]);
+  const [topic, setTopic] = useState<string>(defaultTopic && (TOPICS as readonly string[]).includes(defaultTopic) ? defaultTopic : TOPICS[0]);
 
   // A CTA can land here with ?topic=VOVIX+Payroll so the visitor doesn't re-pick it.
   useEffect(() => {

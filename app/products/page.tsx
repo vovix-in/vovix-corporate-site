@@ -17,7 +17,7 @@ const SITE = "https://www.vovix.in";
 const ld = {
   "@context": "https://schema.org", "@type": "ItemList", name: "VOVIX products",
   itemListElement: [
-    { "@type": "ListItem", position: 1, item: { "@type": "SoftwareApplication", name: "VOVIX Payroll", applicationCategory: "BusinessApplication", operatingSystem: "Web", url: `${SITE}/products#payroll`, description: "Managed payroll, statutory compliance and workforce operations for Tamil Nadu factories with 20 to 150 employees." } },
+    { "@type": "ListItem", position: 1, item: { "@type": "SoftwareApplication", name: "VOVIX Payroll", applicationCategory: "BusinessApplication", operatingSystem: "Web", url: `${SITE}/payroll`, description: "Managed payroll, statutory compliance and workforce operations for Tamil Nadu factories with 20 to 150 employees." } },
     { "@type": "ListItem", position: 2, item: { "@type": "SoftwareApplication", name: "VOVIX OneView", applicationCategory: "FinanceApplication", operatingSystem: "WhatsApp", url: `${SITE}/products#oneview`, description: "Conversational research on NSE and BSE-listed companies, delivered through WhatsApp. Informational only.", provider: { "@id": `${SITE}/#organization` } } },
     { "@type": "ListItem", position: 3, item: { "@type": "SoftwareApplication", name: "VOVIX Edge", applicationCategory: "FinanceApplication", operatingSystem: "MetaTrader 5", url: "https://edge.vovix.in/", description: "Forex decision-support and optional automated execution on MetaTrader 5, with pre-event blackouts and automated exit management.", provider: { "@id": `${SITE}/#organization` } } },
   ],

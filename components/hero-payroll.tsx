@@ -120,7 +120,7 @@ export function HeroPayroll() {
           </p>
           <div className="rise mt-9 flex flex-col gap-3 sm:flex-row [animation-delay:.24s]">
             <Button href="/contact?topic=VOVIX+Payroll" size="lg">Book a payroll walkthrough <ArrowRight size={18} aria-hidden /></Button>
-            <Button href="/products#payroll" size="lg" variant="onDark">See how a month runs</Button>
+            <Button href="/payroll#month" size="lg" variant="onDark">See how a month runs</Button>
           </div>
           <ul className="rise mt-10 grid gap-2.5 border-t border-white/10 pt-6 sm:grid-cols-3 [animation-delay:.32s]">
             {PROOF.map((x) => (
