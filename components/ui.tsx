@@ -40,6 +40,9 @@ type BtnProps = {
   children: ReactNode;
   href?: string;
   onClick?: () => void;
+  /** Analytics: event name and where the button sits, e.g. track="cta_click" place="hero". */
+  track?: string;
+  place?: string;
   variant?: "primary" | "secondary" | "ghost" | "onDark";
   size?: "sm" | "md" | "lg";
   className?: string;
@@ -56,18 +59,19 @@ const VARIANTS = {
   onDark: "border-[1.5px] border-white/30 text-white font-semibold hover:border-white hover:bg-white/5",
 };
 
-export function Button({ children, href, onClick, variant = "primary", size = "md", className = "", type = "button", external, disabled }: BtnProps) {
+export function Button({ children, href, onClick, variant = "primary", size = "md", className = "", type = "button", external, disabled, track, place }: BtnProps) {
+  const data = track ? { "data-event": track, "data-place": place } : {};
   const cls = `inline-flex min-h-[44px] items-center justify-center gap-2 rounded-control transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 disabled:pointer-events-none disabled:opacity-60 ${SIZES[size]} ${VARIANTS[variant]} ${className}`;
   if (href) {
     const ext = external ?? /^https?:\/\//.test(href);
     return (
-      <a href={href} className={cls} {...(ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
+      <a href={href} className={cls} {...data} {...(ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
         {children}
         {ext && <span className="sr-only"> (opens in a new tab)</span>}
       </a>
     );
   }
-  return <button type={type} onClick={onClick} disabled={disabled} className={cls}>{children}</button>;
+  return <button type={type} onClick={onClick} disabled={disabled} className={cls} {...data}>{children}</button>;
 }
 
 /* ── Chip ─────────────────────────────────────────────────────── */

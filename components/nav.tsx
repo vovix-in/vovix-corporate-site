@@ -89,7 +89,7 @@ export function Navbar() {
     <>
       {/* Announcement — a real, current product fact, not a promo */}
       <div className="on-dark bg-navy text-white">
-        <a href={PAYROLL}
+        <a href={PAYROLL} data-event="cta_click" data-place="announcement"
            className="shell flex items-center justify-center gap-3 py-2.5 text-[13px] sm:text-small">
           <span className="rounded bg-brand-fill px-1.5 py-px font-mono text-[10.5px] font-bold text-navy">NEW</span>
           <span className="truncate text-white/90">VOVIX Payroll runs your factory&rsquo;s payroll every month, with PF, ESI, PT, LWF and TDS proven</span>
@@ -116,7 +116,7 @@ export function Navbar() {
 
             <div className="hidden items-center gap-5 lg:flex">
               <a href="/contact" className="whitespace-nowrap text-[15px] font-medium text-ink-secondary hover:text-ink">Discuss a project</a>
-              <Button href={WALKTHROUGH} size="sm" className="whitespace-nowrap !px-4 !py-2.5">Book a walkthrough</Button>
+              <Button href={WALKTHROUGH} size="sm" className="whitespace-nowrap !px-4 !py-2.5" track="cta_click" place="nav">Book a walkthrough</Button>
             </div>
 
             <button ref={toggleRef} className="-mr-2 flex h-11 w-11 items-center justify-center rounded-control text-ink lg:hidden"
@@ -196,7 +196,7 @@ export function Navbar() {
             {[["Services", "/services"], ...LINKS, ["Contact", "/contact"]].map(([l, h]) => (
               <a key={l} href={h} onClick={() => setSheet(false)} className="py-3 text-body font-semibold text-ink">{l}</a>
             ))}
-            <Button href={WALKTHROUGH} size="lg" className="mt-4 w-full">Book a payroll walkthrough</Button>
+            <Button href={WALKTHROUGH} size="lg" className="mt-4 w-full" track="cta_click" place="nav_mobile">Book a payroll walkthrough</Button>
             <Button href="/contact" size="lg" variant="secondary" className="mt-3 w-full">Discuss a project</Button>
           </div>
         </div>

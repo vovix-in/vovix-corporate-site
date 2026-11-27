@@ -23,11 +23,13 @@ export default function Page() {
             <li>Technical logs and analytics events when you browse this website.</li>
             <li>Information you voluntarily send via email or other contact channels.</li>
           </ul>
+          <h2>Cookies and analytics</h2>
+          <p>This website sets no analytics or advertising cookies unless you choose &ldquo;Allow analytics&rdquo; in the banner. If you do, Google Analytics and, where enabled, Microsoft Clarity record page views and interactions such as button clicks and form submissions, with IP addresses anonymised. We do not use advertising cookies. Your choice is stored in your browser and you can change it by clearing site data; a Global Privacy Control signal from your browser is treated as a refusal. Where a booking calendar is embedded, the calendar provider&rsquo;s own privacy terms apply to what you enter there.</p>
           <h2>How we use it</h2>
           <p>We use this information to operate and improve the website, respond to enquiries, and maintain security and reliability.</p>
           <h2>Contact</h2>
           <p>Questions about this policy: admin@vovix.in</p>
-          <p>Last updated: 23 April 2026</p>
+          <p>Last updated: 27 November 2026</p>
         </Prose>
       </Section>
     </PageShell>

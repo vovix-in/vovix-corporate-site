@@ -3,6 +3,7 @@ import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { PageShell } from "@/components/page-shell";
 import { Section, Reveal } from "@/components/ui";
 import { ContactForm } from "@/components/contact-form";
+import { Scheduler } from "@/components/scheduler";
 
 export const metadata: Metadata = {
   title: "Contact — Discuss Your Automation Project",
@@ -22,6 +23,7 @@ export default function Contact() {
     <PageShell photo="team-cta" eyebrow="Contact" title="Let's Automate What's Slowing Your Business Down."
       lead="Tell us about your workflow, data challenges, or integration requirements. We'll explore a practical engineering solution tailored to your business.">
       <Section>
+        <div className="mb-12 empty:hidden"><Scheduler place="contact" /></div>
         <div className="grid gap-12 lg:grid-cols-[1.3fr_0.9fr]">
           <Reveal>
             <div className="rounded-panel border border-line bg-white p-6 shadow-lifted sm:p-8">

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AlertTriangle, Check, ShieldCheck, FileText, Banknote, FileCheck2, Clock, Fingerprint, Calculator, UserCheck } from "lucide-react";
 import { Illustrative } from "./ui";
+import { track } from "@/lib/analytics";
 
 /* /payroll — the five-stage pillar block.
    Pattern borrowed from Rocketlane's product pages: a sticky stage list on
@@ -260,6 +261,14 @@ const PICS: Record<string, () => JSX.Element> = { attendance: PicAttendance, cal
 export function PayrollStages() {
   const [active, setActive] = useState(0);
   const refs = useRef<(HTMLElement | null)[]>([]);
+  const seen = useRef<Set<number>>(new Set());
+
+  // One event per stage per page view, the first time it becomes the active one.
+  useEffect(() => {
+    if (seen.current.has(active)) return;
+    seen.current.add(active);
+    track("payroll_stage_view", { stage: STAGES[active].id, index: active + 1 });
+  }, [active]);
 
   useEffect(() => {
     if (!("IntersectionObserver" in window)) return;
