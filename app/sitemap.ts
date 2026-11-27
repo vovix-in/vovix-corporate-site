@@ -2,10 +2,14 @@ import type { MetadataRoute } from "next";
 const SITE = "https://www.vovix.in";
 // Bump this whenever page content changes, so search engines know to re-crawl.
 // 2026-11-08: VOVIX Lens replaced by VOVIX Payroll across every page.
+// 2026-11-27: payroll-first homepage and the new /payroll page.
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date("2026-11-08");
+  const v6 = new Date("2026-11-27");
   return [
-    { url: `${SITE}/`,               lastModified: now, changeFrequency: "weekly",  priority: 1.0 },
+    { url: `${SITE}/`,               lastModified: v6,  changeFrequency: "weekly",  priority: 1.0 },
+    { url: `${SITE}/payroll`,        lastModified: v6,  changeFrequency: "weekly",  priority: 0.95 },
+    { url: `${SITE}/payroll/pricing`, lastModified: v6, changeFrequency: "weekly",  priority: 0.9 },
     { url: `${SITE}/services`,       lastModified: now, changeFrequency: "monthly", priority: 0.95 },
     { url: `${SITE}/products`,       lastModified: now, changeFrequency: "weekly",  priority: 0.9 },
     { url: `${SITE}/about`,          lastModified: now, changeFrequency: "monthly", priority: 0.8 },

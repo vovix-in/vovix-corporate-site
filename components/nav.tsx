@@ -8,7 +8,7 @@ import {
 import { Button, Logo } from "./ui";
 
 export const PRODUCTS = [
-  { name: "VOVIX Payroll", desc: "Managed payroll and statutory compliance for Tamil Nadu factories", href: "/products#payroll", icon: Factory },
+  { name: "VOVIX Payroll", desc: "Managed payroll and statutory compliance for Tamil Nadu factories", href: "/payroll", icon: Factory },
   { name: "VOVIX OneView", desc: "Company research inside WhatsApp", href: "/products#oneview", icon: MessageSquare },
   { name: "VOVIX Edge", desc: "Risk-controlled forex automation on MT5", href: "https://edge.vovix.in/", icon: Activity },
 ];
@@ -23,8 +23,8 @@ const SERVICES = [
   { name: "White-label automation", href: "/services#white-label", icon: Layers },
 ];
 
-const LINKS: [string, string][] = [["Platform", "/#platform"], ["Company", "/about"]];
-const PAYROLL = "/products#payroll";
+const LINKS: [string, string][] = [["Pricing", "/payroll/pricing"], ["Platform", "/#platform"], ["Company", "/about"]];
+const PAYROLL = "/payroll";
 const WALKTHROUGH = "/contact?topic=VOVIX+Payroll";
 const isExt = (h: string) => /^https?:\/\//.test(h);
 const ext = (h: string) => (isExt(h) ? { target: "_blank", rel: "noopener noreferrer" } : {});
@@ -89,7 +89,7 @@ export function Navbar() {
     <>
       {/* Announcement — a real, current product fact, not a promo */}
       <div className="on-dark bg-navy text-white">
-        <a href="/products#payroll"
+        <a href={PAYROLL} data-event="cta_click" data-place="announcement"
            className="shell flex items-center justify-center gap-3 py-2.5 text-[13px] sm:text-small">
           <span className="rounded bg-brand-fill px-1.5 py-px font-mono text-[10.5px] font-bold text-navy">NEW</span>
           <span className="truncate text-white/90">VOVIX Payroll runs your factory&rsquo;s payroll every month, with PF, ESI, PT, LWF and TDS proven</span>
@@ -106,17 +106,17 @@ export function Navbar() {
             </a>
 
             <div className="hidden items-center gap-0.5 lg:flex">
-              <a href={PAYROLL} onMouseEnter={() => hoverOpen(null)} className="rounded-control px-3.5 py-2 text-[15px] font-semibold text-ink transition-colors hover:text-brand-ink">Payroll</a>
+              <a href={PAYROLL} onMouseEnter={() => hoverOpen(null)} className="rounded-control px-2.5 py-2 text-[14.5px] font-semibold text-ink transition-colors hover:text-brand-ink xl:px-3.5 xl:text-[15px]">Payroll</a>
               {trigger("products", "Products")}
               {trigger("services", "Services")}
               {LINKS.map(([l, h]) => (
-                <a key={l} href={h} onMouseEnter={() => hoverOpen(null)} className="rounded-control px-3.5 py-2 text-[15px] font-medium text-ink-secondary transition-colors hover:text-ink">{l}</a>
+                <a key={l} href={h} onMouseEnter={() => hoverOpen(null)} className="rounded-control px-2.5 py-2 text-[14.5px] font-medium text-ink-secondary transition-colors hover:text-ink xl:px-3.5 xl:text-[15px]">{l}</a>
               ))}
             </div>
 
-            <div className="hidden items-center gap-5 lg:flex">
-              <a href="/contact" className="whitespace-nowrap text-[15px] font-medium text-ink-secondary hover:text-ink">Discuss a project</a>
-              <Button href={WALKTHROUGH} size="sm" className="whitespace-nowrap !px-4 !py-2.5">Book a walkthrough</Button>
+            <div className="hidden items-center gap-4 lg:flex xl:gap-5">
+              <a href="/contact" className="hidden whitespace-nowrap text-[15px] font-medium text-ink-secondary hover:text-ink xl:inline">Discuss a project</a>
+              <Button href={WALKTHROUGH} size="sm" className="whitespace-nowrap !px-4 !py-2.5" track="cta_click" place="nav">Book a walkthrough</Button>
             </div>
 
             <button ref={toggleRef} className="-mr-2 flex h-11 w-11 items-center justify-center rounded-control text-ink lg:hidden"
@@ -150,7 +150,7 @@ export function Navbar() {
                   ))}
                 </ul>
               </div>
-              <a href="/products#payroll" className="on-dark group flex flex-col justify-between rounded-card bg-navy p-6 text-white">
+              <a href={PAYROLL} className="on-dark group flex flex-col justify-between rounded-card bg-navy p-6 text-white">
                 <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-brand-fill">Featured</span>
                 <span className="mt-6 text-[19px] font-semibold leading-snug">Payroll run by Vovix, approved by you, every filing with its evidence.</span>
                 <span className="mt-4 inline-flex items-center gap-1.5 text-small font-semibold text-brand-fill">See VOVIX Payroll <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" aria-hidden /></span>
@@ -196,7 +196,7 @@ export function Navbar() {
             {[["Services", "/services"], ...LINKS, ["Contact", "/contact"]].map(([l, h]) => (
               <a key={l} href={h} onClick={() => setSheet(false)} className="py-3 text-body font-semibold text-ink">{l}</a>
             ))}
-            <Button href={WALKTHROUGH} size="lg" className="mt-4 w-full">Book a payroll walkthrough</Button>
+            <Button href={WALKTHROUGH} size="lg" className="mt-4 w-full" track="cta_click" place="nav_mobile">Book a payroll walkthrough</Button>
             <Button href="/contact" size="lg" variant="secondary" className="mt-3 w-full">Discuss a project</Button>
           </div>
         </div>

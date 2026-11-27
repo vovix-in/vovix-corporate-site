@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import { Mail, Copy, Check, AlertCircle, CheckCircle2 } from "lucide-react";
 import { Button } from "./ui";
+import { track } from "@/lib/analytics";
 
 /* Submission path: the form posts to /api/contact, which delivers the
    enquiry to our inbox. We only show "sent" when the server confirms it.
@@ -20,11 +21,11 @@ const TOPICS = [
 
 type Errors = Partial<Record<"name" | "email" | "message", string>>;
 
-export function ContactForm({ dark = false }: { dark?: boolean }) {
+export function ContactForm({ dark = false, defaultTopic }: { dark?: boolean; defaultTopic?: string }) {
   const [errors, setErrors] = useState<Errors>({});
   const [state, setState] = useState<"idle" | "sending" | "sent" | "handed" | "copied">("idle");
   const [draft, setDraft] = useState("");
-  const [topic, setTopic] = useState<string>(TOPICS[0]);
+  const [topic, setTopic] = useState<string>(defaultTopic && (TOPICS as readonly string[]).includes(defaultTopic) ? defaultTopic : TOPICS[0]);
 
   // A CTA can land here with ?topic=VOVIX+Payroll so the visitor doesn't re-pick it.
   useEffect(() => {
@@ -61,8 +62,9 @@ export function ContactForm({ dark = false }: { dark?: boolean }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(Object.fromEntries(["name", "email", "company", "topic", "message", "website"].map((k) => [k, v(k)]))),
       });
-      if (res.ok) { form.reset(); setState("sent"); return; }
+      if (res.ok) { form.reset(); setState("sent"); track("lead_submit", { topic: v("topic"), outcome: "sent" }); return; }
     } catch { /* network failure: fall through to the mail-app handoff */ }
+    track("lead_submit", { topic: v("topic"), outcome: "mail_app" });
     window.location.href = `mailto:${TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setState("handed");
   };

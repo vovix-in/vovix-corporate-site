@@ -3,7 +3,8 @@ import { Logo } from "./ui";
 
 const COLS = [
   { h: "Products", links: [
-    { l: "VOVIX Payroll", href: "/products#payroll" },
+    { l: "VOVIX Payroll", href: "/payroll" },
+    { l: "Payroll pricing", href: "/payroll/pricing" },
     { l: "VOVIX OneView", href: "/products#oneview" },
     { l: "VOVIX Edge", href: "https://edge.vovix.in/" },
     { l: "All products", href: "/products" },
