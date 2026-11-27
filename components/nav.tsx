@@ -23,7 +23,9 @@ const SERVICES = [
   { name: "White-label automation", href: "/services#white-label", icon: Layers },
 ];
 
-const LINKS: [string, string][] = [["Platform", "/#platform"], ["Use cases", "/#use-cases"], ["Company", "/about"]];
+const LINKS: [string, string][] = [["Platform", "/#platform"], ["Company", "/about"]];
+const PAYROLL = "/products#payroll";
+const WALKTHROUGH = "/contact?topic=VOVIX+Payroll";
 const isExt = (h: string) => /^https?:\/\//.test(h);
 const ext = (h: string) => (isExt(h) ? { target: "_blank", rel: "noopener noreferrer" } : {});
 
@@ -104,6 +106,7 @@ export function Navbar() {
             </a>
 
             <div className="hidden items-center gap-0.5 lg:flex">
+              <a href={PAYROLL} onMouseEnter={() => hoverOpen(null)} className="rounded-control px-3.5 py-2 text-[15px] font-semibold text-ink transition-colors hover:text-brand-ink">Payroll</a>
               {trigger("products", "Products")}
               {trigger("services", "Services")}
               {LINKS.map(([l, h]) => (
@@ -112,8 +115,8 @@ export function Navbar() {
             </div>
 
             <div className="hidden items-center gap-5 lg:flex">
-              <a href="/products#payroll" className="text-[15px] font-semibold text-ink hover:text-brand-ink">VOVIX Payroll</a>
-              <Button href="/contact" size="sm" className="!px-4 !py-2.5">Discuss Your Project</Button>
+              <a href="/contact" className="whitespace-nowrap text-[15px] font-medium text-ink-secondary hover:text-ink">Discuss a project</a>
+              <Button href={WALKTHROUGH} size="sm" className="whitespace-nowrap !px-4 !py-2.5">Book a walkthrough</Button>
             </div>
 
             <button ref={toggleRef} className="-mr-2 flex h-11 w-11 items-center justify-center rounded-control text-ink lg:hidden"
@@ -193,8 +196,8 @@ export function Navbar() {
             {[["Services", "/services"], ...LINKS, ["Contact", "/contact"]].map(([l, h]) => (
               <a key={l} href={h} onClick={() => setSheet(false)} className="py-3 text-body font-semibold text-ink">{l}</a>
             ))}
-            <Button href="/contact" size="lg" className="mt-4 w-full">Discuss Your Project</Button>
-            <Button href="/products#payroll" size="lg" variant="secondary" className="mt-3 w-full">See VOVIX Payroll</Button>
+            <Button href={WALKTHROUGH} size="lg" className="mt-4 w-full">Book a payroll walkthrough</Button>
+            <Button href="/contact" size="lg" variant="secondary" className="mt-3 w-full">Discuss a project</Button>
           </div>
         </div>
       </header>

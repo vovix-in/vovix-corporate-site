@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import { Mail, Copy, Check, AlertCircle, CheckCircle2 } from "lucide-react";
 import { Button } from "./ui";
@@ -24,6 +24,13 @@ export function ContactForm({ dark = false }: { dark?: boolean }) {
   const [errors, setErrors] = useState<Errors>({});
   const [state, setState] = useState<"idle" | "sending" | "sent" | "handed" | "copied">("idle");
   const [draft, setDraft] = useState("");
+  const [topic, setTopic] = useState<string>(TOPICS[0]);
+
+  // A CTA can land here with ?topic=VOVIX+Payroll so the visitor doesn't re-pick it.
+  useEffect(() => {
+    const t = new URLSearchParams(window.location.search).get("topic");
+    if (t && (TOPICS as readonly string[]).includes(t)) setTopic(t);
+  }, []);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -92,7 +99,7 @@ export function ContactForm({ dark = false }: { dark?: boolean }) {
         </div>
         <div>
           <label htmlFor="cf-topic" className={`text-[13px] font-semibold ${label}`}>What is this about?</label>
-          <select id="cf-topic" name="topic" className={input} defaultValue={TOPICS[0]}>
+          <select id="cf-topic" name="topic" className={input} value={topic} onChange={(e) => setTopic(e.target.value)}>
             {TOPICS.map((t) => <option key={t}>{t}</option>)}
           </select>
         </div>
