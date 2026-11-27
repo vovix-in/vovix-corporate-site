@@ -6,6 +6,7 @@ import { PayrollDemo } from "@/components/product-demos";
 import { PayrollStages } from "@/components/payroll-stages";
 import { ContactForm } from "@/components/contact-form";
 import { Plus } from "lucide-react";
+import { SCHEDULER_URL } from "@/lib/analytics";
 
 /* /payroll — the VOVIX Payroll pillar page (v6 plan, step 2).
    Shape: hero → who it's for → five-stage block → live demo →
@@ -91,8 +92,8 @@ export default function Payroll() {
         title="Your factory's payroll, run every month. Every filing proven."
         lead="Managed payroll, compliance and workforce operations for Tamil Nadu factories with 20 to 150 employees. Vovix runs the month, the owner approves, and PF, ESI, PT, LWF and TDS each carry their own evidence."
         actions={<>
-          <Button href="/contact?topic=VOVIX+Payroll" size="lg">Book a payroll walkthrough <ArrowRight size={18} aria-hidden /></Button>
-          <Button href="#month" size="lg" variant="onDark">See how a month runs</Button>
+          <Button href="/contact?topic=VOVIX+Payroll" size="lg" track="cta_click" place="payroll_hero">Book a payroll walkthrough <ArrowRight size={18} aria-hidden /></Button>
+          <Button href="#month" size="lg" variant="onDark" track="cta_click" place="payroll_hero">See how a month runs</Button>
         </>}
       >
         {/* ═══ WHO IT'S FOR ═══ */}
@@ -235,6 +236,9 @@ export default function Payroll() {
                   })}
                 </dl>
                 <p className="mt-4 text-[12.5px] text-white/55">Typical first reply within one business day (IST, Mon–Fri).</p>
+                {SCHEDULER_URL && (
+                  <Button href="/contact?topic=VOVIX+Payroll#schedule" variant="onDark" className="mt-5" track="cta_click" place="payroll_cta">Pick a time on the calendar <ArrowRight size={16} aria-hidden /></Button>
+                )}
               </div>
               <div className="rounded-panel border border-white/10 bg-white/[0.04] p-5 sm:p-7">
                 <ContactForm dark defaultTopic="VOVIX Payroll" />

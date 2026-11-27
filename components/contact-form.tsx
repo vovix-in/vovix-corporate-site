@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import { Mail, Copy, Check, AlertCircle, CheckCircle2 } from "lucide-react";
 import { Button } from "./ui";
+import { track } from "@/lib/analytics";
 
 /* Submission path: the form posts to /api/contact, which delivers the
    enquiry to our inbox. We only show "sent" when the server confirms it.
@@ -61,8 +62,9 @@ export function ContactForm({ dark = false, defaultTopic }: { dark?: boolean; de
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(Object.fromEntries(["name", "email", "company", "topic", "message", "website"].map((k) => [k, v(k)]))),
       });
-      if (res.ok) { form.reset(); setState("sent"); return; }
+      if (res.ok) { form.reset(); setState("sent"); track("lead_submit", { topic: v("topic"), outcome: "sent" }); return; }
     } catch { /* network failure: fall through to the mail-app handoff */ }
+    track("lead_submit", { topic: v("topic"), outcome: "mail_app" });
     window.location.href = `mailto:${TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setState("handed");
   };

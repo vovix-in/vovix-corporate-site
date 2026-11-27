@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/plus-jakarta-sans";
 import "@fontsource-variable/jetbrains-mono";
 import "./globals.css";
+import { Analytics } from "@/components/analytics";
 
 const SITE = "https://www.vovix.in";
 const TITLE = "VOVIX | IT Automation, AI Document Processing & Data Engineering";
@@ -80,6 +81,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to main content
         </a>
         {children}
+        <Analytics />
       </body>
     </html>
   );
