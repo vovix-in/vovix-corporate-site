@@ -23,7 +23,7 @@ const SERVICES = [
   { name: "White-label automation", href: "/services#white-label", icon: Layers },
 ];
 
-const LINKS: [string, string][] = [["Platform", "/#platform"], ["Company", "/about"]];
+const LINKS: [string, string][] = [["Pricing", "/payroll/pricing"], ["Platform", "/#platform"], ["Company", "/about"]];
 const PAYROLL = "/payroll";
 const WALKTHROUGH = "/contact?topic=VOVIX+Payroll";
 const isExt = (h: string) => /^https?:\/\//.test(h);
@@ -106,16 +106,16 @@ export function Navbar() {
             </a>
 
             <div className="hidden items-center gap-0.5 lg:flex">
-              <a href={PAYROLL} onMouseEnter={() => hoverOpen(null)} className="rounded-control px-3.5 py-2 text-[15px] font-semibold text-ink transition-colors hover:text-brand-ink">Payroll</a>
+              <a href={PAYROLL} onMouseEnter={() => hoverOpen(null)} className="rounded-control px-2.5 py-2 text-[14.5px] font-semibold text-ink transition-colors hover:text-brand-ink xl:px-3.5 xl:text-[15px]">Payroll</a>
               {trigger("products", "Products")}
               {trigger("services", "Services")}
               {LINKS.map(([l, h]) => (
-                <a key={l} href={h} onMouseEnter={() => hoverOpen(null)} className="rounded-control px-3.5 py-2 text-[15px] font-medium text-ink-secondary transition-colors hover:text-ink">{l}</a>
+                <a key={l} href={h} onMouseEnter={() => hoverOpen(null)} className="rounded-control px-2.5 py-2 text-[14.5px] font-medium text-ink-secondary transition-colors hover:text-ink xl:px-3.5 xl:text-[15px]">{l}</a>
               ))}
             </div>
 
-            <div className="hidden items-center gap-5 lg:flex">
-              <a href="/contact" className="whitespace-nowrap text-[15px] font-medium text-ink-secondary hover:text-ink">Discuss a project</a>
+            <div className="hidden items-center gap-4 lg:flex xl:gap-5">
+              <a href="/contact" className="hidden whitespace-nowrap text-[15px] font-medium text-ink-secondary hover:text-ink xl:inline">Discuss a project</a>
               <Button href={WALKTHROUGH} size="sm" className="whitespace-nowrap !px-4 !py-2.5" track="cta_click" place="nav">Book a walkthrough</Button>
             </div>
 

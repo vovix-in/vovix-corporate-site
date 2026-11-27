@@ -65,6 +65,7 @@ const FAQ: [string, string][] = [
   ["What size of factory is this built for?", "Tamil Nadu factories with 20 to 150 employees, biometric attendance and shift work. Larger plants and multi-state employers are not the current focus."],
   ["Where is our data stored, and who can see it?", "On AWS in the Mumbai region, one isolated tenant per factory, encrypted at rest and in transit. Vovix operators see only the tenant they work on, and every action is in the audit trail."],
   ["Is this a replacement for our auditor or labour consultant?", "No. VOVIX Payroll prepares workings from the data your business provides. Amounts should be reviewed and approved by you before payment or filing, and the workings are not a substitute for professional advice."],
+  ["What does it cost?", "One plan, priced per employee per month with everything included, plus a one-time onboarding fee. The pricing page has the tiers and a calculator; the exact figure for your plant is confirmed in writing after the walkthrough."],
   ["How do we start?", "Book a walkthrough. We go through one real month with your attendance data and show what the run, the approval screen and the proof ledger look like for your plant. Early access means we are onboarding a small number of factories at a time."],
 ];
 
@@ -93,7 +94,7 @@ export default function Payroll() {
         lead="Managed payroll, compliance and workforce operations for Tamil Nadu factories with 20 to 150 employees. Vovix runs the month, the owner approves, and PF, ESI, PT, LWF and TDS each carry their own evidence."
         actions={<>
           <Button href="/contact?topic=VOVIX+Payroll" size="lg" track="cta_click" place="payroll_hero">Book a payroll walkthrough <ArrowRight size={18} aria-hidden /></Button>
-          <Button href="#month" size="lg" variant="onDark" track="cta_click" place="payroll_hero">See how a month runs</Button>
+          <Button href="/payroll/pricing" size="lg" variant="onDark" track="cta_click" place="payroll_hero">See pricing</Button>
         </>}
       >
         {/* ═══ WHO IT'S FOR ═══ */}
